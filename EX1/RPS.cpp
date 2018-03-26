@@ -1,13 +1,13 @@
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <fstream>
 #include "RPS.h"
 
-using namespace std;
-
 bool RPS::SetPiece(vector<string> piece_description) {
+    int m = -1, n = -1;
+    string piece = piece_description[0];
+    if (piece.compare("J")) {
 
+    } else {
+
+    }
 }
 
 void RPS::Parser(RPS& rps_board_, int player_number) {

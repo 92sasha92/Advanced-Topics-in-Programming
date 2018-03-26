@@ -1,7 +1,13 @@
-#pragma once
-
 #ifndef RPS_RPS_H
 #define RPS_RPS_H
+
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
 
 class RPS {
   private:
@@ -24,14 +30,15 @@ class RPS {
         kFlag
     } RPSPieces;
 
-    const string player_1_name_ = "player1.rps_board";
-    const string player_2_name_ = "player2.rps_board";
+    const static string player_1_name_;
+    const static string player_2_name_;
 
     bool SetPiece(vector<string> piece_description);
 
   public:
 
     void Parser(RPS& rps_board_, int player_number);
+    char board[kM_][kN_];
 
 //    RPS() : board(NULL) {}
 //    ~RPS() {
