@@ -1,44 +1,37 @@
-#ifndef RPS_RPS_H
-#define RPS_RPS_H
+#pragma once
 
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <fstream>
 #include <vector>
+#include "PieceFactory.h"
 
 using namespace std;
 
 class RPS {
   private:
 
-    static const int kM_ = 10;
-    static const int kN_ = 10;
-    static const int kR_ = 2;
-    static const int kP_ = 5;
-    static const int kS_ = 1;
-    static const int kB_ = 2;
-    static const int kJ_ = 2;
-    static const int kF_ = 1;
+    static const int Mcols = 10;
+    static const int Nrows = 10;
+    static const int R = 2;
+    static const int P = 5;
+    static const int S = 1;
+    static const int B = 2;
+    static const int J = 2;
+    static const int F = 1;
 
-    typedef enum {
-        kRock,
-        kPaper,
-        kScissors,
-        kBomb,
-        kJoker,
-        kFlag
-    } RPSPieces;
+    static string player_0_name_;
+    static string player_1_name_;
+		int playerPiecesArsenal[6];
 
-    const static string player_1_name_;
-    const static string player_2_name_;
-
-    bool SetPiece(vector<string> piece_description);
+		void initializePiecesArsenal();
+    bool SetPiece(RPS& rps, int playerNumber, vector<string> piece_description);
 
   public:
 
-    void Parser(RPS& rps_board_, int player_number);
-    char board[kM_][kN_];
+    bool Parser(RPS& rps, int playerNumber);
+    Piece *board[Mcols][Nrows][2];
 
 //    RPS() : board(NULL) {}
 //    ~RPS() {
@@ -50,4 +43,3 @@ class RPS {
 };
 
 
-#endif //RPS_RPS_H
