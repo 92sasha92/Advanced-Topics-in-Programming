@@ -15,7 +15,6 @@ public:
 
 	static RPSPiecesTypes charToPieceType(char c);
 	static Piece *createPiece(RPSPiecesTypes cPiece, int player, RPSPiecesTypes jokerPiece = Undefined);
-
 };
 
 

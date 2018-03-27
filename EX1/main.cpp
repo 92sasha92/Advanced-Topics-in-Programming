@@ -5,6 +5,5 @@ int main(int argc, char *argv[]) {
 		rps.Parser(1);
 		rps.Parser(2);
 
-    
     return 0;
 }
