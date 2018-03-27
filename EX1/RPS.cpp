@@ -73,7 +73,7 @@ bool RPS::Parser(int playerIndex) {
 					// TODO: error, not enogh arguments in line
 					return false;
 				}
-        check = SetPiece(rps, playerIndex, line_words);
+        check = SetPiece(*this, playerIndex, line_words);
         if (!check) {
             // TODO: raise relevant error
 					return false;
@@ -82,7 +82,7 @@ bool RPS::Parser(int playerIndex) {
     }
 
 
-		if (rps.playerPiecesArsenal[PieceFactory::Flag] > 0) {
+		if (this->playerPiecesArsenal[PieceFactory::Flag] > 0) {
 			// TODO: flag not placed error other player wins
 			return false;
 		}
@@ -100,7 +100,11 @@ void RPS::PrintBoard() {
 			} else if (this->board[i][j][0] != nullptr) {
 				cout << this->board[i][j][0]->toString() << " "; // TODO: implement toString function
 			} else if (this->board[i][j][1] != nullptr) {
+<<<<<<< HEAD
 				cout << this->board[i][j][1]->toString() << " "; 
+=======
+				cout << this->board[i][j][1]->toString() << " ";
+>>>>>>> 29e74337588a0a6f3497622e0cb1ea87d2345067
 			} else {
 				cout << "  ";
 			}
