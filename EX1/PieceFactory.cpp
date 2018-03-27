@@ -2,6 +2,7 @@
 #include "RockPiece.h"
 #include "PaperPiece.h"
 #include "ScissorsPiece.h"
+#include "BombPiece.h"
 #include "JokerPiece.h"
 #include "FlagPiece.h"
 
