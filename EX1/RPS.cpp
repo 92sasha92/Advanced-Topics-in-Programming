@@ -31,7 +31,7 @@ bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
 		}
 		rps.playerPiecesArsenal[pieceType]--;
     if (pieceType == RPSPiecesTypes::Joker) {
-			if (pieceDescription.size != 4) {
+			if (pieceDescription.size() != 4) {
 				// TODO: error, too much arguments in line
 				return false;
 			}
@@ -39,7 +39,7 @@ bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
 			RPSPiecesTypes jokerPieceType = charToPieceType(jokerPiece);
 			rps.board[row][col][playerIndex] = createPiece(pieceType, playerIndex, jokerPieceType);
     } else {
-			if (pieceDescription.size != 3) {
+			if (pieceDescription.size() != 3) {
 				// TODO: error, too much arguments in line
 				return false;
 			}
@@ -71,7 +71,7 @@ bool RPS::Parser(RPS& rps, int playerIndex) {
         while (getline(ss,word,' ')) {
             line_words.push_back(word);
         }
-				if (line_words.size < 3) {
+				if (line_words.size() < 3) {
 					// TODO: error, not enogh arguments in line
 					return false;
 				}
@@ -93,4 +93,21 @@ bool RPS::Parser(RPS& rps, int playerIndex) {
 		return true;
 }
 
+void RPS::PrintBoard(RPS& rps) {
+	for (int i = 0; i < rps.Mcols; i++) {
+		for (int j = 0; j < rps.Nrows; j++) {
+			if (rps.board[i][j][0] != nullptr && rps.board[i][j][1] != nullptr) {
+				cout << "ERROR: two pieces in the same sale" << endl;
+				break;
+			} else if (rps.board[i][j][0] != nullptr) {
+				cout << rps.board[i][j][0].toString() << " ";
+			} else if (rps.board[i][j][1] != nullptr) {
+				cout << rps.board[i][j][1].toString() << " ";
+			} else {
+				cout << "  ";
+			}
+		}
+		cout << endl;
+	}
+}
 
