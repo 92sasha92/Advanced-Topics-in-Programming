@@ -48,6 +48,9 @@
     <ClInclude Include="RPS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -85,11 +88,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1\player1.rps_board">
+    <ResourceCompile Include="ConsoleApplication1.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="player1.rps_board">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="..\..\..\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1\player2.rps_board">
-      <Filter>Source Files</Filter>
-    </None>
+    <None Include="player2.rps_board" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,16 @@
 string RPS::player_0_name_ = "player1.rps_board";
 string RPS::player_1_name_ = "player2.rps_board";
 
+
+RPS::RPS() {
+	for (int i = 0; i < this->Mcols; i++) {
+		for (int j = 0; j < this->Nrows; j++) {
+			this->board[i][j][0] = nullptr;
+			this->board[i][j][1] = nullptr;
+		}
+	}
+}
+
 void RPS::initializePiecesArsenal() {
 	this->playerPiecesArsenal[PieceFactory::Rock] = R;
 	this->playerPiecesArsenal[PieceFactory::Paper] = P;
@@ -18,16 +28,20 @@ bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
 	int col = stoi(pieceDescription[1]) - 1;
 	int row = stoi(pieceDescription[2]) - 1;
 	if (0 > row || row >= rps.Nrows || 0 > col || col >= rps.Mcols) {
-		// TODO: the other player win the game 
+		// TODO: the other player win the game
+		cout << "ERROR: piece set outside the board: row: " << row << ", col: " << col << endl;
 		return false;
 	}
-	else if (rps.board[row][col] == nullptr) {
-		// TODO: the other player win the game to many pieces in one 
+	else if (rps.board[row][col][playerIndex] != nullptr) {
+		// TODO: the other player win the game, too many pieces in one cell
+		cout << "ERROR: two pieces of the same player in one cell: row: " << row << ", col: " << col << endl;
 		return false;
 	}
 	PieceFactory::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piece);
 	if (rps.playerPiecesArsenal[pieceType] == 0) {
-		// TODO: error other player wins not enouth pieces of the type
+		// TODO: error other player wins not enough pieces of the type
+		cout << "ERROR: too many pices of the same type, type enum:" << pieceType << endl;
+		return false;
 	}
 	rps.playerPiecesArsenal[pieceType]--;
 	if (pieceType == PieceFactory::Joker) {
@@ -68,24 +82,26 @@ bool RPS::Parser(int playerIndex) {
 		return false;
 	}
 	if (fin.is_open()) {
-		cout << "@@@@@@@ hi";
+		cout << "hi ";
 	} else{
 		cout << "not!!!!!";
 	}
 	while (!fin.eof()) {
 		getline(fin, cur_line);
 		istringstream ss(cur_line);
-
+		line_words.clear();
 		while (getline(ss, word, ' ')) {
 			line_words.push_back(word);
 		}
 		if (line_words.size() < 3) {
 			// TODO: error, not enogh arguments in line
+			cout << "not enouth arguments";
 			return false;
 		}
 		check = SetPiece(*this, playerIndex, line_words);
 		if (!check) {
 			// TODO: raise relevant error
+			cout << "@@@@@@ ERROR ";
 			return false;
 		}
 
@@ -101,21 +117,23 @@ bool RPS::Parser(int playerIndex) {
 	return true;
 }
 
+
 void RPS::PrintBoard() {
 	for (int i = 0; i < this->Mcols; i++) {
+		cout << "----------------------------------------" << endl;
 		for (int j = 0; j < this->Nrows; j++) {
 			if (this->board[i][j][0] != nullptr && this->board[i][j][1] != nullptr) {
-				cout << "ERROR: two pieces in the same sale" << endl;
+				cout << "ERROR: two pieces in the same cell: row: " << j << ", col: " << i << endl;
 				break;
 			}
 			else if (this->board[i][j][0] != nullptr) {
-				cout << this->board[i][j][0]->toString() << " "; // TODO: implement toString function
+				cout << this->board[i][j][0]->toString() << " |";
 			}
 			else if (this->board[i][j][1] != nullptr) {
-				cout << this->board[i][j][1]->toString() << " ";
+				cout << this->board[i][j][1]->toString() << " |";
 			}
 			else {
-				cout << "  ";
+				cout << "   |";
 			}
 		}
 		cout << endl;
