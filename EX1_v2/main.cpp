@@ -1,7 +1,6 @@
-#include <iostream>
 #include "RPS.h"
 
-int main(int argc, char *argv[]) {
+int main() {
     RPS rps;
     rps.Parser(0);
     rps.Parser(1);

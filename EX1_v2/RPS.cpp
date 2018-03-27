@@ -18,14 +18,18 @@ bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
     int row = stoi(pieceDescription[2]) - 1;
     if (0 > row || row >= rps.Nrows || 0 > col || col >= rps.Mcols) {
         // TODO: the other player win the game
+        cout << "ERROR: piece set outside the board: row: " << row << ", col: "<< col <<endl;
         return false;
-    } else if (rps.board[row][col] == nullptr) {
-        // TODO: the other player win the game to many pieces in one
+    } else if (rps.board[row][col][playerIndex] != nullptr) {
+        // TODO: the other player win the game, too many pieces in one cell
+        cout << "ERROR: two pieces of the same player in one cell: row: " << row << ", col: "<< col <<endl;
         return false;
     }
     PieceFactory::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piece);
     if (rps.playerPiecesArsenal[pieceType] == 0) {
-        // TODO: error other player wins not enouth pieces of the type
+        // TODO: error other player wins not enough pieces of the type
+        cout << "ERROR: too many pices of the same type, type enum:" << pieceType << endl;
+        return false;
     }
     rps.playerPiecesArsenal[pieceType]--;
     if (pieceType == PieceFactory::Joker) {
@@ -94,19 +98,20 @@ bool RPS::Parser(int playerIndex) {
 
 void RPS::PrintBoard() {
     for (int i = 0; i < this->Mcols; i++) {
+        cout << "----------------------------------------" << endl;
         for (int j = 0; j < this->Nrows; j++) {
             if (this->board[i][j][0] != nullptr && this->board[i][j][1] != nullptr) {
-                cout << "ERROR: two pieces in the same sale" << endl;
+                cout << "ERROR: two pieces in the same cell: row: " << j << ", col: "<< i <<endl;
                 break;
             }
             else if (this->board[i][j][0] != nullptr) {
-                cout << this->board[i][j][0]->toString() << " "; // TODO: implement toString function
+                cout << this->board[i][j][0]->toString() << " |";
             }
             else if (this->board[i][j][1] != nullptr) {
-                cout << this->board[i][j][1]->toString() << " ";
+                cout << this->board[i][j][1]->toString() << " |";
             }
             else {
-                cout << "  ";
+                cout << "   |";
             }
         }
         cout << endl;
