@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 class Piece {
   private:
@@ -6,6 +7,5 @@ class Piece {
   public:
 		Piece(int playerNumber);
 		int getPlayerNumber();
-		virtual void toString();
-
+		virtual std::string toString();
 };

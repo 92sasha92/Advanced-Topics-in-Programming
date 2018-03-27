@@ -5,5 +5,5 @@ class FlagPiece : public Piece {
 public:
 	FlagPiece(int player):Piece(player) {
 	}
-	void toString() override;
+	std::string toString() override;
 };

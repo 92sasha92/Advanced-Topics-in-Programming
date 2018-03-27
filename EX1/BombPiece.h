@@ -5,5 +5,5 @@ class BombPiece : public Piece {
 public:
 	BombPiece(int player) :Piece(player) {
 	}
-	void toString() override;
+	std::string toString() override;
 };

@@ -1,6 +1,6 @@
 #include "FlagPiece.h"
 
 
-void FlagPiece::toString() {
-	std::cout << "F" << this->getPlayerNumber();
+std::string FlagPiece::toString() {
+	return "F" + this->getPlayerNumber();
 }

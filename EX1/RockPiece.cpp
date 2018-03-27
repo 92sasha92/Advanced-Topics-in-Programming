@@ -1,5 +1,5 @@
 #include "RockPiece.h"
 
-void RockPiece::toString() {
-	std::cout << "R" << this->getPlayerNumber();
+std::string RockPiece::toString() {
+	return "R" + this->getPlayerNumber();
 }

@@ -1,5 +1,5 @@
 #include "PaperPiece.h"
 
-void PaperPiece::toString() {
-	std::cout << "R" << this->getPlayerNumber();
+std::string PaperPiece::toString() {
+	return "P" +  this->getPlayerNumber();
 }

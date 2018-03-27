@@ -1,5 +1,5 @@
 #include "ScissorsPiece.h"
 
-void ScissorsPiece::toString() {
-	std::cout << "S" << this->getPlayerNumber();
+std::string ScissorsPiece::toString() {
+	return "S" + this->getPlayerNumber();
 }

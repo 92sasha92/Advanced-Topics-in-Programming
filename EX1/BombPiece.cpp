@@ -1,5 +1,5 @@
 #include "BombPiece.h"
 
-void BombPiece::toString() {
-	std::cout << "B" << this->getPlayerNumber();
+std::string BombPiece::toString() {
+	return "B" + this->getPlayerNumber();
 }

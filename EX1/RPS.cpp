@@ -47,12 +47,12 @@ bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
 		return true;
 }
 
-bool RPS::Parser(RPS& rps, int playerIndex) {
+bool RPS::Parser(int playerIndex) {
     string cur_line, word;
     bool check;
     ifstream fin;
     vector<string> line_words;
-		rps.initializePiecesArsenal();
+		this->initializePiecesArsenal();
     if (playerIndex == 0) {
         fin.open(player_0_name_);
     } else if (playerIndex == 1) {
@@ -98,9 +98,9 @@ void RPS::PrintBoard(RPS& rps) {
 				cout << "ERROR: two pieces in the same sale" << endl;
 				break;
 			} else if (rps.board[i][j][0] != nullptr) {
-				cout << rps.board[i][j][0].toString() << " "; // TODO: implement toString function
+				cout << rps.board[i][j][0]->toString() << " "; // TODO: implement toString function
 			} else if (rps.board[i][j][1] != nullptr) {
-				cout << rps.board[i][j][1].toString() << " "; 
+				cout << rps.board[i][j][1]->toString() << " "; 
 			} else {
 				cout << "  ";
 			}

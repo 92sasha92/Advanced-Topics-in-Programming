@@ -8,6 +8,6 @@ JokerPiece::JokerPiece(int player, PieceFactory::RPSPiecesTypes jokerPiece_): Pi
 	}
 }
 
-void JokerPiece::toString() {
-	std::cout << "R" << this->getPlayerNumber();
+std::string JokerPiece::toString() {
+	return "R" + this->getPlayerNumber();
 }

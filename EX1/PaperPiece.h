@@ -4,5 +4,5 @@
 class PaperPiece: public Piece{
 public:
 	PaperPiece(int player):Piece(player) {}
-	void toString() override;
+	std::string toString() override;
 };
