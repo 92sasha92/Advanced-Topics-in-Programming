@@ -31,7 +31,7 @@ class RPS {
   public:
 
     bool Parser(int playerNumber);
-    void PrintBoard(RPS& rps);
+    void PrintBoard();
     Piece *board[Mcols][Nrows][2];
 
 //    RPS() : board(NULL) {}

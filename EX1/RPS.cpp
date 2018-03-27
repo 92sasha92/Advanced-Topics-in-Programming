@@ -91,16 +91,16 @@ bool RPS::Parser(int playerIndex) {
 		return true;
 }
 
-void RPS::PrintBoard(RPS& rps) {
-	for (int i = 0; i < rps.Mcols; i++) {
-		for (int j = 0; j < rps.Nrows; j++) {
-			if (rps.board[i][j][0] != nullptr && rps.board[i][j][1] != nullptr) {
+void RPS::PrintBoard() {
+	for (int i = 0; i < this->Mcols; i++) {
+		for (int j = 0; j < this->Nrows; j++) {
+			if (this->board[i][j][0] != nullptr && this->board[i][j][1] != nullptr) {
 				cout << "ERROR: two pieces in the same sale" << endl;
 				break;
-			} else if (rps.board[i][j][0] != nullptr) {
-				cout << rps.board[i][j][0]->toString() << " "; // TODO: implement toString function
-			} else if (rps.board[i][j][1] != nullptr) {
-				cout << rps.board[i][j][1]->toString() << " "; 
+			} else if (this->board[i][j][0] != nullptr) {
+				cout << this->board[i][j][0]->toString() << " "; // TODO: implement toString function
+			} else if (this->board[i][j][1] != nullptr) {
+				cout << this->board[i][j][1]->toString() << " "; 
 			} else {
 				cout << "  ";
 			}
