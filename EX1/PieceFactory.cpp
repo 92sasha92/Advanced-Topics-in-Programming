@@ -1,4 +1,9 @@
 #include "PieceFactory.h"
+#include "Rock.h"
+#include "Paper.h"
+#include "Scissors.h"
+#include "Joker.h"
+#include "Flag.h"
 
 PieceFactory::RPSPiecesTypes PieceFactory::charToPieceType(char c)
 {

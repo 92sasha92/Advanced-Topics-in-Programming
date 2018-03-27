@@ -5,5 +5,6 @@ class Piece {
     int playerNumber;
   public:
 		Piece(int playerNumber);
+		virtual void toString();
 
 };
