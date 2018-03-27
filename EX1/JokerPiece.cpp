@@ -9,5 +9,5 @@ JokerPiece::JokerPiece(int player, PieceFactory::RPSPiecesTypes jokerPiece_): Pi
 }
 
 std::string JokerPiece::toString() {
-	return "R" + this->getPlayerNumber();
+	return "J" + this->getPlayerNumber() + this->jokerPiece; // TODO: set jokerPiece as char
 }

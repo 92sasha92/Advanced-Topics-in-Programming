@@ -6,8 +6,7 @@
 #include "JokerPiece.h"
 #include "FlagPiece.h"
 
-PieceFactory::RPSPiecesTypes PieceFactory::charToPieceType(char c)
-{
+PieceFactory::RPSPiecesTypes PieceFactory::charToPieceType(char c) {
 	switch (c) {
 	case 'R':
 		return PieceFactory::RPSPiecesTypes::Rock;
@@ -27,8 +26,7 @@ PieceFactory::RPSPiecesTypes PieceFactory::charToPieceType(char c)
 
 }
 
-Piece* PieceFactory::createPiece(PieceFactory::RPSPiecesTypes pieceType, int player, PieceFactory::RPSPiecesTypes jokerPiece)
-{
+Piece* PieceFactory::createPiece(PieceFactory::RPSPiecesTypes pieceType, int player, PieceFactory::RPSPiecesTypes jokerPiece) {
 	switch (pieceType) {
 	case Rock:
 		return new RockPiece(player);

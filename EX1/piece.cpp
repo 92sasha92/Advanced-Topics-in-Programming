@@ -1,10 +1,8 @@
 #include "Piece.h"
 
-Piece::Piece(int player) : playerNumber(player)
-{
+Piece::Piece(int player) : playerNumber(player) {
 }
 
-int Piece::getPlayerNumber()
-{
+int Piece::getPlayerNumber() {
 	return this->playerNumber;
 }
