@@ -1,27 +1,27 @@
 #include "PieceFactory.h"
 
-RPSPiecesTypes charToPieceType(char c)
+PieceFactory::RPSPiecesTypes PieceFactory::charToPieceType(char c)
 {
 	switch (c) {
 	case 'R':
-		return RPSPiecesTypes::Rock;
+		return PieceFactory::RPSPiecesTypes::Rock;
 	case 'P':
-		return RPSPiecesTypes::Paper;
+		return PieceFactory::RPSPiecesTypes::Paper;
 	case 'S':
-		return RPSPiecesTypes::Scissors;
+		return PieceFactory::RPSPiecesTypes::Scissors;
 	case 'B':
-		return RPSPiecesTypes::Bomb;
+		return PieceFactory::RPSPiecesTypes::Bomb;
 	case 'J':
-		return RPSPiecesTypes::Joker;
+		return PieceFactory::RPSPiecesTypes::Joker;
 	case 'F':
-		return RPSPiecesTypes::Flag;
+		return PieceFactory::RPSPiecesTypes::Flag;
 	default:
 		// TODO: handle unsported piece character
 	}
 
 }
 
-Piece *createPiece(RPSPiecesTypes pieceType, int player, RPSPiecesTypes jokerPiece)
+Piece *PieceFactory::createPiece(PieceFactory::RPSPiecesTypes pieceType, int player, PieceFactory::RPSPiecesTypes jokerPiece)
 {
 	switch (pieceType) {
 	case Rock:

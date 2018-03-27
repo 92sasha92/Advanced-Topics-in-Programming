@@ -4,14 +4,13 @@
 string RPS::player_0_name_ = "player1.rps_board";
 string RPS::player_1_name_ = "player2.rps_board";
 
-void RPS::initializePiecesArsenal()
-{
-	this->playerPiecesArsenal[RPSPiecesTypes::Rock] = R;
-	this->playerPiecesArsenal[RPSPiecesTypes::Paper] = P;
-	this->playerPiecesArsenal[RPSPiecesTypes::Scissors] = S;
-	this->playerPiecesArsenal[RPSPiecesTypes::Bomb] = B;
-	this->playerPiecesArsenal[RPSPiecesTypes::Joker] = J;
-	this->playerPiecesArsenal[RPSPiecesTypes::Flag] = F;
+void RPS::initializePiecesArsenal() {
+	this->playerPiecesArsenal[PieceFactory::Rock] = R;
+	this->playerPiecesArsenal[PieceFactory::Paper] = P;
+	this->playerPiecesArsenal[PieceFactory::Scissors] = S;
+	this->playerPiecesArsenal[PieceFactory::Bomb] = B;
+	this->playerPiecesArsenal[PieceFactory::Joker] = J;
+	this->playerPiecesArsenal[PieceFactory::Flag] = F;
 }
 
 bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
@@ -25,27 +24,26 @@ bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
 			// TODO: the other player win the game to many pieces in one 
 			return false;
 		}
-		RPSPiecesTypes pieceType = charToPieceType(piece);
+		PieceFactory::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piece);
 		if (rps.playerPiecesArsenal[pieceType] == 0) {
 			// TODO: error other player wins not enouth pieces of the type
 		}
 		rps.playerPiecesArsenal[pieceType]--;
-    if (pieceType == RPSPiecesTypes::Joker) {
+    if (pieceType == PieceFactory::Joker) {
 			if (pieceDescription.size() != 4) {
 				// TODO: error, too much arguments in line
 				return false;
 			}
 			char jokerPiece = pieceDescription[3][0];
-			RPSPiecesTypes jokerPieceType = charToPieceType(jokerPiece);
-			rps.board[row][col][playerIndex] = createPiece(pieceType, playerIndex, jokerPieceType);
+			PieceFactory::RPSPiecesTypes jokerPieceType = PieceFactory::charToPieceType(jokerPiece);
+			rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex, jokerPieceType);
     } else {
 			if (pieceDescription.size() != 3) {
 				// TODO: error, too much arguments in line
 				return false;
 			}
-			rps.board[row][col][playerIndex] = createPiece(pieceType, playerIndex);
+			rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex);
     }
-
 		return true;
 }
 
@@ -84,7 +82,7 @@ bool RPS::Parser(RPS& rps, int playerIndex) {
     }
 
 
-		if (rps.playerPiecesArsenal[RPSPiecesTypes::Flag] > 0) {
+		if (rps.playerPiecesArsenal[PieceFactory::Flag] > 0) {
 			// TODO: flag not placed error other player wins
 			return false;
 		}
@@ -100,9 +98,9 @@ void RPS::PrintBoard(RPS& rps) {
 				cout << "ERROR: two pieces in the same sale" << endl;
 				break;
 			} else if (rps.board[i][j][0] != nullptr) {
-				cout << rps.board[i][j][0].toString() << " ";
+				cout << rps.board[i][j][0].toString() << " "; // TODO: implement toString function
 			} else if (rps.board[i][j][1] != nullptr) {
-				cout << rps.board[i][j][1].toString() << " ";
+				cout << rps.board[i][j][1].toString() << " "; 
 			} else {
 				cout << "  ";
 			}
