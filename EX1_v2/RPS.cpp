@@ -19,8 +19,7 @@ bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
     if (0 > row || row >= rps.Nrows || 0 > col || col >= rps.Mcols) {
         // TODO: the other player win the game
         return false;
-    }
-    else if (rps.board[row][col] == nullptr) {
+    } else if (rps.board[row][col] == nullptr) {
         // TODO: the other player win the game to many pieces in one
         return false;
     }
@@ -37,8 +36,7 @@ bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
         char jokerPiece = pieceDescription[3][0];
         PieceFactory::RPSPiecesTypes jokerPieceType = PieceFactory::charToPieceType(jokerPiece);
         rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex, jokerPieceType);
-    }
-    else {
+    } else {
         if (pieceDescription.size() != 3) {
             // TODO: error, too much arguments in line
             return false;
