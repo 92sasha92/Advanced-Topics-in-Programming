@@ -9,10 +9,15 @@ CMakeFiles/EX1_v2.dir/FlagPiece.cpp.o: ../FlagPiece.cpp
 CMakeFiles/EX1_v2.dir/FlagPiece.cpp.o: ../FlagPiece.h
 CMakeFiles/EX1_v2.dir/FlagPiece.cpp.o: ../Piece.h
 
+CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o: ../BombPiece.h
+CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o: ../FlagPiece.h
 CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o: ../JokerPiece.cpp
 CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o: ../JokerPiece.h
+CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o: ../PaperPiece.h
 CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o: ../Piece.h
 CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o: ../PieceFactory.h
+CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o: ../RockPiece.h
+CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o: ../ScissorsPiece.h
 
 CMakeFiles/EX1_v2.dir/PaperPiece.cpp.o: ../PaperPiece.cpp
 CMakeFiles/EX1_v2.dir/PaperPiece.cpp.o: ../PaperPiece.h
@@ -31,10 +36,16 @@ CMakeFiles/EX1_v2.dir/PieceFactory.cpp.o: ../PieceFactory.h
 CMakeFiles/EX1_v2.dir/PieceFactory.cpp.o: ../RockPiece.h
 CMakeFiles/EX1_v2.dir/PieceFactory.cpp.o: ../ScissorsPiece.h
 
+CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../BombPiece.h
+CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../FlagPiece.h
+CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../JokerPiece.h
+CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../PaperPiece.h
 CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../Piece.h
 CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../PieceFactory.h
 CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../RPS.cpp
 CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../RPS.h
+CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../RockPiece.h
+CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../ScissorsPiece.h
 
 CMakeFiles/EX1_v2.dir/RockPiece.cpp.o: ../Piece.h
 CMakeFiles/EX1_v2.dir/RockPiece.cpp.o: ../RockPiece.cpp
@@ -44,8 +55,14 @@ CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.o: ../Piece.h
 CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.o: ../ScissorsPiece.cpp
 CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.o: ../ScissorsPiece.h
 
+CMakeFiles/EX1_v2.dir/main.cpp.o: ../BombPiece.h
+CMakeFiles/EX1_v2.dir/main.cpp.o: ../FlagPiece.h
+CMakeFiles/EX1_v2.dir/main.cpp.o: ../JokerPiece.h
+CMakeFiles/EX1_v2.dir/main.cpp.o: ../PaperPiece.h
 CMakeFiles/EX1_v2.dir/main.cpp.o: ../Piece.h
 CMakeFiles/EX1_v2.dir/main.cpp.o: ../PieceFactory.h
 CMakeFiles/EX1_v2.dir/main.cpp.o: ../RPS.h
+CMakeFiles/EX1_v2.dir/main.cpp.o: ../RockPiece.h
+CMakeFiles/EX1_v2.dir/main.cpp.o: ../ScissorsPiece.h
 CMakeFiles/EX1_v2.dir/main.cpp.o: ../main.cpp
 

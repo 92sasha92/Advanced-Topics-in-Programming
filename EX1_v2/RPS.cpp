@@ -28,7 +28,7 @@ bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
     PieceFactory::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piece);
     if (rps.playerPiecesArsenal[pieceType] == 0) {
         // TODO: error other player wins not enough pieces of the type
-        cout << "ERROR: too many pices of the same type, type enum:" << pieceType << endl;
+        cout << "ERROR: too many pieces of the same type, type enum:" << pieceType << endl;
         return false;
     }
     rps.playerPiecesArsenal[pieceType]--;

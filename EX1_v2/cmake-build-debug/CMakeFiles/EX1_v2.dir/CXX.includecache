@@ -53,6 +53,8 @@ iostream
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PieceFactory.cpp
 PieceFactory.h
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PieceFactory.h
+
+/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PieceFactory.h
 RockPiece.h
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/RockPiece.h
 PaperPiece.h
@@ -65,10 +67,6 @@ JokerPiece.h
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/JokerPiece.h
 FlagPiece.h
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/FlagPiece.h
-
-/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PieceFactory.h
-Piece.h
-/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Piece.h
 
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/RPS.cpp
 RPS.h
