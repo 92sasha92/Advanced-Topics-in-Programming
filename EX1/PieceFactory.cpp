@@ -1,9 +1,9 @@
 #include "PieceFactory.h"
-#include "Rock.h"
-#include "Paper.h"
-#include "Scissors.h"
-#include "Joker.h"
-#include "Flag.h"
+#include "RockPiece.h"
+#include "PaperPiece.h"
+#include "ScissorsPiece.h"
+#include "JokerPiece.h"
+#include "FlagPiece.h"
 
 PieceFactory::RPSPiecesTypes PieceFactory::charToPieceType(char c)
 {
@@ -26,21 +26,21 @@ PieceFactory::RPSPiecesTypes PieceFactory::charToPieceType(char c)
 
 }
 
-Piece *PieceFactory::createPiece(PieceFactory::RPSPiecesTypes pieceType, int player, PieceFactory::RPSPiecesTypes jokerPiece)
+Piece* PieceFactory::createPiece(PieceFactory::RPSPiecesTypes pieceType, int player, PieceFactory::RPSPiecesTypes jokerPiece)
 {
 	switch (pieceType) {
 	case Rock:
-		return new Rock(player);
+		return new RockPiece(player);
 	case Paper:
-		return new Paper(player);
+		return new PaperPiece(player);
 	case Scissors:
-		return new Scissors(player);
+		return new ScissorsPiece(player);
 	case Bomb:
-		return new Bomb(player);
+		return new BombPiece(player);
 	case Joker:
-		return new Joker(player, jokerPiece);// joker can be only R P S B
+		return new JokerPiece(player, jokerPiece);// joker can be only R P S B
 	case Flag:
-		return new Flag(player);
+		return new FlagPiece(player);
 	default:
 		// TODO: undefined piece
 	}
