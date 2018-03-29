@@ -1,6 +1,6 @@
 #include "Piece.h"
 
-Piece::Piece(int player) : playerNumber(player), canMove(true) {
+Piece::Piece(int player) : type(Undefined), playerNumber(player), canMove(true) {
 }
 
 int Piece::getPlayerNumber() {

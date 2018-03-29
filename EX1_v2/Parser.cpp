@@ -27,20 +27,25 @@ bool Parser::isInteger(string str) {
 }
 
 bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
+    if (pieceDescription[0].size() != 1) {
+        // TODO: incorrect piece type
+        cout << "incorrect piece type" << endl;
+        return false;
+    }
     char piece = pieceDescription[0][0];
     int col, row;
     if (isInteger(pieceDescription[1])){
         col = stoi(pieceDescription[1]) - 1;
     } else {
-        // TODO: uncorrect line format
-        cout << "uncorrect line format" << endl;
+        // TODO: incorrect line format
+        cout << "incorrect line format" << endl;
         return false;
     }
     if (isInteger(pieceDescription[2])){
         row = stoi(pieceDescription[2]) - 1;
     } else {
-        // TODO: uncorrect line format
-        cout << "uncorrect line format" << endl;
+        // TODO: incorrect line format
+        cout << "incorrect line format" << endl;
         return false;
     }
 
