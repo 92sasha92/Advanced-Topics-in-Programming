@@ -1,5 +1,9 @@
 #include "RockPiece.h"
 
 std::string RockPiece::toString() {
-    return "R" + std::to_string(this->getPlayerNumber());
+    if (this->getPlayerNumber() == 1) {
+        return "R";
+    } else {
+        return "r";
+    }
 }

@@ -1,5 +1,9 @@
 #include "FlagPiece.h"
 
 std::string FlagPiece::toString() {
-    return "F" + std::to_string(this->getPlayerNumber());
+    if (this->getPlayerNumber() == 1) {
+        return "F";
+    } else {
+        return "f";
+    }
 }

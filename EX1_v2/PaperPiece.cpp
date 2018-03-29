@@ -1,5 +1,9 @@
 #include "PaperPiece.h"
 
 std::string PaperPiece::toString() {
-    return "P" +  std::to_string(this->getPlayerNumber());
+    if (this->getPlayerNumber() == 1) {
+        return "P";
+    } else {
+        return "p";
+    }
 }
