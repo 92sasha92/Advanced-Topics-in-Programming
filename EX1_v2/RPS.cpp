@@ -1,7 +1,7 @@
 #include "RPS.h"
 
-string RPS::player_0_name_ = "./player1.rps_board";
-string RPS::player_1_name_ = "./player2.rps_board";
+string RPS::player_0_name_ = "player1.rps_board";
+string RPS::player_1_name_ = "player2.rps_board";
 
 void RPS::initializePiecesArsenal() {
     this->playerPiecesArsenal[PieceFactory::Rock] = R;
@@ -13,17 +13,33 @@ void RPS::initializePiecesArsenal() {
     this->playerPiecesArsenal[PieceFactory::Undefined] = 0;
 }
 
+bool RPS::isInteger(string str) {
+    for (char c : str) {
+        if (c > '9' || c < '0') {
+            return false;
+        }
+    }
+    return true;
+}
+
 bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
     char piece = pieceDescription[0][0];
     int col, row;
-    try {
+    if (isInteger(pieceDescription[1])){
         col = stoi(pieceDescription[1]) - 1;
-        row = stoi(pieceDescription[2]) - 1;
-    } catch (...) {
+    } else {
         // TODO: uncorrect line format
         cout << "uncorrect line format" << endl;
         return false;
     }
+    if (isInteger(pieceDescription[2])){
+        row = stoi(pieceDescription[2]) - 1;
+    } else {
+        // TODO: uncorrect line format
+        cout << "uncorrect line format" << endl;
+        return false;
+    }
+
     if (0 > row || row >= rps.Nrows || 0 > col || col >= rps.Mcols) {
         // TODO: the other player win the game
         cout << "ERROR: piece set outside the board: row: " << row << ", col: "<< col <<endl;
@@ -87,6 +103,7 @@ bool RPS::Parser(int playerIndex) {
                 line_words.push_back(word);
             }
         }
+
         if (line_words.size() < 3) {
             // TODO: error, not enogh arguments in line
             cout << "ERROR: not enogh arguments" << endl;

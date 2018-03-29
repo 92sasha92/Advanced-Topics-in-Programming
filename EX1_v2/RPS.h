@@ -27,6 +27,7 @@ class RPS {
 
     void initializePiecesArsenal();
     bool SetPiece(RPS& rps, int playerNumber, vector<string> piece_description);
+    bool isInteger(string str);
 
   public:
 
