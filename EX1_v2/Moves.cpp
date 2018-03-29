@@ -69,7 +69,7 @@ bool Moves::parseMoves(RPS& rps)
         cout << "ERROR:@ file didn't opened";
         return false;
     }
-    while (((!fin1.eof() && !currentTurn) || (!fin2.eof() && currentTurn)) && (RPS::checkWineer(rps) == RPS::GameNotOver)) {
+    while (((!fin1.eof() && !currentTurn) || (!fin2.eof() && currentTurn)) && (RPS::checkWinner(rps) == RPS::GameNotOver)) {
         if (currentTurn == 0) {
             getline(fin1, cur_line);
         } else {

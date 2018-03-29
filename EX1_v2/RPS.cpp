@@ -78,8 +78,8 @@ void RPS::fight(RPS& rps, int row, int col) {
 
 RPS::GameState RPS::checkWinner(RPS& rps) {
     bool player1HaveFlag = false, player2HaveFlag = false ,player1HaveMovingPieces = false, player2HaveMovingPieces = false;
-    for (int i = 0; i < rps.Mcols; i++) {
-        for (int j = 0; j < rps.Nrows; j++) {
+    for (int i = 0; i < rps.Nrows; i++) {
+        for (int j = 0; j < rps.Mcols; j++) {
 
             if (rps.board[i][j][0] != nullptr) {
                 if (rps.board[i][j][0]->type == Piece::Flag) {
