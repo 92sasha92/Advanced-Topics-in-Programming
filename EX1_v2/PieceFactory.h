@@ -8,10 +8,12 @@ class PieceFactory {
         Paper,
         Scissors,
         Bomb,
-        Joker,
         Flag,
+        Joker,
         Undefined
     } RPSPiecesTypes;
+
+
 
     static RPSPiecesTypes charToPieceType(char c);
     static Piece *createPiece(RPSPiecesTypes cPiece, int player, RPSPiecesTypes jokerPiece = Undefined);

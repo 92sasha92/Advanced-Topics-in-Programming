@@ -3,7 +3,6 @@
 
 class ScissorsPiece : public Piece {
   public:
-    ScissorsPiece(int player) :Piece(player) {
-    }
+    ScissorsPiece(int player);
     std::string toString() override;
 };

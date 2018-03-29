@@ -2,16 +2,28 @@
 
 #include <string>
 #include <iostream>
+#include "PieceFactory.h"
 
 class Piece
 {
   private:
     int playerNumber;
-		int canMove;
+	int canMove;
+
   protected:
-		void setCanMove(bool isMovable);
+    PieceFactory::RPSPiecesTypes type;
+    char strongerThan[5];
+    void setCanMove(bool isMovable);
+
   public:
-    Piece(int playerNumber);
+
+    typedef enum {
+        Weaker,
+        Equal,
+        Stronger
+    } PiecesPower;
+
+    Piece (int playerNumber);
     int getPlayerNumber();
 		int getCanMove();
     virtual std::string toString();
