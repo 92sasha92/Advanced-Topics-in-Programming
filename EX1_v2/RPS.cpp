@@ -1,10 +1,9 @@
 #include "RPS.h"
 
-//string RPS::player_0_name_ = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player1.rps_board";
-//string RPS::player_1_name_ = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player2.rps_board";
-string RPS::player_0_name_ = "./player1.rps_board";
-string RPS::player_1_name_ = "./player2.rps_board";
-
+string RPS::player_0_name_ = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player1.rps_board";
+string RPS::player_1_name_ = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player2.rps_board";
+//string RPS::player_0_name_ = "./player1.rps_board";
+//string RPS::player_1_name_ = "./player2.rps_board";
 
 void RPS::initializePiecesArsenal() {
     this->playerPiecesArsenal[PieceFactory::Rock] = R;
