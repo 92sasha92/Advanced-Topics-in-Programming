@@ -3,6 +3,6 @@
 
 class PaperPiece: public Piece{
   public:
-    PaperPiece(int player):Piece(player) {}
+    PaperPiece(int player);
     std::string toString() override;
 };

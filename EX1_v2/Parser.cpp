@@ -2,19 +2,19 @@
 
 //string Parser::player_0_name_ = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player1.rps_board";
 //string Parser::player_1_name_ = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player2.rps_board";
-string Parser::player_0_name_ = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player1.rps_board";
-string Parser::player_1_name_ = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player2.rps_board";
-//string Parser::player_0_name_ = "player1.rps_board";
-//string Parser::player_1_name_ = "player2.rps_board";
+//string Parser::player_0_name_ = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player1.rps_board";
+//string Parser::player_1_name_ = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player2.rps_board";
+string Parser::player_0_name_ = "player1.rps_board";
+string Parser::player_1_name_ = "player2.rps_board";
 
 void Parser::initializePiecesArsenal(RPS& rps) {
-    rps.playerPiecesArsenal[PieceFactory::Rock] = RPS::R;
-    rps.playerPiecesArsenal[PieceFactory::Paper] = RPS::P;
-    rps.playerPiecesArsenal[PieceFactory::Scissors] = RPS::S;
-    rps.playerPiecesArsenal[PieceFactory::Bomb] = RPS::B;
-    rps.playerPiecesArsenal[PieceFactory::Joker] = RPS::J;
-    rps.playerPiecesArsenal[PieceFactory::Flag] = RPS::F;
-    rps.playerPiecesArsenal[PieceFactory::Undefined] = 0;
+    rps.playerPiecesArsenal[Piece::Rock] = RPS::R;
+    rps.playerPiecesArsenal[Piece::Paper] = RPS::P;
+    rps.playerPiecesArsenal[Piece::Scissors] = RPS::S;
+    rps.playerPiecesArsenal[Piece::Bomb] = RPS::B;
+    rps.playerPiecesArsenal[Piece::Joker] = RPS::J;
+    rps.playerPiecesArsenal[Piece::Flag] = RPS::F;
+    rps.playerPiecesArsenal[Piece::Undefined] = 0;
 }
 
 bool Parser::isInteger(string str) {
@@ -53,21 +53,21 @@ bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription
         cout << "ERROR: two pieces of the same player in one cell: row: " << row << ", col: "<< col <<endl;
         return false;
     }
-    PieceFactory::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piece);
+    Piece::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piece);
     if (rps.playerPiecesArsenal[pieceType] == 0) {
         // TODO: error other player wins not enough pieces of the type
         cout << "ERROR: too many pieces of the same type, type enum:" << pieceType << endl;
         return false;
     }
     rps.playerPiecesArsenal[pieceType]--;
-    if (pieceType == PieceFactory::Joker) {
+    if (pieceType == Piece::Joker) {
         if (pieceDescription.size() != 4) {
             cout << "ERROR: too much arguments" << endl;
             // TODO: error, too much arguments in line
             return false;
         }
         char jokerPiece = pieceDescription[3][0];
-        PieceFactory::RPSPiecesTypes jokerPieceType = PieceFactory::charToPieceType(jokerPiece);
+        Piece::RPSPiecesTypes jokerPieceType = PieceFactory::charToPieceType(jokerPiece);
         rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex, jokerPieceType);
     } else {
         if (pieceDescription.size() != 3) {
@@ -128,7 +128,7 @@ bool Parser::parseBoard(RPS& rps, int playerIndex) {
 
     }
 
-    if (rps.playerPiecesArsenal[PieceFactory::Flag] > 0) {
+    if (rps.playerPiecesArsenal[Piece::Flag] > 0) {
         // TODO: flag not placed error other player wins
 			 fin.close();
         return false;

@@ -4,7 +4,7 @@
 
 class JokerPiece: public Piece{
   public:
-    PieceFactory::RPSPiecesTypes jokerPiece;
-    JokerPiece(int player, PieceFactory::RPSPiecesTypes jokerPiece_);
+    Piece::RPSPiecesTypes jokerPiece;
+    JokerPiece(int player, Piece::RPSPiecesTypes jokerPiece_);
     std::string toString() override;
 };

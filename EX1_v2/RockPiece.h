@@ -3,7 +3,6 @@
 
 class RockPiece: public Piece{
   public:
-    RockPiece(int player):Piece(player) {
-    }
+    RockPiece(int player);
     std::string toString() override;
 };
