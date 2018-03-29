@@ -40,7 +40,7 @@ class RPS {
     int getNumberOfRows();
     int getNumberOfColumns();
     Piece *board[Nrows][Mcols][2];
-    static GameState checkWineer(RPS& rps);
+    static GameState checkWinner(RPS& rps);
 
     RPS();
     RPS(const RPS& rps) = delete;

@@ -17,7 +17,7 @@ int main() {
 
 	rps.printBoard(rps);
 	Moves::parseMoves(rps);
-    cout << "AND THE WINNER NUMBER IS: " << RPS::checkWineer(rps) << endl;
+    cout << "AND THE WINNER NUMBER IS: " << RPS::checkWinner(rps) << endl;
     return 0;
 }
 
