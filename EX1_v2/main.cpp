@@ -13,9 +13,8 @@ int main() {
         cout << "player1 use incorrect format file and lose" << endl;
     } else if (!check2) {
         cout << "player2 use incorrect format file and lose" << endl;
-    } else {
-        // TODO: game should be played
     }
+
 	rps.printBoard(rps);
 	Moves::parseMoves(rps);
     cout << "AND THE WINNER NUMBER IS: " << RPS::checkWineer(rps) << endl;

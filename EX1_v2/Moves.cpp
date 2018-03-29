@@ -45,7 +45,6 @@ Moves::Move* Moves::parseMove(RPS& rps, int playerIndex, vector<string> pieceDes
         if (Parser::isInteger(pieceDescription[i])) {
             arr[i] = stoi(pieceDescription[i]) - 1;
         } else {
-            // TODO: incorrect line format
             cout << "incorrect line format" << endl;
             return nullptr;
         }
@@ -85,7 +84,6 @@ bool Moves::parseMoves(RPS& rps)
             }
         }
         if (line_words.size() != 4) {
-            // TODO: error, not enough arguments in line
             cout << "ERROR: num of arguments is incorrect" << line_words.size() << endl;
             return false;
         }
@@ -127,7 +125,6 @@ bool Moves::setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int play
     if (Parser::isInteger(pieceDescription[1])) {
         col = stoi(pieceDescription[1]) - 1;
     } else {
-        // TODO: incorrect line format
         cout << "incorrect line format" << endl;
         return false;
     }
@@ -135,7 +132,6 @@ bool Moves::setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int play
     if (Parser::isInteger(pieceDescription[2])) {
         row = stoi(pieceDescription[2]) - 1;
     } else {
-        // TODO: incorrect line format
         cout << "incorrect line format" << endl;
         return false;
     }
@@ -151,7 +147,6 @@ bool Moves::setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int play
     }
 
     if (pieceDescription[3].size() != 1) {
-        // TODO: incorrect piece type
         cout << "incorrect piece type" << endl;
         return false;
     }

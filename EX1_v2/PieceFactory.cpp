@@ -8,21 +8,16 @@
 
 Piece::RPSPiecesTypes PieceFactory::charToPieceType(char c) {
     switch (c) {
-        case 'R':
-            return Piece::RPSPiecesTypes::Rock;
-        case 'P':
-            return Piece::RPSPiecesTypes::Paper;
-        case 'S':
-            return Piece::RPSPiecesTypes::Scissors;
-        case 'B':
-            return Piece::RPSPiecesTypes::Bomb;
-        case 'J':
-            return Piece::RPSPiecesTypes::Joker;
-        case 'F':
-            return Piece::RPSPiecesTypes::Flag;
-        default:
-            // TODO: handle unsported piece character
+        case 'R':return Piece::RPSPiecesTypes::Rock;
+        case 'P':return Piece::RPSPiecesTypes::Paper;
+        case 'S':return Piece::RPSPiecesTypes::Scissors;
+        case 'B':return Piece::RPSPiecesTypes::Bomb;
+        case 'J':return Piece::RPSPiecesTypes::Joker;
+        case 'F':return Piece::RPSPiecesTypes::Flag;
+        default: {
+            std::cout << "ERROR: unspported piece character" << std::endl;
             return Piece::RPSPiecesTypes::Undefined;
+        }
     }
 
 }
@@ -41,9 +36,10 @@ Piece* PieceFactory::createPiece(Piece::RPSPiecesTypes pieceType, int player, Pi
             return new JokerPiece(player, jokerPiece);// joker can be only R P S B
         case Piece::Flag:
             return new FlagPiece(player);
-        default:
-            // TODO: undefined piece
+        default: {
+            std::cout << "ERROR: undefined piece type" << std::endl;
             return nullptr;
+        }
     }
 }
 
