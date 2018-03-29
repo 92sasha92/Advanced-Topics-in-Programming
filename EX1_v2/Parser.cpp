@@ -20,6 +20,7 @@ void Parser::initializePiecesArsenal(RPS& rps) {
 bool Parser::isInteger(string str) {
     for (char c : str) {
         if (c > '9' || c < '0') {
+            cout << "not an integer" << endl;
             return false;
         }
     }
@@ -109,13 +110,13 @@ bool Parser::parseBoard(RPS& rps, int playerIndex) {
 
         if (line_words.size() < 3) {
             cout << "ERROR: not enogh arguments " << line_words.size() << endl;
-						fin.close();
+			fin.close();
             return false;
         }
         check = setPiece(rps, playerIndex, line_words);
         if (!check) {
             cout << "ERROR: could not set piece" << endl;
-					 fin.close();
+			fin.close();
             return false;
         }
 
@@ -123,7 +124,7 @@ bool Parser::parseBoard(RPS& rps, int playerIndex) {
 
     if (rps.playerPiecesArsenal[Piece::Flag] > 0) {
         cout << "ERROR: Not all Flags placed" << endl;
-			 fin.close();
+		fin.close();
         return false;
     }
 
