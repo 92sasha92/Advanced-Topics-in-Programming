@@ -23,6 +23,7 @@ class Piece
 	} PiecesPower;
 
 	Piece (int playerNumber);
+    PiecesPower isStrongerThan(const Piece& rival);
 	int getPlayerNumber();
 	int getCanMove();
 	virtual std::string toString();
@@ -30,7 +31,7 @@ class Piece
 
   protected:
 	RPSPiecesTypes type;
-    char strongerThan[5];
+    PiecesPower strongerThan[5];
     void setCanMove(bool isMovable);
 
   private:
