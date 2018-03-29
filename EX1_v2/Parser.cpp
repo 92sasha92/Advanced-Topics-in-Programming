@@ -116,11 +116,13 @@ bool Parser::parseBoard(RPS& rps, int playerIndex) {
         if (line_words.size() < 3) {
             // TODO: error, not enogh arguments in line
             cout << "ERROR: not enogh arguments " << line_words.size() << endl;
+						fin.close();
             return false;
         }
         check = setPiece(rps, playerIndex, line_words);
         if (!check) {
             // TODO: raise relevant error
+					 fin.close();
             return false;
         }
 
@@ -128,6 +130,7 @@ bool Parser::parseBoard(RPS& rps, int playerIndex) {
 
     if (rps.playerPiecesArsenal[PieceFactory::Flag] > 0) {
         // TODO: flag not placed error other player wins
+			 fin.close();
         return false;
     }
     // TODO: check if need to close ss
