@@ -6,6 +6,7 @@
 #include <fstream>
 #include <vector>
 #include "PieceFactory.h"
+#include "JokerPiece.h"
 
 using namespace std;
 
@@ -27,6 +28,7 @@ class RPS {
 
   public:
 
+    void fight(RPS& rps, int row, int col);
     void printBoard();
     Piece *board[Mcols][Nrows][2];
 

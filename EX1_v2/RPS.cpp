@@ -30,3 +30,34 @@ RPS::RPS() {
         }
     }
 }
+
+void RPS::fight(RPS& rps, int row, int col) {
+    Piece *piece1 = rps.board[col][row][0], *piece2 = rps.board[col][row][1];
+    if (piece1->type == Piece::Joker) {
+        Piece::RPSPiecesTypes piece1jokerpiece = ((JokerPiece *)piece1)->getJokerPiece();
+        piece1 = PieceFactory::createPiece(piece1jokerpiece ,0);
+    }
+    if (piece2->type == Piece::Joker) {
+        Piece::RPSPiecesTypes piece2jokerpiece = ((JokerPiece *)piece2)->getJokerPiece();
+        piece2 = PieceFactory::createPiece(piece2jokerpiece ,1);
+    }
+    Piece::PiecesPower winner = piece1->isStrongerThan(*piece2);
+    switch (winner){
+        case Piece::Stronger:{
+            delete piece2;
+            rps.board[col][row][1] = nullptr;
+        } break;
+        case Piece::Weaker:{
+            delete piece1;
+            rps.board[col][row][0] = nullptr;
+        } break;
+        case Piece::Equal:{
+            delete piece1;
+            delete piece2;
+            rps.board[col][row][0] = nullptr;
+            rps.board[col][row][1] = nullptr;
+        } break;
+        default:
+            cout << "ERROR: wrong PiecesPower type returned" << endl;
+    }
+}

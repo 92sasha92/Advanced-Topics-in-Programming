@@ -3,8 +3,12 @@
 #include "PieceFactory.h"
 
 class JokerPiece: public Piece{
-  public:
+  private:
     Piece::RPSPiecesTypes jokerPiece;
+
+  public:
+    RPSPiecesTypes getJokerPiece();
     JokerPiece(int player, Piece::RPSPiecesTypes jokerPiece_);
     std::string toString() override;
+
 };

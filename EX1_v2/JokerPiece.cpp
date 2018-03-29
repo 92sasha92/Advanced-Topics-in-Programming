@@ -18,3 +18,7 @@ std::string JokerPiece::toString() {
         return "j" + std::to_string(this->jokerPiece); // TODO: set jokerPiece as char
     }
 }
+
+Piece::RPSPiecesTypes JokerPiece::getJokerPiece() {
+    return this->jokerPiece;
+}
