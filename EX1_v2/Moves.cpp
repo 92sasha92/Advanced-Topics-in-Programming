@@ -76,7 +76,7 @@ bool Moves::parseMoves(RPS& rps)
         return false;
     }
 
-    while ((((!fin1.eof() || !player1_next_line.empty()) && !currentTurn) || ((!fin2.eof() || !player2_next_line.empty()) && currentTurn)) && (RPS::checkWineer(rps) == RPS::GameNotOver)) {
+    while ((((!fin1.eof() || !player1_next_line.empty()) && !currentTurn) || ((!fin2.eof() || !player2_next_line.empty()) && currentTurn)) && (RPS::checkWinner(rps) == RPS::GameNotOver)) {
 
         if (currentTurn == 0) {
             if (!player1_next_line.empty()) {
@@ -125,7 +125,7 @@ bool Moves::parseMoves(RPS& rps)
             return false;
         }
 
-        if (((player1_next_line!= "" && !currentTurn) || (player2_next_line!= "" && currentTurn)) && (RPS::checkWineer(rps) == RPS::GameNotOver)) {
+        if (((player1_next_line!= "" && !currentTurn) || (player2_next_line!= "" && currentTurn)) && (RPS::checkWinner(rps) == RPS::GameNotOver)) {
             if (currentTurn == 0) {
                 istringstream ss(player1_next_line);
                 line_words.clear();

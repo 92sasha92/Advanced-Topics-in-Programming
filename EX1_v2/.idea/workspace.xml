@@ -62,17 +62,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Moves.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Moves.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Moves.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="45" column="29" lean-forward="false" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="29" />
+            <state relative-caret-position="533">
+              <caret line="141" column="51" lean-forward="true" selection-start-line="141" selection-start-column="51" selection-end-line="141" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Moves.h" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Moves.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Moves.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
@@ -118,7 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Parser::isInteger(pieceDescription</find>
       <find>okerPieceType == Piece::Flag</find>
       <find>jokerPiece</find>
       <find>getJokerPiece</find>
@@ -148,6 +147,7 @@
       <find>currentTurn</find>
       <find>cout</find>
       <find>player2_next_line</find>
+      <find>winee</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -272,7 +272,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55411000" />
+    <option name="totallyTimeSpent" value="55526000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="988" extended-state="0" />
@@ -690,18 +690,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Moves.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="45" column="29" lean-forward="false" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Moves.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Moves.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="141" column="51" lean-forward="true" selection-start-line="141" selection-start-column="51" selection-end-line="141" selection-end-column="51" />
           <folding />
         </state>
       </provider>
