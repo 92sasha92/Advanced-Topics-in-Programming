@@ -17,3 +17,6 @@ std::string FlagPiece::toString() {
         return "f";
     }
 }
+
+FlagPiece::~FlagPiece() {
+}

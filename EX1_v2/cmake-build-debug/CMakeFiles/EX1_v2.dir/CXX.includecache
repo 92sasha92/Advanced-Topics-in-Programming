@@ -105,6 +105,8 @@ vector
 -
 PieceFactory.h
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PieceFactory.h
+JokerPiece.h
+/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/JokerPiece.h
 
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/RockPiece.cpp
 RockPiece.h

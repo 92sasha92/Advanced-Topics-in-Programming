@@ -16,3 +16,6 @@ std::string PaperPiece::toString() {
         return "p";
     }
 }
+
+PaperPiece::~PaperPiece() {
+}

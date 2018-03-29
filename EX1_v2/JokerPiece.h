@@ -10,5 +10,5 @@ class JokerPiece: public Piece{
     RPSPiecesTypes getJokerPiece();
     JokerPiece(int player, Piece::RPSPiecesTypes jokerPiece_);
     std::string toString() override;
-
+    ~JokerPiece() final;
 };

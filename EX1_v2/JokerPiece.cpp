@@ -22,3 +22,6 @@ std::string JokerPiece::toString() {
 Piece::RPSPiecesTypes JokerPiece::getJokerPiece() {
     return this->jokerPiece;
 }
+
+JokerPiece::~JokerPiece() {
+}

@@ -17,3 +17,6 @@ std::string BombPiece::toString() {
         return "b";
     }
 }
+
+BombPiece::~BombPiece() {
+}

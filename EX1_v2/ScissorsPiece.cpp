@@ -16,3 +16,6 @@ std::string ScissorsPiece::toString() {
         return "s";
     }
 }
+
+ScissorsPiece::~ScissorsPiece() {
+}

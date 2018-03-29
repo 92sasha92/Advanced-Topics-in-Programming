@@ -16,3 +16,6 @@ std::string RockPiece::toString() {
         return "r";
     }
 }
+
+RockPiece::~RockPiece() {
+}

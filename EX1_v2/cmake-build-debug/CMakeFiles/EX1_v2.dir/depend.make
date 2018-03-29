@@ -14,6 +14,7 @@ CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o: ../JokerPiece.h
 CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o: ../Piece.h
 CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o: ../PieceFactory.h
 
+CMakeFiles/EX1_v2.dir/Moves.cpp.o: ../JokerPiece.h
 CMakeFiles/EX1_v2.dir/Moves.cpp.o: ../Moves.cpp
 CMakeFiles/EX1_v2.dir/Moves.cpp.o: ../Moves.h
 CMakeFiles/EX1_v2.dir/Moves.cpp.o: ../Parser.h
@@ -25,6 +26,7 @@ CMakeFiles/EX1_v2.dir/PaperPiece.cpp.o: ../PaperPiece.cpp
 CMakeFiles/EX1_v2.dir/PaperPiece.cpp.o: ../PaperPiece.h
 CMakeFiles/EX1_v2.dir/PaperPiece.cpp.o: ../Piece.h
 
+CMakeFiles/EX1_v2.dir/Parser.cpp.o: ../JokerPiece.h
 CMakeFiles/EX1_v2.dir/Parser.cpp.o: ../Parser.cpp
 CMakeFiles/EX1_v2.dir/Parser.cpp.o: ../Parser.h
 CMakeFiles/EX1_v2.dir/Parser.cpp.o: ../Piece.h
@@ -44,6 +46,7 @@ CMakeFiles/EX1_v2.dir/PieceFactory.cpp.o: ../PieceFactory.h
 CMakeFiles/EX1_v2.dir/PieceFactory.cpp.o: ../RockPiece.h
 CMakeFiles/EX1_v2.dir/PieceFactory.cpp.o: ../ScissorsPiece.h
 
+CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../JokerPiece.h
 CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../Piece.h
 CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../PieceFactory.h
 CMakeFiles/EX1_v2.dir/RPS.cpp.o: ../RPS.cpp
@@ -57,6 +60,7 @@ CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.o: ../Piece.h
 CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.o: ../ScissorsPiece.cpp
 CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.o: ../ScissorsPiece.h
 
+CMakeFiles/EX1_v2.dir/main.cpp.o: ../JokerPiece.h
 CMakeFiles/EX1_v2.dir/main.cpp.o: ../Moves.h
 CMakeFiles/EX1_v2.dir/main.cpp.o: ../Parser.h
 CMakeFiles/EX1_v2.dir/main.cpp.o: ../Piece.h

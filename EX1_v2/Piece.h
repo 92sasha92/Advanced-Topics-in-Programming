@@ -29,7 +29,7 @@ class Piece
     int getPlayerNumber();
     int getCanMove();
     virtual std::string toString();
-	~Piece();
+	virtual ~Piece();
 
   protected:
     PiecesPower strongerThan[5];
