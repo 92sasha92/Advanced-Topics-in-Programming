@@ -153,6 +153,7 @@
     <ClInclude Include="PaperPiece.h" />
     <ClInclude Include="Piece.h" />
     <ClInclude Include="PieceFactory.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="RockPiece.h" />
     <ClInclude Include="RPS.h" />
     <ClInclude Include="ScissorsPiece.h" />
@@ -178,8 +179,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1\player1.rps_board" />
-    <None Include="..\..\..\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1\player2.rps_board" />
+    <ResourceCompile Include="ConsoleApplication1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="player1.rps_board" />
+    <None Include="player2.rps_board" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
