@@ -11,10 +11,10 @@ class Parser {
 
     static void initializePiecesArsenal(RPS& rps);
     static bool setPiece(RPS& rps, int playerNumber, vector<string> piece_description);
-    static bool isInteger(string str);
-
+    
   public:
 
+		static bool isInteger(string str);
     static bool parseBoard(RPS& rps, int playerNumber);
 
 };

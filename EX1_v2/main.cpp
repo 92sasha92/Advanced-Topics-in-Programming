@@ -1,5 +1,6 @@
 #include "RPS.h"
 #include "Parser.h"
+#include "Moves.h"
 
 int main() {
     RPS rps;
@@ -15,6 +16,7 @@ int main() {
     } else {
         // TODO: game should be played
     }
+		parseMoves(rps);
     rps.printBoard();
     return 0;
 }
