@@ -11,5 +11,9 @@ JokerPiece::JokerPiece(int player, PieceFactory::RPSPiecesTypes jokerPiece_): Pi
 }
 
 std::string JokerPiece::toString() {
-    return "J" + std::to_string(this->getPlayerNumber()) + std::to_string(this->jokerPiece); // TODO: set jokerPiece as char
+    if (this->getPlayerNumber() == 1) {
+        return "J" +std::to_string(this->jokerPiece); // TODO: set jokerPiece as char
+    } else {
+        return "j" + std::to_string(this->jokerPiece); // TODO: set jokerPiece as char
+    }
 }

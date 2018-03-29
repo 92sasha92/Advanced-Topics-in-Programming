@@ -1,5 +1,9 @@
 #include "BombPiece.h"
 
 std::string BombPiece::toString() {
-    return "B" + std::to_string(this->getPlayerNumber());
+    if (this->getPlayerNumber() == 1) {
+        return "B";
+    } else {
+        return "b";
+    }
 }
