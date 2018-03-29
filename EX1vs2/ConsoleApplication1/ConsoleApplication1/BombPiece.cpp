@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "BombPiece.h"
 
 std::string BombPiece::toString() {

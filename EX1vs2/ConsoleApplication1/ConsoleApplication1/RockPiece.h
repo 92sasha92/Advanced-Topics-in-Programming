@@ -1,8 +1,18 @@
-#pragma once
 #include "Piece.h"
-class RockPiece : public Piece {
-public:
-	RockPiece(int player) :Piece(player) {
-	}
-	std::string toString() override;
-};
+
+Piece::Piece(int player) : playerNumber(player) {
+	std::cout << "sdsdsd";
+}
+
+int Piece::getPlayerNumber() {
+	return this->playerNumber;
+}
+
+std::string Piece::toString()
+{
+	return "base class";
+}
+
+Piece::~Piece()
+{
+}

@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "PieceFactory.h"
 #include "RockPiece.h"
 #include "PaperPiece.h"

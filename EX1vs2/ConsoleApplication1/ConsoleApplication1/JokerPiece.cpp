@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "JokerPiece.h"
 
 JokerPiece::JokerPiece(int player, PieceFactory::RPSPiecesTypes jokerPiece_) : Piece(player) {

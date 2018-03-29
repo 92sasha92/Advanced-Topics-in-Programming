@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "RPS.h"
 
 string RPS::player_0_name_ = "player1.rps_board";

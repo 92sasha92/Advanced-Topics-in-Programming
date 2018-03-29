@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "FlagPiece.h"
 
 std::string FlagPiece::toString() {

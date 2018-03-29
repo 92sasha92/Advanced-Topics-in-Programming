@@ -100,11 +100,7 @@ void RPS::PrintBoard() {
 			} else if (this->board[i][j][0] != nullptr) {
 				cout << this->board[i][j][0]->toString() << " "; // TODO: implement toString function
 			} else if (this->board[i][j][1] != nullptr) {
-<<<<<<< HEAD
-				cout << this->board[i][j][1]->toString() << " "; 
-=======
 				cout << this->board[i][j][1]->toString() << " ";
->>>>>>> 29e74337588a0a6f3497622e0cb1ea87d2345067
 			} else {
 				cout << "  ";
 			}

@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "RockPiece.h"
 
 std::string RockPiece::toString() {
