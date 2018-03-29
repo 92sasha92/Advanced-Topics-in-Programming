@@ -104,6 +104,12 @@
 		<Unit filename="/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PaperPiece.h">
 			<Option target="EX1_v2"/>
 		</Unit>
+		<Unit filename="/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Parser.cpp">
+			<Option target="EX1_v2"/>
+		</Unit>
+		<Unit filename="/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Parser.h">
+			<Option target="EX1_v2"/>
+		</Unit>
 		<Unit filename="/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Piece.cpp">
 			<Option target="EX1_v2"/>
 		</Unit>
