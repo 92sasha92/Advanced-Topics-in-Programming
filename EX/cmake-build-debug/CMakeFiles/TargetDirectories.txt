@@ -1,3 +1,0 @@
-/Users/guy/school/Advanced-Topics-in-Programming/EX/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/guy/school/Advanced-Topics-in-Programming/EX/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/guy/school/Advanced-Topics-in-Programming/EX/cmake-build-debug/CMakeFiles/EX.dir
