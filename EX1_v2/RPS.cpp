@@ -10,12 +10,20 @@ void RPS::initializePiecesArsenal() {
     this->playerPiecesArsenal[PieceFactory::Bomb] = B;
     this->playerPiecesArsenal[PieceFactory::Joker] = J;
     this->playerPiecesArsenal[PieceFactory::Flag] = F;
+    this->playerPiecesArsenal[PieceFactory::Undefined] = 0;
 }
 
 bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
     char piece = pieceDescription[0][0];
-    int col = stoi(pieceDescription[1]) - 1;
-    int row = stoi(pieceDescription[2]) - 1;
+    int col, row;
+    try {
+        col = stoi(pieceDescription[1]) - 1;
+        row = stoi(pieceDescription[2]) - 1;
+    } catch (...) {
+        // TODO: uncorrect line format
+        cout << "uncorrect line format" << endl;
+        return false;
+    }
     if (0 > row || row >= rps.Nrows || 0 > col || col >= rps.Mcols) {
         // TODO: the other player win the game
         cout << "ERROR: piece set outside the board: row: " << row << ", col: "<< col <<endl;
@@ -34,6 +42,7 @@ bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
     rps.playerPiecesArsenal[pieceType]--;
     if (pieceType == PieceFactory::Joker) {
         if (pieceDescription.size() != 4) {
+            cout << "ERROR: too much arguments" << endl;
             // TODO: error, too much arguments in line
             return false;
         }
@@ -42,6 +51,7 @@ bool RPS::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
         rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex, jokerPieceType);
     } else {
         if (pieceDescription.size() != 3) {
+            cout << "ERROR: too much arguments" << endl;
             // TODO: error, too much arguments in line
             return false;
         }
@@ -72,10 +82,13 @@ bool RPS::Parser(int playerIndex) {
 
         line_words.clear();
         while (getline(ss, word, ' ')) {
-            line_words.push_back(word);
+            if (word.compare("") != 0) {
+                line_words.push_back(word);
+            }
         }
         if (line_words.size() < 3) {
             // TODO: error, not enogh arguments in line
+            cout << "ERROR: not enogh arguments" << endl;
             return false;
         }
         check = SetPiece(*this, playerIndex, line_words);
@@ -101,7 +114,7 @@ void RPS::PrintBoard() {
         cout << "----------------------------------------" << endl;
         for (int j = 0; j < this->Nrows; j++) {
             if (this->board[i][j][0] != nullptr && this->board[i][j][1] != nullptr) {
-                cout << "ERROR: two pieces in the same cell: row: " << j << ", col: "<< i <<endl;
+                cout << "ERROR: two pieces in the same cell: (" << j << ", "<< i << ") should be fight" << endl;
                 break;
             }
             else if (this->board[i][j][0] != nullptr) {

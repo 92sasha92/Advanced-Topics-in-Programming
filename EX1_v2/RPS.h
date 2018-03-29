@@ -23,7 +23,7 @@ class RPS {
 
     static string player_0_name_;
     static string player_1_name_;
-    int playerPiecesArsenal[6];
+    int playerPiecesArsenal[7];
 
     void initializePiecesArsenal();
     bool SetPiece(RPS& rps, int playerNumber, vector<string> piece_description);

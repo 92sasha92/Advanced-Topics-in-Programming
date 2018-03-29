@@ -5,7 +5,7 @@ JokerPiece::JokerPiece(int player, PieceFactory::RPSPiecesTypes jokerPiece_): Pi
         jokerPiece = jokerPiece_;
     } else {
         jokerPiece = PieceFactory::Undefined;
-        std::cout << "ERROR: unsuported joke type" << std::endl;
+        std::cout << "ERROR: unsuported joker type" << std::endl;
         // TODO: error wrong joker type
     }
 }
