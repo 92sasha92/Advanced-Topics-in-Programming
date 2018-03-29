@@ -8,9 +8,9 @@ int main() {
     check2 = Parser::parseBoard(rps, 1);
     if (!check1 && !check2) {
         cout << "two players use incorrect format file and no point are given" << endl;
-    } else if (!check1 && check2) {
+    } else if (!check1) {
         cout << "player1 use incorrect format file and lose" << endl;
-    } else if (check1 && !check2) {
+    } else if (!check2) {
         cout << "player2 use incorrect format file and lose" << endl;
     } else {
         // TODO: game should be played
