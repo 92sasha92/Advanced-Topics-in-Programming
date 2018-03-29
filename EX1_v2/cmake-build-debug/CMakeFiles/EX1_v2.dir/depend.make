@@ -18,6 +18,12 @@ CMakeFiles/EX1_v2.dir/PaperPiece.cpp.o: ../PaperPiece.cpp
 CMakeFiles/EX1_v2.dir/PaperPiece.cpp.o: ../PaperPiece.h
 CMakeFiles/EX1_v2.dir/PaperPiece.cpp.o: ../Piece.h
 
+CMakeFiles/EX1_v2.dir/Parser.cpp.o: ../Parser.cpp
+CMakeFiles/EX1_v2.dir/Parser.cpp.o: ../Parser.h
+CMakeFiles/EX1_v2.dir/Parser.cpp.o: ../Piece.h
+CMakeFiles/EX1_v2.dir/Parser.cpp.o: ../PieceFactory.h
+CMakeFiles/EX1_v2.dir/Parser.cpp.o: ../RPS.h
+
 CMakeFiles/EX1_v2.dir/Piece.cpp.o: ../Piece.cpp
 CMakeFiles/EX1_v2.dir/Piece.cpp.o: ../Piece.h
 
@@ -44,6 +50,7 @@ CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.o: ../Piece.h
 CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.o: ../ScissorsPiece.cpp
 CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.o: ../ScissorsPiece.h
 
+CMakeFiles/EX1_v2.dir/main.cpp.o: ../Parser.h
 CMakeFiles/EX1_v2.dir/main.cpp.o: ../Piece.h
 CMakeFiles/EX1_v2.dir/main.cpp.o: ../PieceFactory.h
 CMakeFiles/EX1_v2.dir/main.cpp.o: ../RPS.h
