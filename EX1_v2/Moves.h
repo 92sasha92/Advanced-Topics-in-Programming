@@ -3,5 +3,5 @@
 class Moves {
 public:
 	bool move(RPS& rps, int fRow, int fCol, int toRow, int toCol, int player);
-	bool parseMoves();
+	bool parseMoves(int playerIndex);
 };
