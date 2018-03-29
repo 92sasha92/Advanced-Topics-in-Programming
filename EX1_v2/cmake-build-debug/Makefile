@@ -231,6 +231,33 @@ PaperPiece.cpp.s:
 	$(MAKE) -f CMakeFiles/EX1_v2.dir/build.make CMakeFiles/EX1_v2.dir/PaperPiece.cpp.s
 .PHONY : PaperPiece.cpp.s
 
+Parser.o: Parser.cpp.o
+
+.PHONY : Parser.o
+
+# target to build an object file
+Parser.cpp.o:
+	$(MAKE) -f CMakeFiles/EX1_v2.dir/build.make CMakeFiles/EX1_v2.dir/Parser.cpp.o
+.PHONY : Parser.cpp.o
+
+Parser.i: Parser.cpp.i
+
+.PHONY : Parser.i
+
+# target to preprocess a source file
+Parser.cpp.i:
+	$(MAKE) -f CMakeFiles/EX1_v2.dir/build.make CMakeFiles/EX1_v2.dir/Parser.cpp.i
+.PHONY : Parser.cpp.i
+
+Parser.s: Parser.cpp.s
+
+.PHONY : Parser.s
+
+# target to generate assembly for a file
+Parser.cpp.s:
+	$(MAKE) -f CMakeFiles/EX1_v2.dir/build.make CMakeFiles/EX1_v2.dir/Parser.cpp.s
+.PHONY : Parser.cpp.s
+
 Piece.o: Piece.cpp.o
 
 .PHONY : Piece.o
@@ -414,6 +441,9 @@ help:
 	@echo "... PaperPiece.o"
 	@echo "... PaperPiece.i"
 	@echo "... PaperPiece.s"
+	@echo "... Parser.o"
+	@echo "... Parser.i"
+	@echo "... Parser.s"
 	@echo "... Piece.o"
 	@echo "... Piece.i"
 	@echo "... Piece.s"

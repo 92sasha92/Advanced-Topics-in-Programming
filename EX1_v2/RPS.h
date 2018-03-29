@@ -21,17 +21,12 @@ class RPS {
     static const int J = 2;
     static const int F = 1;
 
-    static string player_0_name_;
-    static string player_1_name_;
     int playerPiecesArsenal[7];
 
-    void initializePiecesArsenal();
-    bool SetPiece(RPS& rps, int playerNumber, vector<string> piece_description);
-    bool isInteger(string str);
+    friend class Parser;
 
   public:
 
-    bool Parser(int playerNumber);
     void PrintBoard();
     Piece *board[Mcols][Nrows][2];
 
