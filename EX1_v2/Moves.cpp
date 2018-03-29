@@ -2,7 +2,7 @@
 
 bool Moves::move(RPS & rps, int fRow, int fCol, int toRow, int toCol, int player)
 {
-	if (fRow >= 0 && fCol >= 0 && toCol >= 0, toRow >= 0) {
+	if (fRow >= 0 && fCol >= 0 && toCol >= 0 && toRow >= 0) {
 		cout << "ERROR: problem with the indexes";
 		return false;
 	}
@@ -12,7 +12,7 @@ bool Moves::move(RPS & rps, int fRow, int fCol, int toRow, int toCol, int player
 		return false;
 	}
 	if (!(piece->getCanMove())) {
-		cout << "ERROR " << piece->toString << "can't move" << endl;
+		cout << "ERROR " << piece->toString() << "can't move" << endl;
 		return false;
 	}
 
@@ -22,7 +22,6 @@ bool Moves::move(RPS & rps, int fRow, int fCol, int toRow, int toCol, int player
 bool Moves::parseMoves(int playerIndex)
 {
 	string cur_line, word;
-	bool check;
 	ifstream fin;
 	vector<string> line_words;
 	if (playerIndex == 0) {
@@ -55,11 +54,6 @@ bool Moves::parseMoves(int playerIndex)
 		if (line_words.size() < 3) {
 			// TODO: error, not enogh arguments in line
 			cout << "ERROR: not enogh arguments " << line_words.size() << endl;
-			return false;
-		}
-		
-		if (!check) {
-			// TODO: raise relevant error
 			return false;
 		}
 
