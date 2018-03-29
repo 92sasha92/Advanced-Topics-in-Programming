@@ -40,6 +40,14 @@ PaperPiece.h
 Piece.h
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Piece.h
 
+/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Parser.cpp
+Parser.h
+/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Parser.h
+
+/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Parser.h
+RPS.h
+/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/RPS.h
+
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Piece.cpp
 Piece.h
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Piece.h
@@ -107,4 +115,6 @@ Piece.h
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/main.cpp
 RPS.h
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/RPS.h
+Parser.h
+/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Parser.h
 
