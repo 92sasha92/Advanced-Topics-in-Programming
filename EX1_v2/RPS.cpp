@@ -83,6 +83,7 @@ bool RPS::Parser(int playerIndex) {
         line_words.clear();
         while (getline(ss, word, ' ')) {
             if (word.compare("") != 0) {
+                cout << "word: " << word << ";" << endl;
                 line_words.push_back(word);
             }
         }
