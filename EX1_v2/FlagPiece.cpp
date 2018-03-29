@@ -12,9 +12,9 @@ FlagPiece::FlagPiece(int player) :Piece(player) {
 
 std::string FlagPiece::toString() {
     if (this->getPlayerNumber() == 1) {
-        return "F";
-    } else {
         return "f";
+    } else {
+        return "F";
     }
 }
 

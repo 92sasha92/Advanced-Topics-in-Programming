@@ -8,6 +8,7 @@ class JokerPiece: public Piece{
 
   public:
     RPSPiecesTypes getJokerPiece();
+    void setJokerPiece(Piece::RPSPiecesTypes NewJpkerPiece);
     JokerPiece(int player, Piece::RPSPiecesTypes jokerPiece_);
     std::string toString() override;
     ~JokerPiece() final;

@@ -1,10 +1,12 @@
 #include "RPS.h"
 #include "Parser.h"
+#include "JokerPiece.h"
 
 class Moves {
   private:
     static string player1Moves;
     static string player2Moves;
+
     class Move {
       public:
         int fRow;
@@ -12,10 +14,13 @@ class Moves {
         int toRow;
         int toCol;
         int player;
-        Move(int fRow_, int fCol_, int toRow_, int toCol_, int player_);
+        Move(int fCol_, int fRow_, int toCol_, int toRow_, int player_);
     };
+
     static Move* parseMove(RPS& rps, int playerIndex, vector<string> pieceDescription);
     static bool movePiece(RPS& rps, Move& move);
+    static bool setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int player);
+
   public:
     static bool parseMoves(RPS& rps);
 

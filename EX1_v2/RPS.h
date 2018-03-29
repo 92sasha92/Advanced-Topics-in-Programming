@@ -28,16 +28,24 @@ class RPS {
 
   public:
 
+    typedef enum {
+        Tie,
+        Player1Win,
+        Player2Win,
+        GameNotOver
+    } GameState;
+
     static void fight(RPS& rps, int row, int col);
-    void printBoard();
+    static void printBoard(RPS& rps);
+    int getNumberOfRows();
+    int getNumberOfColumns();
     Piece *board[Nrows][Mcols][2];
+    static GameState checkWineer(RPS& rps);
 
     RPS();
-    //    ~RPS() {
-    //        if (board != NULL) {
-    //            delete[] board;
-    //        }
-    //    }
+    RPS(const RPS& rps) = delete;
+    RPS& operator=(const RPS& rps) = delete;
+    ~RPS();
 
 };
 

@@ -12,9 +12,9 @@ BombPiece::BombPiece(int player) :Piece(player) {
 
 std::string BombPiece::toString() {
     if (this->getPlayerNumber() == 1) {
-        return "B";
-    } else {
         return "b";
+    } else {
+        return "B";
     }
 }
 

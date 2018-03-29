@@ -16,9 +16,9 @@ int main() {
     } else {
         // TODO: game should be played
     }
-	rps.printBoard();
-//	Moves::parseMoves(rps);
-//    rps.printBoard();
+	rps.printBoard(rps);
+	Moves::parseMoves(rps);
+    cout << "AND THE WINNER NUMBER IS: " << RPS::checkWineer(rps) << endl;
     return 0;
 }
 

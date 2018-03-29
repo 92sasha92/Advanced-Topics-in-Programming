@@ -1,20 +1,26 @@
 #include "Moves.h"
 
-Moves::Move::Move(int fRow_, int fCol_, int toRow_, int toCol_, int player_): fRow(fRow_), fCol(fCol_), toRow(toRow_), toCol(toCol_), player(player_) {
+Moves::Move::Move(int fCol_, int fRow_, int toCol_, int toRow_, int player_): fRow(fRow_), fCol(fCol_), toRow(toRow_), toCol(toCol_), player(player_) {
 }
 
 //string Moves::player1Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player1.rps_moves";
 //string Moves::player2Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player2.rps_moves";
+//string Moves::player1Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player1.rps_moves";
+//string Moves::player2Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player2.rps_moves";
 string Moves::player1Moves = "player1.rps_moves";
 string Moves::player2Moves = "player2.rps_moves";
 
 bool Moves::movePiece(RPS & rps, Moves::Move& move)
 {
     if (move.fRow < 0 || move.fCol < 0 || move.toCol < 0 || move.toRow < 0) {
-        cout << "ERROR: problem with the indexes";
+        cout << "ERROR: move index is out of bound";
+        return false;
+    } else if (move.fRow >= rps.getNumberOfRows() || move.fCol >= rps.getNumberOfColumns() || move.toCol >= rps.getNumberOfColumns() || move.toRow >= rps.getNumberOfRows()) {
+        cout << "ERROR: move index is out of bound";
         return false;
     }
-    Piece *piece = rps.board[move.fRow][move.fCol][move.player];
+
+    Piece *piece = rps.board[move.fCol][move.fRow][move.player];
     if (piece == nullptr) {
         cout << "ERROR: no piece in the given position";
         return false;
@@ -22,6 +28,12 @@ bool Moves::movePiece(RPS & rps, Moves::Move& move)
     if (!(piece->getCanMove())) {
         cout << "ERROR " << piece->toString() << "can't move" << endl;
         return false;
+    }
+
+    rps.board[move.toCol][move.toRow][move.player] = rps.board[move.fCol][move.fRow][move.player];
+    rps.board[move.fCol][move.fRow][move.player] = nullptr;
+    if (rps.board[move.toCol][move.toRow][!move.player] != nullptr) {
+        RPS::fight(rps, move.toRow, move.toCol);
     }
 
     return false;
@@ -33,18 +45,20 @@ Moves::Move* Moves::parseMove(RPS& rps, int playerIndex, vector<string> pieceDes
         if (Parser::isInteger(pieceDescription[i])) {
             arr[i] = stoi(pieceDescription[i]) - 1;
         } else {
-            // TODO: uncorrect line format
-            cout << "uncorrect line format" << endl;
+            // TODO: incorrect line format
+            cout << "incorrect line format" << endl;
             return nullptr;
         }
     }
-		// arr[1] = fRow, arr[0] = fCol, arr[3] = toRow, arr[2] = toCol
+    // arr[1] = fRow, arr[0] = fCol, arr[3] = toRow, arr[2] = toCol
     return new Move(arr[1], arr[0], arr[3], arr[2], playerIndex);
 }
 
 
 bool Moves::parseMoves(RPS& rps)
 {
+    int currentTurn = 0;
+    bool check;
     string cur_line, word;
     ifstream fin1, fin2;
     Move *move;
@@ -56,8 +70,7 @@ bool Moves::parseMoves(RPS& rps)
         cout << "ERROR:@ file didn't opened";
         return false;
     }
-    int currentTurn = 0;
-    while (!fin1.eof() && !fin2.eof()) {
+    while (((!fin1.eof() && !currentTurn) || (!fin2.eof() && currentTurn)) && (RPS::checkWineer(rps) == RPS::GameNotOver)) {
         if (currentTurn == 0) {
             getline(fin1, cur_line);
         } else {
@@ -68,17 +81,20 @@ bool Moves::parseMoves(RPS& rps)
         line_words.clear();
         while (getline(ss, word, ' ')) {
             if (word.compare("") != 0) {
-                //                cout << "word: " << word << ";" << endl;
                 line_words.push_back(word);
             }
         }
         if (line_words.size() != 4) {
-            // TODO: error, not enogh arguments in line
+            // TODO: error, not enough arguments in line
             cout << "ERROR: num of arguments is incorrect" << line_words.size() << endl;
             return false;
         }
-        if (!(line_words[0].compare("J:"))){
-            // TODO: joker change
+        if (!(line_words[0].compare("J:"))) {
+            check = setNewJokerPiece(rps, line_words, currentTurn);
+            if (!check) {
+                cout << "ERROR: Move change Joker type fail" << endl;
+                return false;
+            }
         } else {
             move = parseMove(rps, currentTurn, line_words);
             if (move != nullptr) {
@@ -90,6 +106,8 @@ bool Moves::parseMoves(RPS& rps)
                 return false;
             }
         }
+        cout << endl << "#######################################" << endl;
+        RPS::printBoard(rps);
         currentTurn = !currentTurn;
     }
 
@@ -102,4 +120,51 @@ bool Moves::parseMoves(RPS& rps)
     fin1.close();
     fin2.close();
     return false;
+}
+
+bool Moves::setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int player) {
+    int col, row;
+    if (Parser::isInteger(pieceDescription[1])) {
+        col = stoi(pieceDescription[1]) - 1;
+    } else {
+        // TODO: incorrect line format
+        cout << "incorrect line format" << endl;
+        return false;
+    }
+
+    if (Parser::isInteger(pieceDescription[2])) {
+        row = stoi(pieceDescription[2]) - 1;
+    } else {
+        // TODO: incorrect line format
+        cout << "incorrect line format" << endl;
+        return false;
+    }
+
+    if (row < 0 || col < 0 || row >= rps.getNumberOfRows() || col >= rps.getNumberOfColumns()) {
+        cout << "ERROR: Joker move index is out of bound";
+        return false;
+    }
+
+    if (rps.board[row][col][player]->type != Piece::Joker) {
+        cout << "ERROR: Piece in the current cell (" << row << ", " << col << ") is not a Joker type";
+        return false;
+    }
+
+    if (pieceDescription[3].size() != 1) {
+        // TODO: incorrect piece type
+        cout << "incorrect piece type" << endl;
+        return false;
+    }
+    char jokerPieceChar = pieceDescription[3][0];
+    Piece::RPSPiecesTypes jokerPiece = PieceFactory::charToPieceType(jokerPieceChar);
+
+    if (jokerPiece != Piece::Joker && jokerPiece != Piece::Flag && jokerPiece!= Piece::Undefined) {
+        ((JokerPiece *)rps.board[row][col][player])->setJokerPiece(jokerPiece);
+    } else {
+        ((JokerPiece *)rps.board[row][col][player])->setJokerPiece(Piece::Undefined);
+        std::cout << "ERROR: unsupported joker type" << std::endl;
+        return false;
+    }
+    return true;
+
 }
