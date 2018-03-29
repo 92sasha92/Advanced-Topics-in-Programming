@@ -10,6 +10,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o"
   "CMakeFiles/EX1_v2.dir/FlagPiece.cpp.o"
   "CMakeFiles/EX1_v2.dir/Parser.cpp.o"
+  "CMakeFiles/EX1_v2.dir/Moves.cpp.o"
   "EX1_v2.pdb"
   "EX1_v2"
 )

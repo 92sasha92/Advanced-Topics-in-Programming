@@ -98,6 +98,12 @@
 		<Unit filename="/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/JokerPiece.h">
 			<Option target="EX1_v2"/>
 		</Unit>
+		<Unit filename="/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Moves.cpp">
+			<Option target="EX1_v2"/>
+		</Unit>
+		<Unit filename="/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Moves.h">
+			<Option target="EX1_v2"/>
+		</Unit>
 		<Unit filename="/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PaperPiece.cpp">
 			<Option target="EX1_v2"/>
 		</Unit>

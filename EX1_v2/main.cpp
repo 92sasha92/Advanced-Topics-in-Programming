@@ -16,7 +16,7 @@ int main() {
     } else {
         // TODO: game should be played
     }
-		parseMoves(rps);
+	Moves::parseMoves(rps);
     rps.printBoard();
     return 0;
 }

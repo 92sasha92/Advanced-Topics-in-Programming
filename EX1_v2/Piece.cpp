@@ -22,7 +22,7 @@ std::string Piece::toString()
     return "base class";
 }
 
-PiecesPower Piece::isStrongerThan(const Piece& rival) {
+Piece::PiecesPower Piece::isStrongerThan(const Piece& rival) {
     return this->strongerThan[rival.type];
 }
 

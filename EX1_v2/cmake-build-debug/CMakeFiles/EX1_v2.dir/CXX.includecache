@@ -32,6 +32,16 @@ Piece.h
 PieceFactory.h
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PieceFactory.h
 
+/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Moves.cpp
+Moves.h
+/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Moves.h
+
+/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Moves.h
+RPS.h
+/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/RPS.h
+Parser.h
+/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Parser.h
+
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PaperPiece.cpp
 PaperPiece.h
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PaperPiece.h
@@ -117,4 +127,6 @@ RPS.h
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/RPS.h
 Parser.h
 /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Parser.h
+Moves.h
+/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Moves.h
 

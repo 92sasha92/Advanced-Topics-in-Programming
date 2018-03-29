@@ -204,6 +204,33 @@ JokerPiece.cpp.s:
 	$(MAKE) -f CMakeFiles/EX1_v2.dir/build.make CMakeFiles/EX1_v2.dir/JokerPiece.cpp.s
 .PHONY : JokerPiece.cpp.s
 
+Moves.o: Moves.cpp.o
+
+.PHONY : Moves.o
+
+# target to build an object file
+Moves.cpp.o:
+	$(MAKE) -f CMakeFiles/EX1_v2.dir/build.make CMakeFiles/EX1_v2.dir/Moves.cpp.o
+.PHONY : Moves.cpp.o
+
+Moves.i: Moves.cpp.i
+
+.PHONY : Moves.i
+
+# target to preprocess a source file
+Moves.cpp.i:
+	$(MAKE) -f CMakeFiles/EX1_v2.dir/build.make CMakeFiles/EX1_v2.dir/Moves.cpp.i
+.PHONY : Moves.cpp.i
+
+Moves.s: Moves.cpp.s
+
+.PHONY : Moves.s
+
+# target to generate assembly for a file
+Moves.cpp.s:
+	$(MAKE) -f CMakeFiles/EX1_v2.dir/build.make CMakeFiles/EX1_v2.dir/Moves.cpp.s
+.PHONY : Moves.cpp.s
+
 PaperPiece.o: PaperPiece.cpp.o
 
 .PHONY : PaperPiece.o
@@ -438,6 +465,9 @@ help:
 	@echo "... JokerPiece.o"
 	@echo "... JokerPiece.i"
 	@echo "... JokerPiece.s"
+	@echo "... Moves.o"
+	@echo "... Moves.i"
+	@echo "... Moves.s"
 	@echo "... PaperPiece.o"
 	@echo "... PaperPiece.i"
 	@echo "... PaperPiece.s"

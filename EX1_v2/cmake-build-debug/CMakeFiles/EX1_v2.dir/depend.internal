@@ -14,6 +14,13 @@ CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o
  /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/JokerPiece.h
  /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Piece.h
  /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PieceFactory.h
+CMakeFiles/EX1_v2.dir/Moves.cpp.o
+ /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Moves.cpp
+ /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Moves.h
+ /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Parser.h
+ /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Piece.h
+ /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PieceFactory.h
+ /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/RPS.h
 CMakeFiles/EX1_v2.dir/PaperPiece.cpp.o
  /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PaperPiece.cpp
  /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PaperPiece.h
@@ -51,6 +58,7 @@ CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.o
  /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/ScissorsPiece.cpp
  /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/ScissorsPiece.h
 CMakeFiles/EX1_v2.dir/main.cpp.o
+ /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Moves.h
  /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Parser.h
  /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Piece.h
  /Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PieceFactory.h
