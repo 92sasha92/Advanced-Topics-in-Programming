@@ -138,6 +138,15 @@ bool Parser::parseBoard(RPS& rps, int playerIndex) {
 			 fin.close();
         return false;
     }
+
+    for (int i = 0; i < rps.Mcols; i++) {
+        for (int j = 0; j < rps.Nrows; j++) {
+            if (rps.board[i][j][0] != nullptr && rps.board[i][j][1]!= nullptr) {
+                RPS::fight(rps, i, j);
+            }
+        }
+    }
+
     // TODO: check if need to close ss
     fin.close();
     return true;

@@ -32,6 +32,7 @@ RPS::RPS() {
 }
 
 void RPS::fight(RPS& rps, int row, int col) {
+    cout << "fight!!!" << endl;
     Piece *piece1 = rps.board[col][row][0], *piece2 = rps.board[col][row][1];
     if (piece1->type == Piece::Joker) {
         Piece::RPSPiecesTypes piece1jokerpiece = ((JokerPiece *)piece1)->getJokerPiece();
@@ -44,14 +45,17 @@ void RPS::fight(RPS& rps, int row, int col) {
     Piece::PiecesPower winner = piece1->isStrongerThan(*piece2);
     switch (winner){
         case Piece::Stronger:{
+            cout << "player1 win in cell (" << row+1 << "," << col+1 << ")"  << endl;
             delete piece2;
             rps.board[col][row][1] = nullptr;
         } break;
         case Piece::Weaker:{
+            cout << "player2 win in cell (" << row+1 << "," << col+1 << ")"  << endl;
             delete piece1;
             rps.board[col][row][0] = nullptr;
         } break;
         case Piece::Equal:{
+            cout << "tie cell (" << row+1 << "," << col+1 << ")"  << endl;
             delete piece1;
             delete piece2;
             rps.board[col][row][0] = nullptr;

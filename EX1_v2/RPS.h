@@ -28,7 +28,7 @@ class RPS {
 
   public:
 
-    void fight(RPS& rps, int row, int col);
+    static void fight(RPS& rps, int row, int col);
     void printBoard();
     Piece *board[Nrows][Mcols][2];
 
