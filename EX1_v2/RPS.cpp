@@ -1,7 +1,9 @@
 #include "RPS.h"
 
-string RPS::player_0_name_ = "./player1.rps_board";
-string RPS::player_1_name_ = "./player2.rps_board";
+string RPS::player_0_name_ = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player1.rps_board";
+string RPS::player_1_name_ = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player2.rps_board";
+//string RPS::player_0_name_ = "./player1.rps_board";
+//string RPS::player_1_name_ = "./player1.rps_board";
 
 void RPS::initializePiecesArsenal() {
     this->playerPiecesArsenal[PieceFactory::Rock] = R;
@@ -76,10 +78,14 @@ bool RPS::Parser(int playerIndex) {
         return false;
     }
 
+		if (!fin.is_open()) {
+			cout << "ERROR: file didn't opened";
+			return false;
+		}
+
     while (!fin.eof()) {
         getline(fin, cur_line);
         istringstream ss(cur_line);
-
         line_words.clear();
         while (getline(ss, word, ' ')) {
             if (word.compare("") != 0) {
@@ -89,7 +95,7 @@ bool RPS::Parser(int playerIndex) {
         }
         if (line_words.size() < 3) {
             // TODO: error, not enogh arguments in line
-            cout << "ERROR: not enogh arguments" << endl;
+            cout << "ERROR: not enogh arguments " << line_words.size() << endl;
             return false;
         }
         check = SetPiece(*this, playerIndex, line_words);
