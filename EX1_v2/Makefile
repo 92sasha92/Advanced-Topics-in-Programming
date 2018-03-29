@@ -7,7 +7,7 @@ UNAME := $(shell uname -s)
 
 COMP_FLAG=-std=c++11 -Werror -Wall -Wfatal-errors -Wno-shift-count-overflow -Weffc++ -Wno-non-virtual-dtor -Wno-strict-aliasing -Wno-unused-private-field
 
-OBJS = BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o
+OBJS = BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o Moves.o
 EXEC = rps
 
 all:	$(EXEC)
@@ -32,6 +32,8 @@ main.o: main.cpp RPS.h
 Piece.o: Piece.h Piece.cpp
 	$(CC) $(COMP_FLAG) -c $*.cpp
 Parser.o: Parser.h Parser.cpp RPS.h
+	$(CC) $(COMP_FLAG) -c $*.cpp
+Moves.o: Moves.h Moves.cpp RPS.h
 	$(CC) $(COMP_FLAG) -c $*.cpp
 PieceFactory.o: PieceFactory.h PieceFactory.cpp Piece.h BombPiece.h RockPiece.h ScissorsPiece.h FlagPiece.h JokerPiece.h PaperPiece.h
 	$(CC) $(COMP_FLAG) -c $*.cpp
