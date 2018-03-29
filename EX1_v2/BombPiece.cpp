@@ -1,12 +1,13 @@
 #include "BombPiece.h"
 
-BombPiece::BombPiece(int player) :Piece(player), type(PieceFactory::Bomb){
+BombPiece::BombPiece(int player) :Piece(player) {
     setCanMove(false);
-    strongerThan[PieceFactory::Rock] = Piece::Equal;
-    strongerThan[PieceFactory::Paper] = Piece::Equal;
-    strongerThan[PieceFactory::Scissors] = Piece::Equal;
-    strongerThan[PieceFactory::Bomb] = Piece::Equal;
-    strongerThan[PieceFactory::Flag] = Piece::Equal;
+    this->type = Piece::Bomb;
+    this->strongerThan[Piece::Rock] = Piece::Equal;
+    this->strongerThan[Piece::Paper] = Piece::Equal;
+    this->strongerThan[Piece::Scissors] = Piece::Equal;
+    this->strongerThan[Piece::Bomb] = Piece::Equal;
+    this->strongerThan[Piece::Flag] = Piece::Equal;
 }
 
 std::string BombPiece::toString() {

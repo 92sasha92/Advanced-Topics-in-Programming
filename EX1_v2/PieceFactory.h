@@ -3,18 +3,7 @@
 
 class PieceFactory {
   public:
-    typedef enum {
-        Rock,
-        Paper,
-        Scissors,
-        Bomb,
-        Flag,
-        Joker,
-        Undefined
-    } RPSPiecesTypes;
 
-
-
-    static RPSPiecesTypes charToPieceType(char c);
-    static Piece *createPiece(RPSPiecesTypes cPiece, int player, RPSPiecesTypes jokerPiece = Undefined);
+    static Piece::RPSPiecesTypes charToPieceType(char c);
+    static Piece *createPiece(Piece::RPSPiecesTypes cPiece, int player, Piece::RPSPiecesTypes jokerPiece = Piece::Undefined);
 };

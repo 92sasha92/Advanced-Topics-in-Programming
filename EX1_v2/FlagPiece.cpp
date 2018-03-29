@@ -1,12 +1,13 @@
 #include "FlagPiece.h"
 
-FlagPiece::FlagPiece(int player) :Piece(player), type(PieceFactory::Flag){
+FlagPiece::FlagPiece(int player) :Piece(player) {
     setCanMove(false);
-    strongerThan[PieceFactory::Rock] = Piece::Weaker;
-    strongerThan[PieceFactory::Paper] = Piece::Weaker;
-    strongerThan[PieceFactory::Scissors] = Piece::Weaker;
-    strongerThan[PieceFactory::Bomb] = Piece::Equal;
-    strongerThan[PieceFactory::Flag] = Piece::Equal;
+    this->type = Piece::Flag;
+    this->strongerThan[Piece::Rock] = Piece::Weaker;
+    this->strongerThan[Piece::Paper] = Piece::Weaker;
+    this->strongerThan[Piece::Scissors] = Piece::Weaker;
+    this->strongerThan[Piece::Bomb] = Piece::Equal;
+    this->strongerThan[Piece::Flag] = Piece::Equal;
 }
 
 std::string FlagPiece::toString() {

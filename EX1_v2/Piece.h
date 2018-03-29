@@ -2,31 +2,39 @@
 
 #include <string>
 #include <iostream>
-#include "PieceFactory.h"
 
 class Piece
 {
-  private:
-    int playerNumber;
-	int canMove;
+  public:
+	typedef enum {
+		Rock,
+		Paper,
+		Scissors,
+		Bomb,
+		Flag,
+		Joker,
+		Undefined
+	} RPSPiecesTypes;
+
+	typedef enum {
+		Weaker,
+		Equal,
+		Stronger
+	} PiecesPower;
+
+	Piece (int playerNumber);
+	int getPlayerNumber();
+	int getCanMove();
+	virtual std::string toString();
+	~Piece();
 
   protected:
-    PieceFactory::RPSPiecesTypes type;
+	RPSPiecesTypes type;
     char strongerThan[5];
     void setCanMove(bool isMovable);
 
-  public:
-
-    typedef enum {
-        Weaker,
-        Equal,
-        Stronger
-    } PiecesPower;
-
-    Piece (int playerNumber);
-    int getPlayerNumber();
-		int getCanMove();
-    virtual std::string toString();
-    ~Piece();
+  private:
+	int playerNumber;
+	int canMove;
 };
 

@@ -6,40 +6,40 @@
 #include "JokerPiece.h"
 #include "FlagPiece.h"
 
-PieceFactory::RPSPiecesTypes PieceFactory::charToPieceType(char c) {
+Piece::RPSPiecesTypes PieceFactory::charToPieceType(char c) {
     switch (c) {
         case 'R':
-            return PieceFactory::RPSPiecesTypes::Rock;
+            return Piece::RPSPiecesTypes::Rock;
         case 'P':
-            return PieceFactory::RPSPiecesTypes::Paper;
+            return Piece::RPSPiecesTypes::Paper;
         case 'S':
-            return PieceFactory::RPSPiecesTypes::Scissors;
+            return Piece::RPSPiecesTypes::Scissors;
         case 'B':
-            return PieceFactory::RPSPiecesTypes::Bomb;
+            return Piece::RPSPiecesTypes::Bomb;
         case 'J':
-            return PieceFactory::RPSPiecesTypes::Joker;
+            return Piece::RPSPiecesTypes::Joker;
         case 'F':
-            return PieceFactory::RPSPiecesTypes::Flag;
+            return Piece::RPSPiecesTypes::Flag;
         default:
             // TODO: handle unsported piece character
-            return PieceFactory::RPSPiecesTypes::Undefined;
+            return Piece::RPSPiecesTypes::Undefined;
     }
 
 }
 
-Piece* PieceFactory::createPiece(PieceFactory::RPSPiecesTypes pieceType, int player, PieceFactory::RPSPiecesTypes jokerPiece) {
+Piece* PieceFactory::createPiece(Piece::RPSPiecesTypes pieceType, int player, Piece::RPSPiecesTypes jokerPiece) {
     switch (pieceType) {
-        case Rock:
+        case Piece::Rock:
             return new RockPiece(player);
-        case Paper:
+        case Piece::Paper:
             return new PaperPiece(player);
-        case Scissors:
+        case Piece::Scissors:
             return new ScissorsPiece(player);
-        case Bomb:
+        case Piece::Bomb:
             return new BombPiece(player);
-        case Joker:
+        case Piece::Joker:
             return new JokerPiece(player, jokerPiece);// joker can be only R P S B
-        case Flag:
+        case Piece::Flag:
             return new FlagPiece(player);
         default:
             // TODO: undefined piece

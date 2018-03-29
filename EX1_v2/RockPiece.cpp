@@ -1,11 +1,12 @@
 #include "RockPiece.h"
 
-RockPiece::RockPiece(int player) :Piece(player), type(PieceFactory::Rock){
-    strongerThan[PieceFactory::Rock] = Piece::Equal;
-    strongerThan[PieceFactory::Paper] = Piece::Weaker;
-    strongerThan[PieceFactory::Scissors] = Piece::Stronger;
-    strongerThan[PieceFactory::Bomb] = Piece::Equal;
-    strongerThan[PieceFactory::Flag] = Piece::Stronger;
+RockPiece::RockPiece(int player) :Piece(player) {
+    this->type = Piece::Rock;
+    this->strongerThan[Piece::Rock] = Piece::Equal;
+    this->strongerThan[Piece::Paper] = Piece::Weaker;
+    this->strongerThan[Piece::Scissors] = Piece::Stronger;
+    this->strongerThan[Piece::Bomb] = Piece::Equal;
+    this->strongerThan[Piece::Flag] = Piece::Stronger;
 }
 
 std::string RockPiece::toString() {

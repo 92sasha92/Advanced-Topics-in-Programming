@@ -1,11 +1,12 @@
 #include "PaperPiece.h"
 
-PaperPiece::PaperPiece(int player) :Piece(player), type(PieceFactory::Paper){
-    strongerThan[PieceFactory::Rock] = Piece::Stronger;
-    strongerThan[PieceFactory::Paper] = Piece::Equal;
-    strongerThan[PieceFactory::Scissors] = Piece::Weaker;
-    strongerThan[PieceFactory::Bomb] = Piece::Equal;
-    strongerThan[PieceFactory::Flag] = Piece::Stronger;
+PaperPiece::PaperPiece(int player) :Piece(player) {
+    this->type = Piece::Paper;
+    this->strongerThan[Piece::Rock] = Piece::Stronger;
+    this->strongerThan[Piece::Paper] = Piece::Equal;
+    this->strongerThan[Piece::Scissors] = Piece::Weaker;
+    this->strongerThan[Piece::Bomb] = Piece::Equal;
+    this->strongerThan[Piece::Flag] = Piece::Stronger;
 }
 
 std::string PaperPiece::toString() {

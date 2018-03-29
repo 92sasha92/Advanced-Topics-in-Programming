@@ -1,10 +1,11 @@
 #include "JokerPiece.h"
 
-JokerPiece::JokerPiece(int player, PieceFactory::RPSPiecesTypes jokerPiece_): Piece(player), jokerPiece(PieceFactory::Undefined) {
-    if (jokerPiece_ != PieceFactory::Joker && jokerPiece_ != PieceFactory::Flag && jokerPiece_!= PieceFactory::Undefined) {
+JokerPiece::JokerPiece(int player, Piece::RPSPiecesTypes jokerPiece_): Piece(player), jokerPiece(Piece::Undefined) {
+    this->type = Piece::Joker;
+    if (jokerPiece_ != Piece::Joker && jokerPiece_ != Piece::Flag && jokerPiece_!= Piece::Undefined) {
         jokerPiece = jokerPiece_;
     } else {
-        jokerPiece = PieceFactory::Undefined;
+        jokerPiece = Piece::Undefined;
         std::cout << "ERROR: unsuported joker type" << std::endl;
         // TODO: error wrong joker type
     }
