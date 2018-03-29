@@ -3,7 +3,8 @@
 
 class BombPiece : public Piece {
   public:
-    BombPiece(int player) :Piece(player) {
+    BombPiece(int player) :Piece(player){
+			setCanMove(true);
     }
     std::string toString() override;
 };

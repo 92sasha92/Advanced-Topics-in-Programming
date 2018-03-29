@@ -3,7 +3,8 @@
 
 class FlagPiece : public Piece {
   public:
-    FlagPiece(int player):Piece(player) {
+    FlagPiece(int player):Piece(player){
+			setCanMove(true);
     }
     std::string toString() override;
 };
