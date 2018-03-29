@@ -24,7 +24,7 @@ bool Parser::isInteger(string str) {
     return true;
 }
 
-bool Parser::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
+bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
     char piece = pieceDescription[0][0];
     int col, row;
     if (isInteger(pieceDescription[1])){
@@ -78,7 +78,7 @@ bool Parser::SetPiece(RPS& rps, int playerIndex, vector<string> pieceDescription
     return true;
 }
 
-bool Parser::ParseBoard(RPS& rps, int playerIndex) {
+bool Parser::parseBoard(RPS& rps, int playerIndex) {
     string cur_line, word;
     bool check;
     ifstream fin;
@@ -116,7 +116,7 @@ bool Parser::ParseBoard(RPS& rps, int playerIndex) {
             cout << "ERROR: not enogh arguments " << line_words.size() << endl;
             return false;
         }
-        check = SetPiece(rps, playerIndex, line_words);
+        check = setPiece(rps, playerIndex, line_words);
         if (!check) {
             // TODO: raise relevant error
             return false;

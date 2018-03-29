@@ -27,7 +27,7 @@ class RPS {
 
   public:
 
-    void PrintBoard();
+    void printBoard();
     Piece *board[Mcols][Nrows][2];
 
     RPS();

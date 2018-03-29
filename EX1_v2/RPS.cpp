@@ -1,6 +1,6 @@
 #include "RPS.h"
 
-void RPS::PrintBoard() {
+void RPS::printBoard() {
     for (int i = 0; i < this->Mcols; i++) {
         cout << "----------------------------------------" << endl;
         for (int j = 0; j < this->Nrows; j++) {
