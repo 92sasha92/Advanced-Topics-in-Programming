@@ -62,7 +62,7 @@ EndOfGameHandler Moves::exitMoves(ifstream &fin1, ifstream &fin2, EndOfGameHandl
 	cout << errorStr;
 	fin1.close();
 	fin2.close();
-	endOfGameHandler.setEndOfGameReason(error);
+	endOfGameHandler.setEndOfGameReason(reason);
 	return endOfGameHandler;
 }
 EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
