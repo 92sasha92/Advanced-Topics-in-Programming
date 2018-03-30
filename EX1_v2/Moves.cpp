@@ -20,7 +20,7 @@ bool Moves::movePiece(RPS & rps, Moves::Move& move)
         return false;
     }
 
-    Piece *piece = rps.board[move.fCol][move.fRow][move.player];
+    Piece *piece = rps.board[move.fRow][move.fCol][move.player];
     if (piece == nullptr) {
         cout << "ERROR: no piece in the given position";
         return false;
@@ -29,14 +29,14 @@ bool Moves::movePiece(RPS & rps, Moves::Move& move)
         cout << "ERROR " << piece->toString() << "can't move" << endl;
         return false;
     }
-    if (rps.board[move.toCol][move.toRow][move.player] != nullptr) {
+    if (rps.board[move.toRow][move.toCol][move.player] != nullptr) {
         cout << "ERROR: the cell already occupied by other piece of the same player";
         return false;
     }
 
-    rps.board[move.toCol][move.toRow][move.player] = rps.board[move.fCol][move.fRow][move.player];
-    rps.board[move.fCol][move.fRow][move.player] = nullptr;
-    if (rps.board[move.toCol][move.toRow][!move.player] != nullptr) {
+    rps.board[move.toRow][move.toCol][move.player] = rps.board[move.fRow][move.fCol][move.player];
+    rps.board[move.fRow][move.fCol][move.player] = nullptr;
+    if (rps.board[move.toRow][move.toCol][!move.player] != nullptr) {
         RPS::fight(rps, move.toRow, move.toCol);
     }
 
@@ -75,6 +75,7 @@ bool Moves::parseMoves(RPS& rps)
         fin2.close();
         return false;
     }
+
 
     while ((((!fin1.eof() || !player1_next_line.empty()) && !currentTurn) || ((!fin2.eof() || !player2_next_line.empty()) && currentTurn)) && (RPS::checkWinner(rps) == RPS::GameNotOver)) {
 
