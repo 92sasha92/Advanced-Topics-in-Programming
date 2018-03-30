@@ -61,11 +61,11 @@ Moves::Move* Moves::parseMove(RPS& rps, int playerIndex, vector<string> pieceDes
 
 EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
 {
-    int currentTurn = 0;
+    int currentTurn = 0, fileLinePlayer [2] = {0, 0};
     bool check;
     string cur_line, word;
     ifstream fin1, fin2;
-		ifstream fins[2];
+	ifstream fins[2];
     Move *move;
     vector<string> line_words;
 		fins[0].open(player1Moves);
@@ -75,22 +75,21 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
         cout << "ERROR: file didn't opened";
         fins[0].close();
         fins[1].close();
-        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::NoMoveFile);
         return endOfGameHandler;
     }
 		string playerNextLines[2] = { "", "" };
 
     while ((((!fins[0].eof() || !playerNextLines[0].empty()) && !currentTurn) || ((!fins[1].eof() || !playerNextLines[1].empty()) && currentTurn)) && ((RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)) {
-
-			if (!playerNextLines[currentTurn].empty()) {
-				cur_line = playerNextLines[currentTurn];
-			}
-			else {
-				getline(fins[currentTurn], cur_line);
-			}
-			if (!fins[currentTurn].eof()) {
-				getline(fins[currentTurn], playerNextLines[currentTurn]);
-			}
+        if (!playerNextLines[currentTurn].empty()) {
+            cur_line = playerNextLines[currentTurn];
+        }
+        else {
+            getline(fins[currentTurn], cur_line);
+        }
+        if (!fins[currentTurn].eof()) {
+            getline(fins[currentTurn], playerNextLines[currentTurn]);
+        }
 
         istringstream ss(cur_line);
         line_words.clear();
@@ -103,45 +102,63 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
             cout << "ERROR: num of arguments is incorrect" << line_words.size() << endl;
             fin1.close();
             fin2.close();
-            return false;
+            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
+            EndOfGameHandler::setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
+            return endOfGameHandler;
         }
 
         move = parseMove(rps, currentTurn, line_words);
         if (move != nullptr) {
-            movePiece(rps, *move);
+            check = movePiece(rps, *move);
             free(move);
+            if (!check) {
+                cout << "ERROR: in making move";
+                fins[0].close();
+                fins[1].close();
+                endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
+                EndOfGameHandler::setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
+                return endOfGameHandler;
+            }
         } else {
             cout << "ERROR: in parsing move";
-						fins[0].close();
-						fins[1].close();
-            return false;
+            fins[0].close();
+            fins[1].close();
+            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
+            EndOfGameHandler::setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
+            return endOfGameHandler;
         }
+        fileLinePlayer[currentTurn]++;
 
         if ((((!(playerNextLines[0].empty()) && !currentTurn) || ((!(playerNextLines[1].empty()) && currentTurn))) && (RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)){
-    				istringstream ss(playerNextLines[currentTurn]);
-						line_words.clear();
-						while (getline(ss, word, ' ')) {
-							if (word.compare("") != 0) {
-								line_words.push_back(word);
-							}
-						}
+            istringstream ss(playerNextLines[currentTurn]);
+            line_words.clear();
+            while (getline(ss, word, ' ')) {
+                if (word.compare("") != 0) {
+                    line_words.push_back(word);
+                }
+            }
 
             if (line_words.size() != 4) {
                 cout << "ERROR: num of arguments is incorrect" << line_words.size() << endl;
-								fins[0].close();
-								fins[1].close();
-                return false;
+                fins[0].close();
+                fins[1].close();
+                endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
+                EndOfGameHandler::setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
+                return endOfGameHandler;
             }
 
             if (!(line_words[0].compare("J:"))) {
                 check = setNewJokerPiece(rps, line_words, currentTurn);
                 if (!check) {
                     cout << "ERROR: Move change Joker type fail" << endl;
-										fins[0].close();
-										fins[1].close();
-                    return false;
+                    fins[0].close();
+                    fins[1].close();
+                    endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
+                    EndOfGameHandler::setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
+                    return endOfGameHandler;
                 }
-								playerNextLines[currentTurn] = "";
+				playerNextLines[currentTurn] = "";
+                fileLinePlayer[currentTurn]++;
             }
         }
 
@@ -158,7 +175,7 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
     }
     fin1.close();
     fin2.close();
-    return true;
+    return endOfGameHandler;
 }
 
 bool Moves::setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int player) {

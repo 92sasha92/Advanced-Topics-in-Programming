@@ -22,3 +22,13 @@ EndOfGameHandler::GameState EndOfGameHandler::getGameState() {
 void EndOfGameHandler::setGameState(GameState state) {
     this->gameState = state;
 }
+
+void EndOfGameHandler::setWinner(int currentTurn ,int fileLinePlayer1, int fileLinePlayer2) {
+    if (!currentTurn) {
+        this->setEndGamelineNumber(fileLinePlayer1);
+        this->setGameState(EndOfGameHandler::Player2Win);
+    } else {
+        this->setEndGamelineNumber(fileLinePlayer2);
+        this->setGameState(EndOfGameHandler::Player1Win);
+    }
+}

@@ -30,6 +30,7 @@ class EndOfGameHandler {
     void setEndOfGameReason(EndOfGameReason reason);
     GameState getGameState();
     void setGameState(GameState state);
+    static void setWinner(int currentTurn ,int fileLinePlayer1, int fileLinePlayer2);
 
 
   private:
