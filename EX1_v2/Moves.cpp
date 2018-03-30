@@ -1,6 +1,6 @@
 #include "Moves.h"
 
-Moves::Move::Move(int fCol_, int fRow_, int toCol_, int toRow_, int player_): fRow(fRow_), fCol(fCol_), toRow(toRow_), toCol(toCol_), player(player_) {
+Moves::Move::Move(int fRow_, int fCol_, int toRow_, int toCol_, int player_): fRow(fRow_), fCol(fCol_), toRow(toRow_), toCol(toCol_), player(player_) {
 }
 
 //string Moves::player1Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player1.rps_moves";
@@ -54,6 +54,7 @@ Moves::Move* Moves::parseMove(RPS& rps, int playerIndex, vector<string> pieceDes
         }
     }
     // arr[1] = fRow, arr[0] = fCol, arr[3] = toRow, arr[2] = toCol
+		cout << arr[1] << " " << arr[0] << " " << arr[3] << " " << arr[2] << endl;
     return new Move(arr[1], arr[0], arr[3], arr[2], playerIndex);
 }
 

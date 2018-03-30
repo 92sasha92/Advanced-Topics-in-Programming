@@ -25,8 +25,8 @@ void RPS::printBoard(RPS& rps) {
 }
 
 RPS::RPS() {
-    for (int i = 0; i < this->Mcols; i++) {
-        for (int j = 0; j < this->Nrows; j++) {
+    for (int i = 0; i < this->Nrows; i++) {
+        for (int j = 0; j < this->Mcols; j++) {
             this->board[i][j][0] = nullptr;
             this->board[i][j][1] = nullptr;
         }
