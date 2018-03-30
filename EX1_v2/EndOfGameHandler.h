@@ -21,7 +21,7 @@ class EndOfGameHandler {
         GameNotOver,
     } GameState;
 
-    EndOfGameHandler() : endGamelineNumber(0), endOfGameReason(GamePlaying), gameState(GameNotOver) {}
+    EndOfGameHandler() : endOfGameReason(GamePlaying), gameState(GameNotOver), endGamelineNumber(0) {}
     ~EndOfGameHandler() = default;
 
     int getEndGamelineNumber();
@@ -30,7 +30,7 @@ class EndOfGameHandler {
     void setEndOfGameReason(EndOfGameReason reason);
     GameState getGameState();
     void setGameState(GameState state);
-    static void setWinner(int currentTurn ,int fileLinePlayer1, int fileLinePlayer2);
+    void setWinner(int currentTurn ,int fileLinePlayer1, int fileLinePlayer2);
 
 
   private:

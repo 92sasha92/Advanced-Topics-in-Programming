@@ -3,12 +3,12 @@
 Moves::Move::Move(int fRow_, int fCol_, int toRow_, int toCol_, int player_): fRow(fRow_), fCol(fCol_), toRow(toRow_), toCol(toCol_), player(player_) {
 }
 
-string Moves::player1Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player1.rps_moves";
-string Moves::player2Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player2.rps_moves";
+//string Moves::player1Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player1.rps_moves";
+//string Moves::player2Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player2.rps_moves";
 //string Moves::player1Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player1.rps_moves";
 //string Moves::player2Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player2.rps_moves";
-//string Moves::player1Moves = "player1.rps_moves";
-//string Moves::player2Moves = "player2.rps_moves";
+string Moves::player1Moves = "player1.rps_moves";
+string Moves::player2Moves = "player2.rps_moves";
 
 bool Moves::movePiece(RPS & rps, Moves::Move& move)
 {
@@ -103,7 +103,7 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
             fin1.close();
             fin2.close();
             endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
-            EndOfGameHandler::setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
+            endOfGameHandler.setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
             return endOfGameHandler;
         }
 
@@ -116,7 +116,7 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
                 fins[0].close();
                 fins[1].close();
                 endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
-                EndOfGameHandler::setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
+                endOfGameHandler.setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
                 return endOfGameHandler;
             }
         } else {
@@ -124,7 +124,7 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
             fins[0].close();
             fins[1].close();
             endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
-            EndOfGameHandler::setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
+            endOfGameHandler.setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
             return endOfGameHandler;
         }
         fileLinePlayer[currentTurn]++;
@@ -143,7 +143,7 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
                 fins[0].close();
                 fins[1].close();
                 endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
-                EndOfGameHandler::setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
+                endOfGameHandler.setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
                 return endOfGameHandler;
             }
 
@@ -154,7 +154,7 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
                     fins[0].close();
                     fins[1].close();
                     endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
-                    EndOfGameHandler::setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
+                    endOfGameHandler.setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
                     return endOfGameHandler;
                 }
 				playerNextLines[currentTurn] = "";
