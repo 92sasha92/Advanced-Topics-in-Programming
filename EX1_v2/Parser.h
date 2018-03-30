@@ -15,7 +15,7 @@ class Parser {
   public:
 
 	static bool isInteger(string str);
-    static bool parseBoard(RPS& rps, int playerNumber);
+    static void parseBoard(RPS& rps, int playerNumber, EndOfGameHandler& endOfGameHandler);
 
 };
 

@@ -5,20 +5,27 @@
 int main() {
     RPS rps;
     EndOfGameHandler endOfGameHandler;
-    bool check1, check2;
-    check1 = Parser::parseBoard(rps, 0);
-    check2 = Parser::parseBoard(rps, 1);
-    if (!check1 && !check2) {
-        cout << "two players use incorrect format file and no point are given" << endl;
-    } else if (!check1) {
-        cout << "player1 use incorrect format file and lose" << endl;
-    } else if (!check2) {
-        cout << "player2 use incorrect format file and lose" << endl;
+    bool isBadInputFile[2] = {false, false};
+    int ErrorLine[2] = {0, 0};
+
+    Parser::parseBoard(rps, 0, endOfGameHandler);
+    if (endOfGameHandler.getEndOfGameReason() == EndOfGameHandler::BadInputFile) {
+        isBadInputFile[0] = true;
+        ErrorLine[0] = endOfGameHandler.getEndGamelineNumber();
+    }
+    endOfGameHandler.clear();
+    Parser::parseBoard(rps, 1, endOfGameHandler);
+    if (endOfGameHandler.getEndOfGameReason() == EndOfGameHandler::BadInputFile) {
+        isBadInputFile[1] = true;
+        ErrorLine[1] = endOfGameHandler.getEndGamelineNumber();
     }
 
-	RPS::printBoard(rps);
-	Moves::parseMoves(rps, endOfGameHandler);
-    RPS::createOutFile(rps);
+    if (EndOfGameHandler::isInputFileOk(isBadInputFile)) {
+        RPS::printBoard(rps);
+        Moves::parseMoves(rps, endOfGameHandler);
+    }
+
+    RPS::createOutFile(rps, endOfGameHandler, isBadInputFile, ErrorLine);
     cout << "AND THE WINNER NUMBER IS: " << RPS::checkWinner(rps, endOfGameHandler).getGameState() << endl;
     return 0;
 }

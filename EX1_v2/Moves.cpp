@@ -153,19 +153,20 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
 		fins[0].open(player1Moves);
 		fins[1].open(player2Moves);
     if (!fins[0].is_open() || !fins[1].is_open()) {
-			  cout << "ERROR: file didn't opened";
-				exitMoves(fins[0], fins[1], endOfGameHandler, EndOfGameHandler::NoMoveFile);
+        cout << "ERROR: file didn't opened";
+        exitMoves(fins[0], fins[1], endOfGameHandler, EndOfGameHandler::BadMoveFile);
         return;
     }
+
     while ((((!fins[0].eof() || !playerNextLines[0].empty()) && !currentTurn) || ((!fins[1].eof() || !playerNextLines[1].empty()) && currentTurn)) && ((RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)) {
-				updateLine(currentTurn, fins, playerNextLines, cur_line);
+		updateLine(currentTurn, fins, playerNextLines, cur_line);
         clearLine(line_words, cur_line);
-				if (!checkMoveAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler, playerNextLines)) {
-					return;
-				}
-				if (!checkJokerChangeAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler, playerNextLines)) {
-					return;
-				}
+        if (!checkMoveAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler, playerNextLines)) {
+            return;
+        }
+        if (!checkJokerChangeAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler, playerNextLines)) {
+            return;
+        }
         cout << endl << "#######################################" << endl;
         RPS::printBoard(rps);
         currentTurn = !currentTurn;

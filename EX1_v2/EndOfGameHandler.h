@@ -1,17 +1,18 @@
 #pragma once
+#include <iostream>
+#include <sstream>
+
+using namespace std;
 
 class EndOfGameHandler {
   public:
     typedef enum {
-        GamePlaying,
+        GameNotFinished,
         LooserAllFlagsEaten,
         AllMovingPiecesEaten,
-        GmaeOverWithoutWinner,
         TieAllFlagsEaten,
         BadInputFile,
         BadMoveFile,
-        NoInputFile,
-        NoMoveFile
     } EndOfGameReason;
 
     typedef enum {
@@ -21,7 +22,7 @@ class EndOfGameHandler {
         GameNotOver,
     } GameState;
 
-    EndOfGameHandler() : endOfGameReason(GamePlaying), gameState(GameNotOver), endGamelineNumber(0) {}
+    EndOfGameHandler() : endOfGameReason(GameNotFinished), gameState(GameNotOver), endGamelineNumber(0) {}
     ~EndOfGameHandler() = default;
 
     int getEndGamelineNumber();
@@ -31,6 +32,9 @@ class EndOfGameHandler {
     GameState getGameState();
     void setGameState(GameState state);
     void setWinner(int currentTurn ,int fileLinePlayer1, int fileLinePlayer2);
+    static bool isInputFileOk(const bool isBadInputFile[2]);
+    void clear();
+    string toString();
 
 
   private:
