@@ -16,6 +16,7 @@ int main() {
         cout << "player2 use incorrect format file and lose" << endl;
     }
 
+	RPS::printBoard(rps);
 	Moves::parseMoves(rps, endOfGameHandler);
     RPS::createOutFile(rps);
     cout << "AND THE WINNER NUMBER IS: " << RPS::checkWinner(rps, endOfGameHandler).getGameState() << endl;
