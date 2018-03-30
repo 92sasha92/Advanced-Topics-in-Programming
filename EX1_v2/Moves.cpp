@@ -3,12 +3,12 @@
 Moves::Move::Move(int fRow_, int fCol_, int toRow_, int toCol_, int player_): fRow(fRow_), fCol(fCol_), toRow(toRow_), toCol(toCol_), player(player_) {
 }
 
-//string Moves::player1Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player1.rps_moves";
-//string Moves::player2Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player2.rps_moves";
+string Moves::player1Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player1.rps_moves";
+string Moves::player2Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player2.rps_moves";
 //string Moves::player1Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player1.rps_moves";
 //string Moves::player2Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player2.rps_moves";
-string Moves::player1Moves = "player1.rps_moves";
-string Moves::player2Moves = "player2.rps_moves";
+//string Moves::player1Moves = "player1.rps_moves";
+//string Moves::player2Moves = "player2.rps_moves";
 
 bool Moves::movePiece(RPS & rps, Moves::Move& move)
 {
@@ -64,20 +64,12 @@ void Moves::exitMoves(ifstream &fin1, ifstream &fin2, EndOfGameHandler& endOfGam
 	endOfGameHandler.setEndOfGameReason(reason);
 }
 
-void Moves::clearLine(vector<string> &line_words, string &cur_line){
-	string word;
-	istringstream ss(cur_line);
-	line_words.clear();
-	while (getline(ss, word, ' ')) {
-		if (word.compare("") != 0) {
-			line_words.push_back(word);
-		}
-	}
-}
+
 void Moves::updateLine(int currentTurn, ifstream fins[2], string playerNextLines[2], string &cur_line)
 {
 	if (!playerNextLines[currentTurn].empty()) {
 		cur_line = playerNextLines[currentTurn];
+		playerNextLines[currentTurn] = "";
 	}
 	else {
 		getline(fins[currentTurn], cur_line);
@@ -100,7 +92,7 @@ bool Moves::checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &li
 {
 	bool check;
 	if ((((!(playerNextLines[0].empty()) && !currentTurn) || ((!(playerNextLines[1].empty()) && currentTurn))) && (RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)) {
-		clearLine(line_words, playerNextLines[currentTurn]);
+		Parser::clearLine(line_words, playerNextLines[currentTurn]);
 		if (!isNumOfArgsCorrect(currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler)) {
 			return false;
 		}
@@ -157,10 +149,10 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
         exitMoves(fins[0], fins[1], endOfGameHandler, EndOfGameHandler::BadMoveFile);
         return;
     }
-//	bool isOneFileLeft = false;
+   	bool isOneFileLeft = false;
     while ((((!fins[0].eof() || !playerNextLines[0].empty()) && !currentTurn) || ((!fins[1].eof() || !playerNextLines[1].empty()) && currentTurn)) && ((RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)) {
-		    updateLine(currentTurn, fins, playerNextLines, cur_line);
-        clearLine(line_words, cur_line);
+			  updateLine(currentTurn, fins, playerNextLines, cur_line);
+        Parser::clearLine(line_words, cur_line);
         if (!checkMoveAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler, playerNextLines)) {
             return;
         }
@@ -169,12 +161,12 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
         }
         cout << endl << "#######################################" << endl;
         RPS::printBoard(rps);
-				//if (!isOneFileLeft) {
+				if (!isOneFileLeft) {
 					currentTurn = !currentTurn;
-				//}
-				//if (fins[0].eof() || fins[1].eof()) {
-				//	isOneFileLeft = true;
-				//}
+				}
+				if ((fins[0].eof() && !fins[1].eof()) || (!fins[0].eof() && fins[1].eof())) {
+					isOneFileLeft = true;
+				}
     }
 		fins[0].close();
 		fins[1].close();

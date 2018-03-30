@@ -13,7 +13,7 @@ class Parser {
     static bool setPiece(RPS& rps, int playerNumber, vector<string> piece_description);
     
   public:
-
+		static void clearLine(vector<string> &line_words, string &cur_line);
 	static bool isInteger(string str);
     static void parseBoard(RPS& rps, int playerNumber, EndOfGameHandler& endOfGameHandler);
 

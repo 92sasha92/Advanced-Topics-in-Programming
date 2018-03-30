@@ -86,7 +86,7 @@ EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler) 
             if (rps.board[i][j][0] != nullptr) {
                 if (rps.board[i][j][0]->type == Piece::Flag) {
                     player1HaveFlag = true;
-                } else if (rps.board[i][j][0]->type != Piece::Flag && rps.board[i][j][0]->type != Piece::Undefined) {
+                } else if (rps.board[i][j][0]->type != Piece::Flag && rps.board[i][j][0]->type != Piece::Undefined && rps.board[i][j][0]->type != Piece::Bomb) {
                     player1HaveMovingPieces = true;
                 }
             }
@@ -94,7 +94,7 @@ EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler) 
             if (rps.board[i][j][1] != nullptr) {
                 if (rps.board[i][j][1]->type == Piece::Flag) {
                     player2HaveFlag = true;
-                } else if (rps.board[i][j][1]->type != Piece::Flag && rps.board[i][j][1]->type != Piece::Undefined) {
+                } else if (rps.board[i][j][1]->type != Piece::Flag && rps.board[i][j][1]->type != Piece::Undefined && rps.board[i][j][1]->type != Piece::Bomb) {
                     player2HaveMovingPieces = true;
                 }
             }
