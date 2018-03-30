@@ -4,6 +4,7 @@
 
 int main() {
     RPS rps;
+    EndOfGameHandler endOfGameHandler;
     bool check1, check2;
     check1 = Parser::parseBoard(rps, 0);
     check2 = Parser::parseBoard(rps, 1);
@@ -15,9 +16,9 @@ int main() {
         cout << "player2 use incorrect format file and lose" << endl;
     }
 
-	Moves::parseMoves(rps);
+	Moves::parseMoves(rps, endOfGameHandler);
     RPS::createOutFile(rps);
-    cout << "AND THE WINNER NUMBER IS: " << RPS::checkWinner(rps) << endl;
+    cout << "AND THE WINNER NUMBER IS: " << RPS::checkWinner(rps, endOfGameHandler).getGameState() << endl;
     return 0;
 }
 

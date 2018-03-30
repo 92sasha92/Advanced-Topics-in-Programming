@@ -78,7 +78,7 @@ void RPS::fight(RPS& rps, int row, int col) {
     }
 }
 
-RPS::GameState RPS::checkWinner(RPS& rps) {
+EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler) {
     bool player1HaveFlag = false, player2HaveFlag = false ,player1HaveMovingPieces = false, player2HaveMovingPieces = false;
     for (int i = 0; i < rps.Nrows; i++) {
         for (int j = 0; j < rps.Mcols; j++) {
@@ -101,19 +101,33 @@ RPS::GameState RPS::checkWinner(RPS& rps) {
 
         }
     }
-    if ((!player1HaveFlag || !player1HaveMovingPieces) && (!player2HaveFlag || !player2HaveMovingPieces)) {
-        return Tie;
-    } else if (!player1HaveFlag || !player1HaveMovingPieces) {
-        return Player2Win;
-    } else if (!player2HaveFlag || !player2HaveMovingPieces) {
-        return Player1Win;
+    if ((!player1HaveFlag) || (!player2HaveFlag)) {
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::TieAllFlagsEaten);
+        if (player1HaveFlag) {
+            endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
+        } else if (player2HaveFlag) {
+            endOfGameHandler.setGameState(EndOfGameHandler::Player2Win);
+        } else {
+            endOfGameHandler.setGameState(EndOfGameHandler::Tie);
+        }
+
+    } else if (!player1HaveMovingPieces || !player2HaveMovingPieces) {
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::AllMovingPiecesEaten);
+        if (player1HaveMovingPieces) {
+            endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
+        } else if (player2HaveMovingPieces) {
+            endOfGameHandler.setGameState(EndOfGameHandler::Player2Win);
+        } else {
+            endOfGameHandler.setGameState(EndOfGameHandler::Tie);
+        }
     }
-    return GameNotOver;
+    return endOfGameHandler;
 }
 
 void RPS::createOutFile(RPS& rps) {
+    EndOfGameHandler endOfGameHandler;
     ofstream fout(outputFile);
-    fout << "Winner: " << checkWinner(rps) << endl;
+    fout << "Winner: " << checkWinner(rps, endOfGameHandler).getGameState() << endl;
     fout << "Reason: " << endl << endl;
 
     for (int i = 0; i < rps.Nrows; i++) {

@@ -7,6 +7,7 @@
 #include <vector>
 #include "PieceFactory.h"
 #include "JokerPiece.h"
+#include "EndOfGameHandler.h"
 
 using namespace std;
 
@@ -29,18 +30,11 @@ class RPS {
 
   public:
 
-    typedef enum {
-        Tie,
-        Player1Win,
-        Player2Win,
-        GameNotOver
-    } GameState;
-
     static void fight(RPS& rps, int row, int col);
     static void printBoard(RPS& rps);
     int getNumberOfRows();
     int getNumberOfColumns();
-    static GameState checkWinner(RPS& rps);
+    static EndOfGameHandler checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler);
     static void createOutFile(RPS& rps);
 
     Piece *board[Nrows][Mcols][2];
@@ -49,7 +43,6 @@ class RPS {
     RPS(const RPS& rps) = delete;
     RPS& operator=(const RPS& rps) = delete;
     ~RPS();
-
 };
 
 

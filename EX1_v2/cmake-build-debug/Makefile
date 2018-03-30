@@ -150,6 +150,33 @@ BombPiece.cpp.s:
 	$(MAKE) -f CMakeFiles/EX1_v2.dir/build.make CMakeFiles/EX1_v2.dir/BombPiece.cpp.s
 .PHONY : BombPiece.cpp.s
 
+EndOfGameHandler.o: EndOfGameHandler.cpp.o
+
+.PHONY : EndOfGameHandler.o
+
+# target to build an object file
+EndOfGameHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/EX1_v2.dir/build.make CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.o
+.PHONY : EndOfGameHandler.cpp.o
+
+EndOfGameHandler.i: EndOfGameHandler.cpp.i
+
+.PHONY : EndOfGameHandler.i
+
+# target to preprocess a source file
+EndOfGameHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/EX1_v2.dir/build.make CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.i
+.PHONY : EndOfGameHandler.cpp.i
+
+EndOfGameHandler.s: EndOfGameHandler.cpp.s
+
+.PHONY : EndOfGameHandler.s
+
+# target to generate assembly for a file
+EndOfGameHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/EX1_v2.dir/build.make CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.s
+.PHONY : EndOfGameHandler.cpp.s
+
 FlagPiece.o: FlagPiece.cpp.o
 
 .PHONY : FlagPiece.o
@@ -459,6 +486,9 @@ help:
 	@echo "... BombPiece.o"
 	@echo "... BombPiece.i"
 	@echo "... BombPiece.s"
+	@echo "... EndOfGameHandler.o"
+	@echo "... EndOfGameHandler.i"
+	@echo "... EndOfGameHandler.s"
 	@echo "... FlagPiece.o"
 	@echo "... FlagPiece.i"
 	@echo "... FlagPiece.s"

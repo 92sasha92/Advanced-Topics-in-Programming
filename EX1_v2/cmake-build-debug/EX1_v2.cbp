@@ -86,6 +86,12 @@
 		<Unit filename="/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/BombPiece.h">
 			<Option target="EX1_v2"/>
 		</Unit>
+		<Unit filename="/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/EndOfGameHandler.cpp">
+			<Option target="EX1_v2"/>
+		</Unit>
+		<Unit filename="/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/EndOfGameHandler.h">
+			<Option target="EX1_v2"/>
+		</Unit>
 		<Unit filename="/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/FlagPiece.cpp">
 			<Option target="EX1_v2"/>
 		</Unit>

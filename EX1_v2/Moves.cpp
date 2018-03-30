@@ -59,7 +59,7 @@ Moves::Move* Moves::parseMove(RPS& rps, int playerIndex, vector<string> pieceDes
 }
 
 
-bool Moves::parseMoves(RPS& rps)
+EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
 {
     int currentTurn = 0;
     bool check;
@@ -74,11 +74,11 @@ bool Moves::parseMoves(RPS& rps)
         cout << "ERROR: file didn't opened";
         fin1.close();
         fin2.close();
-        return false;
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
+        return endOfGameHandler;
     }
 
-
-    while ((((!fin1.eof() || !player1_next_line.empty()) && !currentTurn) || ((!fin2.eof() || !player2_next_line.empty()) && currentTurn)) && (RPS::checkWinner(rps) == RPS::GameNotOver)) {
+    while ((((!fin1.eof() || !player1_next_line.empty()) && !currentTurn) || ((!fin2.eof() || !player2_next_line.empty()) && currentTurn)) && ((RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)) {
 
         if (currentTurn == 0) {
             if (!player1_next_line.empty()) {
@@ -127,7 +127,7 @@ bool Moves::parseMoves(RPS& rps)
             return false;
         }
 
-        if (((player1_next_line!= "" && !currentTurn) || (player2_next_line!= "" && currentTurn)) && (RPS::checkWinner(rps) == RPS::GameNotOver)) {
+        if (((player1_next_line!= "" && !currentTurn) || (player2_next_line!= "" && currentTurn)) && ((RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)) {
             if (currentTurn == 0) {
                 istringstream ss(player1_next_line);
                 line_words.clear();
