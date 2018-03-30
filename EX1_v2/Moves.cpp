@@ -76,7 +76,7 @@ bool Moves::parseMoves(RPS& rps)
         fin2.close();
         return false;
     }
-
+		string playerNextLines[2] = { "", "" };
 
     while ((((!fin1.eof() || !player1_next_line.empty()) && !currentTurn) || ((!fin2.eof() || !player2_next_line.empty()) && currentTurn)) && (RPS::checkWinner(rps) == RPS::GameNotOver)) {
 
