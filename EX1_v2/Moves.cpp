@@ -178,8 +178,9 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
     else if (!fins[1].eof()) {
         // ???????
     }
-		fins[0].close();
-		fins[1].close();
+    fins[0].close();
+    fins[1].close();
+    RPS::checkWinner(rps, endOfGameHandler);
 }
 
 bool Moves::setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int player) {
