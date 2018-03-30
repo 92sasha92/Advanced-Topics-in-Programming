@@ -23,6 +23,6 @@ class Moves {
 		static EndOfGameHandler exitMoves(ifstream &fin1, ifstream &fin2, EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason, string errorStr);
 
   public:
-    static EndOfGameHandler parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler);
+    static void parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler);
 
 };
