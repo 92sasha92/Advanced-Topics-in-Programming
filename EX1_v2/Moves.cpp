@@ -77,7 +77,7 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::NoMoveFile);
         return;
     }
-		string playerNextLines[2] = { "", "" };
+    string playerNextLines[2] = { "", "" };
 
     while ((((!fins[0].eof() || !playerNextLines[0].empty()) && !currentTurn) || ((!fins[1].eof() || !playerNextLines[1].empty()) && currentTurn)) && ((RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)) {
         if (!playerNextLines[currentTurn].empty()) {

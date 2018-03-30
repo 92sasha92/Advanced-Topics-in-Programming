@@ -6,8 +6,8 @@ int main() {
     RPS rps;
     EndOfGameHandler endOfGameHandler;
     bool check1, check2;
-    check1 = Parser::parseBoard(rps, 0);
-    check2 = Parser::parseBoard(rps, 1);
+    Parser::parseBoard(rps, 0, endOfGameHandler);
+    Parser::parseBoard(rps, 1, endOfGameHandler);
     if (!check1 && !check2) {
         cout << "two players use incorrect format file and no point are given" << endl;
     } else if (!check1) {

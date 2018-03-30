@@ -79,7 +79,7 @@ bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription
     return true;
 }
 
-bool Parser::parseBoard(RPS& rps, int playerIndex) {
+void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHandler) {
     string cur_line, word;
     bool check;
     ifstream fin;
