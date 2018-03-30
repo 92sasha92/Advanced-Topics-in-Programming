@@ -68,6 +68,10 @@ bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription
         }
         char jokerPiece = pieceDescription[3][0];
         Piece::RPSPiecesTypes jokerPieceType = PieceFactory::charToPieceType(jokerPiece);
+        if (jokerPieceType == Piece::Joker || jokerPieceType == Piece::Flag || jokerPieceType == Piece::Undefined) {
+            cout << "ERROR: joker piece type is wrong" << endl;
+            return false;
+        }
         rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex, jokerPieceType);
     } else {
         if (pieceDescription.size() != 3) {
@@ -81,6 +85,7 @@ bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription
 
 void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHandler) {
     string cur_line, word;
+    int fileLine = 0;
     bool check;
     ifstream fin;
     vector<string> line_words;
@@ -95,7 +100,9 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
 
     if (!fin.is_open()) {
         cout << "ERROR: file didn't opened";
-        return false;
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadInputFile);
+        endOfGameHandler.setWinner(playerIndex ,fileLine , fileLine);
+        return;
     }
 
     while (!fin.eof()) {
@@ -104,7 +111,6 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
         line_words.clear();
         while (getline(ss, word, ' ')) {
             if (word.compare("") != 0) {
-//                cout << "word: " << word << ";" << endl;
                 line_words.push_back(word);
             }
         }
@@ -112,21 +118,27 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
         if (line_words.size() < 3) {
             cout << "ERROR: not enogh arguments " << line_words.size() << endl;
 			fin.close();
-            return false;
+            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadInputFile);
+            endOfGameHandler.setWinner(playerIndex ,fileLine , fileLine);
+            return;
         }
         check = setPiece(rps, playerIndex, line_words);
         if (!check) {
             cout << "ERROR: could not set piece" << endl;
 			fin.close();
-            return false;
+            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadInputFile);
+            endOfGameHandler.setWinner(playerIndex ,fileLine , fileLine);
+            return;
         }
-
+        fileLine++;
     }
 
     if (rps.playerPiecesArsenal[Piece::Flag] > 0) {
         cout << "ERROR: Not all Flags placed" << endl;
 		fin.close();
-        return false;
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadInputFile);
+        endOfGameHandler.setWinner(playerIndex ,fileLine , fileLine);
+        return;
     }
 
     for (int i = 0; i < rps.Mcols; i++) {
@@ -136,8 +148,7 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
             }
         }
     }
+    RPS::checkWinner(rps, endOfGameHandler);
 
-    // TODO: check if need to close ss
     fin.close();
-    return true;
 }

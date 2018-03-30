@@ -81,7 +81,7 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
         cout << "ERROR: file didn't opened";
         fins[0].close();
         fins[1].close();
-        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::NoMoveFile);
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
         return;
     }
     string playerNextLines[2] = { "", "" };

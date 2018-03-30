@@ -102,12 +102,13 @@ EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler) 
         }
     }
     if ((!player1HaveFlag) || (!player2HaveFlag)) {
-        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::TieAllFlagsEaten);
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::LooserAllFlagsEaten);
         if (player1HaveFlag) {
             endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
         } else if (player2HaveFlag) {
             endOfGameHandler.setGameState(EndOfGameHandler::Player2Win);
         } else {
+            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::TieAllFlagsEaten);
             endOfGameHandler.setGameState(EndOfGameHandler::Tie);
         }
 
@@ -124,11 +125,25 @@ EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler) 
     return endOfGameHandler;
 }
 
-void RPS::createOutFile(RPS& rps) {
-    EndOfGameHandler endOfGameHandler;
+void RPS::createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]) {
     ofstream fout(outputFile);
-    fout << "Winner: " << checkWinner(rps, endOfGameHandler).getGameState() << endl;
-    fout << "Reason: " << endl << endl;
+    if (endOfGameHandler.getGameState() == EndOfGameHandler::GameNotOver) {
+        fout << "Winner: 0" << endl;
+    } else {
+        fout << "Winner: " << endOfGameHandler.getGameState() << endl;
+    }
+
+    if (isBadInputFile[0] && isBadInputFile[1]) {
+        fout << "Reason: Bad Positioning input file for both players - player 1: line ";
+        fout << ErrorLine[0] << ", player 2: line" << ErrorLine[1] << endl << endl;
+    } else if (isBadInputFile[0]) {
+        fout << "Reason: Bad Positioning input file for player 1 - line " << ErrorLine[0] << endl;
+    } else if (isBadInputFile[1]) {
+        fout << "Reason: Bad Positioning input file for player 2 - line " << ErrorLine[1] << endl;
+    } else {
+        fout << endOfGameHandler.toString() << endl;
+    }
+
 
     for (int i = 0; i < rps.Nrows; i++) {
         for (int j = 0; j < rps.Mcols; j++) {

@@ -32,3 +32,52 @@ void EndOfGameHandler::setWinner(int currentTurn ,int fileLinePlayer1, int fileL
         this->setGameState(EndOfGameHandler::Player1Win);
     }
 }
+
+void EndOfGameHandler::clear() {
+    this->setEndOfGameReason(GameNotFinished);
+    this->setGameState(GameNotOver);
+    this->setEndGamelineNumber(0);
+}
+
+bool EndOfGameHandler::isInputFileOk(const bool isBadInputFile[2]) {
+    if (isBadInputFile[0] && isBadInputFile[1]) {
+        cout << "two players use incorrect format file and no point are given" << endl;
+        return false;
+    } else if (isBadInputFile[0]) {
+        cout << "player1 use incorrect format file and lose" << endl;
+        return false;
+    } else if (isBadInputFile[1]) {
+        cout << "player2 use incorrect format file and lose" << endl;
+        return false;
+    }
+    return true;
+}
+
+string EndOfGameHandler::toString() {
+    if (this->getEndOfGameReason() == EndOfGameHandler::BadMoveFile) {
+        stringstream ss;
+        ss << this->getEndGamelineNumber();
+        if (this->getGameState() == 1) {
+            return "Reason: Bad Moves input file for player 2 - line " + ss.str();
+        } else {
+            return "Reason: Bad Moves input file for player 1 - line " + ss.str();
+        }
+    }
+
+    switch (this->getEndOfGameReason()) {
+        case LooserAllFlagsEaten: {
+            return "All flags of the opponent are captured";
+        }
+        case AllMovingPiecesEaten: {
+            return "All moving PIECEs of the opponent are eaten";
+        }
+        case GameNotFinished: {
+            return "A tie - both Moves input files done without a winner";
+        }
+        case TieAllFlagsEaten: {
+            return "A tie - all flags are eaten by both players in the position files";
+        }
+        default:
+            return "Unsupported end of game state";
+    }
+}
