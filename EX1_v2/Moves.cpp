@@ -5,10 +5,10 @@ Moves::Move::Move(int fCol_, int fRow_, int toCol_, int toRow_, int player_): fR
 
 //string Moves::player1Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player1.rps_moves";
 //string Moves::player2Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player2.rps_moves";
-string Moves::player1Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player1.rps_moves";
-string Moves::player2Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player2.rps_moves";
-//string Moves::player1Moves = "player1.rps_moves";
-//string Moves::player2Moves = "player2.rps_moves";
+//string Moves::player1Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player1.rps_moves";
+//string Moves::player2Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player2.rps_moves";
+string Moves::player1Moves = "player1.rps_moves";
+string Moves::player2Moves = "player2.rps_moves";
 
 bool Moves::movePiece(RPS & rps, Moves::Move& move)
 {
