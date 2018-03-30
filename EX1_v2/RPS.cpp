@@ -128,7 +128,7 @@ EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler) 
 void RPS::createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]) {
     ofstream fout(outputFile);
     if (endOfGameHandler.getGameState() == EndOfGameHandler::GameNotOver) {
-        fout << "Winner: 0" << endl;
+        fout << "Winner: " << 0 << endl;
     } else {
         fout << "Winner: " << endOfGameHandler.getGameState() << endl;
     }
