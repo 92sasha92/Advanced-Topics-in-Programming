@@ -3,12 +3,12 @@
 Moves::Move::Move(int fRow_, int fCol_, int toRow_, int toCol_, int player_): fRow(fRow_), fCol(fCol_), toRow(toRow_), toCol(toCol_), player(player_) {
 }
 
-//string Moves::player1Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player1.rps_moves";
-//string Moves::player2Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player2.rps_moves";
+string Moves::player1Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player1.rps_moves";
+string Moves::player2Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Programming\/Advanced-Topics-in-Programming\/EX1_v2\/player2.rps_moves";
 //string Moves::player1Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player1.rps_moves";
 //string Moves::player2Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player2.rps_moves";
-string Moves::player1Moves = "player1.rps_moves";
-string Moves::player2Moves = "player2.rps_moves";
+//string Moves::player1Moves = "player1.rps_moves";
+//string Moves::player2Moves = "player2.rps_moves";
 
 bool Moves::movePiece(RPS & rps, Moves::Move& move)
 {
@@ -54,7 +54,7 @@ Moves::Move* Moves::parseMove(RPS& rps, int playerIndex, vector<string> pieceDes
         }
     }
     // arr[1] = fRow, arr[0] = fCol, arr[3] = toRow, arr[2] = toCol
-		cout << arr[1] << " " << arr[0] << " " << arr[3] << " " << arr[2] << endl;
+		cout << arr[1] << " " << arr[0] << " " << arr[3] << " " << arr[2] << " " << playerIndex<< endl;
     return new Move(arr[1], arr[0], arr[3], arr[2], playerIndex);
 }
 
@@ -63,45 +63,33 @@ bool Moves::parseMoves(RPS& rps)
 {
     int currentTurn = 0;
     bool check;
-    string cur_line, word, player1_next_line = "", player2_next_line = "";
+    string cur_line, word;
     ifstream fin1, fin2;
+		ifstream fins[2];
     Move *move;
     vector<string> line_words;
-    fin1.open(player1Moves);
-    fin2.open(player2Moves);
+		fins[0].open(player1Moves);
+		fins[1].open(player2Moves);
 
-    if (!fin1.is_open() || !fin2.is_open()) {
+    if (!fins[0].is_open() || !fins[1].is_open()) {
         cout << "ERROR: file didn't opened";
-        fin1.close();
-        fin2.close();
+				fins[0].close();
+				fins[1].close();
         return false;
     }
 		string playerNextLines[2] = { "", "" };
 
-    while ((((!fin1.eof() || !player1_next_line.empty()) && !currentTurn) || ((!fin2.eof() || !player2_next_line.empty()) && currentTurn)) && (RPS::checkWinner(rps) == RPS::GameNotOver)) {
+    while ((((!fins[0].eof() || !playerNextLines[0].empty()) && !currentTurn) || ((!fins[1].eof() || !playerNextLines[1].empty()) && currentTurn)) && (RPS::checkWinner(rps) == RPS::GameNotOver)) {
 
-        if (currentTurn == 0) {
-            if (!player1_next_line.empty()) {
-                cur_line = player1_next_line;
-            } else {
-                getline(fin1, cur_line);
-            }
-            if (!fin1.eof()) {
-                getline(fin1, player1_next_line);
-            }
-        } else {
-
-            if (!player2_next_line.empty()) {
-
-                cur_line = player2_next_line;
-            } else {
-                getline(fin2, cur_line);
-            }
-            if (!fin1.eof()) {
-                getline(fin2, player2_next_line);
-            }
-        }
-
+			if (!playerNextLines[currentTurn].empty()) {
+				cur_line = playerNextLines[currentTurn];
+			}
+			else {
+				getline(fins[currentTurn], cur_line);
+			}
+			if (!fins[currentTurn].eof()) {
+				getline(fins[currentTurn], playerNextLines[currentTurn]);
+			}
         istringstream ss(cur_line);
         line_words.clear();
         while (getline(ss, word, ' ')) {
@@ -122,34 +110,24 @@ bool Moves::parseMoves(RPS& rps)
             free(move);
         } else {
             cout << "ERROR: in parsing move";
-            fin1.close();
-            fin2.close();
+						fins[0].close();
+						fins[1].close();
             return false;
         }
 
-        if (((player1_next_line!= "" && !currentTurn) || (player2_next_line!= "" && currentTurn)) && (RPS::checkWinner(rps) == RPS::GameNotOver)) {
-            if (currentTurn == 0) {
-                istringstream ss(player1_next_line);
-                line_words.clear();
-                while (getline(ss, word, ' ')) {
-                    if (word.compare("") != 0) {
-                        line_words.push_back(word);
-                    }
-                }
-            } else {
-                istringstream ss(player2_next_line);
-                line_words.clear();
-                while (getline(ss, word, ' ')) {
-                    if (word.compare("") != 0) {
-                        line_words.push_back(word);
-                    }
-                }
-            }
+        if ((((!(playerNextLines[0].empty()) && !currentTurn) || ((!(playerNextLines[1].empty()) && currentTurn))) && (RPS::checkWinner(rps) == RPS::GameNotOver))){
+    				istringstream ss(playerNextLines[currentTurn]);
+						line_words.clear();
+						while (getline(ss, word, ' ')) {
+							if (word.compare("") != 0) {
+								line_words.push_back(word);
+							}
+						}
 
             if (line_words.size() != 4) {
                 cout << "ERROR: num of arguments is incorrect" << line_words.size() << endl;
-                fin1.close();
-                fin2.close();
+								fins[0].close();
+								fins[1].close();
                 return false;
             }
 
@@ -157,16 +135,11 @@ bool Moves::parseMoves(RPS& rps)
                 check = setNewJokerPiece(rps, line_words, currentTurn);
                 if (!check) {
                     cout << "ERROR: Move change Joker type fail" << endl;
-                    fin1.close();
-                    fin2.close();
+										fins[0].close();
+										fins[1].close();
                     return false;
                 }
-
-                if (currentTurn == 0) {
-                    player1_next_line = "";
-                } else {
-                    player2_next_line = "";
-                }
+								playerNextLines[currentTurn] = "";
             }
         }
 
@@ -207,10 +180,17 @@ bool Moves::setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int play
         return false;
     }
 
-    if (rps.board[row][col][player]->type != Piece::Joker) {
+		Piece *piece = rps.board[row][col][player];
+		if (piece == nullptr) {
+			cout << "ERROR: no joker in the given position";
+			return false;
+		}
+		cout << row << " " << col << endl;
+    if (piece->type != Piece::Joker) {
         cout << "ERROR: Piece in the current cell (" << row << ", " << col << ") is not a Joker type";
         return false;
     }
+
 
     if (pieceDescription[3].size() != 1) {
         cout << "incorrect piece type" << endl;
@@ -220,9 +200,9 @@ bool Moves::setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int play
     Piece::RPSPiecesTypes jokerPiece = PieceFactory::charToPieceType(jokerPieceChar);
 
     if (jokerPiece != Piece::Joker && jokerPiece != Piece::Flag && jokerPiece!= Piece::Undefined) {
-        ((JokerPiece *)rps.board[row][col][player])->setJokerPiece(jokerPiece);
+        ((JokerPiece *)piece)->setJokerPiece(jokerPiece);
     } else {
-        ((JokerPiece *)rps.board[row][col][player])->setJokerPiece(Piece::Undefined);
+        ((JokerPiece *)piece)->setJokerPiece(Piece::Undefined);
         std::cout << "ERROR: unsupported joker type" << std::endl;
         return false;
     }
