@@ -21,7 +21,7 @@ class Moves {
     static bool movePiece(RPS& rps, Move& move);
     static bool setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int player);
 		static void exitMoves(ifstream &fin1, ifstream &fin2, EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason);
-		static void Moves::clearLine(vector<string> &line_words, string &cur_line);
+		static void clearLine(vector<string> &line_words, string &cur_line);
 		static void updateLine(int currentTurn, ifstream fins[2], string playerNextLines[2], string &cur_line);
 		static bool isNumOfArgsCorrect(int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler);
 		static bool checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler, string playerNextLines[2]);
