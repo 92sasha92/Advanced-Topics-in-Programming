@@ -58,7 +58,13 @@ Moves::Move* Moves::parseMove(RPS& rps, int playerIndex, vector<string> pieceDes
     return new Move(arr[1], arr[0], arr[3], arr[2], playerIndex);
 }
 
-
+EndOfGameHandler Moves::exitMoves(ifstream &fin1, ifstream &fin2, EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason, string errorStr) {
+	cout << errorStr;
+	fin1.close();
+	fin2.close();
+	endOfGameHandler.setEndOfGameReason(error);
+	return endOfGameHandler;
+}
 EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
 {
     int currentTurn = 0, fileLinePlayer [2] = {0, 0};

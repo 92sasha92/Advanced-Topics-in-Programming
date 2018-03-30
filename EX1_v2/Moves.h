@@ -20,6 +20,7 @@ class Moves {
     static Move* parseMove(RPS& rps, int playerIndex, vector<string> pieceDescription);
     static bool movePiece(RPS& rps, Move& move);
     static bool setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int player);
+		static EndOfGameHandler exitMoves(ifstream &fin1, ifstream &fin2, EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason, string errorStr);
 
   public:
     static EndOfGameHandler parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler);
