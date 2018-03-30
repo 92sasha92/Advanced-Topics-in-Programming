@@ -157,7 +157,7 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
         exitMoves(fins[0], fins[1], endOfGameHandler, EndOfGameHandler::BadMoveFile);
         return;
     }
-		bool isOneFileLeft = false;
+//	bool isOneFileLeft = false;
     while ((((!fins[0].eof() || !playerNextLines[0].empty()) && !currentTurn) || ((!fins[1].eof() || !playerNextLines[1].empty()) && currentTurn)) && ((RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)) {
 		    updateLine(currentTurn, fins, playerNextLines, cur_line);
         clearLine(line_words, cur_line);
