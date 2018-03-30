@@ -59,8 +59,7 @@ Moves::Move* Moves::parseMove(RPS& rps, int playerIndex, vector<string> pieceDes
 }
 
 
-EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
-{
+void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
     int currentTurn = 0, fileLinePlayer [2] = {0, 0};
     bool check;
     string cur_line, word;
@@ -76,7 +75,7 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
         fins[0].close();
         fins[1].close();
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::NoMoveFile);
-        return endOfGameHandler;
+        return;
     }
 		string playerNextLines[2] = { "", "" };
 
@@ -104,7 +103,7 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
             fin2.close();
             endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
             endOfGameHandler.setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
-            return endOfGameHandler;
+            return;
         }
 
         move = parseMove(rps, currentTurn, line_words);
@@ -117,7 +116,7 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
                 fins[1].close();
                 endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
                 endOfGameHandler.setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
-                return endOfGameHandler;
+                return;
             }
         } else {
             cout << "ERROR: in parsing move";
@@ -125,7 +124,7 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
             fins[1].close();
             endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
             endOfGameHandler.setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
-            return endOfGameHandler;
+            return;
         }
         fileLinePlayer[currentTurn]++;
 
@@ -144,7 +143,7 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
                 fins[1].close();
                 endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
                 endOfGameHandler.setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
-                return endOfGameHandler;
+                return;
             }
 
             if (!(line_words[0].compare("J:"))) {
@@ -155,7 +154,7 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
                     fins[1].close();
                     endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
                     endOfGameHandler.setWinner(currentTurn ,fileLinePlayer[0], fileLinePlayer[1]);
-                    return endOfGameHandler;
+                    return;
                 }
 				playerNextLines[currentTurn] = "";
                 fileLinePlayer[currentTurn]++;
@@ -175,7 +174,6 @@ EndOfGameHandler Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler)
     }
     fin1.close();
     fin2.close();
-    return endOfGameHandler;
 }
 
 bool Moves::setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int player) {

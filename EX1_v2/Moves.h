@@ -22,6 +22,6 @@ class Moves {
     static bool setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int player);
 
   public:
-    static EndOfGameHandler parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler);
+    static void parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler);
 
 };
