@@ -22,6 +22,7 @@ class RPS {
     static const int B = 2;
     static const int J = 2;
     static const int F = 1;
+		static const int numOfPlayers = 2;
 
     int playerPiecesArsenal[7];
     static string outputFile;
@@ -32,8 +33,8 @@ class RPS {
 
     static void fight(RPS& rps, int row, int col);
     static void printBoard(RPS& rps);
-    int getNumberOfRows();
-    int getNumberOfColumns();
+    int getNumberOfRows() const;
+    int getNumberOfColumns() const;
     static EndOfGameHandler checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler);
     static void createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]);
 

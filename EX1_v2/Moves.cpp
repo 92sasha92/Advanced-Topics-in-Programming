@@ -13,16 +13,16 @@ string Moves::player2Moves = "C:\/Users\/sasha\/Desktop\/Advanced_Topics_in_Prog
 bool Moves::movePiece(RPS & rps, Moves::Move& move)
 {
     if (move.fRow < 0 || move.fCol < 0 || move.toCol < 0 || move.toRow < 0) {
-        cout << "ERROR: move index is out of bound";
+        cout << "ERROR: move index is out of bound" << endl;
         return false;
     } else if (move.fRow >= rps.getNumberOfRows() || move.fCol >= rps.getNumberOfColumns() || move.toCol >= rps.getNumberOfColumns() || move.toRow >= rps.getNumberOfRows()) {
-        cout << "ERROR: move index is out of bound";
+        cout << "ERROR: move index is out of bound" << endl;
         return false;
     }
 
     Piece *piece = rps.board[move.fRow][move.fCol][move.player];
     if (piece == nullptr) {
-        cout << "ERROR: no piece in the given position";
+        cout << "ERROR: no piece in the given position" << endl;
         return false;
     }
     if (!(piece->getCanMove())) {
@@ -30,7 +30,7 @@ bool Moves::movePiece(RPS & rps, Moves::Move& move)
         return false;
     }
     if (rps.board[move.toRow][move.toCol][move.player] != nullptr) {
-        cout << "ERROR: the cell already occupied by other piece of the same player";
+        cout << "ERROR: the cell already occupied by other piece of the same player" << endl;
         return false;
     }
 
@@ -54,7 +54,7 @@ Moves::Move* Moves::parseMove(RPS& rps, int playerIndex, vector<string> pieceDes
         }
     }
     // arr[1] = fRow, arr[0] = fCol, arr[3] = toRow, arr[2] = toCol
-		cout << arr[1] << " " << arr[0] << " " << arr[3] << " " << arr[2] << " " << playerIndex<< endl;
+		cout << arr[1] << " " << arr[0] << " " << arr[3] << " " << arr[2] << " player:" << playerIndex + 1<< endl;
     return new Move(arr[1], arr[0], arr[3], arr[2], playerIndex);
 }
 
@@ -122,7 +122,7 @@ bool Moves::checkMoveAndSet(RPS &rps, int currentTurn, vector<string>& line_word
 		check = movePiece(rps, *move);
 		free(move);
 		if (!check) {
-			cout << "ERROR: in making move";
+			cout << "ERROR: in making move" << endl;
 			exitMoves(fins[0], fins[1], endOfGameHandler, EndOfGameHandler::BadMoveFile);
 			endOfGameHandler.setWinner(currentTurn, fileLinePlayer[0], fileLinePlayer[1]);
 			return false;
@@ -145,7 +145,7 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
 		fins[0].open(player1Moves);
 		fins[1].open(player2Moves);
     if (!fins[0].is_open() || !fins[1].is_open()) {
-        cout << "ERROR: file didn't opened";
+        cout << "ERROR: file didn't opened" << endl;
         exitMoves(fins[0], fins[1], endOfGameHandler, EndOfGameHandler::BadMoveFile);
         return;
     }
@@ -164,8 +164,14 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
 				if (!isOneFileLeft) {
 					currentTurn = !currentTurn;
 				}
-				if ((fins[0].eof() && !fins[1].eof()) || (!fins[0].eof() && fins[1].eof())) {
+				if (!fins[currentTurn].eof()) {
 					isOneFileLeft = true;
+					if (fins[0].eof()) {
+						cout << "0@" << endl;
+					}
+					if (fins[1].eof()) {
+						cout << "1@" << endl;
+					}
 				}
     }
 		fins[0].close();
@@ -190,18 +196,18 @@ bool Moves::setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int play
     }
 
     if (row < 0 || col < 0 || row >= rps.getNumberOfRows() || col >= rps.getNumberOfColumns()) {
-        cout << "ERROR: Joker move index is out of bound";
+        cout << "ERROR: Joker move index is out of bound" << endl;
         return false;
     }
 
 		Piece *piece = rps.board[row][col][player];
 		if (piece == nullptr) {
-			cout << "ERROR: no joker in the given position";
+			cout << "ERROR: no joker in the given position" << endl;
 			return false;
 		}
 
     if (piece->type != Piece::Joker) {
-        cout << "ERROR: Piece in the current cell (" << row << ", " << col << ") is not a Joker type";
+        cout << "ERROR: Piece in the current cell (" << row << ", " << col << ") is not a Joker type" << endl;
         return false;
     }
 

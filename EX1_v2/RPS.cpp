@@ -33,11 +33,11 @@ RPS::RPS() {
     }
 }
 
-int RPS::getNumberOfRows() {
+int RPS::getNumberOfRows() const{
     return Nrows;
 }
 
-int RPS::getNumberOfColumns(){
+int RPS::getNumberOfColumns() const{
     return Mcols;
 }
 
@@ -57,17 +57,17 @@ void RPS::fight(RPS& rps, int row, int col) {
     Piece::PiecesPower winner = piece1->isStrongerThan(*piece2);
     switch (winner){
         case Piece::Stronger:{
-            cout << "player1 win in cell (" << row+1 << "," << col+1 << ")"  << endl;
+            cout << "player1 win in cell (" << row + 1 << "," << col + 1 << ")"  << endl;
             delete piece2;
             rps.board[row][col][1] = nullptr;
         } break;
         case Piece::Weaker:{
-            cout << "player2 win in cell (" << row+1 << "," << col+1 << ")"  << endl;
+            cout << "player2 win in cell (" << row + 1 << "," << col + 1 << ")"  << endl;
             delete piece1;
             rps.board[row][col][0] = nullptr;
         } break;
         case Piece::Equal:{
-            cout << "tie cell (" << row+1 << "," << col+1 << ")"  << endl;
+            cout << "tie cell (" << row + 1 << "," << col + 1 << ")"  << endl;
             delete piece1;
             delete piece2;
             rps.board[row][col][0] = nullptr;
@@ -164,4 +164,13 @@ void RPS::createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBad
 }
 
 RPS::~RPS() {
+	for (int row = 0; row < this->Nrows; row++) {
+		for (int col = 0; col < this->Mcols; col++) {
+			for (int playerIndex = 0; playerIndex < this->numOfPlayers; playerIndex++) {
+				if (this->board[row][col][playerIndex] != nullptr) {
+					delete this->board[row][col][playerIndex];
+				}
+			}
+		}
+	}
 }
