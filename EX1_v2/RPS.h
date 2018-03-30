@@ -23,6 +23,7 @@ class RPS {
     static const int F = 1;
 
     int playerPiecesArsenal[7];
+    static string outputFile;
 
     friend class Parser;
 
@@ -39,8 +40,10 @@ class RPS {
     static void printBoard(RPS& rps);
     int getNumberOfRows();
     int getNumberOfColumns();
-    Piece *board[Nrows][Mcols][2];
     static GameState checkWinner(RPS& rps);
+    static void createOutFile(RPS& rps);
+
+    Piece *board[Nrows][Mcols][2];
 
     RPS();
     RPS(const RPS& rps) = delete;

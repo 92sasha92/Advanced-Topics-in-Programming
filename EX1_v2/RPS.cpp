@@ -1,5 +1,7 @@
 #include "RPS.h"
 
+string RPS::outputFile = "rps.output";
+
 void RPS::printBoard(RPS& rps) {
     for (int i = 0; i < rps.Nrows; i++) {
         cout << "----------------------------------------" << endl;
@@ -107,6 +109,29 @@ RPS::GameState RPS::checkWinner(RPS& rps) {
         return Player1Win;
     }
     return GameNotOver;
+}
+
+void RPS::createOutFile(RPS& rps) {
+    ofstream fout(outputFile);
+    fout << "Winner: " << checkWinner(rps) << endl;
+    fout << "Reason: " << endl << endl;
+
+    for (int i = 0; i < rps.Nrows; i++) {
+        for (int j = 0; j < rps.Mcols; j++) {
+            if (rps.board[i][j][0] != nullptr && rps.board[i][j][1] != nullptr) {
+                fout << "ERROR: two pieces in the same cell: (" << i << ", " << j << ") should be fight" << endl;
+                break;
+            } else if (rps.board[i][j][0] != nullptr) {
+                fout << rps.board[i][j][0]->toString() << " ";
+            } else if (rps.board[i][j][1] != nullptr) {
+                fout << rps.board[i][j][1]->toString() << " ";
+            } else {
+                fout << "  ";
+            }
+        }
+        fout << endl;
+    }
+    fout.close();
 }
 
 RPS::~RPS() {
