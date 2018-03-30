@@ -157,9 +157,9 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
         exitMoves(fins[0], fins[1], endOfGameHandler, EndOfGameHandler::BadMoveFile);
         return;
     }
-
+		bool isOneFileLeft = false;
     while ((((!fins[0].eof() || !playerNextLines[0].empty()) && !currentTurn) || ((!fins[1].eof() || !playerNextLines[1].empty()) && currentTurn)) && ((RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)) {
-		updateLine(currentTurn, fins, playerNextLines, cur_line);
+		    updateLine(currentTurn, fins, playerNextLines, cur_line);
         clearLine(line_words, cur_line);
         if (!checkMoveAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler, playerNextLines)) {
             return;
@@ -169,17 +169,16 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
         }
         cout << endl << "#######################################" << endl;
         RPS::printBoard(rps);
-        currentTurn = !currentTurn;
-    }
-    if (!fins[0].eof()) {
-        // ??????
-
-    }
-    else if (!fins[1].eof()) {
-        // ???????
+				//if (!isOneFileLeft) {
+					currentTurn = !currentTurn;
+				//}
+				//if (fins[0].eof() || fins[1].eof()) {
+				//	isOneFileLeft = true;
+				//}
     }
 		fins[0].close();
 		fins[1].close();
+		RPS::checkWinner(rps, endOfGameHandler);
 }
 
 bool Moves::setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int player) {
