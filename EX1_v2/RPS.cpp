@@ -1,6 +1,6 @@
 #include "RPS.h"
 
-string RPS::outputFile = "rps.output";
+string RPS::outputFile = "C:\\Users\\sasha\\Desktop\\Advanced_Topics_in_Programming\\Advanced-Topics-in-Programming\\EX1_v2\\rps.output";
 
 void RPS::printBoard(RPS& rps) {
     for (int i = 0; i < rps.Nrows; i++) {
@@ -132,30 +132,30 @@ void RPS::createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBad
     } else {
         fout << "Winner: " << endOfGameHandler.getGameState() << endl;
     }
-
+		fout << "Reason: ";
     if (isBadInputFile[0] && isBadInputFile[1]) {
-        fout << "Reason: Bad Positioning input file for both players - player 1: line ";
+        fout << "Bad Positioning input file for both players - player 1: line ";
         fout << ErrorLine[0] << ", player 2: line" << ErrorLine[1] << endl << endl;
     } else if (isBadInputFile[0]) {
-        fout << "Reason: Bad Positioning input file for player 1 - line " << ErrorLine[0] << endl;
+        fout << "Bad Positioning input file for player 1 - line " << ErrorLine[0] << endl;
     } else if (isBadInputFile[1]) {
-        fout << "Reason: Bad Positioning input file for player 2 - line " << ErrorLine[1] << endl;
+        fout << "Bad Positioning input file for player 2 - line " << ErrorLine[1] << endl;
     } else {
         fout << endOfGameHandler.toString() << endl;
     }
-
-
+		// empty line
+		fout << endl;
     for (int i = 0; i < rps.Nrows; i++) {
         for (int j = 0; j < rps.Mcols; j++) {
             if (rps.board[i][j][0] != nullptr && rps.board[i][j][1] != nullptr) {
                 fout << "ERROR: two pieces in the same cell: (" << i << ", " << j << ") should be fight" << endl;
                 break;
             } else if (rps.board[i][j][0] != nullptr) {
-                fout << rps.board[i][j][0]->toString() << " ";
+                fout << rps.board[i][j][0]->toString();
             } else if (rps.board[i][j][1] != nullptr) {
-                fout << rps.board[i][j][1]->toString() << " ";
+                fout << rps.board[i][j][1]->toString();
             } else {
-                fout << "  ";
+                fout << " ";
             }
         }
         fout << endl;

@@ -119,17 +119,19 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
     while (!fin.eof()) {
         getline(fin, cur_line);
 				clearLine(line_words, cur_line);
-        if (line_words.size() < 3) {
+        if (line_words.size() < 3 && line_words.size() != 0) {
             cout << "ERROR: not enogh arguments " << line_words.size() << endl;
 			      fin.close();
             endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadInputFile);
             endOfGameHandler.setWinner(playerIndex ,fileLine , fileLine);
             return;
         }
-        check = setPiece(rps, playerIndex, line_words);
+				if (line_words.size() != 0) {
+					check = setPiece(rps, playerIndex, line_words);
+				}
         if (!check) {
             cout << "ERROR: could not set piece" << endl;
-			fin.close();
+			      fin.close();
             endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadInputFile);
             endOfGameHandler.setWinner(playerIndex ,fileLine , fileLine);
             return;

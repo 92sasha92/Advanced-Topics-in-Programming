@@ -58,9 +58,9 @@ string EndOfGameHandler::toString() {
         stringstream ss;
         ss << this->getEndGamelineNumber();
         if (this->getGameState() == 1) {
-            return "Reason: Bad Moves input file for player 2 - line " + ss.str();
+            return "Bad Moves input file for player 2 - line " + ss.str();
         } else {
-            return "Reason: Bad Moves input file for player 1 - line " + ss.str();
+            return "Bad Moves input file for player 1 - line " + ss.str();
         }
     }
 

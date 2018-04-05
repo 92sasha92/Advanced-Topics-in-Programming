@@ -29,6 +29,10 @@ bool Moves::movePiece(RPS & rps, Moves::Move& move)
         cout << "ERROR " << piece->toString() << " can't move" << endl;
         return false;
     }
+		if ((move.fRow + 1 != move.toRow && move.fRow - 1 != move.toRow && move.fCol + 1 != move.toCol && move.fCol - 1 != move.toCol) || (move.fRow != move.toRow && move.fCol != move.toCol)) {
+			cout << "ERROR: illegal move, can't move from: (" << move.fCol + 1 << ", " << move.fRow + 1 << ") to: (" << move.toCol + 1 << ", " << move.toRow + 1 << ")" << endl;
+			return false;
+		}
     if (rps.board[move.toRow][move.toCol][move.player] != nullptr) {
         cout << "ERROR: the cell already occupied by other piece of the same player" << endl;
         return false;
