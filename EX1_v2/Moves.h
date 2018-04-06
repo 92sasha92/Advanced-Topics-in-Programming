@@ -17,15 +17,25 @@ class Moves {
         Move(int fCol_, int fRow_, int toCol_, int toRow_, int player_);
     };
 
+		class JokerSuitChange {
+		public:
+			int row;
+			int col;
+			char type;
+			JokerSuitChange(int row_, int col_, char type_);
+		};
+
     static Move* parseMove(RPS& rps, int playerIndex, vector<string> pieceDescription);
     static bool movePiece(RPS& rps, Move& move);
     static bool setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int player);
-		static void exitMoves(ifstream &fin1, ifstream &fin2, EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason);
+		static void movesHandleError(ifstream fins[2], EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason, int fileLinePlayer[2], int currentTurn);
+		static void movesHandleError(ifstream fins[2], EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason);
 		static void clearLine(vector<string> &line_words, string &cur_line);
-		static void updateLine(int currentTurn, ifstream fins[2], string playerNextLines[2], string &cur_line);
 		static bool isNumOfArgsCorrect(int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler);
-		static bool checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler, string playerNextLines[2]);
-		static bool checkMoveAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler, string playerNextLines[2]);
+		static JokerSuitChange* parseJokerSuitChange(vector<string> pieceDescription);
+		static bool setNewJokerSuit(RPS& rps, Moves::JokerSuitChange& suitChange, int player);
+		static bool checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler);
+		static bool checkMoveAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler);
 		static bool parsingLeftoverMoves();
 
   public:
