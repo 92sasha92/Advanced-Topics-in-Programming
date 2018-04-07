@@ -7,18 +7,16 @@ int main() {
     EndOfGameHandler endOfGameHandler;
     bool isBadInputFile[2] = {false, false};
     int ErrorLine[2] = {0, 0};
-
-    Parser::parseBoard(rps, 0, endOfGameHandler);
-    if (endOfGameHandler.getEndOfGameReason() == EndOfGameHandler::BadInputFile) {
-        isBadInputFile[0] = true;
-        ErrorLine[0] = endOfGameHandler.getEndGamelineNumber();
-    }
-    endOfGameHandler.clear();
-    Parser::parseBoard(rps, 1, endOfGameHandler);
-    if (endOfGameHandler.getEndOfGameReason() == EndOfGameHandler::BadInputFile) {
-        isBadInputFile[1] = true;
-        ErrorLine[1] = endOfGameHandler.getEndGamelineNumber();
-    }
+		for (int i = 0; i < 2; i++) {
+			endOfGameHandler.clear();
+			Parser::parseBoard(rps, i, endOfGameHandler);
+			if (endOfGameHandler.getEndOfGameReason() == EndOfGameHandler::BadInputFile) {
+				isBadInputFile[i] = true;
+				ErrorLine[i] = endOfGameHandler.getEndGamelineNumber();
+			} else if (endOfGameHandler.getEndOfGameReason() == EndOfGameHandler::CantOpenInputFile) {
+				return 0;
+			}
+		}
 
     if (EndOfGameHandler::isInputFileOk(isBadInputFile)) {
         RPS::printBoard(rps);

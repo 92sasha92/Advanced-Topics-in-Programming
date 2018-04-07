@@ -110,9 +110,8 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
     }
 
     if (!fin.is_open()) {
-        cout << "ERROR: file didn't opened";
-        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadInputFile);
-        endOfGameHandler.setWinner(playerIndex ,fileLine , fileLine);
+        cout << "ERROR: file didn't opened for player " << playerIndex + 1 << endl;
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::CantOpenInputFile);
         return;
     }
 
