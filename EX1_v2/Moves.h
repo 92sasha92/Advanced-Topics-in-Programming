@@ -27,7 +27,6 @@ class Moves {
 
     static Move* parseMove(RPS& rps, int playerIndex, vector<string> pieceDescription);
     static bool movePiece(RPS& rps, Move& move);
-    static bool setNewJokerPiece(RPS& rps, vector<string> pieceDescription, int player);
 		static void movesHandleError(ifstream fins[2], EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason, int fileLinePlayer[2], int currentTurn);
 		static void movesHandleError(ifstream fins[2], EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason);
 		static void clearLine(vector<string> &line_words, string &cur_line);
@@ -36,7 +35,6 @@ class Moves {
 		static bool setNewJokerSuit(RPS& rps, Moves::JokerSuitChange& suitChange, int player);
 		static bool checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler);
 		static bool checkMoveAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler);
-		static bool parsingLeftoverMoves();
 
   public:
     static void parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler);
