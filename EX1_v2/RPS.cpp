@@ -1,6 +1,7 @@
 #include "RPS.h"
 
-string RPS::outputFile = "C:\\Users\\sasha\\Desktop\\Advanced_Topics_in_Programming\\Advanced-Topics-in-Programming\\EX1_v2\\rps.output";
+//string RPS::outputFile = "C:\\Users\\sasha\\Desktop\\Advanced_Topics_in_Programming\\Advanced-Topics-in-Programming\\EX1_v2\\rps.output";
+string RPS::outputFile = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\rps.output";
 
 void RPS::printBoard(RPS& rps) {
     for (int i = 0; i < rps.Nrows; i++) {
@@ -127,7 +128,15 @@ EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler) 
 
 void RPS::createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]) {
     ofstream fout(outputFile);
-    if (endOfGameHandler.getGameState() == EndOfGameHandler::GameNotOver || (isBadInputFile[0] && isBadInputFile[1])) {
+    if ((isBadInputFile[0] || isBadInputFile[1])) {
+        if (!isBadInputFile[0]) {
+            fout << "Winner: " << 1 << endl;
+        } else if (!isBadInputFile[1]) {
+            fout << "Winner: " << 2 << endl;
+        } else {
+            fout << "Winner: " << 0 << endl;
+        }
+    } else if (endOfGameHandler.getGameState() == EndOfGameHandler::GameNotOver) {
         fout << "Winner: " << 0 << endl;
     } else {
         fout << "Winner: " << endOfGameHandler.getGameState() << endl;

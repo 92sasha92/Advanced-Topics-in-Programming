@@ -1,10 +1,10 @@
 #include "Parser.h"
 
 
-string Parser::player_0_name_ = "c://users//sasha//desktop//advanced_topics_in_programming//advanced-topics-in-programming//ex1_v2//player1.rps_board";
-string Parser::player_1_name_ = "c://users//sasha//desktop//advanced_topics_in_programming//advanced-topics-in-programming//ex1_v2//player2.rps_board";
-//string Parser::player_0_name_ = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player1.rps_board";
-//string Parser::player_1_name_ = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player2.rps_board";
+//string Parser::player_0_name_ = "c://users//sasha//desktop//advanced_topics_in_programming//advanced-topics-in-programming//ex1_v2//player1.rps_board";
+//string Parser::player_1_name_ = "c://users//sasha//desktop//advanced_topics_in_programming//advanced-topics-in-programming//ex1_v2//player2.rps_board";
+string Parser::player_0_name_ = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player1.rps_board";
+string Parser::player_1_name_ = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player2.rps_board";
 //string Parser::player_0_name_ = "player1.rps_board";
 //string Parser::player_1_name_ = "player2.rps_board";
 
@@ -103,7 +103,7 @@ void Parser::handleParseError(ifstream& fin, EndOfGameHandler& endOfGameHandler,
 void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHandler) {
     string cur_line, word;
     int fileLine = 1;
-    bool check;
+    bool check = true;
     ifstream fin;
     vector<string> line_words;
     initializePiecesArsenal(rps);
@@ -135,12 +135,12 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
 						handleParseError(fin, endOfGameHandler, playerIndex, fileLine);
             return;
         }
-				if (line_words.size() != 0) {
-					check = setPiece(rps, playerIndex, line_words);
-				}
+        if (line_words.size() != 0) {
+            check = setPiece(rps, playerIndex, line_words);
+        }
         if (!check) {
             cout << "ERROR: could not set piece" << endl;
-						handleParseError(fin, endOfGameHandler, playerIndex, fileLine);
+			handleParseError(fin, endOfGameHandler, playerIndex, fileLine);
             return;
         }
         fileLine++;

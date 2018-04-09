@@ -22,7 +22,7 @@ class RPS {
     static const int B = 2;
     static const int J = 2;
     static const int F = 1;
-		static const int numOfPlayers = 2;
+	static const int numOfPlayers = 2;
 
     int playerPiecesArsenal[7];
     static string outputFile;

@@ -24,7 +24,7 @@ int main() {
     }
 
     RPS::createOutFile(rps, endOfGameHandler, isBadInputFile, ErrorLine);
-    cout << "AND THE WINNER NUMBER IS: " << RPS::checkWinner(rps, endOfGameHandler).getGameState() << endl;
+//    cout << "AND THE WINNER NUMBER IS: " << RPS::checkWinner(rps, endOfGameHandler).getGameState() << endl;
     return 0;
 }
 

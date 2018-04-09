@@ -5,10 +5,10 @@ Moves::Move::Move(int fRow_, int fCol_, int toRow_, int toCol_, int player_): fR
 Moves::JokerSuitChange::JokerSuitChange(int row_, int col_, char type_): row(row_), col(col_), type(type_) {
 }
 
-string Moves::player1Moves = "C:\\Users\\sasha\\Desktop\\Advanced_Topics_in_Programming\\Advanced-Topics-in-Programming\\EX1_v2\\player1.rps_moves";
-string Moves::player2Moves = "C:\\Users\\sasha\\Desktop\\Advanced_Topics_in_Programming\\Advanced-Topics-in-Programming\\EX1_v2\\player2.rps_moves";
-//string Moves::player1Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player1.rps_moves";
-//string Moves::player2Moves = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player2.rps_moves";
+//string Moves::player1Moves = "C:\\Users\\sasha\\Desktop\\Advanced_Topics_in_Programming\\Advanced-Topics-in-Programming\\EX1_v2\\player1.rps_moves";
+//string Moves::player2Moves = "C:\\Users\\sasha\\Desktop\\Advanced_Topics_in_Programming\\Advanced-Topics-in-Programming\\EX1_v2\\player2.rps_moves";
+string Moves::player1Moves = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player1.rps_moves";
+string Moves::player2Moves = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player2.rps_moves";
 //string Moves::player1Moves = "player1.rps_moves";
 //string Moves::player2Moves = "player2.rps_moves";
 
@@ -121,7 +121,6 @@ bool Moves::checkMoveAndSet(RPS &rps, int currentTurn, vector<string>& line_word
 	if (curPiece == nullptr) {
 		isJokerDied = true;
 	}
-	fileLinePlayer[currentTurn]++;
 	return true;
 }
 
@@ -250,6 +249,7 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
 			if (line_words.size() == 8 && !checkJokerChangeAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler, isJokerDied)) {
 				return;
 			}
+            fileLinePlayer[currentTurn]++;
 			cout << endl << "#######################################" << endl;
 			RPS::printBoard(rps);
 			if (!isOneFileLeft) {

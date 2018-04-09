@@ -4,24 +4,25 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/BombPiece.cpp" "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/BombPiece.cpp.o"
-  "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/EndOfGameHandler.cpp" "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.o"
-  "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/FlagPiece.cpp" "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/FlagPiece.cpp.o"
-  "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/JokerPiece.cpp" "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/JokerPiece.cpp.o"
-  "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Moves.cpp" "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/Moves.cpp.o"
-  "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PaperPiece.cpp" "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/PaperPiece.cpp.o"
-  "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Parser.cpp" "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/Parser.cpp.o"
-  "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/Piece.cpp" "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/Piece.cpp.o"
-  "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/PieceFactory.cpp" "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/PieceFactory.cpp.o"
-  "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/RPS.cpp" "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/RPS.cpp.o"
-  "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/RockPiece.cpp" "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/RockPiece.cpp.o"
-  "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/ScissorsPiece.cpp" "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.o"
-  "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/main.cpp" "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/main.cpp.o"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/BombPiece.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/BombPiece.cpp.obj"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/EndOfGameHandler.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.obj"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/FlagPiece.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/FlagPiece.cpp.obj"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/JokerPiece.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/JokerPiece.cpp.obj"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/Moves.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/Moves.cpp.obj"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/PaperPiece.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/PaperPiece.cpp.obj"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/Parser.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/Parser.cpp.obj"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/Piece.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/Piece.cpp.obj"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/PieceFactory.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/PieceFactory.cpp.obj"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/RPS.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/RPS.cpp.obj"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/RockPiece.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/RockPiece.cpp.obj"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/ScissorsPiece.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.obj"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/main.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2/cmake-build-debug/CMakeFiles/EX1_v2.dir/main.cpp.obj"
   )
-set(CMAKE_CXX_COMPILER_ID "AppleClang")
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../."
   )
 
 # Targets to which this target links.
