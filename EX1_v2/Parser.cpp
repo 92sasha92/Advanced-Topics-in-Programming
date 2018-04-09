@@ -1,8 +1,8 @@
 #include "Parser.h"
 
 
-string Parser::player_0_name_ = "c:\/users\/sasha\/desktop\/advanced_topics_in_programming\/advanced-topics-in-programming\/ex1_v2\/player1.rps_board";
-string Parser::player_1_name_ = "c:\/users\/sasha\/desktop\/advanced_topics_in_programming\/advanced-topics-in-programming\/ex1_v2\/player2.rps_board";
+string Parser::player_0_name_ = "c://users//sasha//desktop//advanced_topics_in_programming//advanced-topics-in-programming//ex1_v2//player1.rps_board";
+string Parser::player_1_name_ = "c://users//sasha//desktop//advanced_topics_in_programming//advanced-topics-in-programming//ex1_v2//player2.rps_board";
 //string Parser::player_0_name_ = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player1.rps_board";
 //string Parser::player_1_name_ = "/Users/guy/school/Advanced-Topics-in-Programming/EX1_v2/player2.rps_board";
 //string Parser::player_0_name_ = "player1.rps_board";
@@ -94,9 +94,15 @@ void Parser::clearLine(vector<string> &line_words, string &cur_line) {
 	}
 }
 
+void Parser::handleParseError(ifstream& fin, EndOfGameHandler& endOfGameHandler, int playerIndex, int fileLine) {
+	fin.close();
+	endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadInputFile);
+	endOfGameHandler.setWinner(playerIndex, fileLine, fileLine);
+}
+
 void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHandler) {
     string cur_line, word;
-    int fileLine = 0;
+    int fileLine = 1;
     bool check;
     ifstream fin;
     vector<string> line_words;
@@ -104,8 +110,7 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
 
     if (playerIndex == 0) {
         fin.open(player_0_name_);
-    }
-    else if (playerIndex == 1) {
+    } else if (playerIndex == 1) {
         fin.open(player_1_name_);
     }
 
@@ -116,13 +121,18 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
     }
 
     while (!fin.eof()) {
-        getline(fin, cur_line);
+				try {
+					getline(fin, cur_line);
+				} catch (std::ifstream::failure e){
+					cout << "ERROR: could not read the next line from the file" << endl;
+					handleParseError(fin, endOfGameHandler, playerIndex, fileLine);
+					return;
+				}
+        
 				clearLine(line_words, cur_line);
         if (line_words.size() < 3 && line_words.size() != 0) {
             cout << "ERROR: not enogh arguments " << line_words.size() << endl;
-			      fin.close();
-            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadInputFile);
-            endOfGameHandler.setWinner(playerIndex ,fileLine , fileLine);
+						handleParseError(fin, endOfGameHandler, playerIndex, fileLine);
             return;
         }
 				if (line_words.size() != 0) {
@@ -130,9 +140,7 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
 				}
         if (!check) {
             cout << "ERROR: could not set piece" << endl;
-			      fin.close();
-            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadInputFile);
-            endOfGameHandler.setWinner(playerIndex ,fileLine , fileLine);
+						handleParseError(fin, endOfGameHandler, playerIndex, fileLine);
             return;
         }
         fileLine++;
@@ -140,9 +148,7 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
 
     if (rps.playerPiecesArsenal[Piece::Flag] > 0) {
         cout << "ERROR: Not all Flags placed" << endl;
-		fin.close();
-        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadInputFile);
-        endOfGameHandler.setWinner(playerIndex ,fileLine , fileLine);
+				handleParseError(fin, endOfGameHandler, playerIndex, fileLine);
         return;
     }
 

@@ -127,7 +127,7 @@ EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler) 
 
 void RPS::createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]) {
     ofstream fout(outputFile);
-    if (endOfGameHandler.getGameState() == EndOfGameHandler::GameNotOver) {
+    if (endOfGameHandler.getGameState() == EndOfGameHandler::GameNotOver || (isBadInputFile[0] && isBadInputFile[1])) {
         fout << "Winner: " << 0 << endl;
     } else {
         fout << "Winner: " << endOfGameHandler.getGameState() << endl;
@@ -135,7 +135,7 @@ void RPS::createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBad
 		fout << "Reason: ";
     if (isBadInputFile[0] && isBadInputFile[1]) {
         fout << "Bad Positioning input file for both players - player 1: line ";
-        fout << ErrorLine[0] << ", player 2: line" << ErrorLine[1] << endl << endl;
+        fout << ErrorLine[0] << ", player 2: line " << ErrorLine[1] << endl;
     } else if (isBadInputFile[0]) {
         fout << "Bad Positioning input file for player 1 - line " << ErrorLine[0] << endl;
     } else if (isBadInputFile[1]) {

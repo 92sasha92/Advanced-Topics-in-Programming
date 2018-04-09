@@ -50,8 +50,9 @@ Moves::Move* Moves::parseMove(RPS& rps, int playerIndex, vector<string> pieceDes
 	return new Move(arr[1], arr[0], arr[3], arr[2], playerIndex);
 }
 
-bool Moves::movePiece(RPS & rps, Moves::Move& move)
+bool Moves::movePiece(RPS & rps, Moves::Move& move, bool &isJokerDied)
 {
+	  bool isJoker = false;
     if (move.fRow < 0 || move.fCol < 0 || move.toCol < 0 || move.toRow < 0) {
         cout << "ERROR: move index is out of bound" << endl;
         return false;
@@ -65,6 +66,9 @@ bool Moves::movePiece(RPS & rps, Moves::Move& move)
         cout << "ERROR: no piece in the given position" << endl;
         return false;
     }
+		if (piece->type == Piece::Joker) {
+			 isJoker = true;
+		}
     if (!(piece->getCanMove())) {
         cout << "ERROR " << piece->toString() << " can't move" << endl;
         return false;
@@ -83,21 +87,26 @@ bool Moves::movePiece(RPS & rps, Moves::Move& move)
     if (rps.board[move.toRow][move.toCol][!move.player] != nullptr) {
         RPS::fight(rps, move.toRow, move.toCol);
     }
-
+		if (isJoker = true && rps.board[move.toRow][move.toCol][move.player] == nullptr) {
+			isJokerDied = true;
+		}
     return true;
 }
 
 
-bool Moves::checkMoveAndSet(RPS &rps, int currentTurn, vector<string>& line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler &endOfGameHandler)
+bool Moves::checkMoveAndSet(RPS &rps, int currentTurn, vector<string>& line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler &endOfGameHandler, bool &isJokerDied)
 {
 	bool check;
 	Move *move;
+	Piece *curPiece = nullptr, *prevPiece;
 	if (!isNumOfArgsCorrect(currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler)) {
 		return false;
 	}
 	move = parseMove(rps, currentTurn, line_words);
 	if (move != nullptr) {
-		check = movePiece(rps, *move);
+		prevPiece = rps.board[move->fRow][move->fCol][currentTurn];
+		check = movePiece(rps, *move, isJokerDied);
+		curPiece = rps.board[move->toRow][move->toCol][currentTurn];
 		delete move;
 		if (!check) {
 			cout << "ERROR: in making move" << endl;
@@ -108,6 +117,9 @@ bool Moves::checkMoveAndSet(RPS &rps, int currentTurn, vector<string>& line_word
 	else {
 		movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);
 		return false;
+	}
+	if (curPiece == nullptr) {
+		isJokerDied = true;
 	}
 	fileLinePlayer[currentTurn]++;
 	return true;
@@ -175,7 +187,7 @@ bool Moves::setNewJokerSuit(RPS& rps, Moves::JokerSuitChange& suitChange, int pl
 	return true;
 }
 
-bool Moves::checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler)
+bool Moves::checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler, bool &isJokerDied)
 {
 	bool check;
 	if (((RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)) {
@@ -189,6 +201,9 @@ bool Moves::checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &li
 			return false;
 		}
 		else {
+			if (isJokerDied == true && !line_words[2].compare(line_words[5]) && !line_words[3].compare(line_words[6])) {
+				return true;
+			}
 			check = setNewJokerSuit(rps, *suitChange, currentTurn);
 			delete suitChange;
 			if (!check) {
@@ -206,6 +221,7 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
 	string cur_line;
 	ifstream fins[2];
 	vector<string> line_words;
+	bool isJokerDied = false;
 	fins[0].open(player1Moves);
 	fins[1].open(player2Moves);
 	if (!fins[0].is_open() || !fins[1].is_open()) {
@@ -215,16 +231,23 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
 	}
 	bool isOneFileLeft = false;
 	while (((!fins[0].eof() && !currentTurn) || (!fins[1].eof() && currentTurn)) && ((RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)) {
-		getline(fins[currentTurn], cur_line);
+		isJokerDied = false;
+		try {
+			getline(fins[currentTurn], cur_line);
+		} catch (std::ifstream::failure e) {
+			cout << "ERROR: could not read the next line from the move file" << endl;
+			movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);
+			return;
+		}
 		Parser::clearLine(line_words, cur_line);
 		if (line_words.size() != 0) {
-			if (!checkMoveAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler)) {
+			if (!checkMoveAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler, isJokerDied)) {
 				return;
 			}
 			if (line_words.size() != 4 && line_words.size() != 8) {
 				return;
 			}
-			if (line_words.size() == 8 && !checkJokerChangeAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler)) {
+			if (line_words.size() == 8 && !checkJokerChangeAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler, isJokerDied)) {
 				return;
 			}
 			cout << endl << "#######################################" << endl;
