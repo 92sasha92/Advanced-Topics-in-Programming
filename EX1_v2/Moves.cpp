@@ -87,7 +87,7 @@ bool Moves::movePiece(RPS & rps, Moves::Move& move, bool &isJokerDied)
     if (rps.board[move.toRow][move.toCol][!move.player] != nullptr) {
         RPS::fight(rps, move.toRow, move.toCol);
     }
-		if (isJoker = true && rps.board[move.toRow][move.toCol][move.player] == nullptr) {
+		if (isJoker && rps.board[move.toRow][move.toCol][move.player] == nullptr) {
 			isJokerDied = true;
 		}
     return true;
@@ -255,7 +255,7 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
 			if (!isOneFileLeft) {
 				currentTurn = !currentTurn;
 			}
-			if (fins[currentTurn].eof()) {
+			if (fins[!currentTurn].eof()) {
 				isOneFileLeft = true;
 			}
 		}
