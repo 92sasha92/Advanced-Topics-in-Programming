@@ -32,16 +32,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="player1.rps_board" pinned="false" current-in-tab="false">
+      <file leaf-file-name="player1.rps_board" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/player1.rps_board">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+              <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Moves.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Moves.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Moves.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="186">
@@ -53,8 +53,8 @@
       <file leaf-file-name="player2.rps_board" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/player2.rps_board">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+            <state relative-caret-position="17">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -80,8 +80,8 @@
       <file leaf-file-name="rps.output" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rps.output">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+            <state relative-caret-position="68">
+              <caret line="4" column="10" lean-forward="true" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -104,16 +104,16 @@
       <find>setEndOfGameReason</find>
       <find>na</find>
       <find>joker</find>
-      <find />
-      <find />
-      <find />
+      <find>two players use incorrect format file and no point are given</find>
+      <find>Bad Moves input file for player</find>
+      <find>can't move</find>
       <find>createOutFile</find>
       <find>checkwinn</find>
-      <find />
+      <find>ERROR: file didn't opened</find>
       <find>rps.out</find>
       <find>while</find>
-      <find />
-      <find />
+      <find>use incorrect format file and lose</find>
+      <find>ERROR: could not set piece</find>
       <find>check</find>
       <find>isBadInputFile</find>
       <find>setPiece</find>
@@ -156,8 +156,8 @@
         <option value="$PROJECT_DIR$/player1.rps_moves" />
         <option value="$PROJECT_DIR$/player2.rps_moves" />
         <option value="$PROJECT_DIR$/player1.rps_board" />
-        <option value="$PROJECT_DIR$/player2.rps_board" />
         <option value="$PROJECT_DIR$/Moves.cpp" />
+        <option value="$PROJECT_DIR$/player2.rps_board" />
       </list>
     </option>
   </component>
@@ -239,25 +239,25 @@
       <workItem from="1522171768598" duration="55376000" />
       <workItem from="1523192956449" duration="616000" />
       <workItem from="1523250930987" duration="1552000" />
-      <workItem from="1523282790892" duration="16280000" />
+      <workItem from="1523282790892" duration="16463000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92754000" />
+    <option name="totallyTimeSpent" value="92937000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="661" height="728" extended-state="0" />
+    <frame x="0" y="0" width="797" height="728" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.21860465" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.18053778" />
       <window_info anchor="bottom" id="TODO" order="11" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.553018" />
       <window_info anchor="bottom" id="CMake" order="1" weight="0.3060574" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="6" />
       <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="7" visible="true" weight="0.5791191" />
+      <window_info active="true" anchor="bottom" id="Run" order="7" visible="true" weight="0.47471452" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="4" />
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -590,41 +590,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/player1.rps_moves">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/player1.rps_board">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/player2.rps_board">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/player2.rps_moves">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rps.output">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Parser.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -636,6 +601,41 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="92" column="16" lean-forward="true" selection-start-line="92" selection-start-column="16" selection-end-line="92" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/player1.rps_moves">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rps.output">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="10" lean-forward="true" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/player2.rps_moves">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/player2.rps_board">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/player1.rps_board">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
         </state>
       </provider>
     </entry>
