@@ -7,10 +7,10 @@ Moves::JokerSuitChange::JokerSuitChange(int row_, int col_, char type_): row(row
 
 //string Moves::player1Moves = "C:\\Users\\sasha\\Desktop\\Advanced_Topics_in_Programming\\Advanced-Topics-in-Programming\\EX1_v2\\player1.rps_moves";
 //string Moves::player2Moves = "C:\\Users\\sasha\\Desktop\\Advanced_Topics_in_Programming\\Advanced-Topics-in-Programming\\EX1_v2\\player2.rps_moves";
-string Moves::player1Moves = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player1.rps_moves";
-string Moves::player2Moves = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player2.rps_moves";
-//string Moves::player1Moves = "player1.rps_moves";
-//string Moves::player2Moves = "player2.rps_moves";
+//string Moves::player1Moves = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player1.rps_moves";
+//string Moves::player2Moves = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player2.rps_moves";
+string Moves::player1Moves = "player1.rps_moves";
+string Moves::player2Moves = "player2.rps_moves";
 
 void Moves::movesHandleError(ifstream fins[2], EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason, int fileLinePlayer[2], int currentTurn) {
 	fins[0].close();
@@ -35,7 +35,7 @@ bool Moves::isNumOfArgsCorrect(int currentTurn, vector<string> &line_words, ifst
 	return true;
 }
 
-Moves::Move* Moves::parseMove(RPS& rps, int playerIndex, vector<string> pieceDescription) {
+Moves::Move* Moves::parseMove(int playerIndex, vector<string> pieceDescription) {
 	int arr[4];
 	for (int i = 0; i < 4; i++) {
 		if (Parser::isInteger(pieceDescription[i])) {
@@ -98,13 +98,12 @@ bool Moves::checkMoveAndSet(RPS &rps, int currentTurn, vector<string>& line_word
 {
 	bool check;
 	Move *move;
-	Piece *curPiece = nullptr, *prevPiece;
+	Piece *curPiece = nullptr;
 	if (!isNumOfArgsCorrect(currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler)) {
 		return false;
 	}
-	move = parseMove(rps, currentTurn, line_words);
+	move = parseMove(currentTurn, line_words);
 	if (move != nullptr) {
-		prevPiece = rps.board[move->fRow][move->fCol][currentTurn];
 		check = movePiece(rps, *move, isJokerDied);
 		curPiece = rps.board[move->toRow][move->toCol][currentTurn];
 		delete move;
