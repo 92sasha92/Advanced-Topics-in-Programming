@@ -98,13 +98,12 @@ bool Moves::checkMoveAndSet(RPS &rps, int currentTurn, vector<string>& line_word
 {
 	bool check;
 	Move *move;
-	Piece *curPiece = nullptr, *prevPiece;
+	Piece *curPiece = nullptr;
 	if (!isNumOfArgsCorrect(currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler)) {
 		return false;
 	}
 	move = parseMove(rps, currentTurn, line_words);
 	if (move != nullptr) {
-		prevPiece = rps.board[move->fRow][move->fCol][currentTurn];
 		check = movePiece(rps, *move, isJokerDied);
 		curPiece = rps.board[move->toRow][move->toCol][currentTurn];
 		delete move;
