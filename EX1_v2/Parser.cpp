@@ -3,10 +3,10 @@
 
 //string Parser::player_0_name_ = "c://users//sasha//desktop//advanced_topics_in_programming//advanced-topics-in-programming//ex1_v2//player1.rps_board";
 //string Parser::player_1_name_ = "c://users//sasha//desktop//advanced_topics_in_programming//advanced-topics-in-programming//ex1_v2//player2.rps_board";
-string Parser::player_0_name_ = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player1.rps_board";
-string Parser::player_1_name_ = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player2.rps_board";
-//string Parser::player_0_name_ = "player1.rps_board";
-//string Parser::player_1_name_ = "player2.rps_board";
+//string Parser::player_0_name_ = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player1.rps_board";
+//string Parser::player_1_name_ = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player2.rps_board";
+string Parser::player_0_name_ = "player1.rps_board";
+string Parser::player_1_name_ = "player2.rps_board";
 
 void Parser::initializePiecesArsenal(RPS& rps) {
     rps.playerPiecesArsenal[Piece::Rock] = RPS::R;
@@ -87,10 +87,13 @@ void Parser::clearLine(vector<string> &line_words, string &cur_line) {
 	string word;
 	istringstream ss(cur_line);
 	line_words.clear();
-	while (getline(ss, word, ' ')) {
-		if (word.compare("") != 0) {
-			line_words.push_back(word);
-		}
+	//while (getline(ss, word, ' ')) {
+	//	if (word.compare("") != 0) {
+	//		line_words.push_back(word);
+	//	}
+	//}
+	while (ss >> word) {
+		line_words.push_back(word);
 	}
 }
 

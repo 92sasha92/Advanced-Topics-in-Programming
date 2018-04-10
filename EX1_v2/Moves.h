@@ -25,7 +25,7 @@ class Moves {
 			JokerSuitChange(int row_, int col_, char type_);
 		};
 
-    static Move* parseMove(RPS& rps, int playerIndex, vector<string> pieceDescription);
+    static Move* parseMove(int playerIndex, vector<string> pieceDescription);
     static bool movePiece(RPS& rps, Move& move, bool &isJokerDied);
 		static void movesHandleError(ifstream fins[2], EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason, int fileLinePlayer[2], int currentTurn);
 		static void movesHandleError(ifstream fins[2], EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason);
