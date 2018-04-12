@@ -2,7 +2,7 @@
 g++ -Wall -Wextra -Werror main.cpp BombPiece.cpp RockPiece.cpp ScissorsPiece.cpp FlagPiece.cpp JokerPiece.cpp PaperPiece.cpp RPS.cpp Piece.cpp PieceFactory.cpp Parser.cpp Moves.cpp EndOfGameHandler.cpp -o run
 
 counter=0
-for i in `seq 1 32`;
+for i in `seq 1 33`;
 do
     echo ""
     echo ""
@@ -31,4 +31,4 @@ done
 echo ""
 echo ""
 echo ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-echo "$counter TESTS FAILED"
+echo "$counter TEST FAILED"
