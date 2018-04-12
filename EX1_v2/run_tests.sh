@@ -1,8 +1,6 @@
 #!/bin/bash
-g++ -Wall -Wextra -Werror main.cpp BombPiece.cpp RockPiece.cpp ScissorsPiece.cpp FlagPiece.cpp JokerPiece.cpp PaperPiece.cpp RPS.cpp Piece.cpp PieceFactory.cpp Parser.cpp Moves.cpp EndOfGameHandler.cpp -o run
-
 counter=0
-for i in `seq 1 32`;
+for ((i=1; i<=32; i++ ))
 do
     echo ""
     echo ""
@@ -18,7 +16,7 @@ do
     cp "./tests/test_$i/player1.rps_moves" "./player1.rps_moves"
     cp "./tests/test_$i/player2.rps_moves" "./player2.rps_moves"
 
-    ./run
+    ./ex1
 
     if diff ./rps.output ./tests/test_$i/rps.output; then
         echo PASS
