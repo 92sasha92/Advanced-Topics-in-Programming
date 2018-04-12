@@ -7,10 +7,10 @@ Moves::JokerSuitChange::JokerSuitChange(int row_, int col_, char type_): row(row
 
 //string Moves::player1Moves = "C:\\Users\\sasha\\Desktop\\Advanced_Topics_in_Programming\\Advanced-Topics-in-Programming\\EX1_v2\\player1.rps_moves";
 //string Moves::player2Moves = "C:\\Users\\sasha\\Desktop\\Advanced_Topics_in_Programming\\Advanced-Topics-in-Programming\\EX1_v2\\player2.rps_moves";
-//string Moves::player1Moves = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player1.rps_moves";
-//string Moves::player2Moves = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player2.rps_moves";
-string Moves::player1Moves = "player1.rps_moves";
-string Moves::player2Moves = "player2.rps_moves";
+string Moves::player1Moves = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player1.rps_moves";
+string Moves::player2Moves = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player2.rps_moves";
+//string Moves::player1Moves = "player1.rps_moves";
+//string Moves::player2Moves = "player2.rps_moves";
 
 void Moves::movesHandleError(ifstream fins[2], EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason, int fileLinePlayer[2], int currentTurn) {
 	fins[0].close();

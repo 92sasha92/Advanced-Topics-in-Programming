@@ -12,9 +12,9 @@ JokerPiece::JokerPiece(int player, Piece::RPSPiecesTypes jokerPiece_): Piece(pla
 
 std::string JokerPiece::toString() {
     if (this->getPlayerNumber() == 1) {
-        return "j" + std::to_string(this->jokerPiece); // TODO: set jokerPiece as char
+        return "j";
     } else {
-        return "J" + std::to_string(this->jokerPiece); // TODO: set jokerPiece as char
+        return "J";
     }
 }
 

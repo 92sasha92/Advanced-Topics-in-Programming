@@ -17,10 +17,6 @@
 //Path to a program.
 CMAKE_AR:FILEPATH=C:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-dwarf-rt_v5-rev0/mingw32/bin/ar.exe
 
-//For backwards compatibility, what version of CMake commands and
-// syntax should this version of CMake try to support.
-CMAKE_BACKWARDS_COMPATIBILITY:STRING=2.4
-
 //Choose the type of build, options are: None(CMAKE_CXX_FLAGS or
 // CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.
 CMAKE_BUILD_TYPE:STRING=Debug
@@ -226,12 +222,6 @@ EX1_v2_BINARY_DIR:STATIC=C:/Users/drucker16/git/Advanced-Topics-in-Programming/E
 
 //Value Computed by CMake
 EX1_v2_SOURCE_DIR:STATIC=C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX1_v2
-
-//Single output directory for building all executables.
-EXECUTABLE_OUTPUT_PATH:PATH=
-
-//Single output directory for building all libraries.
-LIBRARY_OUTPUT_PATH:PATH=
 
 
 ########################
