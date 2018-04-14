@@ -35,7 +35,7 @@ class RPS {
     static void printBoard(RPS& rps);
     int getNumberOfRows() const;
     int getNumberOfColumns() const;
-    static EndOfGameHandler checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler);
+    static EndOfGameHandler checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler, int currentPlayer);
     static void createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]);
 
     Piece *board[Nrows][Mcols][2];

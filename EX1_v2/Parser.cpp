@@ -162,7 +162,7 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
             }
         }
     }
-    RPS::checkWinner(rps, endOfGameHandler);
+    RPS::checkWinner(rps, endOfGameHandler, 0);
 
     fin.close();
 }

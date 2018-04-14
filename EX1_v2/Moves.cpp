@@ -188,7 +188,7 @@ bool Moves::setNewJokerSuit(RPS& rps, Moves::JokerSuitChange& suitChange, int pl
 bool Moves::checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler, bool &isJokerDied)
 {
 	bool check;
-	if (((RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)) {
+	if (((RPS::checkWinner(rps, endOfGameHandler, !currentTurn)).getGameState() == EndOfGameHandler::GameNotOver)) {
 		if (!isNumOfArgsCorrect(currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler)) {
 			return false;
 		}
@@ -228,7 +228,7 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
 		return;
 	}
 	bool isOneFileLeft = false;
-	while (((!fins[0].eof() && !currentTurn) || (!fins[1].eof() && currentTurn)) && ((RPS::checkWinner(rps, endOfGameHandler)).getGameState() == EndOfGameHandler::GameNotOver)) {
+	while (((!fins[0].eof() && !currentTurn) || (!fins[1].eof() && currentTurn)) && ((RPS::checkWinner(rps, endOfGameHandler, currentTurn)).getGameState() == EndOfGameHandler::GameNotOver)) {
 		isJokerDied = false;
 		try {
 			getline(fins[currentTurn], cur_line);
@@ -266,5 +266,5 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
 	}
 	fins[0].close();
 	fins[1].close();
-	RPS::checkWinner(rps, endOfGameHandler);
+	RPS::checkWinner(rps, endOfGameHandler, currentTurn);
 }

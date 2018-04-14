@@ -80,7 +80,7 @@ void RPS::fight(RPS& rps, int row, int col) {
     }
 }
 
-EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler) {
+EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler, int currentPlayer) {
     bool player1HaveFlag = false, player2HaveFlag = false ,player1HaveMovingPieces = false, player2HaveMovingPieces = false;
     for (int i = 0; i < rps.Nrows; i++) {
         for (int j = 0; j < rps.Mcols; j++) {
@@ -118,7 +118,7 @@ EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler) 
             endOfGameHandler.setGameState(EndOfGameHandler::Tie);
         }
 
-    } else if (!player1HaveMovingPieces || !player2HaveMovingPieces) {
+    } else if ((!player1HaveMovingPieces && currentPlayer == 0) || (!player2HaveMovingPieces && currentPlayer)) {
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::AllMovingPiecesEaten);
         if (player1HaveMovingPieces) {
             endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
