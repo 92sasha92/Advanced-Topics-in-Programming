@@ -1,6 +1,6 @@
 #!/bin/bash
 counter=0
-for ((i=1; i<=35; i++ ))
+for ((i=1; i<=40; i++ ))
 do
     echo ""
     echo ""

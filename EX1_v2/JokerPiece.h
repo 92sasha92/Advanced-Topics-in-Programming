@@ -11,5 +11,6 @@ class JokerPiece: public Piece{
     void setJokerPiece(Piece::RPSPiecesTypes NewJpkerPiece);
     JokerPiece(int player, Piece::RPSPiecesTypes jokerPiece_);
     std::string toString() override;
+		int getCanMove() override;
     ~JokerPiece() final;
 };

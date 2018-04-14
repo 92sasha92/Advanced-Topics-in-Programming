@@ -11,9 +11,10 @@ class EndOfGameHandler {
         LooserAllFlagsEaten,
         AllMovingPiecesEaten,
         TieAllFlagsEaten,
+				TieAllMovingPiecesEaten,
         BadInputFile,
         BadMoveFile,
-		CantOpenInputFile
+		    CantOpenInputFile
     } EndOfGameReason;
 
     typedef enum {

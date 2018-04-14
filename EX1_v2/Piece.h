@@ -27,7 +27,7 @@ class Piece
     Piece (int playerNumber);
     PiecesPower isStrongerThan(const Piece& rival);
     int getPlayerNumber();
-    int getCanMove();
+    virtual int getCanMove();
     virtual std::string toString();
 	virtual ~Piece();
 

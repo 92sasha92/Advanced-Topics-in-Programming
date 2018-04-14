@@ -77,6 +77,9 @@ string EndOfGameHandler::toString() {
         case TieAllFlagsEaten: {
             return "A tie - all flags are eaten by both players in the position files";
         }
+				case TieAllMovingPiecesEaten: {
+					return "A tie - All moving PIECEs of both players are eaten";
+				}
         default:
             return "Unsupported end of game state";
     }

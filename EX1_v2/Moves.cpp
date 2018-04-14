@@ -257,6 +257,11 @@ void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
 			if (fins[!currentTurn].eof()) {
 				isOneFileLeft = true;
 			}
+		} else {
+			if (fins[currentTurn].eof()) {
+				isOneFileLeft = true;
+				currentTurn = !currentTurn;
+			}
 		}
 	}
 	fins[0].close();

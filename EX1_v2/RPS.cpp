@@ -126,6 +126,7 @@ EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler) 
             endOfGameHandler.setGameState(EndOfGameHandler::Player2Win);
         } else {
             endOfGameHandler.setGameState(EndOfGameHandler::Tie);
+						endOfGameHandler.setEndOfGameReason(EndOfGameHandler::TieAllMovingPiecesEaten);
         }
     }
     return endOfGameHandler;

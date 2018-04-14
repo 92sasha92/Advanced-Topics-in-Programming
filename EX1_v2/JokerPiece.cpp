@@ -18,6 +18,14 @@ std::string JokerPiece::toString() {
     }
 }
 
+int JokerPiece::getCanMove() {
+	if (this->jokerPiece == Piece::Bomb) {
+		return 0;
+	} else {
+		return 1;
+	}
+}
+
 Piece::RPSPiecesTypes JokerPiece::getJokerPiece() {
     return this->jokerPiece;
 }
