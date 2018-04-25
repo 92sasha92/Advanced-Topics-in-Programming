@@ -24,6 +24,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <file leaf-file-name="RPS.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RPS.h">
           <provider selected="true" editor-type-id="text-editor">
@@ -88,6 +89,8 @@
             <state relative-caret-position="102">
               <caret line="6" column="57" lean-forward="true" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
 =======
+=======
+>>>>>>> 0360db19b74d8141528ddba6cc4ab1d2e429a23c
       <file leaf-file-name="Move.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Move.h">
           <provider selected="true" editor-type-id="text-editor">
@@ -136,7 +139,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Moves.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Moves.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Moves.cpp">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
@@ -145,8 +148,37 @@
 >>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
 =======
             <state relative-caret-position="306">
+<<<<<<< HEAD
               <caret line="45" column="48" selection-start-line="45" selection-start-column="48" selection-end-line="45" selection-end-column="48" />
 >>>>>>> 5744e577d920aa9c7cfd895b0cb7de1c25b420f4
+=======
+              <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Makefile2" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1463" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Makefile" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cmake-build-debug/Makefile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1580">
+              <caret line="537" selection-start-line="537" selection-end-line="537" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+>>>>>>> 0360db19b74d8141528ddba6cc4ab1d2e429a23c
             </state>
           </provider>
         </entry>
@@ -181,7 +213,7 @@
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="82" />
+              <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="82" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -269,10 +301,13 @@
         <option value="$PROJECT_DIR$/Parser.h" />
         <option value="$PROJECT_DIR$/RPS.cpp" />
         <option value="$PROJECT_DIR$/MyPoint.h" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
 <<<<<<< HEAD
         <option value="$PROJECT_DIR$/Bla.h" />
 =======
+=======
+>>>>>>> 0360db19b74d8141528ddba6cc4ab1d2e429a23c
         <option value="$PROJECT_DIR$/Point.h" />
         <option value="$PROJECT_DIR$/Move.h" />
         <option value="$PROJECT_DIR$/MyPoint.cpp" />
@@ -281,7 +316,11 @@
         <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/Moves.h" />
         <option value="$PROJECT_DIR$/Moves.cpp" />
+<<<<<<< HEAD
 >>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
+=======
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+>>>>>>> 0360db19b74d8141528ddba6cc4ab1d2e429a23c
       </list>
     </option>
   </component>
@@ -381,12 +420,17 @@
 >>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
 =======
       <workItem from="1524645992116" duration="12876000" />
+<<<<<<< HEAD
       <workItem from="1524661940127" duration="795000" />
 >>>>>>> 5744e577d920aa9c7cfd895b0cb7de1c25b420f4
+=======
+      <workItem from="1524661940127" duration="2212000" />
+>>>>>>> 0360db19b74d8141528ddba6cc4ab1d2e429a23c
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     <option name="totallyTimeSpent" value="116118000" />
@@ -405,6 +449,9 @@
 =======
     <option name="totallyTimeSpent" value="123597000" />
 >>>>>>> 5744e577d920aa9c7cfd895b0cb7de1c25b420f4
+=======
+    <option name="totallyTimeSpent" value="125014000" />
+>>>>>>> 0360db19b74d8141528ddba6cc4ab1d2e429a23c
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
@@ -427,7 +474,7 @@
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="4" />
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="8" weight="0.44535074" />
+      <window_info anchor="bottom" id="Debug" order="8" weight="0.445271" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
@@ -482,7 +529,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="58" />
+      <option name="time" value="59" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -514,6 +561,7 @@
   <component name="editorHistoryManager">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <entry file="file://$USER_HOME$/jumper/vlab/jemu/emulator/jemu/include/BMA280.h" />
     <entry file="file://$USER_HOME$/jumper/vlab/jemu/emulator/jemu/build/Makefile" />
     <entry file="file://$PROJECT_DIR$/Moves1.cpp" />
@@ -535,6 +583,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 0360db19b74d8141528ddba6cc4ab1d2e429a23c
     <entry file="file://$PROJECT_DIR$/Move.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -750,6 +800,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
 >>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
     <entry file="file://$PROJECT_DIR$/cmake-build-debug/Makefile">
       <provider selected="true" editor-type-id="text-editor">
@@ -765,6 +816,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 0360db19b74d8141528ddba6cc4ab1d2e429a23c
     <entry file="file://$PROJECT_DIR$/RPS.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -785,13 +838,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vdvdvd.h" />
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="37" column="25" lean-forward="true" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Point.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -823,7 +869,7 @@
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="82" />
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="82" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
@@ -939,8 +985,38 @@
           <caret line="6" column="57" lean-forward="true" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
 =======
         <state relative-caret-position="306">
+<<<<<<< HEAD
           <caret line="45" column="48" selection-start-line="45" selection-start-column="48" selection-end-line="45" selection-end-column="48" />
 >>>>>>> 5744e577d920aa9c7cfd895b0cb7de1c25b420f4
+=======
+          <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1463" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1580">
+          <caret line="537" selection-start-line="537" selection-end-line="537" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+>>>>>>> 0360db19b74d8141528ddba6cc4ab1d2e429a23c
         </state>
       </provider>
     </entry>
