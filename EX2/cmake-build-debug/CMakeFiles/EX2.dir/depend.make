@@ -19,12 +19,26 @@ CMakeFiles/EX2.dir/JokerPiece.cpp.obj: ../PieceFactory.h
 
 CMakeFiles/EX2.dir/Moves.cpp.obj: ../EndOfGameHandler.h
 CMakeFiles/EX2.dir/Moves.cpp.obj: ../JokerPiece.h
+CMakeFiles/EX2.dir/Moves.cpp.obj: ../Move.h
 CMakeFiles/EX2.dir/Moves.cpp.obj: ../Moves.cpp
 CMakeFiles/EX2.dir/Moves.cpp.obj: ../Moves.h
+CMakeFiles/EX2.dir/Moves.cpp.obj: ../MyMove.h
+CMakeFiles/EX2.dir/Moves.cpp.obj: ../MyPoint.h
 CMakeFiles/EX2.dir/Moves.cpp.obj: ../Parser.h
 CMakeFiles/EX2.dir/Moves.cpp.obj: ../Piece.h
 CMakeFiles/EX2.dir/Moves.cpp.obj: ../PieceFactory.h
+CMakeFiles/EX2.dir/Moves.cpp.obj: ../Point.h
 CMakeFiles/EX2.dir/Moves.cpp.obj: ../RPS.h
+
+CMakeFiles/EX2.dir/MyMove.cpp.obj: ../Move.h
+CMakeFiles/EX2.dir/MyMove.cpp.obj: ../MyMove.cpp
+CMakeFiles/EX2.dir/MyMove.cpp.obj: ../MyMove.h
+CMakeFiles/EX2.dir/MyMove.cpp.obj: ../MyPoint.h
+CMakeFiles/EX2.dir/MyMove.cpp.obj: ../Point.h
+
+CMakeFiles/EX2.dir/MyPoint.cpp.obj: ../MyPoint.cpp
+CMakeFiles/EX2.dir/MyPoint.cpp.obj: ../MyPoint.h
+CMakeFiles/EX2.dir/MyPoint.cpp.obj: ../Point.h
 
 CMakeFiles/EX2.dir/PaperPiece.cpp.obj: ../PaperPiece.cpp
 CMakeFiles/EX2.dir/PaperPiece.cpp.obj: ../PaperPiece.h
@@ -68,10 +82,14 @@ CMakeFiles/EX2.dir/ScissorsPiece.cpp.obj: ../ScissorsPiece.h
 
 CMakeFiles/EX2.dir/main.cpp.obj: ../EndOfGameHandler.h
 CMakeFiles/EX2.dir/main.cpp.obj: ../JokerPiece.h
+CMakeFiles/EX2.dir/main.cpp.obj: ../Move.h
 CMakeFiles/EX2.dir/main.cpp.obj: ../Moves.h
+CMakeFiles/EX2.dir/main.cpp.obj: ../MyMove.h
+CMakeFiles/EX2.dir/main.cpp.obj: ../MyPoint.h
 CMakeFiles/EX2.dir/main.cpp.obj: ../Parser.h
 CMakeFiles/EX2.dir/main.cpp.obj: ../Piece.h
 CMakeFiles/EX2.dir/main.cpp.obj: ../PieceFactory.h
+CMakeFiles/EX2.dir/main.cpp.obj: ../Point.h
 CMakeFiles/EX2.dir/main.cpp.obj: ../RPS.h
 CMakeFiles/EX2.dir/main.cpp.obj: ../main.cpp
 

@@ -1,7 +1,7 @@
 #include "RPS.h"
 #include "Parser.h"
 #include "JokerPiece.h"
-#include <dirent.h>
+#include "MyMove.h"
 
 class Moves {
   private:
@@ -26,11 +26,10 @@ class Moves {
 			JokerSuitChange(int row_, int col_, char type_);
 		};
 
-    static Move* parseMove(int playerIndex, vector<string> pieceDescription);
-    static bool movePiece(RPS& rps, Move& move, bool &isJokerDied);
+    static void parseMove(int playerIndex, vector<string> pieceDescription, MyMove &move);
+    static bool movePiece(RPS & rps, MyMove& move, bool &isJokerDied, int currentPlayer);
 		static void movesHandleError(ifstream fins[2], EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason, int fileLinePlayer[2], int currentTurn);
 		static void movesHandleError(ifstream fins[2], EndOfGameHandler& endOfGameHandler, EndOfGameHandler::EndOfGameReason reason);
-		static void clearLine(vector<string> &line_words, string &cur_line);
 		static bool isNumOfArgsCorrect(int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler);
 		static JokerSuitChange* parseJokerSuitChange(vector<string> pieceDescription);
 		static bool setNewJokerSuit(RPS& rps, Moves::JokerSuitChange& suitChange, int player);

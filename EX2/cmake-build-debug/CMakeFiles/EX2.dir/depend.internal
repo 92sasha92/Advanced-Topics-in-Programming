@@ -20,12 +20,26 @@ CMakeFiles/EX2.dir/JokerPiece.cpp.obj
 CMakeFiles/EX2.dir/Moves.cpp.obj
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/JokerPiece.h
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Move.h
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Moves.cpp
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Moves.h
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Parser.h
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.h
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PieceFactory.h
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Point.h
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RPS.h
+CMakeFiles/EX2.dir/MyMove.cpp.obj
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Move.h
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.cpp
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Point.h
+CMakeFiles/EX2.dir/MyPoint.cpp.obj
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.cpp
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Point.h
 CMakeFiles/EX2.dir/PaperPiece.cpp.obj
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PaperPiece.cpp
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PaperPiece.h
@@ -69,9 +83,13 @@ CMakeFiles/EX2.dir/ScissorsPiece.cpp.obj
 CMakeFiles/EX2.dir/main.cpp.obj
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/JokerPiece.h
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Move.h
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Moves.h
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Parser.h
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.h
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PieceFactory.h
+ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Point.h
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RPS.h
  C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/main.cpp

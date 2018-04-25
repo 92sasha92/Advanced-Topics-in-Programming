@@ -31,33 +31,39 @@ bool Moves::isNumOfArgsCorrect(int currentTurn, vector<string> &line_words, ifst
 	return true;
 }
 
-Moves::Move* Moves::parseMove(int playerIndex, vector<string> pieceDescription) {
+void Moves::parseMove(int playerIndex, vector<string> pieceDescription, MyMove &move) {
 	int arr[4];
 	for (int i = 0; i < 4; i++) {
 		if (Parser::isInteger(pieceDescription[i])) {
 			arr[i] = stoi(pieceDescription[i]) - 1;
 		} else {
 			cout << "incorrect line format" << endl;
-			return nullptr;
+			return;
 		}
 	}
 	// arr[1] = fRow, arr[0] = fCol, arr[3] = toRow, arr[2] = toCol
 	cout << arr[1] << " " << arr[0] << " " << arr[3] << " " << arr[2] << " player:" << playerIndex + 1 << endl;
-	return new Move(arr[1], arr[0], arr[3], arr[2], playerIndex);
+	MyPoint p1(arr[0], arr[1]), p2(arr[3], arr[4]);
+	move.init(p1, p2);
 }
 
-bool Moves::movePiece(RPS & rps, Moves::Move& move, bool &isJokerDied)
+bool Moves::movePiece(RPS & rps, MyMove& move, bool &isJokerDied, int currentPlayer)
 {
 	  bool isJoker = false;
-    if (move.fRow < 0 || move.fCol < 0 || move.toCol < 0 || move.toRow < 0) {
+	//Point fPoint;
+	const Point *fPoint = &(move.getFrom());
+	//Point toPoint;
+	const Point *toPoint = &(move.getTo());
+	  int player = currentPlayer;
+    if (fPoint->getY() < 0 || fPoint->getX() < 0 || toPoint->getX() < 0 || toPoint->getY() < 0) {
         cout << "ERROR: move index is out of bound" << endl;
         return false;
-    } else if (move.fRow >= rps.getNumberOfRows() || move.fCol >= rps.getNumberOfColumns() || move.toCol >= rps.getNumberOfColumns() || move.toRow >= rps.getNumberOfRows()) {
+    } else if (fPoint->getY() >= rps.getNumberOfRows() || fPoint->getX() >= rps.getNumberOfColumns() || toPoint->getX() >= rps.getNumberOfColumns() || toPoint->getY() >= rps.getNumberOfRows()) {
         cout << "ERROR: move index is out of bound" << endl;
         return false;
     }
 
-    Piece *piece = rps.board[move.fRow][move.fCol][move.player];
+    Piece *piece = rps.board[fPoint->getY()][fPoint->getX()][player];
     if (piece == nullptr) {
         cout << "ERROR: no piece in the given position" << endl;
         return false;
@@ -69,21 +75,21 @@ bool Moves::movePiece(RPS & rps, Moves::Move& move, bool &isJokerDied)
         cout << "ERROR " << piece->toString() << " can't move" << endl;
         return false;
     }
-		if ((move.fRow + 1 != move.toRow && move.fRow - 1 != move.toRow && move.fCol + 1 != move.toCol && move.fCol - 1 != move.toCol) || (move.fRow != move.toRow && move.fCol != move.toCol)) {
-			cout << "ERROR: illegal move, can't move from: (" << move.fCol + 1 << ", " << move.fRow + 1 << ") to: (" << move.toCol + 1 << ", " << move.toRow + 1 << ")" << endl;
+		if ((fPoint->getY() + 1 != toPoint->getY() && fPoint->getY() - 1 != toPoint->getY() && fPoint->getX() + 1 != toPoint->getX() && fPoint->getX() - 1 != toPoint->getX()) || (fPoint->getY() != toPoint->getY() && fPoint->getX() != toPoint->getX())) {
+			cout << "ERROR: illegal move, can't move from: (" << fPoint->getX() + 1 << ", " << fPoint->getY() + 1 << ") to: (" << toPoint->getX() + 1 << ", " << toPoint->getY() + 1 << ")" << endl;
 			return false;
 		}
-    if (rps.board[move.toRow][move.toCol][move.player] != nullptr) {
+    if (rps.board[toPoint->getY()][toPoint->getX()][player] != nullptr) {
         cout << "ERROR: the cell already occupied by other piece of the same player" << endl;
         return false;
     }
 
-    rps.board[move.toRow][move.toCol][move.player] = rps.board[move.fRow][move.fCol][move.player];
-    rps.board[move.fRow][move.fCol][move.player] = nullptr;
-    if (rps.board[move.toRow][move.toCol][!move.player] != nullptr) {
-        RPS::fight(rps, move.toRow, move.toCol);
+    rps.board[toPoint->getY()][toPoint->getX()][player] = rps.board[fPoint->getY()][fPoint->getX()][player];
+    rps.board[fPoint->getY()][fPoint->getX()][player] = nullptr;
+    if (rps.board[toPoint->getY()][toPoint->getX()][!player] != nullptr) {
+        RPS::fight(rps, toPoint->getY(), toPoint->getX());
     }
-		if (isJoker && rps.board[move.toRow][move.toCol][move.player] == nullptr) {
+		if (isJoker && rps.board[toPoint->getY()][toPoint->getX()][player] == nullptr) {
 			isJokerDied = true;
 		}
     return true;
@@ -93,15 +99,16 @@ bool Moves::movePiece(RPS & rps, Moves::Move& move, bool &isJokerDied)
 bool Moves::checkMoveAndSet(RPS &rps, int currentTurn, vector<string>& line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler &endOfGameHandler, bool &isJokerDied)
 {
 	bool check;
-	Move *move;
+	//Move *move;
+	MyMove move;
 	Piece *curPiece = nullptr;
 	if (!isNumOfArgsCorrect(currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler)) {
 		return false;
 	}
-	move = parseMove(currentTurn, line_words);
-	if (move != nullptr) {
-		check = movePiece(rps, *move, isJokerDied);
-		curPiece = rps.board[move->toRow][move->toCol][currentTurn];
+	parseMove(currentTurn, line_words, move);
+	if (move.getIsInitialized()) {
+		check = movePiece(rps, move, isJokerDied, currentTurn);
+		curPiece = rps.board[move.getTo().getY()][move.getTo().getX()][currentTurn];
 		delete move;
 		if (!check) {
 			cout << "ERROR: in making move" << endl;
@@ -113,6 +120,26 @@ bool Moves::checkMoveAndSet(RPS &rps, int currentTurn, vector<string>& line_word
 		movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);
 		return false;
 	}
+//	if (!isNumOfArgsCorrect(currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler)) {
+//		return false;
+//	}
+//	move = parseMove(currentTurn, line_words);
+//	if (move != nullptr) {
+//		check = movePiece(rps, *move, isJokerDied);
+//		curPiece = rps.board[move->toRow][move->toCol][currentTurn];
+//		delete move;
+//		if (!check) {
+//			cout << "ERROR: in making move" << endl;
+//			movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);
+//			return false;
+//		}
+//	}
+//	else {
+//		movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);
+//		return false;
+//	}
+
+
 	if (curPiece == nullptr) {
 		isJokerDied = true;
 	}

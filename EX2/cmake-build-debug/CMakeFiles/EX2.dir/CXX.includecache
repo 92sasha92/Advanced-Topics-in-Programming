@@ -42,6 +42,8 @@ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Program
 PieceFactory.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PieceFactory.h
 
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Move.h
+
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Moves.cpp
 Moves.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Moves.h
@@ -53,8 +55,26 @@ Parser.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Parser.h
 JokerPiece.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/JokerPiece.h
-dirent.h
--
+MyMove.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
+
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.cpp
+MyMove.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
+
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
+Move.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Move.h
+MyPoint.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
+
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.cpp
+MyPoint.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
+
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
+Point.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Point.h
 
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PaperPiece.cpp
 PaperPiece.h
@@ -102,6 +122,8 @@ C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Program
 Piece.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.h
 
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Point.h
+
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RPS.cpp
 RPS.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RPS.h
@@ -147,4 +169,6 @@ Parser.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Parser.h
 Moves.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Moves.h
+MyMove.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
 

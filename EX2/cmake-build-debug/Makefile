@@ -257,6 +257,60 @@ Moves.cpp.s:
 	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/Moves.cpp.s
 .PHONY : Moves.cpp.s
 
+MyMove.obj: MyMove.cpp.obj
+
+.PHONY : MyMove.obj
+
+# target to build an object file
+MyMove.cpp.obj:
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyMove.cpp.obj
+.PHONY : MyMove.cpp.obj
+
+MyMove.i: MyMove.cpp.i
+
+.PHONY : MyMove.i
+
+# target to preprocess a source file
+MyMove.cpp.i:
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyMove.cpp.i
+.PHONY : MyMove.cpp.i
+
+MyMove.s: MyMove.cpp.s
+
+.PHONY : MyMove.s
+
+# target to generate assembly for a file
+MyMove.cpp.s:
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyMove.cpp.s
+.PHONY : MyMove.cpp.s
+
+MyPoint.obj: MyPoint.cpp.obj
+
+.PHONY : MyPoint.obj
+
+# target to build an object file
+MyPoint.cpp.obj:
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyPoint.cpp.obj
+.PHONY : MyPoint.cpp.obj
+
+MyPoint.i: MyPoint.cpp.i
+
+.PHONY : MyPoint.i
+
+# target to preprocess a source file
+MyPoint.cpp.i:
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyPoint.cpp.i
+.PHONY : MyPoint.cpp.i
+
+MyPoint.s: MyPoint.cpp.s
+
+.PHONY : MyPoint.s
+
+# target to generate assembly for a file
+MyPoint.cpp.s:
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyPoint.cpp.s
+.PHONY : MyPoint.cpp.s
+
 PaperPiece.obj: PaperPiece.cpp.obj
 
 .PHONY : PaperPiece.obj
@@ -497,6 +551,12 @@ help:
 	@echo ... Moves.obj
 	@echo ... Moves.i
 	@echo ... Moves.s
+	@echo ... MyMove.obj
+	@echo ... MyMove.i
+	@echo ... MyMove.s
+	@echo ... MyPoint.obj
+	@echo ... MyPoint.i
+	@echo ... MyPoint.s
 	@echo ... PaperPiece.obj
 	@echo ... PaperPiece.i
 	@echo ... PaperPiece.s

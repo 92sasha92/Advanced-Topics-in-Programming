@@ -42,4 +42,5 @@ add_executable(EX2
         RPS.cpp
         RPS.h
         ScissorsPiece.cpp
-        ScissorsPiece.h)
+        ScissorsPiece.h
+        MyPoint.cpp MyPoint.h MyMove.cpp MyMove.h)
