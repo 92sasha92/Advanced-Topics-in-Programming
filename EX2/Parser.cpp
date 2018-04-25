@@ -1,10 +1,5 @@
 #include "Parser.h"
 
-
-//string Parser::player_0_name_ = "c://users//sasha//desktop//advanced_topics_in_programming//advanced-topics-in-programming//ex1_v2//player1.rps_board";
-//string Parser::player_1_name_ = "c://users//sasha//desktop//advanced_topics_in_programming//advanced-topics-in-programming//ex1_v2//player2.rps_board";
-//string Parser::player_0_name_ = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player1.rps_board";
-//string Parser::player_1_name_ = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\player2.rps_board";
 string Parser::player_0_name_ = "player1.rps_board";
 string Parser::player_1_name_ = "player2.rps_board";
 
@@ -17,6 +12,7 @@ void Parser::initializePiecesArsenal(RPS& rps) {
     rps.playerPiecesArsenal[Piece::Flag] = RPS::F;
     rps.playerPiecesArsenal[Piece::Undefined] = 0;
 }
+
 
 bool Parser::isInteger(string str) {
     for (char c : str) {

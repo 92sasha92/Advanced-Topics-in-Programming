@@ -1,6 +1,7 @@
 #include "RPS.h"
 #include "Parser.h"
 #include "JokerPiece.h"
+#include <dirent.h>
 
 class Moves {
   private:

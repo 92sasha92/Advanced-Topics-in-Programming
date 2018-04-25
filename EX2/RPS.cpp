@@ -1,7 +1,5 @@
 #include "RPS.h"
 
-//string RPS::outputFile = "C:\\Users\\sasha\\Desktop\\Advanced_Topics_in_Programming\\Advanced-Topics-in-Programming\\EX1_v2\\rps.output";
-//string RPS::outputFile = "C:\\Users\\drucker16\\git\\Advanced-Topics-in-Programming\\EX1_v2\\rps.output";
 string RPS::outputFile = "rps.output";
 
 void RPS::printBoard(RPS& rps) {
