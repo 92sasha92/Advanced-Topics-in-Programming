@@ -7,8 +7,8 @@ UNAME := $(shell uname -s)
 
 COMP_FLAG=-std=c++14 -Werror -Wall -Wfatal-errors -Wno-shift-count-overflow -Weffc++ -Wno-non-virtual-dtor -Wno-strict-aliasing -Wno-unused-private-field -pedantic-errors
 
-OBJS = BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o Moves.o EndOfGameHandler.o
-EXEC = ex1
+OBJS = BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o Moves.o EndOfGameHandler.o Board.o FightInfo.o JokerChange.o Move.o MyMove.o MyPoint.o PiecePosition.o Point.o PlayerAlgorithm.o
+EXEC = ex2
 
 all:	$(EXEC)
 $(EXEC): $(OBJS)
@@ -27,19 +27,22 @@ PaperPiece.o: PaperPiece.h PaperPiece.cpp Piece.h
 	$(CC) $(COMP_FLAG) -c $*.cpp
 RPS.o: RPS.h RPS.cpp Piece.h PieceFactory.h
 	$(CC) $(COMP_FLAG) -c $*.cpp
-main.o: main.cpp RPS.h
+main.o: main.cpp RPS.h MyMove.h 
 	$(CC) $(COMP_FLAG) -c $*.cpp
 Piece.o: Piece.h Piece.cpp
 	$(CC) $(COMP_FLAG) -c $*.cpp
 Parser.o: Parser.h Parser.cpp RPS.h
 	$(CC) $(COMP_FLAG) -c $*.cpp
-Moves.o: Moves.h Moves.cpp RPS.h
+Moves.o: Moves.h Moves.cpp RPS.h MyMove.h
 	$(CC) $(COMP_FLAG) -c $*.cpp
 EndOfGameHandler.o: EndOfGameHandler.h EndOfGameHandler.cpp
 	$(CC) $(COMP_FLAG) -c $*.cpp
 PieceFactory.o: PieceFactory.h PieceFactory.cpp Piece.h BombPiece.h RockPiece.h ScissorsPiece.h FlagPiece.h JokerPiece.h PaperPiece.h
 	$(CC) $(COMP_FLAG) -c $*.cpp
-
+MyMove.o: MyMove.h MyMove.cpp MyPoint.h MyPoint.h Move.h
+	$(CC) $(COMP_FLAG) -c $*.cpp
+MyPoint.o: MyPoint.h MyPoint.cpp Point.h
+	$(CC) $(COMP_FLAG) -c $*.cpp
 clean:
 	rm -f *.o $(EXEC) $(UNIT_TESTS)
 

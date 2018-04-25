@@ -16,7 +16,7 @@ do
     cp "./tests/test_$i/player1.rps_moves" "./player1.rps_moves"
     cp "./tests/test_$i/player2.rps_moves" "./player2.rps_moves"
 
-    ./ex1
+    ./ex2
 
     if diff ./rps.output ./tests/test_$i/rps.output; then
         echo PASS

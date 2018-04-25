@@ -1,6 +1,7 @@
 #pragma once
 #include "Move.h"
 #include "MyPoint.h"
+
 class MyMove: public Move {
 private:
     MyPoint fPoint;
