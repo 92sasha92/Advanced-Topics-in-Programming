@@ -2,3 +2,5 @@
 *.log
 *.o
 .vscode
+cmake-build-debug/
+\.idea/
