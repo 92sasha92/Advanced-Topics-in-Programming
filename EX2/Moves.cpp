@@ -50,9 +50,9 @@ void Moves::parseMove(int playerIndex, vector<string> pieceDescription, MyMove &
 bool Moves::movePiece(RPS & rps, MyMove& move, bool &isJokerDied, int currentPlayer)
 {
 	  bool isJoker = false;
-	//Point fPoint;
+	  //const Point &p = move.getFrom();
+	  //cout << p.getY() << endl;
 	const Point *fPoint = &(move.getFrom());
-	//Point toPoint;
 	const Point *toPoint = &(move.getTo());
 	  int player = currentPlayer;
     if (fPoint->getY() < 0 || fPoint->getX() < 0 || toPoint->getX() < 0 || toPoint->getY() < 0) {
