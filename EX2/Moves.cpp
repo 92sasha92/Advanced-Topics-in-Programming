@@ -1,7 +1,5 @@
 #include "Moves.h"
 
-Moves::Move::Move(int fRow_, int fCol_, int toRow_, int toCol_, int player_): fRow(fRow_), fCol(fCol_), toRow(toRow_), toCol(toCol_), player(player_) {
-}
 Moves::JokerSuitChange::JokerSuitChange(int row_, int col_, char type_): row(row_), col(col_), type(type_) {
 }
 

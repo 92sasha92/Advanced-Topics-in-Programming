@@ -6,189 +6,151 @@
 
 #IncludeRegexTransform: 
 
-.././JokerPiece.h
-Piece.h
-.././Piece.h
-PieceFactory.h
-.././PieceFactory.h
-
-.././Move.h
-
-.././Moves.h
-RPS.h
-.././RPS.h
-Parser.h
-.././Parser.h
-JokerPiece.h
-.././JokerPiece.h
-MyMove.h
-.././MyMove.h
-
-.././MyMove.h
-Move.h
-.././Move.h
-MyPoint.h
-.././MyPoint.h
-
-.././MyPoint.h
-Point.h
-.././Point.h
-
-.././Piece.h
-string
--
-iostream
--
-
-.././Point.h
-
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/BombPiece.cpp
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/BombPiece.cpp
 BombPiece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/BombPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/BombPiece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/BombPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/BombPiece.h
 Piece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.cpp
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.cpp
 EndOfGameHandler.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
 iostream
 -
 sstream
 -
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/FlagPiece.cpp
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/FlagPiece.cpp
 FlagPiece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/FlagPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/FlagPiece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/FlagPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/FlagPiece.h
 Piece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.cpp
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/JokerPiece.cpp
 JokerPiece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/JokerPiece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/JokerPiece.h
 Piece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.h
 PieceFactory.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PieceFactory.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Move.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Move.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.cpp
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Moves.cpp
 Moves.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Moves.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Moves.h
 RPS.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RPS.h
 Parser.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Parser.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Parser.h
 JokerPiece.h
-<<<<<<< HEAD
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.h
-dirent.h
--
-=======
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/JokerPiece.h
 MyMove.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
--
+
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.cpp
 MyMove.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
--
+
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
 Move.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Move.h
 MyPoint.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
--
+
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPiecePosition.cpp
+MyPiecePosition.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPiecePosition.h
+
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPiecePosition.h
+Piece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.h
+PiecePosition.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PiecePosition.h
+MyPoint.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
+
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.cpp
 MyPoint.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
--
+
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
 Point.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Point.h
->>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
+iostream
+-
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.cpp
-MyMove.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.h
-
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.h
-Move.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Move.h
-MyPoint.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.h
-
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.cpp
-MyPoint.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.h
-
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.h
-Point.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Point.h
-
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PaperPiece.cpp
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PaperPiece.cpp
 PaperPiece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PaperPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PaperPiece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PaperPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PaperPiece.h
 Piece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Parser.cpp
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Parser.cpp
 Parser.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Parser.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Parser.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Parser.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Parser.h
 RPS.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RPS.h
+memory
+-
+MyPiecePosition.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPiecePosition.h
+MyPoint.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.cpp
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.cpp
 Piece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.h
 string
 -
 iostream
 -
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.cpp
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PieceFactory.cpp
 PieceFactory.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PieceFactory.h
 RockPiece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RockPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RockPiece.h
 PaperPiece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PaperPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PaperPiece.h
 ScissorsPiece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/ScissorsPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/ScissorsPiece.h
 BombPiece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/BombPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/BombPiece.h
 JokerPiece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/JokerPiece.h
 FlagPiece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/FlagPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/FlagPiece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PieceFactory.h
 Piece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Point.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PiecePosition.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.cpp
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Point.h
+
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RPS.cpp
 RPS.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RPS.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RPS.h
 iostream
 -
 string
@@ -200,39 +162,35 @@ fstream
 vector
 -
 PieceFactory.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/PieceFactory.h
 JokerPiece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/JokerPiece.h
 EndOfGameHandler.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RockPiece.cpp
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RockPiece.cpp
 RockPiece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RockPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RockPiece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RockPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RockPiece.h
 Piece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/ScissorsPiece.cpp
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/ScissorsPiece.cpp
 ScissorsPiece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/ScissorsPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/ScissorsPiece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/ScissorsPiece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/ScissorsPiece.h
 Piece.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Piece.h
 
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/main.cpp
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/main.cpp
 RPS.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/RPS.h
 Parser.h
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Parser.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Parser.h
 Moves.h
-<<<<<<< HEAD
-C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.h
-=======
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Moves.h
 MyMove.h
 C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
->>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
 

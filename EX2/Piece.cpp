@@ -26,5 +26,25 @@ Piece::PiecesPower Piece::isStrongerThan(const Piece& rival) {
     return this->strongerThan[rival.type];
 }
 
+char Piece::getCharTypeRep(Piece::RPSPiecesTypes type) {
+    switch(type){
+        case Piece::Rock:
+            return 'R';
+        case Piece::Paper:
+            return 'P';
+        case Piece::Scissors:
+            return 'S';
+        case Piece::Bomb:
+            return 'B';
+        case Piece::Joker:
+            return 'J';
+        case Piece::Flag:
+            return 'F';
+        default:
+        std::cout << "unsupported piece type" << std::endl;
+            return '#';
+
+    }
+}
 Piece::~Piece() {
 }

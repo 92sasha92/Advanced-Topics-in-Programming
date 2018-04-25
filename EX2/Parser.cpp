@@ -24,7 +24,9 @@ bool Parser::isInteger(string str) {
     return true;
 }
 
-bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription) {
+
+
+bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription, vector<unique_ptr<PiecePosition>> &vectorToFill ) {
     if (pieceDescription[0].size() != 1) {
         cout << "incorrect piece type" << endl;
         return false;
@@ -52,6 +54,10 @@ bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription
         return false;
     }
     Piece::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piece);
+    MyPoint p(col, row);
+    MyPiecePosition piecePosition(pieceType, p);
+    unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
+    vectorToFill.push_back(std::move(ptr));
     if (rps.playerPiecesArsenal[pieceType] == 0) {
         cout << "ERROR: too many pieces of the same type, type enum:" << pieceType << endl;
         return false;
@@ -83,11 +89,6 @@ void Parser::clearLine(vector<string> &line_words, string &cur_line) {
 	string word;
 	istringstream ss(cur_line);
 	line_words.clear();
-	//while (getline(ss, word, ' ')) {
-	//	if (word.compare("") != 0) {
-	//		line_words.push_back(word);
-	//	}
-	//}
 	while (ss >> word) {
 		line_words.push_back(word);
 	}
@@ -99,6 +100,14 @@ void Parser::handleParseError(ifstream& fin, EndOfGameHandler& endOfGameHandler,
 	endOfGameHandler.setWinner(playerIndex, fileLine, fileLine);
 }
 
+void Parser::printVector(vector<unique_ptr<PiecePosition>> &vector){
+    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
+    for(const auto &vPtr : vector){
+        cout << "Piece from unique: " << vPtr->getPiece() << "    piece position: (" << vPtr->getPosition().getX() << ", " << vPtr->getPosition().getY() << ")" << endl;
+        // cout << "Piece from unique: " << vPtr->getPiece() << "    piece position: "<< vPtr->getPosition() << endl;
+    }
+    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
+}
 void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHandler) {
     string cur_line, word;
     int fileLine = 1;
@@ -106,6 +115,7 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
     ifstream fin;
     vector<string> line_words;
     initializePiecesArsenal(rps);
+    vector<unique_ptr<PiecePosition>> vectorToFill;
 
     if (playerIndex == 0) {
         fin.open(player_0_name_);
@@ -135,7 +145,7 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
             return;
         }
         if (line_words.size() != 0) {
-            check = setPiece(rps, playerIndex, line_words);
+            check = setPiece(rps, playerIndex, line_words, vectorToFill);
         }
         if (!check) {
             cout << "ERROR: could not set piece" << endl;
@@ -159,6 +169,6 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
         }
     }
     RPS::checkWinner(rps, endOfGameHandler, 0);
-
+    Parser::printVector(vectorToFill);
     fin.close();
 }
