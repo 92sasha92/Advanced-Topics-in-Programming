@@ -43,7 +43,7 @@ void Moves::parseMove(int playerIndex, vector<string> pieceDescription, MyMove &
 	}
 	// arr[1] = fRow, arr[0] = fCol, arr[3] = toRow, arr[2] = toCol
 	cout << arr[1] << " " << arr[0] << " " << arr[3] << " " << arr[2] << " player:" << playerIndex + 1 << endl;
-	MyPoint p1(arr[0], arr[1]), p2(arr[3], arr[4]);
+	MyPoint p1(arr[0], arr[1]), p2(arr[2], arr[3]);
 	move.init(p1, p2);
 }
 
@@ -106,10 +106,11 @@ bool Moves::checkMoveAndSet(RPS &rps, int currentTurn, vector<string>& line_word
 		return false;
 	}
 	parseMove(currentTurn, line_words, move);
+    cout << "(" << move.getFrom().getX() << ", "<< move.getFrom().getY() << ")" << endl;
 	if (move.getIsInitialized()) {
 		check = movePiece(rps, move, isJokerDied, currentTurn);
+        cout << "(" << move.getFrom().getX() << ", "<< move.getFrom().getY() << ")" << endl;
 		curPiece = rps.board[move.getTo().getY()][move.getTo().getX()][currentTurn];
-		delete move;
 		if (!check) {
 			cout << "ERROR: in making move" << endl;
 			movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);
