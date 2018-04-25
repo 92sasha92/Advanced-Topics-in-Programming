@@ -106,8 +106,10 @@ bool Moves::checkMoveAndSet(RPS &rps, int currentTurn, vector<string>& line_word
 		return false;
 	}
 	parseMove(currentTurn, line_words, move);
+    cout << "(" << move.getFrom().getX() << ", "<< move.getFrom().getY() << ")" << endl;
 	if (move.getIsInitialized()) {
 		check = movePiece(rps, move, isJokerDied, currentTurn);
+        cout << "(" << move.getFrom().getX() << ", "<< move.getFrom().getY() << ")" << endl;
 		curPiece = rps.board[move.getTo().getY()][move.getTo().getX()][currentTurn];
 		if (!check) {
 			cout << "ERROR: in making move" << endl;
