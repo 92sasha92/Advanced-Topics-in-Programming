@@ -7,7 +7,7 @@ UNAME := $(shell uname -s)
 
 COMP_FLAG=-std=c++14 -Werror -Wall -Wfatal-errors -Wno-shift-count-overflow -Weffc++ -Wno-non-virtual-dtor -Wno-strict-aliasing -Wno-unused-private-field -pedantic-errors
 
-OBJS = BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o Moves.o EndOfGameHandler.o Board.o FightInfo.o JokerChange.o Move.o MyMove.o MyPoint.o PiecePosition.o Point.o PlayerAlgorithm.o
+OBJS = BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o Moves.o EndOfGameHandler.o MyMove.o MyPoint.o
 EXEC = ex2
 
 all:	$(EXEC)
