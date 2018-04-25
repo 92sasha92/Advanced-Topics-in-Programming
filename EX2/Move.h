@@ -7,7 +7,7 @@
 // (a) returned from PlayerAlgorithm to "Game" in the flow:
 // "Game" -> PlayerAlgorithm : virtual unique_ptr<Move> getMove();
 // (b) sent to PlayerAlgorithm by "Game" in the flow:
-// "Game" -> PlayerAlgorithm : notifyOnOpponentMove(const Move& move); // called only on opponent’s move
+// "Game" -> PlayerAlgorithm : notifyOnOpponentMove(const Move& move); // called only on opponentï¿½s move
 // Note that "Game" is in parantheses because this is your class and you can choose its name
 
 // @author Amir Kirsh, TAU - Advanced Topics in Programming - 2018 Semester B
@@ -18,6 +18,7 @@ class Point;
 //--------------------------
 
 class Move {
+public:
 	virtual const Point& getFrom() const = 0;
 	virtual const Point& getTo() const = 0;
 };

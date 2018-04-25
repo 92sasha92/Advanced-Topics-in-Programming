@@ -23,6 +23,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
       <file leaf-file-name="RPS.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RPS.h">
           <provider selected="true" editor-type-id="text-editor">
@@ -31,40 +32,69 @@
               <folding>
                 <element signature="e#14#33#0" expanded="true" />
               </folding>
+=======
+      <file leaf-file-name="Point.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Point.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Moves.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Moves.h">
+      <file leaf-file-name="MyPoint.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyPoint.cpp">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="84">
               <caret line="9" selection-start-line="9" selection-end-line="9" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="194">
+              <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="RockPiece.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RockPiece.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
               <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="16" />
+=======
+      <file leaf-file-name="MyPoint.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyPoint.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="PieceFactory.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PieceFactory.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="6" column="57" lean-forward="true" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
+=======
+      <file leaf-file-name="Move.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Move.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="23" column="2" selection-start-line="23" selection-start-column="2" selection-end-line="23" selection-end-column="2" />
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="FightInfo.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FightInfo.h">
           <provider selected="true" editor-type-id="text-editor" />
@@ -80,10 +110,39 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
               <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
+=======
+      <file leaf-file-name="MyMove.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyMove.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="MyMove.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyMove.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+              <folding>
+                <element signature="e#13#30#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Moves.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Moves.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="JokerChange.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JokerChange.h">
           <provider selected="true" editor-type-id="text-editor" />
@@ -96,6 +155,34 @@
       </file>
       <file leaf-file-name="Point.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Point.h">
+=======
+      <file leaf-file-name="Moves.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Moves.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="369">
+              <caret line="29" column="89" selection-start-line="29" selection-start-column="89" selection-end-line="29" selection-end-column="89" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Board.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Board.h">
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
@@ -103,8 +190,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fout</find>
-      <find>gameState</find>
       <find>checkWinner</find>
       <find>new</find>
       <find>checkW</find>
@@ -133,6 +218,8 @@
       <find>print</find>
       <find>set</find>
       <find>make</find>
+      <find>poi</find>
+      <find>move.toCol</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -166,14 +253,23 @@
         <option value="$PROJECT_DIR$/player2.rps_board" />
         <option value="$PROJECT_DIR$/player2.rps_moves" />
         <option value="$PROJECT_DIR$/run_tests.sh" />
-        <option value="$PROJECT_DIR$/main.cpp" />
-        <option value="$PROJECT_DIR$/Moves.h" />
         <option value="$PROJECT_DIR$/Parser.cpp" />
         <option value="$PROJECT_DIR$/Parser.h" />
-        <option value="$PROJECT_DIR$/Moves.cpp" />
         <option value="$PROJECT_DIR$/RPS.cpp" />
+        <option value="$PROJECT_DIR$/MyPoint.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/Bla.h" />
+=======
+        <option value="$PROJECT_DIR$/Point.h" />
+        <option value="$PROJECT_DIR$/Move.h" />
+        <option value="$PROJECT_DIR$/MyPoint.cpp" />
+        <option value="$PROJECT_DIR$/MyMove.cpp" />
+        <option value="$PROJECT_DIR$/MyMove.h" />
+        <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/Moves.h" />
+        <option value="$PROJECT_DIR$/Moves.cpp" />
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
       </list>
     </option>
   </component>
@@ -264,12 +360,17 @@
       <workItem from="1523282790892" duration="23377000" />
       <workItem from="1523525807195" duration="7951000" />
       <workItem from="1523560610907" duration="2109000" />
+<<<<<<< HEAD
       <workItem from="1524645992116" duration="3292000" />
       <workItem from="1524652849074" duration="2900000" />
+=======
+      <workItem from="1524645992116" duration="12744000" />
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="116118000" />
   </component>
   <component name="ToolWindowManager">
@@ -281,6 +382,20 @@
       <window_info anchor="bottom" id="Messages" order="0" weight="0.54531" />
       <window_info anchor="bottom" id="CMake" order="1" weight="0.3060574" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+=======
+    <option name="totallyTimeSpent" value="122670000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.13645834" />
+      <window_info anchor="bottom" id="TODO" order="11" />
+      <window_info anchor="bottom" id="Messages" order="0" visible="true" weight="0.47183847" />
+      <window_info anchor="bottom" id="CMake" order="1" weight="0.3060574" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="7" weight="0.23166844" />
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
       <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="7" weight="0.25437203" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
@@ -371,6 +486,7 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$USER_HOME$/jumper/vlab/jemu/emulator/jemu/include/BMA280.h" />
     <entry file="file://$USER_HOME$/jumper/vlab/jemu/emulator/jemu/build/Makefile" />
     <entry file="file://$PROJECT_DIR$/Moves1.cpp" />
@@ -382,6 +498,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
     <entry file="file://$PROJECT_DIR$/ScissorsPiece.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -492,6 +610,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Board.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -499,6 +618,18 @@
         </state>
       </provider>
     </entry>
+=======
+    <entry file="file://$PROJECT_DIR$/run_tests.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/player2.rps_moves">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
     <entry file="file://$PROJECT_DIR$/BombPiece.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -513,20 +644,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="537" lean-forward="true" selection-start-line="537" selection-end-line="537" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/player1.rps_board">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -534,6 +651,8 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
     <entry file="file://$PROJECT_DIR$/Parser.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -541,17 +660,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/Makefile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+        <state relative-caret-position="535">
+          <caret line="537" lean-forward="true" selection-start-line="537" selection-end-line="537" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Moves.cpp">
+    <entry file="file://$PROJECT_DIR$/makefile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="119">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="170" />
         </state>
       </provider>
     </entry>
@@ -562,6 +682,92 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="323">
+          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+=======
+        <state>
+          <caret selection-end-column="12" />
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Point.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Board.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vdvdv.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dvdvdv.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dvdvdv.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vdvdvd.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vdvdvd.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="37" column="25" lean-forward="true" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Point.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Move.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="2" selection-start-line="23" selection-start-column="2" selection-end-line="23" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyPoint.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyMove.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+          <folding>
+            <element signature="e#13#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Parser.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -627,6 +833,36 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" selection-start-line="11" selection-end-line="11" />
+=======
+    <entry file="file://$PROJECT_DIR$/Moves.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="29" column="89" selection-start-line="29" selection-start-column="89" selection-end-line="29" selection-end-column="89" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyPoint.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyMove.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Moves.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
         </state>
       </provider>
     </entry>

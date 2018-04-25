@@ -18,14 +18,25 @@ CMakeFiles/EX2.dir/JokerPiece.cpp.obj
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.h
 CMakeFiles/EX2.dir/Moves.cpp.obj
+ .././JokerPiece.h
+ .././Piece.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.cpp
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Parser.h
- C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.h
+CMakeFiles/EX2.dir/MyMove.cpp.obj
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Move.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.cpp
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Point.h
+CMakeFiles/EX2.dir/MyPoint.cpp.obj
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.cpp
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Point.h
 CMakeFiles/EX2.dir/PaperPiece.cpp.obj
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PaperPiece.cpp
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PaperPiece.h
@@ -67,6 +78,11 @@ CMakeFiles/EX2.dir/ScissorsPiece.cpp.obj
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/ScissorsPiece.cpp
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/ScissorsPiece.h
 CMakeFiles/EX2.dir/main.cpp.obj
+ .././Move.h
+ .././Moves.h
+ .././MyMove.h
+ .././MyPoint.h
+ .././Point.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.h

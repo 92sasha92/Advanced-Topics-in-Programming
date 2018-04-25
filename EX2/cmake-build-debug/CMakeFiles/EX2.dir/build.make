@@ -381,6 +381,56 @@ CMakeFiles/EX2.dir/ScissorsPiece.cpp.obj.provides: CMakeFiles/EX2.dir/ScissorsPi
 CMakeFiles/EX2.dir/ScissorsPiece.cpp.obj.provides.build: CMakeFiles/EX2.dir/ScissorsPiece.cpp.obj
 
 
+CMakeFiles/EX2.dir/MyPoint.cpp.obj: CMakeFiles/EX2.dir/flags.make
+CMakeFiles/EX2.dir/MyPoint.cpp.obj: CMakeFiles/EX2.dir/includes_CXX.rsp
+CMakeFiles/EX2.dir/MyPoint.cpp.obj: ../MyPoint.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/EX2.dir/MyPoint.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX2.dir\MyPoint.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX2\MyPoint.cpp
+
+CMakeFiles/EX2.dir/MyPoint.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX2.dir/MyPoint.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX2\MyPoint.cpp > CMakeFiles\EX2.dir\MyPoint.cpp.i
+
+CMakeFiles/EX2.dir/MyPoint.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX2.dir/MyPoint.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX2\MyPoint.cpp -o CMakeFiles\EX2.dir\MyPoint.cpp.s
+
+CMakeFiles/EX2.dir/MyPoint.cpp.obj.requires:
+
+.PHONY : CMakeFiles/EX2.dir/MyPoint.cpp.obj.requires
+
+CMakeFiles/EX2.dir/MyPoint.cpp.obj.provides: CMakeFiles/EX2.dir/MyPoint.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyPoint.cpp.obj.provides.build
+.PHONY : CMakeFiles/EX2.dir/MyPoint.cpp.obj.provides
+
+CMakeFiles/EX2.dir/MyPoint.cpp.obj.provides.build: CMakeFiles/EX2.dir/MyPoint.cpp.obj
+
+
+CMakeFiles/EX2.dir/MyMove.cpp.obj: CMakeFiles/EX2.dir/flags.make
+CMakeFiles/EX2.dir/MyMove.cpp.obj: CMakeFiles/EX2.dir/includes_CXX.rsp
+CMakeFiles/EX2.dir/MyMove.cpp.obj: ../MyMove.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/EX2.dir/MyMove.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX2.dir\MyMove.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX2\MyMove.cpp
+
+CMakeFiles/EX2.dir/MyMove.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX2.dir/MyMove.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX2\MyMove.cpp > CMakeFiles\EX2.dir\MyMove.cpp.i
+
+CMakeFiles/EX2.dir/MyMove.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX2.dir/MyMove.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX2\MyMove.cpp -o CMakeFiles\EX2.dir\MyMove.cpp.s
+
+CMakeFiles/EX2.dir/MyMove.cpp.obj.requires:
+
+.PHONY : CMakeFiles/EX2.dir/MyMove.cpp.obj.requires
+
+CMakeFiles/EX2.dir/MyMove.cpp.obj.provides: CMakeFiles/EX2.dir/MyMove.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyMove.cpp.obj.provides.build
+.PHONY : CMakeFiles/EX2.dir/MyMove.cpp.obj.provides
+
+CMakeFiles/EX2.dir/MyMove.cpp.obj.provides.build: CMakeFiles/EX2.dir/MyMove.cpp.obj
+
+
 # Object files for target EX2
 EX2_OBJECTS = \
 "CMakeFiles/EX2.dir/BombPiece.cpp.obj" \
@@ -395,7 +445,9 @@ EX2_OBJECTS = \
 "CMakeFiles/EX2.dir/PieceFactory.cpp.obj" \
 "CMakeFiles/EX2.dir/RockPiece.cpp.obj" \
 "CMakeFiles/EX2.dir/RPS.cpp.obj" \
-"CMakeFiles/EX2.dir/ScissorsPiece.cpp.obj"
+"CMakeFiles/EX2.dir/ScissorsPiece.cpp.obj" \
+"CMakeFiles/EX2.dir/MyPoint.cpp.obj" \
+"CMakeFiles/EX2.dir/MyMove.cpp.obj"
 
 # External object files for target EX2
 EX2_EXTERNAL_OBJECTS =
@@ -413,11 +465,13 @@ EX2.exe: CMakeFiles/EX2.dir/PieceFactory.cpp.obj
 EX2.exe: CMakeFiles/EX2.dir/RockPiece.cpp.obj
 EX2.exe: CMakeFiles/EX2.dir/RPS.cpp.obj
 EX2.exe: CMakeFiles/EX2.dir/ScissorsPiece.cpp.obj
+EX2.exe: CMakeFiles/EX2.dir/MyPoint.cpp.obj
+EX2.exe: CMakeFiles/EX2.dir/MyMove.cpp.obj
 EX2.exe: CMakeFiles/EX2.dir/build.make
 EX2.exe: CMakeFiles/EX2.dir/linklibs.rsp
 EX2.exe: CMakeFiles/EX2.dir/objects1.rsp
 EX2.exe: CMakeFiles/EX2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable EX2.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable EX2.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\EX2.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -438,6 +492,8 @@ CMakeFiles/EX2.dir/requires: CMakeFiles/EX2.dir/PieceFactory.cpp.obj.requires
 CMakeFiles/EX2.dir/requires: CMakeFiles/EX2.dir/RockPiece.cpp.obj.requires
 CMakeFiles/EX2.dir/requires: CMakeFiles/EX2.dir/RPS.cpp.obj.requires
 CMakeFiles/EX2.dir/requires: CMakeFiles/EX2.dir/ScissorsPiece.cpp.obj.requires
+CMakeFiles/EX2.dir/requires: CMakeFiles/EX2.dir/MyPoint.cpp.obj.requires
+CMakeFiles/EX2.dir/requires: CMakeFiles/EX2.dir/MyMove.cpp.obj.requires
 
 .PHONY : CMakeFiles/EX2.dir/requires
 

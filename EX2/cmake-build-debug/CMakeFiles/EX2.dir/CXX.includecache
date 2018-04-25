@@ -6,6 +6,42 @@
 
 #IncludeRegexTransform: 
 
+.././JokerPiece.h
+Piece.h
+.././Piece.h
+PieceFactory.h
+.././PieceFactory.h
+
+.././Move.h
+
+.././Moves.h
+RPS.h
+.././RPS.h
+Parser.h
+.././Parser.h
+JokerPiece.h
+.././JokerPiece.h
+MyMove.h
+.././MyMove.h
+
+.././MyMove.h
+Move.h
+.././Move.h
+MyPoint.h
+.././MyPoint.h
+
+.././MyPoint.h
+Point.h
+.././Point.h
+
+.././Piece.h
+string
+-
+iostream
+-
+
+.././Point.h
+
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/BombPiece.cpp
 BombPiece.h
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/BombPiece.h
@@ -42,6 +78,8 @@ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
 PieceFactory.h
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.h
 
+C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Move.h
+
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.cpp
 Moves.h
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.h
@@ -52,9 +90,51 @@ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.h
 Parser.h
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Parser.h
 JokerPiece.h
+<<<<<<< HEAD
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.h
 dirent.h
 -
+=======
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/JokerPiece.h
+MyMove.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
+-
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.cpp
+MyMove.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
+-
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
+Move.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Move.h
+MyPoint.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
+-
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.cpp
+MyPoint.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
+-
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyPoint.h
+Point.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Point.h
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
+
+C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.cpp
+MyMove.h
+C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.h
+
+C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.h
+Move.h
+C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Move.h
+MyPoint.h
+C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.h
+
+C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.cpp
+MyPoint.h
+C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.h
+
+C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.h
+Point.h
+C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Point.h
 
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PaperPiece.cpp
 PaperPiece.h
@@ -102,6 +182,8 @@ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.h
 Piece.h
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
 
+C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Point.h
+
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.cpp
 RPS.h
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.h
@@ -146,5 +228,11 @@ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.h
 Parser.h
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Parser.h
 Moves.h
+<<<<<<< HEAD
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.h
+=======
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/Moves.h
+MyMove.h
+C:/Users/sasha/Desktop/Advanced_Topics_in_Programming/Advanced-Topics-in-Programming/EX2/MyMove.h
+>>>>>>> 3b9737d8d837bd11dfb2a060c98ce413b5d83266
 
