@@ -130,6 +130,12 @@
 		<Unit filename="C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.h">
 			<Option target="EX2"/>
 		</Unit>
+		<Unit filename="C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPiecePosition.cpp">
+			<Option target="EX2"/>
+		</Unit>
+		<Unit filename="C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPiecePosition.h">
+			<Option target="EX2"/>
+		</Unit>
 		<Unit filename="C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.cpp">
 			<Option target="EX2"/>
 		</Unit>

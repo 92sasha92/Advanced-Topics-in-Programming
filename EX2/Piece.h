@@ -16,6 +16,14 @@ class Piece
 		Undefined
 	} RPSPiecesTypes;
 
+    typedef enum {
+        JRock,
+        JPaper,
+        JScissors,
+        JBomb,
+        JNotAJoker
+    } RPSJokerTypes;
+
 	typedef enum {
 		Weaker,
 		Equal,
@@ -23,7 +31,7 @@ class Piece
 	} PiecesPower;
 
     RPSPiecesTypes type;
-
+    static char getCharTypeRep(RPSPiecesTypes type);
     Piece (int playerNumber);
     PiecesPower isStrongerThan(const Piece& rival);
     int getPlayerNumber();

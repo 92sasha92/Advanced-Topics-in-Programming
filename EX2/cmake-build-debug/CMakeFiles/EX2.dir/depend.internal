@@ -18,20 +18,32 @@ CMakeFiles/EX2.dir/JokerPiece.cpp.obj
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.h
 CMakeFiles/EX2.dir/Moves.cpp.obj
- .././JokerPiece.h
- .././Piece.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Move.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.cpp
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPiecePosition.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Parser.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PiecePosition.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Point.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.h
 CMakeFiles/EX2.dir/MyMove.cpp.obj
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Move.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.cpp
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Point.h
+CMakeFiles/EX2.dir/MyPiecePosition.cpp.obj
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPiecePosition.cpp
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPiecePosition.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PiecePosition.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Point.h
 CMakeFiles/EX2.dir/MyPoint.cpp.obj
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.cpp
@@ -44,10 +56,14 @@ CMakeFiles/EX2.dir/PaperPiece.cpp.obj
 CMakeFiles/EX2.dir/Parser.cpp.obj
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPiecePosition.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Parser.cpp
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Parser.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PiecePosition.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Point.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.h
 CMakeFiles/EX2.dir/Piece.cpp.obj
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.cpp
@@ -78,16 +94,17 @@ CMakeFiles/EX2.dir/ScissorsPiece.cpp.obj
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/ScissorsPiece.cpp
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/ScissorsPiece.h
 CMakeFiles/EX2.dir/main.cpp.obj
- .././Move.h
- .././Moves.h
- .././MyMove.h
- .././MyPoint.h
- .././Point.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Move.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPiecePosition.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Parser.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Piece.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PiecePosition.h
+ C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Point.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RPS.h
  C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/main.cpp

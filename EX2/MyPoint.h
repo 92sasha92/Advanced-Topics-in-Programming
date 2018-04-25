@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Point.h"
+#include <iostream>
 
 class MyPoint: public Point{
 private:
@@ -12,6 +13,7 @@ public:
     virtual int getY() const override;
     void setX(int x);
     void setY(int y);
+    //friend std::ostream &operator<<(std::ostream &os, const MyPoint& p);
 };
 
 

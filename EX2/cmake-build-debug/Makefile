@@ -284,6 +284,33 @@ MyMove.cpp.s:
 	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyMove.cpp.s
 .PHONY : MyMove.cpp.s
 
+MyPiecePosition.obj: MyPiecePosition.cpp.obj
+
+.PHONY : MyPiecePosition.obj
+
+# target to build an object file
+MyPiecePosition.cpp.obj:
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyPiecePosition.cpp.obj
+.PHONY : MyPiecePosition.cpp.obj
+
+MyPiecePosition.i: MyPiecePosition.cpp.i
+
+.PHONY : MyPiecePosition.i
+
+# target to preprocess a source file
+MyPiecePosition.cpp.i:
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyPiecePosition.cpp.i
+.PHONY : MyPiecePosition.cpp.i
+
+MyPiecePosition.s: MyPiecePosition.cpp.s
+
+.PHONY : MyPiecePosition.s
+
+# target to generate assembly for a file
+MyPiecePosition.cpp.s:
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyPiecePosition.cpp.s
+.PHONY : MyPiecePosition.cpp.s
+
 MyPoint.obj: MyPoint.cpp.obj
 
 .PHONY : MyPoint.obj
@@ -554,6 +581,9 @@ help:
 	@echo ... MyMove.obj
 	@echo ... MyMove.i
 	@echo ... MyMove.s
+	@echo ... MyPiecePosition.obj
+	@echo ... MyPiecePosition.i
+	@echo ... MyPiecePosition.s
 	@echo ... MyPoint.obj
 	@echo ... MyPoint.i
 	@echo ... MyPoint.s

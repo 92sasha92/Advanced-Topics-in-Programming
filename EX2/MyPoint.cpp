@@ -19,3 +19,7 @@ void MyPoint::setX(int x) {
 void MyPoint::setY(int y) {
     this->y = y;
 }
+
+//std::ostream &operator<<(std::ostream &os, const MyPoint& p){
+//    return os << "(" << p.getX() << ", "<< p.getY() << ")" << std::endl;
+//}

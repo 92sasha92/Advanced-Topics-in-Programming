@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/cmake-build-debug/CMakeFiles/EX2.dir/JokerPiece.cpp.obj"
   "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Moves.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/cmake-build-debug/CMakeFiles/EX2.dir/Moves.cpp.obj"
   "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyMove.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/cmake-build-debug/CMakeFiles/EX2.dir/MyMove.cpp.obj"
+  "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPiecePosition.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/cmake-build-debug/CMakeFiles/EX2.dir/MyPiecePosition.cpp.obj"
   "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/MyPoint.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/cmake-build-debug/CMakeFiles/EX2.dir/MyPoint.cpp.obj"
   "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PaperPiece.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/cmake-build-debug/CMakeFiles/EX2.dir/PaperPiece.cpp.obj"
   "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/Parser.cpp" "C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/cmake-build-debug/CMakeFiles/EX2.dir/Parser.cpp.obj"
