@@ -33,19 +33,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2018.1\bin\cmake\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2018.1.1\bin\cmake\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2018.1\bin\cmake\bin\cmake.exe" -E remove -f
+RM = "C:\Program Files\JetBrains\CLion 2018.1.1\bin\cmake\bin\cmake.exe" -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2
+CMAKE_SOURCE_DIR = C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/EX1_v2.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/BombPiece.cpp.obj: CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/BombPiece.cpp.obj: CMakeFiles/EX1_v2.dir/includes_CXX.rsp
 CMakeFiles/EX1_v2.dir/BombPiece.cpp.obj: ../BombPiece.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/EX1_v2.dir/BombPiece.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\BombPiece.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\BombPiece.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/EX1_v2.dir/BombPiece.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\BombPiece.cpp.obj -c C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\BombPiece.cpp
 
 CMakeFiles/EX1_v2.dir/BombPiece.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX1_v2.dir/BombPiece.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\BombPiece.cpp > CMakeFiles\EX1_v2.dir\BombPiece.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\BombPiece.cpp > CMakeFiles\EX1_v2.dir\BombPiece.cpp.i
 
 CMakeFiles/EX1_v2.dir/BombPiece.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX1_v2.dir/BombPiece.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\BombPiece.cpp -o CMakeFiles\EX1_v2.dir\BombPiece.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\BombPiece.cpp -o CMakeFiles\EX1_v2.dir\BombPiece.cpp.s
 
 CMakeFiles/EX1_v2.dir/BombPiece.cpp.obj.requires:
 
@@ -84,16 +84,16 @@ CMakeFiles/EX1_v2.dir/BombPiece.cpp.obj.provides.build: CMakeFiles/EX1_v2.dir/Bo
 CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.obj: CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.obj: CMakeFiles/EX1_v2.dir/includes_CXX.rsp
 CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.obj: ../EndOfGameHandler.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\EndOfGameHandler.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\EndOfGameHandler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\EndOfGameHandler.cpp.obj -c C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\EndOfGameHandler.cpp
 
 CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\EndOfGameHandler.cpp > CMakeFiles\EX1_v2.dir\EndOfGameHandler.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\EndOfGameHandler.cpp > CMakeFiles\EX1_v2.dir\EndOfGameHandler.cpp.i
 
 CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\EndOfGameHandler.cpp -o CMakeFiles\EX1_v2.dir\EndOfGameHandler.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\EndOfGameHandler.cpp -o CMakeFiles\EX1_v2.dir\EndOfGameHandler.cpp.s
 
 CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.obj.requires:
 
@@ -109,16 +109,16 @@ CMakeFiles/EX1_v2.dir/EndOfGameHandler.cpp.obj.provides.build: CMakeFiles/EX1_v2
 CMakeFiles/EX1_v2.dir/FlagPiece.cpp.obj: CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/FlagPiece.cpp.obj: CMakeFiles/EX1_v2.dir/includes_CXX.rsp
 CMakeFiles/EX1_v2.dir/FlagPiece.cpp.obj: ../FlagPiece.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/EX1_v2.dir/FlagPiece.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\FlagPiece.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\FlagPiece.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/EX1_v2.dir/FlagPiece.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\FlagPiece.cpp.obj -c C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\FlagPiece.cpp
 
 CMakeFiles/EX1_v2.dir/FlagPiece.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX1_v2.dir/FlagPiece.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\FlagPiece.cpp > CMakeFiles\EX1_v2.dir\FlagPiece.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\FlagPiece.cpp > CMakeFiles\EX1_v2.dir\FlagPiece.cpp.i
 
 CMakeFiles/EX1_v2.dir/FlagPiece.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX1_v2.dir/FlagPiece.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\FlagPiece.cpp -o CMakeFiles\EX1_v2.dir\FlagPiece.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\FlagPiece.cpp -o CMakeFiles\EX1_v2.dir\FlagPiece.cpp.s
 
 CMakeFiles/EX1_v2.dir/FlagPiece.cpp.obj.requires:
 
@@ -134,16 +134,16 @@ CMakeFiles/EX1_v2.dir/FlagPiece.cpp.obj.provides.build: CMakeFiles/EX1_v2.dir/Fl
 CMakeFiles/EX1_v2.dir/JokerPiece.cpp.obj: CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/JokerPiece.cpp.obj: CMakeFiles/EX1_v2.dir/includes_CXX.rsp
 CMakeFiles/EX1_v2.dir/JokerPiece.cpp.obj: ../JokerPiece.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/EX1_v2.dir/JokerPiece.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\JokerPiece.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\JokerPiece.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/EX1_v2.dir/JokerPiece.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\JokerPiece.cpp.obj -c C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\JokerPiece.cpp
 
 CMakeFiles/EX1_v2.dir/JokerPiece.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX1_v2.dir/JokerPiece.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\JokerPiece.cpp > CMakeFiles\EX1_v2.dir\JokerPiece.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\JokerPiece.cpp > CMakeFiles\EX1_v2.dir\JokerPiece.cpp.i
 
 CMakeFiles/EX1_v2.dir/JokerPiece.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX1_v2.dir/JokerPiece.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\JokerPiece.cpp -o CMakeFiles\EX1_v2.dir\JokerPiece.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\JokerPiece.cpp -o CMakeFiles\EX1_v2.dir\JokerPiece.cpp.s
 
 CMakeFiles/EX1_v2.dir/JokerPiece.cpp.obj.requires:
 
@@ -159,16 +159,16 @@ CMakeFiles/EX1_v2.dir/JokerPiece.cpp.obj.provides.build: CMakeFiles/EX1_v2.dir/J
 CMakeFiles/EX1_v2.dir/main.cpp.obj: CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/main.cpp.obj: CMakeFiles/EX1_v2.dir/includes_CXX.rsp
 CMakeFiles/EX1_v2.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/EX1_v2.dir/main.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\main.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/EX1_v2.dir/main.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\main.cpp.obj -c C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\main.cpp
 
 CMakeFiles/EX1_v2.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX1_v2.dir/main.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\main.cpp > CMakeFiles\EX1_v2.dir\main.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\main.cpp > CMakeFiles\EX1_v2.dir\main.cpp.i
 
 CMakeFiles/EX1_v2.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX1_v2.dir/main.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\main.cpp -o CMakeFiles\EX1_v2.dir\main.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\main.cpp -o CMakeFiles\EX1_v2.dir\main.cpp.s
 
 CMakeFiles/EX1_v2.dir/main.cpp.obj.requires:
 
@@ -184,16 +184,16 @@ CMakeFiles/EX1_v2.dir/main.cpp.obj.provides.build: CMakeFiles/EX1_v2.dir/main.cp
 CMakeFiles/EX1_v2.dir/Moves.cpp.obj: CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/Moves.cpp.obj: CMakeFiles/EX1_v2.dir/includes_CXX.rsp
 CMakeFiles/EX1_v2.dir/Moves.cpp.obj: ../Moves.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/EX1_v2.dir/Moves.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\Moves.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\Moves.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/EX1_v2.dir/Moves.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\Moves.cpp.obj -c C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\Moves.cpp
 
 CMakeFiles/EX1_v2.dir/Moves.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX1_v2.dir/Moves.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\Moves.cpp > CMakeFiles\EX1_v2.dir\Moves.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\Moves.cpp > CMakeFiles\EX1_v2.dir\Moves.cpp.i
 
 CMakeFiles/EX1_v2.dir/Moves.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX1_v2.dir/Moves.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\Moves.cpp -o CMakeFiles\EX1_v2.dir\Moves.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\Moves.cpp -o CMakeFiles\EX1_v2.dir\Moves.cpp.s
 
 CMakeFiles/EX1_v2.dir/Moves.cpp.obj.requires:
 
@@ -209,16 +209,16 @@ CMakeFiles/EX1_v2.dir/Moves.cpp.obj.provides.build: CMakeFiles/EX1_v2.dir/Moves.
 CMakeFiles/EX1_v2.dir/PaperPiece.cpp.obj: CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/PaperPiece.cpp.obj: CMakeFiles/EX1_v2.dir/includes_CXX.rsp
 CMakeFiles/EX1_v2.dir/PaperPiece.cpp.obj: ../PaperPiece.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/EX1_v2.dir/PaperPiece.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\PaperPiece.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\PaperPiece.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/EX1_v2.dir/PaperPiece.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\PaperPiece.cpp.obj -c C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\PaperPiece.cpp
 
 CMakeFiles/EX1_v2.dir/PaperPiece.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX1_v2.dir/PaperPiece.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\PaperPiece.cpp > CMakeFiles\EX1_v2.dir\PaperPiece.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\PaperPiece.cpp > CMakeFiles\EX1_v2.dir\PaperPiece.cpp.i
 
 CMakeFiles/EX1_v2.dir/PaperPiece.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX1_v2.dir/PaperPiece.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\PaperPiece.cpp -o CMakeFiles\EX1_v2.dir\PaperPiece.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\PaperPiece.cpp -o CMakeFiles\EX1_v2.dir\PaperPiece.cpp.s
 
 CMakeFiles/EX1_v2.dir/PaperPiece.cpp.obj.requires:
 
@@ -234,16 +234,16 @@ CMakeFiles/EX1_v2.dir/PaperPiece.cpp.obj.provides.build: CMakeFiles/EX1_v2.dir/P
 CMakeFiles/EX1_v2.dir/Parser.cpp.obj: CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/Parser.cpp.obj: CMakeFiles/EX1_v2.dir/includes_CXX.rsp
 CMakeFiles/EX1_v2.dir/Parser.cpp.obj: ../Parser.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/EX1_v2.dir/Parser.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\Parser.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\Parser.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/EX1_v2.dir/Parser.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\Parser.cpp.obj -c C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\Parser.cpp
 
 CMakeFiles/EX1_v2.dir/Parser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX1_v2.dir/Parser.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\Parser.cpp > CMakeFiles\EX1_v2.dir\Parser.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\Parser.cpp > CMakeFiles\EX1_v2.dir\Parser.cpp.i
 
 CMakeFiles/EX1_v2.dir/Parser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX1_v2.dir/Parser.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\Parser.cpp -o CMakeFiles\EX1_v2.dir\Parser.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\Parser.cpp -o CMakeFiles\EX1_v2.dir\Parser.cpp.s
 
 CMakeFiles/EX1_v2.dir/Parser.cpp.obj.requires:
 
@@ -259,16 +259,16 @@ CMakeFiles/EX1_v2.dir/Parser.cpp.obj.provides.build: CMakeFiles/EX1_v2.dir/Parse
 CMakeFiles/EX1_v2.dir/Piece.cpp.obj: CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/Piece.cpp.obj: CMakeFiles/EX1_v2.dir/includes_CXX.rsp
 CMakeFiles/EX1_v2.dir/Piece.cpp.obj: ../Piece.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/EX1_v2.dir/Piece.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\Piece.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\Piece.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/EX1_v2.dir/Piece.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\Piece.cpp.obj -c C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\Piece.cpp
 
 CMakeFiles/EX1_v2.dir/Piece.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX1_v2.dir/Piece.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\Piece.cpp > CMakeFiles\EX1_v2.dir\Piece.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\Piece.cpp > CMakeFiles\EX1_v2.dir\Piece.cpp.i
 
 CMakeFiles/EX1_v2.dir/Piece.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX1_v2.dir/Piece.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\Piece.cpp -o CMakeFiles\EX1_v2.dir\Piece.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\Piece.cpp -o CMakeFiles\EX1_v2.dir\Piece.cpp.s
 
 CMakeFiles/EX1_v2.dir/Piece.cpp.obj.requires:
 
@@ -284,16 +284,16 @@ CMakeFiles/EX1_v2.dir/Piece.cpp.obj.provides.build: CMakeFiles/EX1_v2.dir/Piece.
 CMakeFiles/EX1_v2.dir/PieceFactory.cpp.obj: CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/PieceFactory.cpp.obj: CMakeFiles/EX1_v2.dir/includes_CXX.rsp
 CMakeFiles/EX1_v2.dir/PieceFactory.cpp.obj: ../PieceFactory.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/EX1_v2.dir/PieceFactory.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\PieceFactory.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\PieceFactory.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/EX1_v2.dir/PieceFactory.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\PieceFactory.cpp.obj -c C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\PieceFactory.cpp
 
 CMakeFiles/EX1_v2.dir/PieceFactory.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX1_v2.dir/PieceFactory.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\PieceFactory.cpp > CMakeFiles\EX1_v2.dir\PieceFactory.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\PieceFactory.cpp > CMakeFiles\EX1_v2.dir\PieceFactory.cpp.i
 
 CMakeFiles/EX1_v2.dir/PieceFactory.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX1_v2.dir/PieceFactory.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\PieceFactory.cpp -o CMakeFiles\EX1_v2.dir\PieceFactory.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\PieceFactory.cpp -o CMakeFiles\EX1_v2.dir\PieceFactory.cpp.s
 
 CMakeFiles/EX1_v2.dir/PieceFactory.cpp.obj.requires:
 
@@ -309,16 +309,16 @@ CMakeFiles/EX1_v2.dir/PieceFactory.cpp.obj.provides.build: CMakeFiles/EX1_v2.dir
 CMakeFiles/EX1_v2.dir/RockPiece.cpp.obj: CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/RockPiece.cpp.obj: CMakeFiles/EX1_v2.dir/includes_CXX.rsp
 CMakeFiles/EX1_v2.dir/RockPiece.cpp.obj: ../RockPiece.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/EX1_v2.dir/RockPiece.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\RockPiece.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\RockPiece.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/EX1_v2.dir/RockPiece.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\RockPiece.cpp.obj -c C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\RockPiece.cpp
 
 CMakeFiles/EX1_v2.dir/RockPiece.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX1_v2.dir/RockPiece.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\RockPiece.cpp > CMakeFiles\EX1_v2.dir\RockPiece.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\RockPiece.cpp > CMakeFiles\EX1_v2.dir\RockPiece.cpp.i
 
 CMakeFiles/EX1_v2.dir/RockPiece.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX1_v2.dir/RockPiece.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\RockPiece.cpp -o CMakeFiles\EX1_v2.dir\RockPiece.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\RockPiece.cpp -o CMakeFiles\EX1_v2.dir\RockPiece.cpp.s
 
 CMakeFiles/EX1_v2.dir/RockPiece.cpp.obj.requires:
 
@@ -334,16 +334,16 @@ CMakeFiles/EX1_v2.dir/RockPiece.cpp.obj.provides.build: CMakeFiles/EX1_v2.dir/Ro
 CMakeFiles/EX1_v2.dir/RPS.cpp.obj: CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/RPS.cpp.obj: CMakeFiles/EX1_v2.dir/includes_CXX.rsp
 CMakeFiles/EX1_v2.dir/RPS.cpp.obj: ../RPS.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/EX1_v2.dir/RPS.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\RPS.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\RPS.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/EX1_v2.dir/RPS.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\RPS.cpp.obj -c C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\RPS.cpp
 
 CMakeFiles/EX1_v2.dir/RPS.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX1_v2.dir/RPS.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\RPS.cpp > CMakeFiles\EX1_v2.dir\RPS.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\RPS.cpp > CMakeFiles\EX1_v2.dir\RPS.cpp.i
 
 CMakeFiles/EX1_v2.dir/RPS.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX1_v2.dir/RPS.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\RPS.cpp -o CMakeFiles\EX1_v2.dir\RPS.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\RPS.cpp -o CMakeFiles\EX1_v2.dir\RPS.cpp.s
 
 CMakeFiles/EX1_v2.dir/RPS.cpp.obj.requires:
 
@@ -359,16 +359,16 @@ CMakeFiles/EX1_v2.dir/RPS.cpp.obj.provides.build: CMakeFiles/EX1_v2.dir/RPS.cpp.
 CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.obj: CMakeFiles/EX1_v2.dir/flags.make
 CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.obj: CMakeFiles/EX1_v2.dir/includes_CXX.rsp
 CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.obj: ../ScissorsPiece.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\ScissorsPiece.cpp.obj -c C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\ScissorsPiece.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\EX1_v2.dir\ScissorsPiece.cpp.obj -c C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\ScissorsPiece.cpp
 
 CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\ScissorsPiece.cpp > CMakeFiles\EX1_v2.dir\ScissorsPiece.cpp.i
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\ScissorsPiece.cpp > CMakeFiles\EX1_v2.dir\ScissorsPiece.cpp.i
 
 CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\ScissorsPiece.cpp -o CMakeFiles\EX1_v2.dir\ScissorsPiece.cpp.s
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\ScissorsPiece.cpp -o CMakeFiles\EX1_v2.dir\ScissorsPiece.cpp.s
 
 CMakeFiles/EX1_v2.dir/ScissorsPiece.cpp.obj.requires:
 
@@ -417,7 +417,7 @@ EX1_v2.exe: CMakeFiles/EX1_v2.dir/build.make
 EX1_v2.exe: CMakeFiles/EX1_v2.dir/linklibs.rsp
 EX1_v2.exe: CMakeFiles/EX1_v2.dir/objects1.rsp
 EX1_v2.exe: CMakeFiles/EX1_v2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable EX1_v2.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable EX1_v2.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\EX1_v2.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -446,6 +446,6 @@ CMakeFiles/EX1_v2.dir/clean:
 .PHONY : CMakeFiles/EX1_v2.dir/clean
 
 CMakeFiles/EX1_v2.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2 C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2 C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug C:\Users\drucker16\git\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles\EX1_v2.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2 C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2 C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug C:\Users\sasha\Desktop\Advanced_Topics_in_Programming\Advanced-Topics-in-Programming\EX1_v2\cmake-build-debug\CMakeFiles\EX1_v2.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/EX1_v2.dir/depend
 
