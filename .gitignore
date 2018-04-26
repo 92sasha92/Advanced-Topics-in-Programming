@@ -4,5 +4,4 @@
 .vscode
 cmake-build-debug/
 \.idea/
-EX2/cmake-build-debug/*
 EX2/\.idea/
