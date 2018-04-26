@@ -5,3 +5,4 @@
 cmake-build-debug/
 \.idea/
 EX2/\.idea/
+EX2/**/cmake-build-debug/
