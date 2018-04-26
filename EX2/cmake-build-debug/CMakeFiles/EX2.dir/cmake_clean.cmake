@@ -15,6 +15,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/EX2.dir/MyPoint.cpp.obj"
   "CMakeFiles/EX2.dir/MyMove.cpp.obj"
   "CMakeFiles/EX2.dir/MyPiecePosition.cpp.obj"
+  "CMakeFiles/EX2.dir/MyJokerChange.cpp.obj"
   "EX2.pdb"
   "EX2.exe"
   "EX2.exe.manifest"

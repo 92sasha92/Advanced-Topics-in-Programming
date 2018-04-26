@@ -48,3 +48,18 @@ char Piece::getCharTypeRep(Piece::RPSPiecesTypes type) {
 }
 Piece::~Piece() {
 }
+
+char Piece::fromJRepToChar(Piece::RPSJokerTypes jokerRep) {
+    switch(jokerRep){
+        case Piece::JRock:
+            return Piece::getCharTypeRep(Piece::Rock);
+        case Piece::JPaper:
+            return Piece::getCharTypeRep(Piece::Paper);
+        case Piece::JScissors:
+            return Piece::getCharTypeRep(Piece::Scissors);
+        case Piece::JBomb:
+            return Piece::getCharTypeRep(Piece::Bomb);
+        default:
+            return '#';
+    }
+}

@@ -46,4 +46,4 @@ add_executable(EX2
         MyPoint.cpp
         MyPoint.h
         MyMove.cpp
-        MyMove.h MyPiecePosition.cpp MyPiecePosition.h)
+        MyMove.h MyPiecePosition.cpp MyPiecePosition.h MyJokerChange.cpp MyJokerChange.h)

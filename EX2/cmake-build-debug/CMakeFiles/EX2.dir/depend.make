@@ -32,6 +32,13 @@ CMakeFiles/EX2.dir/Moves.cpp.obj: ../PiecePosition.h
 CMakeFiles/EX2.dir/Moves.cpp.obj: ../Point.h
 CMakeFiles/EX2.dir/Moves.cpp.obj: ../RPS.h
 
+CMakeFiles/EX2.dir/MyJokerChange.cpp.obj: ../JokerChange.h
+CMakeFiles/EX2.dir/MyJokerChange.cpp.obj: ../MyJokerChange.cpp
+CMakeFiles/EX2.dir/MyJokerChange.cpp.obj: ../MyJokerChange.h
+CMakeFiles/EX2.dir/MyJokerChange.cpp.obj: ../MyPoint.h
+CMakeFiles/EX2.dir/MyJokerChange.cpp.obj: ../Piece.h
+CMakeFiles/EX2.dir/MyJokerChange.cpp.obj: ../Point.h
+
 CMakeFiles/EX2.dir/MyMove.cpp.obj: ../Move.h
 CMakeFiles/EX2.dir/MyMove.cpp.obj: ../MyMove.cpp
 CMakeFiles/EX2.dir/MyMove.cpp.obj: ../MyMove.h
