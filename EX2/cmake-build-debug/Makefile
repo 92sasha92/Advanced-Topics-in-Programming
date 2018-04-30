@@ -257,6 +257,33 @@ Moves.cpp.s:
 	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/Moves.cpp.s
 .PHONY : Moves.cpp.s
 
+MyJokerChange.obj: MyJokerChange.cpp.obj
+
+.PHONY : MyJokerChange.obj
+
+# target to build an object file
+MyJokerChange.cpp.obj:
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyJokerChange.cpp.obj
+.PHONY : MyJokerChange.cpp.obj
+
+MyJokerChange.i: MyJokerChange.cpp.i
+
+.PHONY : MyJokerChange.i
+
+# target to preprocess a source file
+MyJokerChange.cpp.i:
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyJokerChange.cpp.i
+.PHONY : MyJokerChange.cpp.i
+
+MyJokerChange.s: MyJokerChange.cpp.s
+
+.PHONY : MyJokerChange.s
+
+# target to generate assembly for a file
+MyJokerChange.cpp.s:
+	$(MAKE) -f CMakeFiles\EX2.dir\build.make CMakeFiles/EX2.dir/MyJokerChange.cpp.s
+.PHONY : MyJokerChange.cpp.s
+
 MyMove.obj: MyMove.cpp.obj
 
 .PHONY : MyMove.obj
@@ -578,6 +605,9 @@ help:
 	@echo ... Moves.obj
 	@echo ... Moves.i
 	@echo ... Moves.s
+	@echo ... MyJokerChange.obj
+	@echo ... MyJokerChange.i
+	@echo ... MyJokerChange.s
 	@echo ... MyMove.obj
 	@echo ... MyMove.i
 	@echo ... MyMove.s
