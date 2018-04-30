@@ -1,3 +1,5 @@
+#ifndef __POINT_H_
+#define __POINT_H_
 
 //--------------------------
 // Point Interface
@@ -9,4 +11,7 @@ class Point {
 public:
 	virtual int getX() const = 0;
 	virtual int getY() const = 0;
+	virtual ~Point() {}
 };
+
+#endif

@@ -10,16 +10,5 @@ char MyPiecePosition::getPiece() const {
 }
 
 char MyPiecePosition::getJokerRep() const {
-    switch(this->jokerRep){
-        case Piece::JRock:
-            return Piece::getCharTypeRep(Piece::Rock);
-        case Piece::JPaper:
-            return Piece::getCharTypeRep(Piece::Paper);
-        case Piece::JScissors:
-            return Piece::getCharTypeRep(Piece::Scissors);
-        case Piece::JBomb:
-            return Piece::getCharTypeRep(Piece::Bomb);
-        default:
-            return '#';
-    }
+    return Piece::fromJRepToChar(this->jokerRep);
 }

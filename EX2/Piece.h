@@ -37,6 +37,7 @@ class Piece
     int getPlayerNumber();
     virtual int getCanMove();
     virtual std::string toString();
+	static char fromJRepToChar(RPSJokerTypes jokerRep);
 	virtual ~Piece();
 
   protected:
