@@ -38,6 +38,7 @@ class Piece
     virtual int getCanMove();
     virtual std::string toString();
 	static char fromJRepToChar(RPSJokerTypes jokerRep);
+	static RPSJokerTypes fromTypeRepToJRep(RPSPiecesTypes typeRep);
 	static RPSPiecesTypes getEnumTypeRep(char type);
 	virtual ~Piece();
 

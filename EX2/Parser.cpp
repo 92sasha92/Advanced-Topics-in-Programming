@@ -55,9 +55,6 @@ bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription
     }
     Piece::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piece);
     MyPoint p(col, row);
-    MyPiecePosition piecePosition(pieceType, p);
-    unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
-    vectorToFill.push_back(std::move(ptr));
     if (rps.playerPiecesArsenal[pieceType] == 0) {
         cout << "ERROR: too many pieces of the same type, type enum:" << pieceType << endl;
         return false;
@@ -74,12 +71,18 @@ bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription
             cout << "ERROR: joker piece type is wrong" << endl;
             return false;
         }
+        MyPiecePosition piecePosition(pieceType, p, Piece::fromTypeRepToJRep(jokerPieceType));
+        unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
+        vectorToFill.push_back(std::move(ptr));
         rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex, jokerPieceType);
     } else {
         if (pieceDescription.size() != 3) {
             cout << "ERROR: too much arguments" << endl;
             return false;
         }
+        MyPiecePosition piecePosition(pieceType, p);
+        unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
+        vectorToFill.push_back(std::move(ptr));
         rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex);
     }
     return true;

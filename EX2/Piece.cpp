@@ -43,7 +43,6 @@ char Piece::getCharTypeRep(Piece::RPSPiecesTypes type) {
         default:
         std::cout << "unsupported piece type" << std::endl;
             return '#';
-
     }
 }
 
@@ -83,5 +82,20 @@ char Piece::fromJRepToChar(Piece::RPSJokerTypes jokerRep) {
             return Piece::getCharTypeRep(Piece::Bomb);
         default:
             return '#';
+    }
+}
+
+Piece::RPSJokerTypes Piece::fromTypeRepToJRep(RPSPiecesTypes typeRep) {
+    switch(typeRep){
+        case Piece::Rock:
+            return Piece::JRock;
+        case Piece::Paper:
+            return Piece::JPaper;
+        case Piece::Scissors:
+            return Piece::JScissors;
+        case Piece::Bomb:
+            return Piece::JBomb;
+        default:
+            return Piece::JNotAJoker;
     }
 }

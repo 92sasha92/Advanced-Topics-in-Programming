@@ -92,13 +92,13 @@ void RPS::fight(RPS& rps, int row, int col, unique_ptr<Piece> &piecePtr) {
     Piece *piece1 , *piece2;
 
     if (rps.game[row][col]->type == Piece::Joker) {
-        piece1 = PieceFactory::createPiece(rps.game[row][col]->, playerIndex, jokerPieceType);
+        piece1 = PieceFactory::createPiece(((JokerPiece *)rps.game[row][col].get())->getJokerPiece(), 0);
     } else {
         piece1 = PieceFactory::createPiece(rps.game[row][col]->type ,0);
     }
 
     if (piecePtr->type == Piece::Joker) {
-//        piece2 = PieceFactory::createPiece(piecePtr->, playerIndex, jokerPieceType);
+        piece2 = PieceFactory::createPiece(((JokerPiece *)piecePtr.get())->getJokerPiece(), 1);
     } else {
         piece2 = PieceFactory::createPiece(piecePtr->type ,1);
     }
