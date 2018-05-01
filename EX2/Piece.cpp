@@ -46,6 +46,28 @@ char Piece::getCharTypeRep(Piece::RPSPiecesTypes type) {
 
     }
 }
+
+Piece::RPSPiecesTypes Piece::getEnumTypeRep(char type) {
+    switch(type){
+        case 'R':
+            return Piece::Rock;
+        case 'P':
+            return Piece::Paper;
+        case 'S':
+            return Piece::Scissors;
+        case 'B':
+            return Piece::Bomb;
+        case 'J':
+            return Piece::Joker;
+        case 'F':
+            return Piece::Flag;
+        default:
+            std::cout << "unsupported piece type" << std::endl;
+            return Piece::Undefined;
+
+    }
+}
+
 Piece::~Piece() {
 }
 

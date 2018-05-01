@@ -175,12 +175,16 @@ fstream
 -
 vector
 -
+memory
+-
 PieceFactory.h
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PieceFactory.h
 JokerPiece.h
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/JokerPiece.h
 EndOfGameHandler.h
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/EndOfGameHandler.h
+PiecePosition.h
+C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/PiecePosition.h
 
 C:/Users/drucker16/git/Advanced-Topics-in-Programming/EX2/RockPiece.cpp
 RockPiece.h

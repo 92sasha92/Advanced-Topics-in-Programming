@@ -24,12 +24,21 @@ void RPS::printBoard(RPS& rps) {
     }
 }
 
-RPS::RPS() {
-    for (int i = 0; i < this->Nrows; i++) {
-        for (int j = 0; j < this->Mcols; j++) {
-            this->board[i][j][0] = nullptr;
-            this->board[i][j][1] = nullptr;
+RPS::RPS() : game(0){ // TODO: game should not be initialize this way
+    for (int i = 0; i < Nrows; i++) {
+        for (int j = 0; j < Mcols; j++) {
+            board[i][j][0] = nullptr;
+            board[i][j][1] = nullptr;
         }
+    }
+
+    for (int i = 0; i < Nrows; i++){
+        vector<unique_ptr<Piece>> line;
+        for (int j = 0; j < Mcols; j++) {
+            unique_ptr<Piece> ptr;
+            line.push_back(move(ptr));
+        }
+        game.push_back(move(line));
     }
 }
 
@@ -76,6 +85,12 @@ void RPS::fight(RPS& rps, int row, int col) {
         default:
             cout << "ERROR: wrong PiecesPower type returned" << endl;
     }
+}
+
+void RPS::fight(RPS& rps,unique_ptr<Piece> &piecePtr, unique_ptr<PiecePosition> &piecePos) {
+    cout << "fight!!!" << endl;
+//    Piece opponent = rps.game[piecePos->getPosition().getX()][piecePos->getPosition().getY()];
+    // TODO: finish to implement fight function, may be problem with casting Piece to the relevant pieceType
 }
 
 EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler, int currentPlayer) {

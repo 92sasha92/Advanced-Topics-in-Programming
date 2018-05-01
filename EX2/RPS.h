@@ -5,9 +5,11 @@
 #include <sstream>
 #include <fstream>
 #include <vector>
+#include <memory>
 #include "PieceFactory.h"
 #include "JokerPiece.h"
 #include "EndOfGameHandler.h"
+#include "PiecePosition.h"
 
 using namespace std;
 
@@ -32,6 +34,7 @@ class RPS {
   public:
 
     static void fight(RPS& rps, int row, int col);
+	static void fight(RPS& rps,unique_ptr<Piece> &piecePtr, unique_ptr<PiecePosition> &piecePos);
     static void printBoard(RPS& rps);
     int getNumberOfRows() const;
     int getNumberOfColumns() const;
@@ -39,6 +42,7 @@ class RPS {
     static void createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]);
 
     Piece *board[Nrows][Mcols][2];
+	vector<vector<unique_ptr<Piece>>> game;
 
     RPS();
     RPS(const RPS& rps) = delete;

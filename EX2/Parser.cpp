@@ -26,7 +26,7 @@ bool Parser::isInteger(string str) {
 
 
 
-bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription, vector<unique_ptr<PiecePosition>> &vectorToFill ) {
+bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription, vector<unique_ptr<PiecePosition>> &vectorToFill) {
     if (pieceDescription[0].size() != 1) {
         cout << "incorrect piece type" << endl;
         return false;
@@ -154,6 +154,13 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
         }
         fileLine++;
     }
+
+     for (unsigned int i=0; i< vectorToFill.size(); i++) {
+         unique_ptr<Piece> piecePtr = make_unique<Piece>(*(PieceFactory::createPiece(Piece::getEnumTypeRep(vectorToFill[i]->getPiece()), playerIndex, Piece::getEnumTypeRep(vectorToFill[i]->getJokerRep()))));
+         RPS::fight(rps, piecePtr, vectorToFill[i]);
+         rps.game[vectorToFill[i]->getPosition().getX()][vectorToFill[i]->getPosition().getY()] = move(piecePtr);
+         cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~: " << (rps.game[vectorToFill[i]->getPosition().getX()][vectorToFill[i]->getPosition().getY()])->toString() << endl;
+     }
 
     if (rps.playerPiecesArsenal[Piece::Flag] > 0) {
         cout << "ERROR: Not all Flags placed" << endl;
