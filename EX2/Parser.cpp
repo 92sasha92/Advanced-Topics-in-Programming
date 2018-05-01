@@ -108,6 +108,7 @@ void Parser::printVector(vector<unique_ptr<PiecePosition>> &vector){
     }
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
 }
+
 void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHandler) {
     string cur_line, word;
     int fileLine = 1;
@@ -116,6 +117,7 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
     vector<string> line_words;
     initializePiecesArsenal(rps);
     vector<unique_ptr<PiecePosition>> vectorToFill;
+    unique_ptr<Piece> piecePtr;
 
     if (playerIndex == 0) {
         fin.open(player_0_name_);
@@ -156,10 +158,14 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
     }
 
      for (unsigned int i=0; i< vectorToFill.size(); i++) {
-         unique_ptr<Piece> piecePtr = make_unique<Piece>(*(PieceFactory::createPiece(Piece::getEnumTypeRep(vectorToFill[i]->getPiece()), playerIndex, Piece::getEnumTypeRep(vectorToFill[i]->getJokerRep()))));
-         RPS::fight(rps, piecePtr, vectorToFill[i]);
-         rps.game[vectorToFill[i]->getPosition().getX()][vectorToFill[i]->getPosition().getY()] = move(piecePtr);
-         cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~: " << (rps.game[vectorToFill[i]->getPosition().getX()][vectorToFill[i]->getPosition().getY()])->toString() << endl;
+         piecePtr = PieceFactory::createPiece1(Piece::getEnumTypeRep(vectorToFill[i]->getPiece()), playerIndex, Piece::getEnumTypeRep(vectorToFill[i]->getJokerRep()));
+         if (rps.game[vectorToFill[i]->getPosition().getX()][vectorToFill[i]->getPosition().getY()]) {
+             RPS::fight(rps, vectorToFill[i]->getPosition().getX(),vectorToFill[i]->getPosition().getY(), piecePtr);
+         } else {
+             rps.game[vectorToFill[i]->getPosition().getX()][vectorToFill[i]->getPosition().getY()] = move(piecePtr);
+         }
+         piecePtr.release();
+//         cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~: " << (rps.game[vectorToFill[i]->getPosition().getX()][vectorToFill[i]->getPosition().getY()])->toString() << endl;
      }
 
     if (rps.playerPiecesArsenal[Piece::Flag] > 0) {

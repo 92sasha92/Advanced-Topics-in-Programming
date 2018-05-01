@@ -34,7 +34,7 @@ class RPS {
   public:
 
     static void fight(RPS& rps, int row, int col);
-	static void fight(RPS& rps,unique_ptr<Piece> &piecePtr, unique_ptr<PiecePosition> &piecePos);
+	static void fight(RPS& rps, int row, int col, unique_ptr<Piece> &piecePtr);
     static void printBoard(RPS& rps);
     int getNumberOfRows() const;
     int getNumberOfColumns() const;

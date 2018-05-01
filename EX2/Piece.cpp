@@ -62,7 +62,7 @@ Piece::RPSPiecesTypes Piece::getEnumTypeRep(char type) {
         case 'F':
             return Piece::Flag;
         default:
-            std::cout << "unsupported piece type" << std::endl;
+//            std::cout << "unsupported piece type" << std::endl;
             return Piece::Undefined;
 
     }

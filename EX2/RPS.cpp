@@ -87,10 +87,39 @@ void RPS::fight(RPS& rps, int row, int col) {
     }
 }
 
-void RPS::fight(RPS& rps,unique_ptr<Piece> &piecePtr, unique_ptr<PiecePosition> &piecePos) {
-    cout << "fight!!!" << endl;
-//    Piece opponent = rps.game[piecePos->getPosition().getX()][piecePos->getPosition().getY()];
-    // TODO: finish to implement fight function, may be problem with casting Piece to the relevant pieceType
+void RPS::fight(RPS& rps, int row, int col, unique_ptr<Piece> &piecePtr) {
+    cout << "fight!!!!!" << endl;
+    Piece *piece1 , *piece2;
+
+    if (rps.game[row][col]->type == Piece::Joker) {
+        piece1 = PieceFactory::createPiece(rps.game[row][col]->, playerIndex, jokerPieceType);
+    } else {
+        piece1 = PieceFactory::createPiece(rps.game[row][col]->type ,0);
+    }
+
+    if (piecePtr->type == Piece::Joker) {
+//        piece2 = PieceFactory::createPiece(piecePtr->, playerIndex, jokerPieceType);
+    } else {
+        piece2 = PieceFactory::createPiece(piecePtr->type ,1);
+    }
+
+    Piece::PiecesPower winner = piece1->isStrongerThan(*piece2);
+    switch (winner){
+        case Piece::Stronger:{
+            cout << "player1 win in cell (" << row + 1 << "," << col + 1 << ")"  << endl;
+        } break;
+        case Piece::Weaker:{
+            cout << "player2 win in cell (" << row + 1 << "," << col + 1 << ")"  << endl;
+            rps.game[row][col].release();
+            rps.game[row][col] = move(piecePtr);
+        } break;
+        case Piece::Equal:{
+            cout << "tie cell (" << row + 1 << "," << col + 1 << ")"  << endl;
+            rps.game[row][col].release();
+        } break;
+        default:
+            cout << "ERROR: wrong PiecesPower type returned" << endl;
+    }
 }
 
 EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler, int currentPlayer) {

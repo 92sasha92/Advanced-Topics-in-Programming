@@ -43,3 +43,24 @@ Piece* PieceFactory::createPiece(Piece::RPSPiecesTypes pieceType, int player, Pi
     }
 }
 
+std::unique_ptr<Piece> PieceFactory::createPiece1(Piece::RPSPiecesTypes pieceType, int player, Piece::RPSPiecesTypes jokerPiece) {
+    switch (pieceType) {
+        case Piece::Rock:
+            return  std::make_unique<RockPiece>(*(new RockPiece(player)));
+        case Piece::Paper:
+            return std::make_unique<PaperPiece>(*(new PaperPiece(player)));
+        case Piece::Scissors:
+            return std::make_unique<ScissorsPiece>(*(new ScissorsPiece(player)));
+        case Piece::Bomb:
+            return std::make_unique<BombPiece>(*(new BombPiece(player)));
+        case Piece::Joker:
+            return std::make_unique<JokerPiece>(*(new JokerPiece(player, jokerPiece)));
+        case Piece::Flag:
+            return std::make_unique<FlagPiece>(*(new FlagPiece(player)));
+        default: {
+            std::cout << "ERROR: undefined piece type" << std::endl;
+            return nullptr;
+        }
+    }
+}
+
