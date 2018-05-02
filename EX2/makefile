@@ -7,7 +7,7 @@ UNAME := $(shell uname -s)
 
 COMP_FLAG=-std=c++14 -Werror -Wall -Wfatal-errors -Wno-shift-count-overflow -Weffc++ -Wno-non-virtual-dtor -Wno-strict-aliasing -Wno-unused-private-field -pedantic-errors
 
-OBJS = BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o Moves.o EndOfGameHandler.o MyMove.o MyPoint.o
+OBJS = BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o Moves.o EndOfGameHandler.o MyMove.o MyPoint.o MyPiecePosition.o  MyJokerChange.o
 EXEC = ex2
 
 all:	$(EXEC)
@@ -43,6 +43,9 @@ MyMove.o: MyMove.h MyMove.cpp MyPoint.h MyPoint.h Move.h
 	$(CC) $(COMP_FLAG) -c $*.cpp
 MyPoint.o: MyPoint.h MyPoint.cpp Point.h
 	$(CC) $(COMP_FLAG) -c $*.cpp
+MyPiecePosition.o: MyPiecePosition.h MyPiecePosition.cpp Piece.h MyPoint.h PiecePosition.h
+	$(CC) $(COMP_FLAG) -c $*.cpp
+MyJokerChange.o: MyJokerChange.h MyJokerChange.cpp JokerChange.h MyPoint.h Piece.h
 clean:
 	rm -f *.o $(EXEC) $(UNIT_TESTS)
 

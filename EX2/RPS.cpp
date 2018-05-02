@@ -165,6 +165,7 @@ EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler, 
 
         }
     }
+
     if ((!player1HaveFlag) || (!player2HaveFlag)) {
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::LooserAllFlagsEaten);
         if (player1HaveFlag) {
@@ -185,6 +186,57 @@ EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler, 
         } else {
             endOfGameHandler.setGameState(EndOfGameHandler::Tie);
 						endOfGameHandler.setEndOfGameReason(EndOfGameHandler::TieAllMovingPiecesEaten);
+        }
+    }
+    return endOfGameHandler;
+}
+
+EndOfGameHandler RPS::checkWinner1(RPS& rps, EndOfGameHandler& endOfGameHandler, int currentPlayer) {
+    bool player1HaveFlag = false, player2HaveFlag = false ,player1HaveMovingPieces = false, player2HaveMovingPieces = false;
+    for (int i = 0; i < rps.Nrows; i++) {
+        for (int j = 0; j < rps.Mcols; j++) {
+            if (rps.game[i][j]) {
+                if (rps.game[i][j]->getPlayerNumber() == 0) {
+                    if (rps.game[i][j]->type == Piece::Flag) {
+                        player1HaveFlag = true;
+                    } else if (rps.game[i][j]->type == Piece::Rock || rps.game[i][j]->type == Piece::Scissors || rps.game[i][j]->type == Piece::Paper) {
+                        player1HaveMovingPieces = true;
+                    } else if (rps.game[i][j]->type == Piece::Joker && ((JokerPiece *)rps.game[i][j].get())->getJokerPiece() != Piece::Bomb) {
+                        player1HaveMovingPieces = true;
+                    }
+                } else {
+                    if (rps.game[i][j]->type == Piece::Flag) {
+                        player2HaveFlag = true;
+                    } else if (rps.game[i][j]->type == Piece::Rock || rps.game[i][j]->type == Piece::Scissors || rps.game[i][j]->type == Piece::Paper) {
+                        player2HaveMovingPieces = true;
+                    } else if (rps.game[i][j]->type == Piece::Joker && ((JokerPiece *)rps.game[i][j].get())->getJokerPiece() != Piece::Bomb) {
+                        player2HaveMovingPieces = true;
+                    }
+                }
+            }
+        }
+    }
+
+    if ((!player1HaveFlag) || (!player2HaveFlag)) {
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::LooserAllFlagsEaten);
+        if (player1HaveFlag) {
+            endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
+        } else if (player2HaveFlag) {
+            endOfGameHandler.setGameState(EndOfGameHandler::Player2Win);
+        } else {
+            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::TieAllFlagsEaten);
+            endOfGameHandler.setGameState(EndOfGameHandler::Tie);
+        }
+
+    } else if ((!player1HaveMovingPieces && currentPlayer == 0) || (!player2HaveMovingPieces && currentPlayer)) {
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::AllMovingPiecesEaten);
+        if (player1HaveMovingPieces) {
+            endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
+        } else if (player2HaveMovingPieces) {
+            endOfGameHandler.setGameState(EndOfGameHandler::Player2Win);
+        } else {
+            endOfGameHandler.setGameState(EndOfGameHandler::Tie);
+            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::TieAllMovingPiecesEaten);
         }
     }
     return endOfGameHandler;
