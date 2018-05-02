@@ -106,16 +106,15 @@ bool Moves::movePiece(RPS & rps, MyMove& move, bool &isJokerDied, int currentPla
 		return false;
 	}
 
-	unique_ptr<Piece> piece = PieceFactory::createPiece(rps.game[fPoint->getY()][fPoint->getX()]->type ,player);
-	if (!piece) {
+	if (rps.game[fPoint->getY()][fPoint->getX()].get() == nullptr) {
 		cout << "ERROR: no piece in the given position" << endl;
 		return false;
 	}
-	if (piece->type == Piece::Joker) {
+	if (rps.game[fPoint->getY()][fPoint->getX()]->type == Piece::Joker) {
 		isJoker = true;
 	}
-	if (!(piece->getCanMove())) {
-		cout << "ERROR " << piece->toString() << " can't move" << endl;
+	if (!(rps.game[fPoint->getY()][fPoint->getX()]->getCanMove())) {
+		cout << "ERROR " << rps.game[fPoint->getY()][fPoint->getX()]->toString() << " can't move" << endl;
 		return false;
 	}
 	if ((fPoint->getY() + 1 != toPoint->getY() && fPoint->getY() - 1 != toPoint->getY() && fPoint->getX() + 1 != toPoint->getX() && fPoint->getX() - 1 != toPoint->getX()) || (fPoint->getY() != toPoint->getY() && fPoint->getX() != toPoint->getX())) {
