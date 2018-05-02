@@ -22,6 +22,22 @@ void RPS::printBoard(RPS& rps) {
         }
         cout << endl;
     }
+
+    cout << endl;
+    cout << "!@#$%^&*()(*&%^@$@#%@#%#$^%$&%&^%*^&(&^($" << endl;
+    cout << endl;
+
+    for (int i = 0; i < rps.Nrows; i++) {
+        cout << "----------------------------------------" << endl;
+        for (int j = 0; j < rps.Mcols; j++) {
+            if (rps.game[i][j]) {
+                cout << rps.game[i][j]->toString() << " |";
+            } else {
+                cout << "   |";
+            }
+        }
+        cout << endl;
+    }
 }
 
 RPS::RPS() : game(0){ // TODO: game should not be initialize this way

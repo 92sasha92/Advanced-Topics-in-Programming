@@ -107,7 +107,6 @@ void Parser::printVector(vector<unique_ptr<PiecePosition>> &vector){
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
     for(const auto &vPtr : vector){
         cout << "Piece from unique: " << vPtr->getPiece() << "    piece position: (" << vPtr->getPosition().getX() << ", " << vPtr->getPosition().getY() << ")" << endl;
-        // cout << "Piece from unique: " << vPtr->getPiece() << "    piece position: "<< vPtr->getPosition() << endl;
     }
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
 }
