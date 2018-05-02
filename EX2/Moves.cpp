@@ -1,7 +1,5 @@
 #include "Moves.h"
 
-Moves::JokerSuitChange::JokerSuitChange(int row_, int col_, char type_): row(row_), col(col_), type(type_) {
-}
 
 string Moves::player1Moves = "player1.rps_moves";
 string Moves::player2Moves = "player2.rps_moves";
@@ -110,7 +108,6 @@ bool Moves::checkMoveAndSet(RPS &rps, int currentTurn, vector<string>& line_word
 	if (move.getIsInitialized()) {
 		check = movePiece(rps, move, isJokerDied, currentTurn);
 		cout << "(" << move.getFrom().getX() << ", "<< move.getFrom().getY() << ")" << endl;
-		//curPiece = PieceFactory::createPiece(rps.game[move.getTo().getY()][move.getTo().getX()]->type ,currentTurn) ;
 		if (!check) {
 			cout << "ERROR: in making move" << endl;
 			movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);
@@ -128,61 +125,125 @@ bool Moves::checkMoveAndSet(RPS &rps, int currentTurn, vector<string>& line_word
 	return true;
 }
 
-Moves::JokerSuitChange* Moves::parseJokerSuitChange(vector<string> pieceDescription) {
+void Moves::parseJokerSuitChange(vector<string> pieceDescription, MyJokerChange &jokerChange) {
 	int col, row;
 	char type;
 	if (pieceDescription[4].compare("J:")) {
-		return nullptr;
+		return ;
 	}
 
 	if (Parser::isInteger(pieceDescription[5])) {
 		col = stoi(pieceDescription[5]) - 1;
 	} else {
-		return nullptr;
+		return ;
 	}
 
 	if (Parser::isInteger(pieceDescription[6])) {
 		row = stoi(pieceDescription[6]) - 1;
 	} else {
-		return nullptr;
+		return ;
 	}
 
 	if (pieceDescription[7].size() != 1) {
-		return nullptr;
+		return ;
 	}
 	type = pieceDescription[7][0];
 
-	return new JokerSuitChange(row, col, type);
+	MyPoint p(col, row);
+	jokerChange.init(p, Piece::fromTypeRepToJRep(Piece::getEnumTypeRep(type)));
 }
 
-bool Moves::setNewJokerSuit(RPS& rps, Moves::JokerSuitChange& suitChange, int player) {
-	if (suitChange.row < 0 || suitChange.col < 0 || suitChange.row >= rps.getNumberOfRows() || suitChange.col >= rps.getNumberOfColumns()) {
+bool Moves::setNewJokerSuit(RPS& rps, MyJokerChange &jokerChange, int player){
+	if (jokerChange.getJokerChangePosition().getY() < 0 || jokerChange.getJokerChangePosition().getX() < 0 || jokerChange.getJokerChangePosition().getY() >= rps.getNumberOfRows() || jokerChange.getJokerChangePosition().getX() >= rps.getNumberOfColumns()) {
 		cout << "ERROR: Joker suit change index is out of bound" << endl;
 		return false;
 	}
 
-	if (rps.game[suitChange.row][suitChange.col].get() == nullptr) {
+	if (rps.game[jokerChange.getJokerChangePosition().getY()][jokerChange.getJokerChangePosition().getX()]->getPlayerNumber() != player) {
+		cout << "ERROR: not current player piece" << endl;
+		return false;
+	}
+
+	if (rps.game[jokerChange.getJokerChangePosition().getY()][jokerChange.getJokerChangePosition().getX()].get() == nullptr) {
 		cout << "ERROR: no joker in the given position" << endl;
 		return false;
 	}
 
-	if (rps.game[suitChange.row][suitChange.col]->type != Piece::Joker) {
-		cout << "ERROR: Piece in the current cell (" << suitChange.row << ", " << suitChange.col << ") is not a Joker type" << endl;
+	if (rps.game[jokerChange.getJokerChangePosition().getY()][jokerChange.getJokerChangePosition().getX()]->type != Piece::Joker) {
+		cout << "ERROR: Piece in the current cell (" << jokerChange.getJokerChangePosition().getY() << ", " << jokerChange.getJokerChangePosition().getX() << ") is not a Joker type" << endl;
 		return false;
 	}
 
-	Piece::RPSPiecesTypes jokerPiece = PieceFactory::charToPieceType(suitChange.type);
+	Piece::RPSPiecesTypes jokerPiece = PieceFactory::charToPieceType(jokerChange.getJokerNewRep());
 
 	if (jokerPiece != Piece::Joker && jokerPiece != Piece::Flag && jokerPiece != Piece::Undefined) {
-		((JokerPiece *)rps.game[suitChange.row][suitChange.col].get())->setJokerPiece(jokerPiece);
+		((JokerPiece *)rps.game[jokerChange.getJokerChangePosition().getY()][jokerChange.getJokerChangePosition().getX()].get())->setJokerPiece(jokerPiece);
 	}
 	else {
-		((JokerPiece *)rps.game[suitChange.row][suitChange.col].get())->setJokerPiece(Piece::Undefined);
+		((JokerPiece *)rps.game[jokerChange.getJokerChangePosition().getY()][jokerChange.getJokerChangePosition().getX()].get())->setJokerPiece(Piece::Undefined);
 		cout << "ERROR: unsupported joker type" << endl;
 		return false;
 	}
 	return true;
 }
+
+//bool Moves::setNewJokerSuit(RPS& rps, Moves::JokerSuitChange& suitChange, int player) {
+//	if (suitChange.row < 0 || suitChange.col < 0 || suitChange.row >= rps.getNumberOfRows() || suitChange.col >= rps.getNumberOfColumns()) {
+//		cout << "ERROR: Joker suit change index is out of bound" << endl;
+//		return false;
+//	}
+//
+//	if (rps.game[suitChange.row][suitChange.col].get() == nullptr) {
+//		cout << "ERROR: no joker in the given position" << endl;
+//		return false;
+//	}
+//
+//	if (rps.game[suitChange.row][suitChange.col]->type != Piece::Joker) {
+//		cout << "ERROR: Piece in the current cell (" << suitChange.row << ", " << suitChange.col << ") is not a Joker type" << endl;
+//		return false;
+//	}
+//
+//	Piece::RPSPiecesTypes jokerPiece = PieceFactory::charToPieceType(suitChange.type);
+//
+//	if (jokerPiece != Piece::Joker && jokerPiece != Piece::Flag && jokerPiece != Piece::Undefined) {
+//		((JokerPiece *)rps.game[suitChange.row][suitChange.col].get())->setJokerPiece(jokerPiece);
+//	}
+//	else {
+//		((JokerPiece *)rps.game[suitChange.row][suitChange.col].get())->setJokerPiece(Piece::Undefined);
+//		cout << "ERROR: unsupported joker type" << endl;
+//		return false;
+//	}
+//	return true;
+//}
+
+//bool Moves::checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler, bool &isJokerDied)
+//{
+//	bool check;
+//	if (((RPS::checkWinner(rps, endOfGameHandler, !currentTurn)).getGameState() == EndOfGameHandler::GameNotOver)) {
+//		if (!isNumOfArgsCorrect(currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler)) {
+//			return false;
+//		}
+//		JokerSuitChange *suitChange = parseJokerSuitChange(line_words);
+//		if (suitChange == nullptr) {
+//			cout << "ERROR: incorrect line format" << endl;
+//			movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);
+//			return false;
+//		}
+//		else {
+//			if (isJokerDied == true && !line_words[2].compare(line_words[5]) && !line_words[3].compare(line_words[6])) {
+//				return true;
+//			}
+//			check = setNewJokerSuit(rps, *suitChange, currentTurn);
+//			delete suitChange;
+//			if (!check) {
+//				cout << "ERROR: Move change Joker type fail" << endl;
+//				movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);
+//				return false;
+//			}
+//		}
+//	}
+//	return true;
+//}
 
 bool Moves::checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler, bool &isJokerDied)
 {
@@ -191,8 +252,9 @@ bool Moves::checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &li
 		if (!isNumOfArgsCorrect(currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler)) {
 			return false;
 		}
-		JokerSuitChange *suitChange = parseJokerSuitChange(line_words);
-		if (suitChange == nullptr) {
+		MyJokerChange suitChange;
+		parseJokerSuitChange(line_words, suitChange);
+		if (!suitChange.getIsInitialized()) {
 			cout << "ERROR: incorrect line format" << endl;
 			movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);
 			return false;
@@ -201,8 +263,7 @@ bool Moves::checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &li
 			if (isJokerDied == true && !line_words[2].compare(line_words[5]) && !line_words[3].compare(line_words[6])) {
 				return true;
 			}
-			check = setNewJokerSuit(rps, *suitChange, currentTurn);
-			delete suitChange;
+			check = setNewJokerSuit(rps, suitChange, currentTurn);
 			if (!check) {
 				cout << "ERROR: Move change Joker type fail" << endl;
 				movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);

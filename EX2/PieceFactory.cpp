@@ -22,20 +22,20 @@ Piece::RPSPiecesTypes PieceFactory::charToPieceType(char c) {
 
 }
 
-//Piece* PieceFactory::createPiece(Piece::RPSPiecesTypes pieceType, int player, Piece::RPSPiecesTypes jokerPiece) {
+//std::unique_ptr<Piece> PieceFactory::createPiece(Piece::RPSPiecesTypes pieceType, int player, Piece::RPSPiecesTypes jokerPiece) {
 //    switch (pieceType) {
 //        case Piece::Rock:
-//            return new RockPiece(player);
+//            return  std::make_unique<RockPiece>(*(new RockPiece(player)));
 //        case Piece::Paper:
-//            return new PaperPiece(player);
+//            return std::make_unique<PaperPiece>(*(new PaperPiece(player)));
 //        case Piece::Scissors:
-//            return new ScissorsPiece(player);
+//            return std::make_unique<ScissorsPiece>(*(new ScissorsPiece(player)));
 //        case Piece::Bomb:
-//            return new BombPiece(player);
+//            return std::make_unique<BombPiece>(*(new BombPiece(player)));
 //        case Piece::Joker:
-//            return new JokerPiece(player, jokerPiece);// joker can be only R P S B
+//            return std::make_unique<JokerPiece>(*(new JokerPiece(player, jokerPiece)));
 //        case Piece::Flag:
-//            return new FlagPiece(player);
+//            return std::make_unique<FlagPiece>(*(new FlagPiece(player)));
 //        default: {
 //            std::cout << "ERROR: undefined piece type" << std::endl;
 //            return nullptr;
@@ -46,17 +46,17 @@ Piece::RPSPiecesTypes PieceFactory::charToPieceType(char c) {
 std::unique_ptr<Piece> PieceFactory::createPiece(Piece::RPSPiecesTypes pieceType, int player, Piece::RPSPiecesTypes jokerPiece) {
     switch (pieceType) {
         case Piece::Rock:
-            return  std::make_unique<RockPiece>(*(new RockPiece(player)));
+            return  std::make_unique<RockPiece>(player);
         case Piece::Paper:
-            return std::make_unique<PaperPiece>(*(new PaperPiece(player)));
+            return std::make_unique<PaperPiece>(player);
         case Piece::Scissors:
-            return std::make_unique<ScissorsPiece>(*(new ScissorsPiece(player)));
+            return std::make_unique<ScissorsPiece>(player);
         case Piece::Bomb:
-            return std::make_unique<BombPiece>(*(new BombPiece(player)));
+            return std::make_unique<BombPiece>(player);
         case Piece::Joker:
-            return std::make_unique<JokerPiece>(*(new JokerPiece(player, jokerPiece)));
+            return std::make_unique<JokerPiece>(player, jokerPiece);
         case Piece::Flag:
-            return std::make_unique<FlagPiece>(*(new FlagPiece(player)));
+            return std::make_unique<FlagPiece>(player);
         default: {
             std::cout << "ERROR: undefined piece type" << std::endl;
             return nullptr;
