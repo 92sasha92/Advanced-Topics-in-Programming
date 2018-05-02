@@ -25,69 +25,6 @@ bool Parser::isInteger(string str) {
 }
 
 
-
-//bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription, vector<unique_ptr<PiecePosition>> &vectorToFill) {
-//    if (pieceDescription[0].size() != 1) {
-//        cout << "incorrect piece type" << endl;
-//        return false;
-//    }
-//    char piece = pieceDescription[0][0];
-//    int col, row;
-//    if (isInteger(pieceDescription[1])){
-//        col = stoi(pieceDescription[1]) - 1;
-//    } else {
-//        cout << "incorrect line format" << endl;
-//        return false;
-//    }
-//    if (isInteger(pieceDescription[2])){
-//        row = stoi(pieceDescription[2]) - 1;
-//    } else {
-//        cout << "incorrect line format" << endl;
-//        return false;
-//    }
-//
-//    if (0 > row || row >= rps.Nrows || 0 > col || col >= rps.Mcols) {
-//        cout << "ERROR: piece set outside the board: row: " << row << ", col: "<< col <<endl;
-//        return false;
-//    } else if (rps.board[row][col][playerIndex] != nullptr) {
-//        cout << "ERROR: two pieces of the same player in one cell: row: " << row << ", col: "<< col <<endl;
-//        return false;
-//    }
-//    Piece::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piece);
-//    MyPoint p(col, row);
-//    if (rps.playerPiecesArsenal[pieceType] == 0) {
-//        cout << "ERROR: too many pieces of the same type, type enum:" << pieceType << endl;
-//        return false;
-//    }
-//    rps.playerPiecesArsenal[pieceType]--;
-//    if (pieceType == Piece::Joker) {
-//        if (pieceDescription.size() != 4) {
-//            cout << "ERROR: too much arguments" << endl;
-//            return false;
-//        }
-//        char jokerPiece = pieceDescription[3][0];
-//        Piece::RPSPiecesTypes jokerPieceType = PieceFactory::charToPieceType(jokerPiece);
-//        if (jokerPieceType == Piece::Joker || jokerPieceType == Piece::Flag || jokerPieceType == Piece::Undefined) {
-//            cout << "ERROR: joker piece type is wrong" << endl;
-//            return false;
-//        }
-//        MyPiecePosition piecePosition(pieceType, p, Piece::fromTypeRepToJRep(jokerPieceType));
-//        unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
-//        vectorToFill.push_back(std::move(ptr));
-//        rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex, jokerPieceType);
-//    } else {
-//        if (pieceDescription.size() != 3) {
-//            cout << "ERROR: too much arguments" << endl;
-//            return false;
-//        }
-//        MyPiecePosition piecePosition(pieceType, p);
-//        unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
-//        vectorToFill.push_back(std::move(ptr));
-//        rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex);
-//    }
-//    return true;
-//}
-
 bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription, vector<unique_ptr<PiecePosition>> &vectorToFill) {
     if (pieceDescription[0].size() != 1) {
         cout << "incorrect piece type" << endl;
@@ -180,7 +117,6 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
     ifstream fin;
     vector<string> line_words;
     initializePiecesArsenal(rps);
-   // vector<unique_ptr<PiecePosition>> vectorToFill;
     unique_ptr<Piece> piecePtr;
 
     if (playerIndex == 0) {
@@ -196,18 +132,18 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
     }
 
     while (!fin.eof()) {
-				try {
-					getline(fin, cur_line);
-				} catch (std::ifstream::failure e){
-					cout << "ERROR: could not read the next line from the file" << endl;
-					handleParseError(fin, endOfGameHandler, playerIndex, fileLine);
-					return;
-				}
+        try {
+            getline(fin, cur_line);
+        } catch (std::ifstream::failure e){
+            cout << "ERROR: could not read the next line from the file" << endl;
+            handleParseError(fin, endOfGameHandler, playerIndex, fileLine);
+            return;
+        }
         
-				clearLine(line_words, cur_line);
+        clearLine(line_words, cur_line);
         if (line_words.size() < 3 && line_words.size() != 0) {
             cout << "ERROR: not enogh arguments " << line_words.size() << endl;
-						handleParseError(fin, endOfGameHandler, playerIndex, fileLine);
+            handleParseError(fin, endOfGameHandler, playerIndex, fileLine);
             return;
         }
         if (line_words.size() != 0) {
@@ -221,22 +157,11 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
         fileLine++;
     }
 
-
-
     if (rps.playerPiecesArsenal[Piece::Flag] > 0) {
         cout << "ERROR: Not all Flags placed" << endl;
 				handleParseError(fin, endOfGameHandler, playerIndex, fileLine);
         return;
     }
 
-//    for (int i = 0; i < rps.Mcols; i++) {
-//        for (int j = 0; j < rps.Nrows; j++) {
-//            if (rps.board[i][j][0] != nullptr && rps.board[i][j][1]!= nullptr) {
-//                RPS::fight(rps, i, j);
-//            }
-//        }
-//    }
-
-    //Parser::printVector(vectorToFill);
     fin.close();
 }
