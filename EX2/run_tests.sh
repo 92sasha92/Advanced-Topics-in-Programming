@@ -1,6 +1,7 @@
 #!/bin/bash
+err[53]=0
 counter=0
-for ((i=1; i<=41; i++ ))
+for ((i=1; i<=52; i++ ))
 do
     echo ""
     echo ""
@@ -23,6 +24,7 @@ do
     else
         let counter=counter+1
         echo FAIL
+		err[$i]=$i 
     fi
 done
 
@@ -30,3 +32,15 @@ echo ""
 echo ""
 echo ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 echo "$counter TESTS FAILED"
+echo ""
+
+for j in "${err[@]}" 
+do
+	if (("$j" != 0))
+	then
+		echo "Test_Failed_"$j
+	fi
+done
+
+echo ""
+
