@@ -1,13 +1,13 @@
-Winner: 0
-Reason: A tie - both Moves input files done without a winner
+Winner: 1
+Reason: Bad Positioning input file for player 2 - line 5
 
-p         
- s        
-  r       
-          
-    Ff    
-      R   
-          
-          
-          
-          
+FJ       f
+RB       r
+RB       r
+P        p
+P         
+P         
+P         
+P         
+S         
+J         

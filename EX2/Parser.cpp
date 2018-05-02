@@ -172,14 +172,15 @@ void Parser::printVector(vector<unique_ptr<PiecePosition>> &vector){
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
 }
 
-void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHandler) {
+
+void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHandler, vector< unique_ptr<PiecePosition> > &vectorToFill) {
     string cur_line, word;
     int fileLine = 1;
     bool check = true;
     ifstream fin;
     vector<string> line_words;
     initializePiecesArsenal(rps);
-    vector<unique_ptr<PiecePosition>> vectorToFill;
+   // vector<unique_ptr<PiecePosition>> vectorToFill;
     unique_ptr<Piece> piecePtr;
 
     if (playerIndex == 0) {
@@ -220,17 +221,7 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
         fileLine++;
     }
 
-     for (unsigned int i=0; i< vectorToFill.size(); i++) {
-         piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(vectorToFill[i]->getPiece()), playerIndex, Piece::getEnumTypeRep(vectorToFill[i]->getJokerRep()));
-         cout << "%%%%%%%%%%%%%%%%%%%%  (" << vectorToFill[i]->getPosition().getX()<< ", " << vectorToFill[i]->getPosition().getY()<< ")" << endl;
-         if (rps.game[vectorToFill[i]->getPosition().getY()][vectorToFill[i]->getPosition().getX()].get() != nullptr) {
-             RPS::fight(rps, vectorToFill[i]->getPosition().getY(),vectorToFill[i]->getPosition().getX(), piecePtr);
-         } else {
-             rps.game[vectorToFill[i]->getPosition().getY()][vectorToFill[i]->getPosition().getX()] = move(piecePtr);
-         }
-         piecePtr.release();
-//         cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~: " << (rps.game[vectorToFill[i]->getPosition().getY()][vectorToFill[i]->getPosition().getX()])->toString() << endl;
-     }
+
 
     if (rps.playerPiecesArsenal[Piece::Flag] > 0) {
         cout << "ERROR: Not all Flags placed" << endl;
@@ -245,7 +236,7 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
 //            }
 //        }
 //    }
-    RPS::checkWinner(rps, endOfGameHandler, 0);
-    Parser::printVector(vectorToFill);
+
+    //Parser::printVector(vectorToFill);
     fin.close();
 }

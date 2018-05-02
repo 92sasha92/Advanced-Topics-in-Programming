@@ -128,12 +128,13 @@ bool Moves::movePiece(RPS & rps, MyMove& move, bool &isJokerDied, int currentPla
 
 	if (rps.game[toPoint->getY()][toPoint->getX()].get() != nullptr) {
 
-		if (rps.game[toPoint->getY()][toPoint->getX()]->type == Piece::Joker) {
-			piecePtr = PieceFactory::createPiece(rps.game[toPoint->getY()][toPoint->getX()]->type, player, ((JokerPiece *)rps.game[toPoint->getY()][toPoint->getX()].get())->getJokerPiece() );
+		if (rps.game[fPoint->getY()][fPoint->getX()]->type == Piece::Joker) {
+			piecePtr = PieceFactory::createPiece(rps.game[fPoint->getY()][fPoint->getX()]->type, player, ((JokerPiece *)rps.game[fPoint->getY()][fPoint->getX()].get())->getJokerPiece() );
 		} else {
-			piecePtr = PieceFactory::createPiece(rps.game[toPoint->getY()][toPoint->getX()]->type, player);
+			piecePtr = PieceFactory::createPiece(rps.game[fPoint->getY()][fPoint->getX()]->type, player);
 		}
 		RPS::fight(rps, toPoint->getY(), toPoint->getX(), piecePtr);
+		rps.game[fPoint->getY()][fPoint->getX()].release();
 	} else {
 		rps.game[toPoint->getY()][toPoint->getX()] = std::move(rps.game[fPoint->getY()][fPoint->getX()]);
 		rps.game[fPoint->getY()][fPoint->getX()].release();
