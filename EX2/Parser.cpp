@@ -26,6 +26,68 @@ bool Parser::isInteger(string str) {
 
 
 
+//bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription, vector<unique_ptr<PiecePosition>> &vectorToFill) {
+//    if (pieceDescription[0].size() != 1) {
+//        cout << "incorrect piece type" << endl;
+//        return false;
+//    }
+//    char piece = pieceDescription[0][0];
+//    int col, row;
+//    if (isInteger(pieceDescription[1])){
+//        col = stoi(pieceDescription[1]) - 1;
+//    } else {
+//        cout << "incorrect line format" << endl;
+//        return false;
+//    }
+//    if (isInteger(pieceDescription[2])){
+//        row = stoi(pieceDescription[2]) - 1;
+//    } else {
+//        cout << "incorrect line format" << endl;
+//        return false;
+//    }
+//
+//    if (0 > row || row >= rps.Nrows || 0 > col || col >= rps.Mcols) {
+//        cout << "ERROR: piece set outside the board: row: " << row << ", col: "<< col <<endl;
+//        return false;
+//    } else if (rps.board[row][col][playerIndex] != nullptr) {
+//        cout << "ERROR: two pieces of the same player in one cell: row: " << row << ", col: "<< col <<endl;
+//        return false;
+//    }
+//    Piece::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piece);
+//    MyPoint p(col, row);
+//    if (rps.playerPiecesArsenal[pieceType] == 0) {
+//        cout << "ERROR: too many pieces of the same type, type enum:" << pieceType << endl;
+//        return false;
+//    }
+//    rps.playerPiecesArsenal[pieceType]--;
+//    if (pieceType == Piece::Joker) {
+//        if (pieceDescription.size() != 4) {
+//            cout << "ERROR: too much arguments" << endl;
+//            return false;
+//        }
+//        char jokerPiece = pieceDescription[3][0];
+//        Piece::RPSPiecesTypes jokerPieceType = PieceFactory::charToPieceType(jokerPiece);
+//        if (jokerPieceType == Piece::Joker || jokerPieceType == Piece::Flag || jokerPieceType == Piece::Undefined) {
+//            cout << "ERROR: joker piece type is wrong" << endl;
+//            return false;
+//        }
+//        MyPiecePosition piecePosition(pieceType, p, Piece::fromTypeRepToJRep(jokerPieceType));
+//        unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
+//        vectorToFill.push_back(std::move(ptr));
+//        rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex, jokerPieceType);
+//    } else {
+//        if (pieceDescription.size() != 3) {
+//            cout << "ERROR: too much arguments" << endl;
+//            return false;
+//        }
+//        MyPiecePosition piecePosition(pieceType, p);
+//        unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
+//        vectorToFill.push_back(std::move(ptr));
+//        rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex);
+//    }
+//    return true;
+//}
+
 bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription, vector<unique_ptr<PiecePosition>> &vectorToFill) {
     if (pieceDescription[0].size() != 1) {
         cout << "incorrect piece type" << endl;
@@ -49,7 +111,7 @@ bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription
     if (0 > row || row >= rps.Nrows || 0 > col || col >= rps.Mcols) {
         cout << "ERROR: piece set outside the board: row: " << row << ", col: "<< col <<endl;
         return false;
-    } else if (rps.board[row][col][playerIndex] != nullptr) {
+    } else if (rps.game[row][col] && rps.game[row][col]->getPlayerNumber() == playerIndex) {
         cout << "ERROR: two pieces of the same player in one cell: row: " << row << ", col: "<< col <<endl;
         return false;
     }
@@ -74,7 +136,6 @@ bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription
         MyPiecePosition piecePosition(pieceType, p, Piece::fromTypeRepToJRep(jokerPieceType));
         unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
         vectorToFill.push_back(std::move(ptr));
-        rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex, jokerPieceType);
     } else {
         if (pieceDescription.size() != 3) {
             cout << "ERROR: too much arguments" << endl;
@@ -83,10 +144,10 @@ bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription
         MyPiecePosition piecePosition(pieceType, p);
         unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
         vectorToFill.push_back(std::move(ptr));
-        rps.board[row][col][playerIndex] = PieceFactory::createPiece(pieceType, playerIndex);
     }
     return true;
 }
+
 
 void Parser::clearLine(vector<string> &line_words, string &cur_line) {
 	string word;
@@ -160,14 +221,15 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
     }
 
      for (unsigned int i=0; i< vectorToFill.size(); i++) {
-         piecePtr = PieceFactory::createPiece1(Piece::getEnumTypeRep(vectorToFill[i]->getPiece()), playerIndex, Piece::getEnumTypeRep(vectorToFill[i]->getJokerRep()));
-         if (rps.game[vectorToFill[i]->getPosition().getX()][vectorToFill[i]->getPosition().getY()]) {
-             RPS::fight(rps, vectorToFill[i]->getPosition().getX(),vectorToFill[i]->getPosition().getY(), piecePtr);
+         piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(vectorToFill[i]->getPiece()), playerIndex, Piece::getEnumTypeRep(vectorToFill[i]->getJokerRep()));
+         cout << "%%%%%%%%%%%%%%%%%%%%  (" << vectorToFill[i]->getPosition().getX()<< ", " << vectorToFill[i]->getPosition().getY()<< ")" << endl;
+         if (rps.game[vectorToFill[i]->getPosition().getY()][vectorToFill[i]->getPosition().getX()].get() != nullptr) {
+             RPS::fight(rps, vectorToFill[i]->getPosition().getY(),vectorToFill[i]->getPosition().getX(), piecePtr);
          } else {
-             rps.game[vectorToFill[i]->getPosition().getX()][vectorToFill[i]->getPosition().getY()] = move(piecePtr);
+             rps.game[vectorToFill[i]->getPosition().getY()][vectorToFill[i]->getPosition().getX()] = move(piecePtr);
          }
          piecePtr.release();
-//         cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~: " << (rps.game[vectorToFill[i]->getPosition().getX()][vectorToFill[i]->getPosition().getY()])->toString() << endl;
+//         cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~: " << (rps.game[vectorToFill[i]->getPosition().getY()][vectorToFill[i]->getPosition().getX()])->toString() << endl;
      }
 
     if (rps.playerPiecesArsenal[Piece::Flag] > 0) {
@@ -176,13 +238,13 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
         return;
     }
 
-    for (int i = 0; i < rps.Mcols; i++) {
-        for (int j = 0; j < rps.Nrows; j++) {
-            if (rps.board[i][j][0] != nullptr && rps.board[i][j][1]!= nullptr) {
-                RPS::fight(rps, i, j);
-            }
-        }
-    }
+//    for (int i = 0; i < rps.Mcols; i++) {
+//        for (int j = 0; j < rps.Nrows; j++) {
+//            if (rps.board[i][j][0] != nullptr && rps.board[i][j][1]!= nullptr) {
+//                RPS::fight(rps, i, j);
+//            }
+//        }
+//    }
     RPS::checkWinner(rps, endOfGameHandler, 0);
     Parser::printVector(vectorToFill);
     fin.close();

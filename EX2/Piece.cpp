@@ -47,7 +47,8 @@ char Piece::getCharTypeRep(Piece::RPSPiecesTypes type) {
 }
 
 Piece::RPSPiecesTypes Piece::getEnumTypeRep(char type) {
-    switch(type){
+    char upperType = putchar(toupper(type));
+    switch(upperType){
         case 'R':
             return Piece::Rock;
         case 'P':
