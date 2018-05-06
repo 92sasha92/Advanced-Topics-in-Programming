@@ -3,26 +3,6 @@
 string RPS::outputFile = "rps.output";
 
 void RPS::printBoard(RPS& rps) {
-//    for (int i = 0; i < rps.Nrows; i++) {
-//        cout << "----------------------------------------" << endl;
-//        for (int j = 0; j < rps.Mcols; j++) {
-//            if (rps.board[i][j][0] != nullptr && rps.board[i][j][1] != nullptr) {
-//                cout << "ERROR: two pieces in the same cell: (" << i << ", "<< j << ") should be fight" << endl;
-//                break;
-//            }
-//            else if (rps.board[i][j][0] != nullptr) {
-//                cout << rps.board[i][j][0]->toString() << " |";
-//            }
-//            else if (rps.board[i][j][1] != nullptr) {
-//                cout << rps.board[i][j][1]->toString() << " |";
-//            }
-//            else {
-//                cout << "   |";
-//            }
-//        }
-//        cout << endl;
-//    }
-
     cout << endl;
     cout << "!@#$%^&*()(*&%^@$@#%@#%#$^%$&%&^%*^&(&^($" << endl;
     cout << endl;
