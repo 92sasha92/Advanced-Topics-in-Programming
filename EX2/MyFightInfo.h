@@ -1,7 +1,7 @@
 #pragma once
 #include "FightInfo.h"
 #include "Piece.h"
-
+#include <iostream>
 //--------------------------
 // FightInfo Interface
 //--------------------------

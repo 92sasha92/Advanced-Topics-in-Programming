@@ -2,18 +2,10 @@
 #include "Parser.h"
 #include "Moves.h"
 #include "MyMove.h"
+#include "GameManager.h"
 
 int main() {
-    MyPoint p1(3, 4), p2(5, 6), p3(6, 6);
-    MyMove m;
-//    cout << "(" << m.getFrom().getX() << ", "<< m.getFrom().getY() << ")" << endl;
-//    cout << "(" << m.getTo().getX() << ", " << m.getTo().getY() << ")" << endl << "isInitialized: " << m.getIsInitialized() << endl;
-//    m.init(p1, p2);
-//    cout << "(" << m.getFrom().getX() << ", "<< m.getFrom().getY() << ")" << endl;
-//    cout << "(" << m.getTo().getX() << ", " << m.getTo().getY() << ")" << endl << "isInitialized: " << m.getIsInitialized() << endl;
-//    m.setFrom(p3);
-//    cout << "(" << m.getFrom().getX() << ", "<< m.getFrom().getY() << ")" << endl;
-//    cout << "(" << m.getTo().getX() << ", " << m.getTo().getY() << ")" << endl << "isInitialized: " << m.getIsInitialized() << endl;
+    //GameManager manager;
     RPS rps;
     EndOfGameHandler endOfGameHandler;
     vector<unique_ptr<PiecePosition>> vectorToFill;
