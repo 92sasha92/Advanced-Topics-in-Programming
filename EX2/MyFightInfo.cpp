@@ -2,11 +2,11 @@
 
 MyFightInfo::MyFightInfo(Point& point_, Piece::RPSPiecesTypes piece_1, Piece::RPSPiecesTypes piece_2, int winner_): point(point_), piece1(piece_1), piece2(piece_2), winner(winner_){}
 
-const Point& MyFightInfo::getPosition() {
+const Point& MyFightInfo::getPosition() const{
     return point;
 }
 
-char MyFightInfo::getPiece(int player) {
+char MyFightInfo::getPiece(int player) const{
     if (player == 1) {
         return Piece::getCharTypeRep(piece1);
     } else if (player == 2) {
@@ -16,7 +16,7 @@ char MyFightInfo::getPiece(int player) {
     return '#';
 }
 
-int MyFightInfo::getWinner() {
+int MyFightInfo::getWinner() const {
     return winner;
 }
 
@@ -24,10 +24,10 @@ void MyFightInfo::setWinner(int winner_) {
     winner = winner_;
 }
 
-void MyFightInfo::setPiece(Piece::RPSPiecesTypes piece_) {
-    piece = piece_;
-}
+//void MyFightInfo::setPiece(Piece::RPSPiecesTypes piece_) {
+//    piece = piece_;
+//}
 
-void MyFightInfo::setPosition(Point &point_) {
-    point = point_;
-}
+//void MyFightInfo::setPosition(Point &point_) {
+//    point = point_;
+//}

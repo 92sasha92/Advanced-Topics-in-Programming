@@ -20,12 +20,12 @@ private:
 
 public:
     MyFightInfo(Point& point_, Piece::RPSPiecesTypes piece_1, Piece::RPSPiecesTypes piece_2, int winner_);
-    const Point& getPosition() override ;
-    char getPiece(int player) override ; // R, P, S, B or F (but NOT J)
-    int getWinner() override ; // 0 - both lost / tie, 1 - player 1 won, 2 - player 2 won
+    const Point& getPosition() const override ;
+    char getPiece(int player) const override ; // R, P, S, B or F (but NOT J)
+    int getWinner() const ; // 0 - both lost / tie, 1 - player 1 won, 2 - player 2 won
     void setWinner(int winner_);
     void setPiece(Piece::RPSPiecesTypes piece_);
-    void setPosition(Point &point_);
+    //void setPosition(Point &point_);
 };
 
 

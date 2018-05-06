@@ -1,7 +1,7 @@
 #include "GameManager.h"
 
 
-GameManager::GameManager(PlayerAlgorithm player1Algoritm_, PlayerAlgorithm player2Algoritm_): player1Algoritm(player1Algoritm_), player2Algoritm(player2Algoritm_){
+GameManager::GameManager(PlayerAlgorithm &player1Algoritm_, PlayerAlgorithm &player2Algoritm_): player1Algoritm(player1Algoritm_), player2Algoritm(player2Algoritm_), gameBoard(){
     startGame();
 }
 
