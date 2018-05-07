@@ -21,7 +21,7 @@ private:
     void ParseJokerChange(vector<string> pieceDescription);
 
 public:
-    FileAlgorithm() = default;
+    FileAlgorithm();
     void getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>>& vectorToFill) override;
     void notifyOnInitialBoard(const Board& b, const std::vector<unique_ptr<FightInfo>>& fights) override;
     void notifyOnOpponentMove(const Move& move) override; // called only on opponent�s move

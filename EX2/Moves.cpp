@@ -37,7 +37,7 @@ void Moves::parseMove(int playerIndex, vector<string> pieceDescription, MyMove &
 		}
 	}
 	// arr[1] = fRow, arr[0] = fCol, arr[3] = toRow, arr[2] = toCol
-	cout << arr[1] << " " << arr[0] << " " << arr[3] << " " << arr[2] << " player:" << playerIndex + 1 << endl;
+//	cout << arr[1] << " " << arr[0] << " " << arr[3] << " " << arr[2] << " player:" << playerIndex + 1 << endl;
 	MyPoint p1(arr[0], arr[1]), p2(arr[2], arr[3]);
 	move.init(p1, p2);
 }
