@@ -9,6 +9,7 @@ private:
     MyPoint position;
     Piece::RPSJokerTypes newJokerRep;
     bool isInitialized;
+    
 public:
     MyJokerChange(): position(-1, -1), newJokerRep(Piece::JNotAJoker), isInitialized(false){};
     MyJokerChange(MyPoint& position_, Piece::RPSJokerTypes jokerRep_): position(position_), newJokerRep(jokerRep_), isInitialized(true){};

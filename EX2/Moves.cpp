@@ -17,8 +17,7 @@ void Moves::movesHandleError(ifstream fins[2], EndOfGameHandler& endOfGameHandle
 	endOfGameHandler.setEndOfGameReason(reason);
 }
 
-bool Moves::isNumOfArgsCorrect(int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler)
-{
+bool Moves::isNumOfArgsCorrect(int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler) {
 	if (line_words.size() != 4 && line_words.size() != 8) {
 		cout << "ERROR: num of arguments is incorrect" << line_words.size() << endl;
 		movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);
@@ -187,8 +186,7 @@ bool Moves::setNewJokerSuit(RPS& rps, MyJokerChange &jokerChange, int player){
 	return true;
 }
 
-bool Moves::checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler, bool &isJokerDied)
-{
+bool Moves::checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &line_words, ifstream fins[2], int fileLinePlayer[2], EndOfGameHandler& endOfGameHandler, bool &isJokerDied) {
 	bool check;
 	if (((RPS::checkWinner(rps, endOfGameHandler, !currentTurn)).getGameState() == EndOfGameHandler::GameNotOver)) {
 		if (!isNumOfArgsCorrect(currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler)) {
