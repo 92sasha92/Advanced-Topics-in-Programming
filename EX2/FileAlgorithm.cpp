@@ -8,15 +8,18 @@ void FileAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<Piece
     this->fileLine = 0;
     RPS rps;
     EndOfGameHandler endOfGameHandler;
-    Parser::parseBoard(rps, player, endOfGameHandler, vectorToFill);
-}
 
-void FileAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector<unique_ptr<FightInfo>> &fights) {
     if (this->player == 1) {
         moveFile.open(player1Moves);
     } else if (this->player == 2) {
         moveFile.open(player2Moves);
     }
+
+    Parser::parseBoard(rps, player, endOfGameHandler, vectorToFill);
+}
+
+void FileAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector<unique_ptr<FightInfo>> &fights) {
+    //not relevant for the file algorithm
 }
 
 void FileAlgorithm::notifyOnOpponentMove(const Move &move) {
