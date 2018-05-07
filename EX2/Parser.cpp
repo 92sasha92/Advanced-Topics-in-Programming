@@ -119,9 +119,9 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
     initializePiecesArsenal(rps);
     unique_ptr<Piece> piecePtr;
 
-    if (playerIndex == 0) {
+    if (playerIndex == 1) {
         fin.open(player_0_name_);
-    } else if (playerIndex == 1) {
+    } else if (playerIndex == 2) {
         fin.open(player_1_name_);
     }
 

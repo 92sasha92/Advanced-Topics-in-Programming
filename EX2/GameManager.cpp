@@ -104,7 +104,7 @@ unique_ptr<MyFightInfo> GameManager::SetPiece(unique_ptr<PiecePosition> &piecePo
     return nullptr;
 }
 
-unique_ptr<MyFightInfo> GameManager::SetPiece(unique_ptr<Move> &pieceMove, int player) {
+unique_ptr<MyFightInfo> GameManager::SetPiece(unique_ptr<Move> &pieceMove, int player) { //for moves case only
     unique_ptr<MyFightInfo> fightInfo = nullptr;
     unique_ptr<Piece> releasePiece1, releasePiece2, piecePtr;
     unique_ptr<PiecePosition> defenderPtr, attackingPtr;
@@ -191,7 +191,22 @@ void GameManager::StartGame(){
             fightInfoVec.push_back(std::move(fightInfo));
         }
     }
+
     printBoard();
 
-    //TODO: remove all release() functions
+    /* TODO:
+     *
+     * notice that we change the player indexes from (0,1) to (1,2) {take place at parser line 122}
+     * need to find the reason to the weird prints
+     * check the SetPiece() for unique_ptr<Move> type (that will be done by writes the next instruction ->)
+     * create a game move while loop int the StartGame()
+     * handle and use all notify functions
+     * create function to handle changeJokerSuit
+     * remove all release() functions
+     * create the AutoPlayer algorithm
+     * check leak of memory
+     * create new tests
+     * SMILE!!!
+     *
+     * */
 }
