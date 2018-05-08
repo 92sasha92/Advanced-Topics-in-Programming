@@ -36,6 +36,7 @@ unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1Pie
         cout << "ERROR: The pieces are not in the same cell" << endl;
         return nullptr;
     }
+
     MyPoint point(player1PiecePos->getPosition().getX(), player1PiecePos->getPosition().getY());
 
     if (Piece::getEnumTypeRep(player1PiecePos->getPiece()) == Piece::Joker) {
@@ -175,6 +176,7 @@ unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<Move> &pieceMove, int p
     return nullptr;
 }
 
+
 GameManager::Turns GameManager::changeTurn(GameManager::Turns turn) {
     if(turn == FIRST_PLAYER_TURN){
         return SECOND_PLAYER_TURN;
@@ -182,13 +184,63 @@ GameManager::Turns GameManager::changeTurn(GameManager::Turns turn) {
         return FIRST_PLAYER_TURN;
     }
 }
+
+bool GameManager::checkLegalPositioningVec(std::vector<unique_ptr<PiecePosition>> &vec) {
+    int tempBoard[RPS::Nrows][RPS::Mcols] = {0}; //TODO: check if need to init the board
+    RPS rps;
+    rps.initializePiecesArsenal();
+    for (unique_ptr<PiecePosition> &piecePos: vec) {
+        if (piecePos->getPosition().getY() < 0 || piecePos->getPosition().getX() < 0 || piecePos->getPosition().getY() >= RPS::Nrows || piecePos->getPosition().getX() >= RPS::Mcols) {
+            cout << "Piece set outside the board" << endl;
+            return false;
+        }
+
+        if (tempBoard[piecePos->getPosition().getY()][piecePos->getPosition().getX()] == 1) {
+            cout << "(" << piecePos->getPosition().getX() + 1 << ", " << piecePos->getPosition().getY() + 1 <<  ") already occupied by other piece of the same player" << endl;
+            return false;
+        } else {
+            Piece::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piecePos->getPiece());
+            if (rps.playerPiecesArsenal[pieceType] == 0) {
+                cout << "ERROR: too many pieces of the same type, type enum:" << pieceType << endl;
+                return false;
+            }
+            rps.playerPiecesArsenal[pieceType]--;
+            tempBoard[piecePos->getPosition().getY()][piecePos->getPosition().getX()] = 1;
+            if (piecePos->getPiece() == Piece::Joker) {
+                if (piecePos->getPiece() == Piece::Joker || piecePos->getPiece() == Piece::Undefined || piecePos->getPiece() == Piece::Flag) {
+                    cout << "ERROR: joker piece type is wrong" << endl;
+                    return false;
+                }
+            }
+        }
+    }
+
+    if (rps.playerPiecesArsenal[Piece::Flag] > 0) {
+        cout << "ERROR: Not all Flags placed" << endl;
+        return false;
+    }
+    return true;
+}
+
 void GameManager::startGame(){
+    bool check1 = true, check2 = true;
     unique_ptr<MyFightInfo> fightInfo;
     std::vector<unique_ptr<MyFightInfo>> fightInfoVec;
     std::vector<unique_ptr<PiecePosition>> vectorToFill_1;
     std::vector<unique_ptr<PiecePosition>> vectorToFill_2;
     playerAlgoritms[0]->getInitialPositions(1, vectorToFill_1);
     playerAlgoritms[1]->getInitialPositions(2, vectorToFill_2);
+
+    check1 = checkLegalPositioningVec(vectorToFill_1);
+    check2 = checkLegalPositioningVec(vectorToFill_2);
+
+    if (!check1 && !check2) {
+        cout << "both players lose because unsupported rps.baord format" << endl;
+    } else if (!check1) {
+        cout << "player1 lose because unsupported rps.baord format" << endl;
+    } else if (!check2) {
+        cout << "player2 lose because unsupported rps.baord format" << endl;
+    }
 
     for (unique_ptr<PiecePosition> &piecePos1: vectorToFill_1) {
         fightInfo = setPiece(piecePos1, 1);

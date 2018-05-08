@@ -21,6 +21,7 @@ private:
     unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos);
     unique_ptr<MyFightInfo> setPiece(unique_ptr<PiecePosition> &piecePos, int player);
     unique_ptr<MyFightInfo> setPiece(unique_ptr<Move> &pieceMove, int player);
+    bool checkLegalPositioningVec(std::vector<unique_ptr<PiecePosition>> &vec);
     void printBoard();
     Turns changeTurn(Turns turn);
 

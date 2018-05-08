@@ -2,6 +2,16 @@
 
 string RPS::outputFile = "rps.output";
 
+void RPS::initializePiecesArsenal() {
+    this->playerPiecesArsenal[Piece::Rock] = RPS::R;
+    this->playerPiecesArsenal[Piece::Paper] = RPS::P;
+    this->playerPiecesArsenal[Piece::Scissors] = RPS::S;
+    this->playerPiecesArsenal[Piece::Bomb] = RPS::B;
+    this->playerPiecesArsenal[Piece::Joker] = RPS::J;
+    this->playerPiecesArsenal[Piece::Flag] = RPS::F;
+    this->playerPiecesArsenal[Piece::Undefined] = 0;
+}
+
 void RPS::printBoard(RPS& rps) {
 //    cout << endl;
 //    cout << "!@#$%^&*()(*&%^@$@#%@#%#$^%$&%&^%*^&(&^($" << endl;

@@ -15,15 +15,11 @@ using namespace std;
 
 class RPS {
   private:
-
-
-
-    int playerPiecesArsenal[7];
     static string outputFile;
-
     friend class Parser;
 
   public:
+
 	static const int Mcols = 10;
 	static const int Nrows = 10;
 	static const int R = 2;
@@ -33,12 +29,15 @@ class RPS {
 	static const int J = 2;
 	static const int F = 1;
 	static const int numOfPlayers = 2;
+	int playerPiecesArsenal[7];
+
 	static void fight(RPS& rps, int row, int col, unique_ptr<Piece> &piecePtr);
-    static void printBoard(RPS& rps);
-    int getNumberOfRows() const;
-    int getNumberOfColumns() const;
+	static void printBoard(RPS& rps);
+	int getNumberOfRows() const;
+	int getNumberOfColumns() const;
+	void initializePiecesArsenal();
 	static EndOfGameHandler checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler, int currentPlayer);
-    static void createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]);
+	static void createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]);
 
 	vector<vector<unique_ptr<Piece>>> game;
 
