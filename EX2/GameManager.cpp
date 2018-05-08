@@ -171,11 +171,11 @@ unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<Move> &pieceMove, int p
     return nullptr;
 }
 
-bool GameManager::checkLegalPositioningVec(std::vector<unique_ptr<PiecePosition>> &vec) {
+bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePosition>> &vec) {
     int tempBoard[RPS::Nrows][RPS::Mcols] = {0}; //TODO: check if need to init the board
     RPS rps;
     rps.initializePiecesArsenal();
-    for (unique_ptr<PiecePosition> &piecePos: vec) {
+    for (const unique_ptr<PiecePosition> &piecePos: vec) {
         if (piecePos->getPosition().getY() < 0 || piecePos->getPosition().getX() < 0 || piecePos->getPosition().getY() >= RPS::Nrows || piecePos->getPosition().getX() >= RPS::Mcols) {
             cout << "Piece set outside the board" << endl;
             return false;
@@ -226,19 +226,20 @@ void GameManager::startGame(){
         cout << "player1 lose because unsupported rps.baord format" << endl;
     } else if (!check2) {
         cout << "player2 lose because unsupported rps.baord format" << endl;
-    }
+    } else {
 
-    for (unique_ptr<PiecePosition> &piecePos1: vectorToFill_1) {
-        fightInfo = setPiece(piecePos1, 1);
-        if (fightInfo.get() != nullptr) {
-            fightInfoVec.push_back(std::move(fightInfo));
+        for (unique_ptr<PiecePosition> &piecePos1: vectorToFill_1) {
+            fightInfo = setPiece(piecePos1, 1);
+            if (fightInfo.get() != nullptr) {
+                fightInfoVec.push_back(std::move(fightInfo));
+            }
         }
-    }
 
-    for (unique_ptr<PiecePosition> &piecePos2: vectorToFill_2) {
-        fightInfo = setPiece(piecePos2, 2);
-        if (fightInfo.get() != nullptr) {
-            fightInfoVec.push_back(std::move(fightInfo));
+        for (unique_ptr<PiecePosition> &piecePos2: vectorToFill_2) {
+            fightInfo = setPiece(piecePos2, 2);
+            if (fightInfo.get() != nullptr) {
+                fightInfoVec.push_back(std::move(fightInfo));
+            }
         }
     }
 
