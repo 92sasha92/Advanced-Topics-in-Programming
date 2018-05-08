@@ -12,6 +12,7 @@ class MyBoard: public Board {
 private:
     std::vector<std::vector<std::unique_ptr<Piece>>> board;
     friend class GameManager;
+    friend class AutoAlgorithm;
 
 public:
     MyBoard();

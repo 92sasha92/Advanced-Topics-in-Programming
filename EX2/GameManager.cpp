@@ -26,7 +26,6 @@ void GameManager::printBoard() {
 }
 
 unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos) {
-    std::unique_ptr<MyFightInfo> fightInfo = nullptr;
     unique_ptr<Piece> piece1 , piece2;
 
     if (player1PiecePos->getPosition().getY() != player2PiecePos->getPosition().getY() || player1PiecePos->getPosition().getX() != player2PiecePos->getPosition().getX()) {
