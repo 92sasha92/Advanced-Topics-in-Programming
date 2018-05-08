@@ -471,7 +471,7 @@ void GameManager::startGame(){
             printBoard();
             if(!handleATurn(currentTurn)){
                 //TODO: handle error
-                return ;
+                break;
             }
            // endOfGame = true;
         }

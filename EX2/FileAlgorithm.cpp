@@ -117,6 +117,7 @@ unique_ptr<Move> FileAlgorithm::getMove() {
             return nullptr;
         }
         Parser::clearLine(line_words, cur_line);
+        fileLine++;
         if (line_words.size() != 0) {
             if (!isNumOfArgsCorrect(line_words, fileLine, endOfGameHandler)) {
                 return nullptr;
@@ -125,9 +126,10 @@ unique_ptr<Move> FileAlgorithm::getMove() {
             if (line_words.size() == 8) {
                 ParseJokerChange(line_words);
             }
+
+            return std::move(move);
         }
     }
-    fileLine++;
-    return std::move(move);
+    return nullptr;
 }
 
