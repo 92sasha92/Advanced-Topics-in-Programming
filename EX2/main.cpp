@@ -4,12 +4,15 @@
 #include "MyMove.h"
 #include "GameManager.h"
 #include "FileAlgorithm.h"
+#include "AutoAlgorithm.h"
 
 int main() {
     FileAlgorithm alg1, alg2;
-    unique_ptr<PlayerAlgorithm> alg_1 = make_unique<FileAlgorithm>();
+    AutoAlgorithm alg3;
+    unique_ptr<PlayerAlgorithm> alg_3 = make_unique<AutoAlgorithm>();
     unique_ptr<PlayerAlgorithm> alg_2 = make_unique<FileAlgorithm>();
-    GameManager manager(std::move(alg_1), std::move(alg_2));
+//    unique_ptr<PlayerAlgorithm> alg_3 = make_unique<AutoAlgorithm>();
+    GameManager manager(std::move(alg_3), std::move(alg_2));
 //    RPS rps;
 //    EndOfGameHandler endOfGameHandler;
 //    vector<unique_ptr<PiecePosition>> vectorToFill;

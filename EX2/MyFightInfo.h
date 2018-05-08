@@ -1,7 +1,10 @@
 #pragma once
 #include "FightInfo.h"
 #include "Piece.h"
+#include "MyPoint.h"
 #include <iostream>
+
+
 //--------------------------
 // FightInfo Interface
 //--------------------------
@@ -13,13 +16,13 @@
 
 class MyFightInfo: public FightInfo {
 private:
-    Point& point;
+    MyPoint point;
     Piece::RPSPiecesTypes piece1;
     Piece::RPSPiecesTypes piece2;
     int winner;
 
 public:
-    MyFightInfo(Point& point_, Piece::RPSPiecesTypes piece_1, Piece::RPSPiecesTypes piece_2, int winner_);
+    MyFightInfo(MyPoint &point_, Piece::RPSPiecesTypes piece_1, Piece::RPSPiecesTypes piece_2, int winner_);
     const Point& getPosition() const override ;
     char getPiece(int player) const override ; // R, P, S, B or F (but NOT J)
     int getWinner() const ; // 0 - both lost / tie, 1 - player 1 won, 2 - player 2 won
