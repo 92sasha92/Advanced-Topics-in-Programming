@@ -1,7 +1,9 @@
 #include "GameManager.h"
 
 
-GameManager::GameManager(PlayerAlgorithm &player1Algoritm_, PlayerAlgorithm &player2Algoritm_): player1Algoritm(player1Algoritm_), player2Algoritm(player2Algoritm_), gameBoard() {
+GameManager::GameManager(unique_ptr<PlayerAlgorithm> &&player1Algoritm_, unique_ptr<PlayerAlgorithm> &&player2Algoritm_): playerAlgoritms(), gameBoard() {
+    playerAlgoritms.push_back(std::move(player1Algoritm_));
+    playerAlgoritms.push_back(std::move(player2Algoritm_));
     startGame();
 }
 
@@ -171,6 +173,14 @@ unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<Move> &pieceMove, int p
     return nullptr;
 }
 
+GameManager::Turns GameManager::changeTurn(GameManager::Turns turn) {
+    if(turn == FIRST_PLAYER_TURN){
+        return SECOND_PLAYER_TURN;
+    } else {
+        return FIRST_PLAYER_TURN;
+    }
+}
+
 bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePosition>> &vec) {
     int tempBoard[RPS::Nrows][RPS::Mcols] = {0}; //TODO: check if need to init the board
     RPS rps;
@@ -214,8 +224,8 @@ void GameManager::startGame(){
     std::vector<unique_ptr<MyFightInfo>> fightInfoVec;
     std::vector<unique_ptr<PiecePosition>> vectorToFill_1;
     std::vector<unique_ptr<PiecePosition>> vectorToFill_2;
-    player1Algoritm.getInitialPositions(1, vectorToFill_1);
-    player2Algoritm.getInitialPositions(2, vectorToFill_2);
+    playerAlgoritms[0]->getInitialPositions(1, vectorToFill_1);
+    playerAlgoritms[1]->getInitialPositions(2, vectorToFill_2);
 
     check1 = checkLegalPositioningVec(vectorToFill_1);
     check2 = checkLegalPositioningVec(vectorToFill_2);
@@ -242,7 +252,15 @@ void GameManager::startGame(){
             }
         }
     }
+//    this->player1Algoritm.
+    bool endOfGame = false;
+    Turns currentTurn = FIRST_PLAYER_TURN;
+    while(!endOfGame){
 
+
+        currentTurn = changeTurn(currentTurn);
+        endOfGame = true;
+    }
     printBoard();
 
     /* TODO:

@@ -7,7 +7,9 @@
 
 int main() {
     FileAlgorithm alg1, alg2;
-    GameManager manager(alg1, alg2);
+    unique_ptr<PlayerAlgorithm> alg_1 = make_unique<FileAlgorithm>();
+    unique_ptr<PlayerAlgorithm> alg_2 = make_unique<FileAlgorithm>();
+    GameManager manager(std::move(alg_1), std::move(alg_2));
 //    RPS rps;
 //    EndOfGameHandler endOfGameHandler;
 //    vector<unique_ptr<PiecePosition>> vectorToFill;
