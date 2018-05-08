@@ -10,7 +10,7 @@ PaperPiece::PaperPiece(int player) :Piece(player) {
 }
 
 std::string PaperPiece::toString() {
-    if (this->getPlayerNumber() == 1) {
+    if (this->getPlayerNumber() == 2) {
         return "p";
     } else {
         return "P";

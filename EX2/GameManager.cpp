@@ -1,5 +1,6 @@
 #include "GameManager.h"
 
+string GameManager::outputFile = "rps.output";
 
 GameManager::GameManager(unique_ptr<PlayerAlgorithm> &&player1Algoritm_, unique_ptr<PlayerAlgorithm> &&player2Algoritm_): playerAlgoritms(), gameBoard() {
     playerAlgoritms.push_back(std::move(player1Algoritm_));
@@ -107,7 +108,7 @@ unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<PiecePosition> &piecePo
     return nullptr;
 }
 
-unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<Move> &pieceMove, int player) { //for moves case only
+unique_ptr<MyFightInfo> GameManager::makeMove(unique_ptr<Move> &pieceMove, int player) { //for moves case only
     unique_ptr<MyFightInfo> fightInfo = nullptr;
     unique_ptr<Piece> releasePiece1, releasePiece2, piecePtr;
     unique_ptr<PiecePosition> defenderPtr, attackingPtr;
@@ -181,11 +182,12 @@ GameManager::Turns GameManager::changeTurn(GameManager::Turns turn) {
     }
 }
 
-bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePosition>> &vec) {
+bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePosition>> &vec, int &errorLineCounter) {
     int tempBoard[RPS::Nrows][RPS::Mcols] = {0}; //TODO: check if need to init the board
     RPS rps;
     rps.initializePiecesArsenal();
     for (const unique_ptr<PiecePosition> &piecePos: vec) {
+        errorLineCounter++;
         if (piecePos->getPosition().getY() < 0 || piecePos->getPosition().getX() < 0 || piecePos->getPosition().getY() >= RPS::Nrows || piecePos->getPosition().getX() >= RPS::Mcols) {
             cout << "Piece set outside the board" << endl;
             return false;
@@ -223,7 +225,7 @@ EndOfGameHandler GameManager::checkWinner(EndOfGameHandler& endOfGameHandler, in
     for (int i = 0; i < RPS::Nrows; i++) {
         for (int j = 0; j < RPS::Mcols; j++) {
             if (this->gameBoard.board[i][j].get() != nullptr) {
-                if (this->gameBoard.board[i][j]->getPlayerNumber() == 0) {
+                if (this->gameBoard.board[i][j]->getPlayerNumber() == 1) {
                     if (this->gameBoard.board[i][j]->type == Piece::Flag) {
                         player1HaveFlag = true;
                     } else if (this->gameBoard.board[i][j]->type == Piece::Rock || this->gameBoard.board[i][j]->type == Piece::Scissors || this->gameBoard.board[i][j]->type == Piece::Paper) {
@@ -269,8 +271,163 @@ EndOfGameHandler GameManager::checkWinner(EndOfGameHandler& endOfGameHandler, in
     return endOfGameHandler;
 }
 
+int GameManager::playerNum(GameManager::Turns const &currentTurn) {
+    if(currentTurn == FIRST_PLAYER_TURN){
+        return 1;
+    } else {
+        return 2;
+    }
+}
+
+bool GameManager::checkIfMoveIsLegal(const Move &move, int player) {
+    //bool isJoker = false;
+    RPS rps;
+    unique_ptr<Piece> piecePtr;
+    const Point *fPoint = &(move.getFrom());
+    const Point *toPoint = &(move.getTo());
+    if (fPoint->getY() < 0 || fPoint->getX() < 0 || toPoint->getX() < 0 || toPoint->getY() < 0) {
+        cout << "ERROR: move index is out of bound" << endl;
+        return false;
+    } else if (fPoint->getY() >= rps.getNumberOfRows() || fPoint->getX() >= rps.getNumberOfColumns() || toPoint->getX() >= rps.getNumberOfColumns() || toPoint->getY() >= rps.getNumberOfRows()) {
+        cout << "ERROR: move index is out of bound" << endl;
+        return false;
+    }
+
+    if (gameBoard.board[fPoint->getY()][fPoint->getX()].get() == nullptr) {
+        cout << "ERROR: no piece in the given position" << endl;
+        return false;
+    }
+//    if (gameBoard.board[fPoint->getY()][fPoint->getX()]->type == Piece::Joker) {
+//        isJoker = true;
+//    }
+    if (!(gameBoard.board[fPoint->getY()][fPoint->getX()]->getCanMove())) {
+        cout << "ERROR " << gameBoard.board[fPoint->getY()][fPoint->getX()]->toString() << " can't move" << endl;
+        return false;
+    }
+    if ((fPoint->getY() + 1 != toPoint->getY() && fPoint->getY() - 1 != toPoint->getY() && fPoint->getX() + 1 != toPoint->getX() && fPoint->getX() - 1 != toPoint->getX()) || (fPoint->getY() != toPoint->getY() && fPoint->getX() != toPoint->getX())) {
+        cout << "ERROR: illegal move, can't move from: (" << fPoint->getX() + 1 << ", " << fPoint->getY() + 1 << ") to: (" << toPoint->getX() + 1 << ", " << toPoint->getY() + 1 << ")" << endl;
+        return false;
+    }
+    if (gameBoard.board[toPoint->getY()][toPoint->getX()].get() != nullptr && gameBoard.board[toPoint->getY()][toPoint->getX()]->getPlayerNumber() == player) {
+        cout << "ERROR: the cell already occupied by other piece of the same player" << endl;
+        return false;
+    }
+    return true;
+}
+
+bool GameManager::checkJokerChangeAndSet(const JokerChange &jokerChange, int player) {
+    RPS rps;
+    if (jokerChange.getJokerChangePosition().getY() < 0 || jokerChange.getJokerChangePosition().getX() < 0 || jokerChange.getJokerChangePosition().getY() >= rps.getNumberOfRows() || jokerChange.getJokerChangePosition().getX() >= rps.getNumberOfColumns()) {
+        cout << "ERROR: Joker suit change index is out of bound" << endl;
+        return false;
+    }
+
+    if (gameBoard.board[jokerChange.getJokerChangePosition().getY()][jokerChange.getJokerChangePosition().getX()]->getPlayerNumber() != player) {
+        cout << "ERROR: not current player piece" << endl;
+        return false;
+    }
+
+    if (gameBoard.board[jokerChange.getJokerChangePosition().getY()][jokerChange.getJokerChangePosition().getX()].get() == nullptr) {
+        cout << "ERROR: no joker in the given position" << endl;
+        return false;
+    }
+
+    if (gameBoard.board[jokerChange.getJokerChangePosition().getY()][jokerChange.getJokerChangePosition().getX()]->type != Piece::Joker) {
+        cout << "ERROR: Piece in the current cell (" << jokerChange.getJokerChangePosition().getY() << ", " << jokerChange.getJokerChangePosition().getX() << ") is not a Joker type" << endl;
+        return false;
+    }
+
+    Piece::RPSPiecesTypes jokerPiece = PieceFactory::charToPieceType(jokerChange.getJokerNewRep());
+
+    if (jokerPiece != Piece::Joker && jokerPiece != Piece::Flag && jokerPiece != Piece::Undefined) {
+        ((JokerPiece *)gameBoard.board[jokerChange.getJokerChangePosition().getY()][jokerChange.getJokerChangePosition().getX()].get())->setJokerPiece(jokerPiece);
+    }
+    else {
+        ((JokerPiece *)gameBoard.board[jokerChange.getJokerChangePosition().getY()][jokerChange.getJokerChangePosition().getX()].get())->setJokerPiece(Piece::Undefined);
+        cout << "ERROR: unsupported joker type" << endl;
+        return false;
+    }
+    return true;
+}
+
+
+bool GameManager::handleATurn(GameManager::Turns &currentTurn) {
+    unique_ptr<Move> movePtr = playerAlgoritms[currentTurn]->getMove();
+    if(movePtr.get() == nullptr){
+        return false;
+    }
+    const Move &move = *(movePtr.get());
+    if(!checkIfMoveIsLegal(move, playerNum(currentTurn))){
+        // TODO: ERROR: in making move
+        return false;
+    }
+    unique_ptr<FightInfo> fightPtr = makeMove(movePtr, playerNum(currentTurn));
+    const FightInfo &fight = *(fightPtr.get());
+    // if there was a fight
+    if(fightPtr.get() != nullptr){
+        playerAlgoritms[currentTurn]->notifyFightResult(fight);
+    }
+    unique_ptr<JokerChange> jokerChangePtr = playerAlgoritms[currentTurn]->getJokerChange();
+    if(jokerChangePtr.get() != nullptr){
+        const JokerChange &jokerChange = *(jokerChangePtr.get());
+        if(!checkJokerChangeAndSet(jokerChange, playerNum(currentTurn))){
+            // TODO: ERROR: in changing joker
+            return false;
+        }
+    }
+    playerAlgoritms[changeTurn(currentTurn)]->notifyOnOpponentMove(move);
+    if(fightPtr.get() != nullptr){
+        playerAlgoritms[changeTurn(currentTurn)]->notifyFightResult(fight);
+    }
+    currentTurn = changeTurn(currentTurn);
+    return true;
+}
+
+void GameManager::createOutFile(EndOfGameHandler &endOfGameHandler, bool *isBadInputFile, int *ErrorLine) {
+    RPS rps;
+    ofstream fout(outputFile);
+    if ((isBadInputFile[0] || isBadInputFile[1])) {
+        if (!isBadInputFile[0]) {
+            fout << "Winner: " << 1 << endl;
+        } else if (!isBadInputFile[1]) {
+            fout << "Winner: " << 2 << endl;
+        } else {
+            fout << "Winner: " << 0 << endl;
+        }
+    } else if (endOfGameHandler.getGameState() == EndOfGameHandler::GameNotOver) {
+        fout << "Winner: " << 0 << endl;
+    } else {
+        fout << "Winner: " << endOfGameHandler.getGameState() << endl;
+    }
+    fout << "Reason: ";
+    if (isBadInputFile[0] && isBadInputFile[1]) {
+        fout << "Bad Positioning input file for both players - player 1: line ";
+        fout << ErrorLine[0] << ", player 2: line " << ErrorLine[1] << endl;
+    } else if (isBadInputFile[0]) {
+        fout << "Bad Positioning input file for player 1 - line " << ErrorLine[0] << endl;
+    } else if (isBadInputFile[1]) {
+        fout << "Bad Positioning input file for player 2 - line " << ErrorLine[1] << endl;
+    } else {
+        fout << endOfGameHandler.toString() << endl;
+    }
+    // empty line
+    fout << endl;
+    for (int i = 0; i < rps.Nrows; i++) {
+        for (int j = 0; j < rps.Mcols; j++) {
+            if (gameBoard.board[i][j].get() == nullptr) {
+                fout << " ";
+            } else {
+                fout << gameBoard.board[i][j]->toString();
+            }
+        }
+        fout << endl;
+    }
+    fout.close();
+}
+
 void GameManager::startGame(){
-    bool check1 = true, check2 = true;
+    bool isBadInputVec[2] = {false, false};
+    int errorLine[2] = {0, 0};
     EndOfGameHandler endOfGameHandler;
     unique_ptr<MyFightInfo> fightInfo;
     std::vector<unique_ptr<FightInfo>> fightInfoVec;
@@ -278,15 +435,15 @@ void GameManager::startGame(){
     std::vector<unique_ptr<PiecePosition>> vectorToFill_2;
     playerAlgoritms[0]->getInitialPositions(1, vectorToFill_1);
     playerAlgoritms[1]->getInitialPositions(2, vectorToFill_2);
-
-    check1 = checkLegalPositioningVec(vectorToFill_1);
-    check2 = checkLegalPositioningVec(vectorToFill_2);
-
-    if (!check1 && !check2) {
+    Turns currentTurn = FIRST_PLAYER_TURN;
+    isBadInputVec[0] = !(checkLegalPositioningVec(vectorToFill_1, errorLine[0]));
+    isBadInputVec[1] = !(checkLegalPositioningVec(vectorToFill_2, errorLine[1]));
+    //checkWinner(endOfGameHandler, currentTurn);
+    if (isBadInputVec[0] && isBadInputVec[1]) {
         cout << "both players lose because unsupported rps.baord format" << endl;
-    } else if (!check1) {
+    } else if (isBadInputVec[0]) {
         cout << "player1 lose because unsupported rps.baord format" << endl;
-    } else if (!check2) {
+    } else if (isBadInputVec[1]) {
         cout << "player2 lose because unsupported rps.baord format" << endl;
     } else {
 
@@ -306,21 +463,25 @@ void GameManager::startGame(){
 
         this->playerAlgoritms[0]->notifyOnInitialBoard(this->gameBoard, fightInfoVec);
         this->playerAlgoritms[1]->notifyOnInitialBoard(this->gameBoard, fightInfoVec);
+
+       // bool endOfGame = false;
+
+        //checkWinner(endOfGameHandler, currentTurn);
+
+        while ((checkWinner(endOfGameHandler, currentTurn)).getGameState() == EndOfGameHandler::GameNotOver){
+            printBoard();
+            if(!handleATurn(currentTurn)){
+                //TODO: handle error
+                return ;
+            }
+           // endOfGame = true;
+        }
+        printBoard();
     }
 
 
-    bool endOfGame = false;
-    Turns currentTurn = FIRST_PLAYER_TURN;
-    checkWinner(endOfGameHandler, currentTurn);
 
-    while (!endOfGame){
-
-
-        currentTurn = changeTurn(currentTurn);
-        endOfGame = true;
-    }
-    printBoard();
-
+    createOutFile(endOfGameHandler, isBadInputVec, errorLine);
     /* TODO:
      *
      * notice that we change the player indexes from (0,1) to (1,2) {take place at parser line 122}
@@ -328,12 +489,10 @@ void GameManager::startGame(){
      * check the SetPiece() for unique_ptr<Move> type (that will be done by writes the next instruction ->)
      * create a game move while loop int the StartGame()
      * handle and use all notify functions
-     * create function to handle changeJokerSuit
      * remove all release() functions
      * create the AutoPlayer algorithm
      * check leak of memory
      * create new tests
-     * fix print function (upper case)
      * SMILE!!!
      *
      * */

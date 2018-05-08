@@ -95,7 +95,7 @@ void FileAlgorithm::parseMove(vector<string> pieceDescription, unique_ptr<MyMove
 }
 
 unique_ptr<Move> FileAlgorithm::getMove() {
-    unique_ptr<MyMove> move = nullptr;
+    unique_ptr<MyMove> move = make_unique<MyMove>();
     EndOfGameHandler endOfGameHandler;
     int fileLine = 0;
     string cur_line;

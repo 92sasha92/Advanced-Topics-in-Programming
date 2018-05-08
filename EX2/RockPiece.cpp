@@ -10,7 +10,7 @@ RockPiece::RockPiece(int player) :Piece(player) {
 }
 
 std::string RockPiece::toString() {
-    if (this->getPlayerNumber() == 1) {
+    if (this->getPlayerNumber() == 2) {
         return "r";
     } else {
         return "R";

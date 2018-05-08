@@ -11,7 +11,7 @@ BombPiece::BombPiece(int player) :Piece(player) {
 }
 
 std::string BombPiece::toString() {
-    if (this->getPlayerNumber() == 1) {
+    if (this->getPlayerNumber() == 2) {
         return "b";
     } else {
         return "B";

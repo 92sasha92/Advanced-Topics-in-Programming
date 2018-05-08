@@ -11,7 +11,7 @@ JokerPiece::JokerPiece(int player, Piece::RPSPiecesTypes jokerPiece_): Piece(pla
 }
 
 std::string JokerPiece::toString() {
-    if (this->getPlayerNumber() == 1) {
+    if (this->getPlayerNumber() == 2) {
         return "j";
     } else {
         return "J";

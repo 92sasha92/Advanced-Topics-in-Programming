@@ -10,7 +10,7 @@ ScissorsPiece::ScissorsPiece(int player) :Piece(player) {
 }
 
 std::string ScissorsPiece::toString() {
-    if (this->getPlayerNumber() == 1) {
+    if (this->getPlayerNumber() == 2) {
         return "s";
     } else {
         return "S";
