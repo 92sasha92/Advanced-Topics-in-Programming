@@ -2,7 +2,7 @@
 
 
 GameManager::GameManager(PlayerAlgorithm &player1Algoritm_, PlayerAlgorithm &player2Algoritm_): player1Algoritm(player1Algoritm_), player2Algoritm(player2Algoritm_), gameBoard() {
-    StartGame();
+    startGame();
 }
 
 void GameManager::printBoard() {
@@ -23,7 +23,7 @@ void GameManager::printBoard() {
     }
 }
 
-unique_ptr<MyFightInfo> GameManager::Fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos) {
+unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos) {
     std::unique_ptr<MyFightInfo> fightInfo = nullptr;
     unique_ptr<Piece> piece1 , piece2;
 
@@ -65,7 +65,7 @@ unique_ptr<MyFightInfo> GameManager::Fight(unique_ptr<PiecePosition> &player1Pie
     }
 }
 
-unique_ptr<MyFightInfo> GameManager::SetPiece(unique_ptr<PiecePosition> &piecePos, int player) { //for the board initializition case only
+unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<PiecePosition> &piecePos, int player) { //for the board initializition case only
     unique_ptr<MyFightInfo> fightInfo = nullptr;
     unique_ptr<Piece> releasePiece, piecePtr;
 
@@ -82,11 +82,11 @@ unique_ptr<MyFightInfo> GameManager::SetPiece(unique_ptr<PiecePosition> &piecePo
         if (gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()]->type == Piece::Joker) {
             MyPiecePosition player1PiecePos(type, point,Piece::fromTypeRepToJRep(((JokerPiece *)gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()].get())->getJokerPiece()));
             unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(player1PiecePos);
-            fightInfo = Fight(ptr, piecePos);
+            fightInfo = fight(ptr, piecePos);
         } else {
             MyPiecePosition player1PiecePos(type, point, Piece::JNotAJoker);
             unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(player1PiecePos);
-            fightInfo = Fight(ptr, piecePos);
+            fightInfo = fight(ptr, piecePos);
         }
 
         if (fightInfo->getWinner() == 0 || fightInfo->getWinner() == 2){ // if player1 wins we are not set the piece of player2 on board
@@ -104,7 +104,7 @@ unique_ptr<MyFightInfo> GameManager::SetPiece(unique_ptr<PiecePosition> &piecePo
     return nullptr;
 }
 
-unique_ptr<MyFightInfo> GameManager::SetPiece(unique_ptr<Move> &pieceMove, int player) { //for moves case only
+unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<Move> &pieceMove, int player) { //for moves case only
     unique_ptr<MyFightInfo> fightInfo = nullptr;
     unique_ptr<Piece> releasePiece1, releasePiece2, piecePtr;
     unique_ptr<PiecePosition> defenderPtr, attackingPtr;
@@ -141,9 +141,9 @@ unique_ptr<MyFightInfo> GameManager::SetPiece(unique_ptr<Move> &pieceMove, int p
         }
 
         if (player == 1) {
-            fightInfo = Fight(attackingPtr, defenderPtr);
+            fightInfo = fight(attackingPtr, defenderPtr);
         } else if (player == 2) {
-            fightInfo = Fight(defenderPtr, attackingPtr);
+            fightInfo = fight(defenderPtr, attackingPtr);
         }
 
         if (fightInfo->getWinner() == 0) {
@@ -170,7 +170,7 @@ unique_ptr<MyFightInfo> GameManager::SetPiece(unique_ptr<Move> &pieceMove, int p
     return nullptr;
 }
 
-void GameManager::StartGame(){
+void GameManager::startGame(){
     unique_ptr<MyFightInfo> fightInfo;
     std::vector<unique_ptr<MyFightInfo>> fightInfoVec;
     std::vector<unique_ptr<PiecePosition>> vectorToFill_1;
@@ -179,18 +179,19 @@ void GameManager::StartGame(){
     player2Algoritm.getInitialPositions(2, vectorToFill_2);
 
     for (unique_ptr<PiecePosition> &piecePos1: vectorToFill_1) {
-        fightInfo = SetPiece(piecePos1, 1);
+        fightInfo = setPiece(piecePos1, 1);
         if (fightInfo.get() != nullptr) {
             fightInfoVec.push_back(std::move(fightInfo));
         }
     }
 
     for (unique_ptr<PiecePosition> &piecePos2: vectorToFill_2) {
-        fightInfo = SetPiece(piecePos2, 1);
+        fightInfo = setPiece(piecePos2, 2);
         if (fightInfo.get() != nullptr) {
             fightInfoVec.push_back(std::move(fightInfo));
         }
     }
+//    this->player1Algoritm.
 
     printBoard();
 
@@ -206,6 +207,7 @@ void GameManager::StartGame(){
      * create the AutoPlayer algorithm
      * check leak of memory
      * create new tests
+     * fix print function (upper case)
      * SMILE!!!
      *
      * */

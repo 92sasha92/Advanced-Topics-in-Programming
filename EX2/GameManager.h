@@ -13,10 +13,10 @@ private:
     PlayerAlgorithm &player2Algoritm;
     MyBoard gameBoard;
 
-    void StartGame();
-    unique_ptr<MyFightInfo> Fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos);
-    unique_ptr<MyFightInfo> SetPiece(unique_ptr<PiecePosition> &piecePos, int player);
-    unique_ptr<MyFightInfo> SetPiece(unique_ptr<Move> &pieceMove, int player);
+    void startGame();
+    unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos);
+    unique_ptr<MyFightInfo> setPiece(unique_ptr<PiecePosition> &piecePos, int player);
+    unique_ptr<MyFightInfo> setPiece(unique_ptr<Move> &pieceMove, int player);
     void printBoard();
 
 public:
