@@ -218,10 +218,62 @@ bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePos
     return true;
 }
 
+EndOfGameHandler GameManager::checkWinner(EndOfGameHandler& endOfGameHandler, int currentPlayer) {
+    bool player1HaveFlag = false, player2HaveFlag = false ,player1HaveMovingPieces = false, player2HaveMovingPieces = false;
+    for (int i = 0; i < RPS::Nrows; i++) {
+        for (int j = 0; j < RPS::Mcols; j++) {
+            if (this->gameBoard.board[i][j].get() != nullptr) {
+                if (this->gameBoard.board[i][j]->getPlayerNumber() == 0) {
+                    if (this->gameBoard.board[i][j]->type == Piece::Flag) {
+                        player1HaveFlag = true;
+                    } else if (this->gameBoard.board[i][j]->type == Piece::Rock || this->gameBoard.board[i][j]->type == Piece::Scissors || this->gameBoard.board[i][j]->type == Piece::Paper) {
+                        player1HaveMovingPieces = true;
+                    } else if (this->gameBoard.board[i][j]->type == Piece::Joker && ((JokerPiece *)this->gameBoard.board[i][j].get())->getJokerPiece() != Piece::Bomb) {
+                        player1HaveMovingPieces = true;
+                    }
+                } else {
+                    if (this->gameBoard.board[i][j]->type == Piece::Flag) {
+                        player2HaveFlag = true;
+                    } else if (this->gameBoard.board[i][j]->type == Piece::Rock || this->gameBoard.board[i][j]->type == Piece::Scissors || this->gameBoard.board[i][j]->type == Piece::Paper) {
+                        player2HaveMovingPieces = true;
+                    } else if (this->gameBoard.board[i][j]->type == Piece::Joker && ((JokerPiece *)this->gameBoard.board[i][j].get())->getJokerPiece() != Piece::Bomb) {
+                        player2HaveMovingPieces = true;
+                    }
+                }
+            }
+        }
+    }
+
+    if ((!player1HaveFlag) || (!player2HaveFlag)) {
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::LooserAllFlagsEaten);
+        if (player1HaveFlag) {
+            endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
+        } else if (player2HaveFlag) {
+            endOfGameHandler.setGameState(EndOfGameHandler::Player2Win);
+        } else {
+            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::TieAllFlagsEaten);
+            endOfGameHandler.setGameState(EndOfGameHandler::Tie);
+        }
+
+    } else if ((!player1HaveMovingPieces && currentPlayer == 0) || (!player2HaveMovingPieces && currentPlayer)) {
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::AllMovingPiecesEaten);
+        if (player1HaveMovingPieces) {
+            endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
+        } else if (player2HaveMovingPieces) {
+            endOfGameHandler.setGameState(EndOfGameHandler::Player2Win);
+        } else {
+            endOfGameHandler.setGameState(EndOfGameHandler::Tie);
+            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::TieAllMovingPiecesEaten);
+        }
+    }
+    return endOfGameHandler;
+}
+
 void GameManager::startGame(){
     bool check1 = true, check2 = true;
+    EndOfGameHandler endOfGameHandler;
     unique_ptr<MyFightInfo> fightInfo;
-    std::vector<unique_ptr<MyFightInfo>> fightInfoVec;
+    std::vector<unique_ptr<FightInfo>> fightInfoVec;
     std::vector<unique_ptr<PiecePosition>> vectorToFill_1;
     std::vector<unique_ptr<PiecePosition>> vectorToFill_2;
     playerAlgoritms[0]->getInitialPositions(1, vectorToFill_1);
@@ -251,11 +303,17 @@ void GameManager::startGame(){
                 fightInfoVec.push_back(std::move(fightInfo));
             }
         }
+
+        this->playerAlgoritms[0]->notifyOnInitialBoard(this->gameBoard, fightInfoVec);
+        this->playerAlgoritms[1]->notifyOnInitialBoard(this->gameBoard, fightInfoVec);
     }
-//    this->player1Algoritm.
+
+
     bool endOfGame = false;
     Turns currentTurn = FIRST_PLAYER_TURN;
-    while(!endOfGame){
+    checkWinner(endOfGameHandler, currentTurn);
+
+    while (!endOfGame){
 
 
         currentTurn = changeTurn(currentTurn);
