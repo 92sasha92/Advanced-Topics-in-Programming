@@ -18,10 +18,11 @@ private:
     int opponentNumOfUnknownPieces;
     bool isOpponentAttacked;
     MyMove lastMove;
-    MyBoard selfGameBoard;
+    std::vector<std::vector<std::unique_ptr<Piece>>> selfGameBoard;
 
     const int TIE = 0;
-    const int EMPTY = 0;
+    const int EMPTY_CELL = 0;
+    const int GAME_NOT_OVER = 3;
     const int FLAG_SCORE = 100;
     const int BOMB_SCORE = 1;
     const int JOKER_SCORE = 5;
