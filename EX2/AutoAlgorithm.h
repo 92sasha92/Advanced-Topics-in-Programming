@@ -14,13 +14,14 @@ private:
     int player;
     int opponent;
     int opponentNumOfFlags;
-//    int opponentNumOfNonMovingPieces;  // maintain opponent moving pieces
-    int opponentNumOfUnknownPieces;  // maintain number of opponent unknown pieces
+//    int opponentNumOfNonMovingPieces;  // TODO: maintain opponent not moving pieces instead of unknown pieces
+    int opponentNumOfUnknownPieces;
     bool isOpponentAttacked;
     MyMove lastMove;
     MyBoard selfGameBoard;
 
     const int TIE = 0;
+    const int EMPTY = 0;
     const int FLAG_SCORE = 100;
     const int BOMB_SCORE = 1;
     const int JOKER_SCORE = 5;
@@ -29,10 +30,10 @@ private:
     const int LOSE_SCORE = INT_MIN;
     const int TIE_SCORE = -1000;
 
-    int scoringFunction(); // calculate the board score
-    int getPieceScore(unique_ptr<Piece> piece); // switch case of the pieces score given the opponent neighbors and their distance
-    int getUnknownPieceTypeScore(unique_ptr<Piece> piece); // As a function of the number of flags remaining in relation to the unknown pieces
-    bool isMoveLegal(unique_ptr<Move> move); // checks if a move is legal. mabe take or copy from GameManager
+    int scoringFunction(int player); // calculate the board score
+    int getPieceScore(unique_ptr<Piece> &piece);
+    int getUnknownPieceTypeScore(); // As a function of the number of flags remaining in relation to the unknown pieces
+    bool isMoveLegal(unique_ptr<Move> &move); // checks if a move is legal. maybe take or copy from GameManager
 
 public:
     AutoAlgorithm();

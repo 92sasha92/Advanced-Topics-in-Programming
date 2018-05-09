@@ -482,13 +482,9 @@ void GameManager::startGame(){
     createOutFile(endOfGameHandler, isBadInputVec, errorLine);
     /* TODO:
      *
-     * notice that we change the player indexes from (0,1) to (1,2) {take place at parser line 122}
      * need to find the reason to the weird prints
-     * check the SetPiece() for unique_ptr<Move> type (that will be done by writes the next instruction ->)
-     * create a game move while loop int the StartGame()
      * handle and use all notify functions
      * remove all release() functions
-     * create the AutoPlayer algorithm
      * check leak of memory
      * create new tests
      * SMILE!!!

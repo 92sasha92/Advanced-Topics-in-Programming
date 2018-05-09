@@ -145,6 +145,50 @@ void AutoAlgorithm::notifyFightResult(const FightInfo& fightInfo) {
     }
 }
 
+int AutoAlgorithm::scoringFunction(int player) {
+    MyPoint p(0,0);
+    int score = 0;
+//    int winner = checkWinner();
+//
+//    if (winner == player) {
+//        return WIN_SCORE;
+//    } else if (winner != TIE) { // opponent wins
+//        return LOSE_SCORE;
+//    } // TODO: handle the case of a tie
+
+    for (int i = 0; i < RPS::Nrows; i++) {
+        p.setY(i);
+        for (int j = 0; j < RPS::Mcols; j++) {
+            p.setX(j);
+            if (this->selfGameBoard.getPlayer(p) == player){
+                score += getPieceScore(this->selfGameBoard.board[i][j]);
+            } else if (this->selfGameBoard.getPlayer(p) != EMPTY){
+                score -= getPieceScore(this->selfGameBoard.board[i][j]);
+            }
+        }
+    }
+    return score;
+}
+
+int AutoAlgorithm::getPieceScore(unique_ptr<Piece> &piece) {
+    switch (piece->type) {
+        case Piece::Flag:
+            return FLAG_SCORE;
+        case Piece::Bomb:
+            return BOMB_SCORE;
+        case Piece::Joker:
+            return JOKER_SCORE;
+        case Piece::Undefined:
+            return getUnknownPieceTypeScore();
+        default:
+            return SIMPLE_PIECE_SCORE; // TODO: create function that calculate the simple pieces score given the opponent neighbors and their distances from it
+    }
+}
+
+int AutoAlgorithm::getUnknownPieceTypeScore() { // TODO: create more sophisticated function
+    return (FLAG_SCORE * opponentNumOfFlags)/opponentNumOfUnknownPieces;
+}
+
 unique_ptr<Move> AutoAlgorithm::getMove() {
 
     //TODO: lastMove = // update the move i do
