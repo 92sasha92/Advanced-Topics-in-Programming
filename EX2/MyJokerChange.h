@@ -17,6 +17,7 @@ public:
     char getJokerNewRep() const override; // R, P, S or B (but NOT J and NOT F)
     bool getIsInitialized() const;
     void setInitializedTrue();
+    void setInitialized(bool init);
     void setPosition(MyPoint &position_);
     void setNewJokerRep(Piece::RPSJokerTypes newRep);
     bool init(MyPoint &position, Piece::RPSJokerTypes newJokerRep);

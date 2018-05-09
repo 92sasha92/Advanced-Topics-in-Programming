@@ -33,3 +33,7 @@ bool MyJokerChange::init(MyPoint &position, Piece::RPSJokerTypes newRep){
     this->setInitializedTrue();
     return true;
 }
+
+void MyJokerChange::setInitialized(bool init) {
+    this->isInitialized = init;
+}

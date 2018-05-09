@@ -3,6 +3,7 @@
 #include "MyBoard.h"
 #include <stdlib.h>
 #include <time.h>
+#include <climits>
 #include "RPS.h"
 #include "MyPoint.h"
 #include "MyMove.h"

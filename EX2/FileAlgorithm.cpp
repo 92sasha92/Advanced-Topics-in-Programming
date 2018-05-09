@@ -3,7 +3,9 @@
 string FileAlgorithm::player1Moves = "player1.rps_moves";
 string FileAlgorithm::player2Moves = "player2.rps_moves";
 
-FileAlgorithm::FileAlgorithm(): moveFile(nullptr), player(0), fileLine(0), jokerChange(nullptr){}
+FileAlgorithm::FileAlgorithm(): moveFile(nullptr), player(0), fileLine(0), jokerChange(){
+
+}
 
 void FileAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>> &vectorToFill) {
     this->player = player;
@@ -33,13 +35,22 @@ void FileAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
 }
 
 unique_ptr<JokerChange> FileAlgorithm::getJokerChange() {
+//    if(this->jokerChange->getIsInitialized()){
+//        return move(this->jokerChange);
+//    } else {
+//        return nullptr;
+//    }
     return move(this->jokerChange);
 }
 
 void FileAlgorithm::ParseJokerChange(vector<string> pieceDescription) {
     int col, row;
     char type;
-    this->jokerChange = nullptr;
+    //this->jokerChange.get();
+    //this->jokerChange = nullptr;
+    unique_ptr<MyJokerChange> m = make_unique<MyJokerChange>();
+    jokerChange = move(m);
+    //this->jokerChange->setInitialized(false);
     if (pieceDescription[4].compare("J:")) {
         cout << "ERROR: Joker line format should start with 'J:'" << endl;
         return;
@@ -65,6 +76,8 @@ void FileAlgorithm::ParseJokerChange(vector<string> pieceDescription) {
 
     MyPoint p(col, row);
     this->jokerChange->init(p, Piece::fromTypeRepToJRep(Piece::getEnumTypeRep(type)));
+//    unique_ptr<JokerChange> joker = make_unique<MyJokerChange>(p, Piece::fromTypeRepToJRep(Piece::getEnumTypeRep(type)));
+//    this->jokerChange = std::move(joker);
 
 }
 
