@@ -78,7 +78,7 @@ void AutoAlgorithm::notifyOnInitialBoard(const Board& b, const std::vector<uniqu
     }
 }
 
-void AutoAlgorithm::notifyOnOpponentMove(const Move& move) { // TODO: check that move is legal
+void AutoAlgorithm::notifyOnOpponentMove(const Move& move) { // TODO: need check that move is legal?
     if (this->selfGameBoard.board[move.getTo().getY()][move.getTo().getY()].get() != nullptr) {
         MyPoint pFrom(move.getFrom().getY(), move.getFrom().getX());
         MyPoint pTo(move.getTo().getY(), move.getTo().getX());

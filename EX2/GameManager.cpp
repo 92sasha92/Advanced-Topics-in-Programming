@@ -78,7 +78,6 @@ unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<PiecePosition> &piecePo
     }
 
     if (gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()].get() != nullptr) {
-        // TODO: set "player1PiecePos" to be player 1 piece
         Piece::RPSPiecesTypes type = gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()]->type;
         MyPoint point(piecePos->getPosition().getX(), piecePos->getPosition().getY());
 
@@ -182,8 +181,7 @@ GameManager::Turns GameManager::changeTurn(GameManager::Turns turn) {
 }
 
 bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePosition>> &vec, int &errorLineCounter) {
-    int tempBoard[RPS::Nrows][RPS::Mcols] = {0}; //TODO: check if need to init the board
-    RPS rps;
+    int tempBoard[RPS::Nrows][RPS::Mcols] = {0};
     rps.initializePiecesArsenal();
     for (const unique_ptr<PiecePosition> &piecePos: vec) {
         errorLineCounter++;

@@ -17,7 +17,20 @@ private:
     bool isOpponentAttacked;
     MyMove lastMove;
     MyBoard selfGameBoard;
+
     const int TIE = 0;
+    const int FLAG_SCORE = 100;
+    const int BOMB_SCORE = 1;
+    const int JOKER_SCORE = 5;
+    const int SIMPLE_PIECE_SCORE = 1;
+    const int WIN_SCORE = INT_MAX;
+    const int LOSE_SCORE = INT_MIN;
+    const int TIE_SCORE = -1000;
+
+    int scoringFunction(); // calculate the board score
+    int getPieceScore(unique_ptr<Piece> piece); // switch case of the pieces score given the opponent neighbors and their distance
+    int getUnknownPieceTypeScore(unique_ptr<Piece> piece); // As a function of the number of flags remaining in relation to the unknown pieces
+    bool isMoveLegal(unique_ptr<Move> move); // checks if a move is legal
 
 public:
     AutoAlgorithm();
