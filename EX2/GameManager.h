@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 #include "MyBoard.h"
-#include "Mypoint.h"
+#include "MyPoint.h"
 #include "MyFightInfo.h"
 #include "MyPiecePosition.h"
 
@@ -17,7 +17,7 @@ private:
         SECOND_PLAYER_TURN = 1
     }Turns;
     int playerNum(GameManager::Turns const &currentTurn);
-    bool handleATurn(GameManager::Turns &currentTurn);
+    bool handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, int fileLinePlayer[2]);
     void startGame();
     unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos);
     unique_ptr<MyFightInfo> setPiece(unique_ptr<PiecePosition> &piecePos, int player);

@@ -13,7 +13,7 @@ class Parser {
     static string player_1_name_;
 
     static void initializePiecesArsenal(RPS& rps);
-    static void handleParseError(ifstream& fin, EndOfGameHandler& endOfGameHandler, int playerIndex, int fileLine);
+    static void handleParseError(ifstream& fin, EndOfGameHandler& endOfGameHandler, int playerIndex, int fileLine, vector< unique_ptr<PiecePosition> > &vectorToFill);
     static bool setPiece(RPS& rps, int playerNumber, vector<string> piece_description, vector<unique_ptr<PiecePosition>> &vectorToFill);
 
   public:
