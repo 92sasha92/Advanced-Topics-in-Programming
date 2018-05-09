@@ -5,6 +5,7 @@
 #include <time.h>
 #include "RPS.h"
 #include "MyPoint.h"
+#include "MyMove.h"
 #include "MyPiecePosition.h"
 
 
@@ -13,7 +14,10 @@ private:
     int player;
     int opponent;
     int opponentNumOfFlags;
+    bool isOpponentAttacked;
+    MyMove lastMove;
     MyBoard selfGameBoard;
+    const int TIE = 0;
 
 public:
     AutoAlgorithm();
