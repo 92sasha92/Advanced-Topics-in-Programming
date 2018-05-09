@@ -150,5 +150,6 @@ unique_ptr<Move> AutoAlgorithm::getMove() {
 }
 
 unique_ptr<JokerChange> AutoAlgorithm::getJokerChange() {
+    // TODO: change the joker that is the most threat to winner piece
     return nullptr;
 }
