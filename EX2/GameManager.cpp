@@ -355,7 +355,7 @@ bool GameManager::handleATurn(GameManager::Turns &currentTurn) {
         return false;
     }
     const Move &move = *(movePtr.get());
-    if(!checkIfMoveIsLegal(move, playerNum(currentTurn))){
+    if(!RPS::checkIfMoveIsLegal(this->gameBoard.board, move, playerNum(currentTurn))){
         // TODO: ERROR: in making move
         return false;
     }

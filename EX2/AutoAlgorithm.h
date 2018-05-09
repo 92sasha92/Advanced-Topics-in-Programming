@@ -3,10 +3,12 @@
 #include "MyBoard.h"
 #include <stdlib.h>
 #include <time.h>
+#include <climits>
 #include "RPS.h"
 #include "MyPoint.h"
 #include "MyMove.h"
 #include "MyPiecePosition.h"
+#include "MyFightInfo.h"
 
 
 class AutoAlgorithm: public PlayerAlgorithm  {
@@ -20,6 +22,7 @@ private:
     MyMove lastMove;
     std::vector<std::vector<std::unique_ptr<Piece>>> selfGameBoard;
 
+    const int AUTO_ALGORITHM_DEPTH = 1;
     const int TIE = 0;
     const int EMPTY_CELL = 0;
     const int GAME_NOT_OVER = 3;
@@ -34,7 +37,10 @@ private:
     int scoringFunction(int player); // calculate the board score
     int getPieceScore(unique_ptr<Piece> &piece);
     int getUnknownPieceTypeScore(); // As a function of the number of flags remaining in relation to the unknown pieces
-    bool isMoveLegal(unique_ptr<Move> &move); // checks if a move is legal. maybe take or copy from GameManager
+    EndOfGameHandler checkWinner(EndOfGameHandler& endOfGameHandler, int currentPlayer);
+    int swapTurn(int curPlayer);
+    void undoMove(MyMove &lastMove, unique_ptr<MyFightInfo>& fightInfo, int curPlayer);
+    void recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo, int curPlayer, int &bestScore, unique_ptr<Move> &bestPtrMove, int depth);
 
 public:
     AutoAlgorithm();
