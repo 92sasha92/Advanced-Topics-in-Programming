@@ -32,7 +32,7 @@ private:
     int scoringFunction(); // calculate the board score
     int getPieceScore(unique_ptr<Piece> piece); // switch case of the pieces score given the opponent neighbors and their distance
     int getUnknownPieceTypeScore(unique_ptr<Piece> piece); // As a function of the number of flags remaining in relation to the unknown pieces
-    bool isMoveLegal(unique_ptr<Move> move); // checks if a move is legal
+    bool isMoveLegal(unique_ptr<Move> move); // checks if a move is legal. mabe take or copy from GameManager
 
 public:
     AutoAlgorithm();
