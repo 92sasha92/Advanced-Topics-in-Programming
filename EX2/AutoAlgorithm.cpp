@@ -196,7 +196,7 @@ EndOfGameHandler AutoAlgorithm::checkWinner(EndOfGameHandler& endOfGameHandler, 
             endOfGameHandler.setGameState(EndOfGameHandler::Tie);
         }
 
-    } else if ((!player1HaveMovingPieces && currentPlayer == 0) || (!player2HaveMovingPieces && currentPlayer)) {
+    } else if ((!player1HaveMovingPieces && currentPlayer == 1) || (!player2HaveMovingPieces && currentPlayer == 2)) {
         if (player1HaveMovingPieces) {
             endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
         } else if (player2HaveMovingPieces) {
@@ -280,6 +280,53 @@ void AutoAlgorithm::undoMove(MyMove &lastMove, unique_ptr<MyFightInfo>& fightInf
 
 }
 
+int AutoAlgorithm::recFunc(int curPlayer, int depth) {
+    EndOfGameHandler endOfGameHandler;
+    checkWinner(endOfGameHandler, curPlayer);
+
+    int bestScore = INT_MIN;
+    unique_ptr<Move> bestPtrMove = nullptr;
+    MyMove curMove;
+    MyPoint pTo(0,0), pFrom(0,0);
+    curPlayer = swapTurn(curPlayer);
+
+    if (endOfGameHandler.getGameState() == static_cast<EndOfGameHandler::GameState>(player)) {
+        return WIN_SCORE;
+    } else if (endOfGameHandler.getGameState() == static_cast<EndOfGameHandler::GameState>(TIE)) {
+        return TIE_SCORE;
+    }  else if (endOfGameHandler.getGameState() != static_cast<EndOfGameHandler::GameState>(GAME_NOT_OVER)) { // opponent wins
+        return LOSE_SCORE;
+    }
+
+    if (depth == 0) {
+        return scoringFunction(curPlayer);
+    }
+
+    for (int i = 0; i < RPS::Nrows; i++) {
+        pFrom.setY(i);
+        pTo.setY(i);
+        for (int j = 0; j < RPS::Mcols; j++) {
+            if ((selfGameBoard[i][j].get() != nullptr) && (selfGameBoard[i][j]->type != Piece::Undefined)) {
+                pFrom.setX(j);
+                curMove.setFrom(pFrom);
+
+                pTo.setPoint(i + 1, j);
+                recFuncHandler(curMove, pFrom , pTo, curPlayer, bestScore, bestPtrMove, depth);
+
+                pTo.setPoint(i - 1, j);
+                recFuncHandler(curMove, pFrom , pTo, curPlayer, bestScore, bestPtrMove, depth);
+
+                pTo.setPoint(i, j + 1);
+                recFuncHandler(curMove, pFrom , pTo, curPlayer, bestScore, bestPtrMove, depth);
+
+                pTo.setPoint(i, j - 1);
+                recFuncHandler(curMove, pFrom , pTo, curPlayer, bestScore, bestPtrMove, depth);
+            }
+        }
+    }
+    return bestScore;
+}
+
 void AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo,  int curPlayer, int &bestScore, unique_ptr<Move> &bestPtrMove, int depth) {
     int curScore = INT_MIN;
     unique_ptr<Move> movesTrash; // TODO: should not be a vector
@@ -290,7 +337,7 @@ void AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pT
     if (RPS::checkIfMoveIsLegal(selfGameBoard, curMove, curPlayer)) {
         fightInfoTrash = std::move(fightInfo);
 //        fightInfo = makeMove(curMove);
-//        curScore = recFunc(curPlayer, depth - 1);
+        curScore = recFunc(curPlayer, depth - 1);
         if (curScore > bestScore) {
             movesTrash = std::move(bestPtrMove);
             bestScore = curScore;
@@ -303,8 +350,7 @@ void AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pT
 unique_ptr<Move> AutoAlgorithm::getMove() {
     int depth = AUTO_ALGORITHM_DEPTH, curPlayer = player;
     int bestScore = INT_MIN;
-    unique_ptr<Move> bestPtrMove = nullptr, curPtrMove = nullptr;
-
+    unique_ptr<Move> bestPtrMove = nullptr;
     MyMove curMove;
     MyPoint pTo(0,0), pFrom(0,0);
 

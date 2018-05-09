@@ -41,6 +41,7 @@ private:
     int swapTurn(int curPlayer);
     void undoMove(MyMove &lastMove, unique_ptr<MyFightInfo>& fightInfo, int curPlayer);
     void recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo, int curPlayer, int &bestScore, unique_ptr<Move> &bestPtrMove, int depth);
+    int recFunc(int curPlayer, int depth);
 
 public:
     AutoAlgorithm();
