@@ -22,11 +22,11 @@ void MyMove::setTo(MyPoint &newToPoint) {
     this->toPoint.setY(newToPoint.getY());
 }
 
-void MyMove::setInitializedTrue(){
+void MyMove::setInitializedTrue() {
     this->isInitialized = true;
 }
 
-void MyMove::init(MyPoint &newFPoint, MyPoint &newToPoint){
+void MyMove::init(MyPoint &newFPoint, MyPoint &newToPoint) {
     this->setFrom(newFPoint);
     this->setTo(newToPoint);
     this->setInitializedTrue();
