@@ -113,36 +113,39 @@ unique_ptr<Move> FileAlgorithm::getMove() {
     int fileLine = 0;
     string cur_line;
     vector<string> line_words;
-
+//    MyPoint p(-1, -1);
+//    MyMove err;
+//    unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
+    unique_ptr<MyMove> errMove = std::make_unique<MyMove>();
     if (!moveFile.is_open()) {
         cout << "ERROR: file didn't opened" << endl;
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
         return nullptr;
     }
 
-    if (!moveFile.eof()) {
-        try {
-            getline(moveFile, cur_line);
-        } catch (std::ifstream::failure &e) {
-            cout << "ERROR: could not read the next line from the move file" << endl;
-            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
-            endOfGameHandler.setWinner(player, fileLine, fileLine); // TODO: should get fileLine of player1 and player2
-            return nullptr;
-        }
-        Parser::clearLine(line_words, cur_line);
-        fileLine++;
-        if (line_words.size() != 0) {
-            if (!isNumOfArgsCorrect(line_words, fileLine, endOfGameHandler)) {
+        while(line_words.size() == 0 && !moveFile.eof()){
+            try {
+                getline(moveFile, cur_line);
+            } catch (std::ifstream::failure &e) {
+                cout << "ERROR: could not read the next line from the move file" << endl;
+                endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
+                endOfGameHandler.setWinner(player, fileLine, fileLine); // TODO: should get fileLine of player1 and player2
                 return nullptr;
             }
-            parseMove(line_words, move);
-            if (line_words.size() == 8) {
-                ParseJokerChange(line_words);
-            }
+            Parser::clearLine(line_words, cur_line);
+            fileLine++;
+            if (line_words.size() != 0) {
+                if (!isNumOfArgsCorrect(line_words, fileLine, endOfGameHandler)) {
+                    return errMove;
+                }
+                parseMove(line_words, move);
+                if (line_words.size() == 8) {
+                    ParseJokerChange(line_words);
+                }
 
-            return std::move(move);
+                return std::move(move);
+            }
         }
-    }
     return nullptr;
 }
 
