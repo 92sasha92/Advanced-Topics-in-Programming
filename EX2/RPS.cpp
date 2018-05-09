@@ -54,15 +54,15 @@ void RPS::fight(RPS& rps, int row, int col, unique_ptr<Piece> &piecePtr) {
     unique_ptr<Piece> piece1 , piece2;
 
     if (rps.game[row][col]->type == Piece::Joker) {
-        piece1 = PieceFactory::createPiece(((JokerPiece *)rps.game[row][col].get())->getJokerPiece(), 0);
+        piece1 = PieceFactory::createPiece(((JokerPiece *)rps.game[row][col].get())->getJokerPiece(), 1);
     } else {
-        piece1 = PieceFactory::createPiece(rps.game[row][col]->type ,0);
+        piece1 = PieceFactory::createPiece(rps.game[row][col]->type ,1);
     }
 
     if (piecePtr->type == Piece::Joker) {
-        piece2 = PieceFactory::createPiece(((JokerPiece *)piecePtr.get())->getJokerPiece(), 1);
+        piece2 = PieceFactory::createPiece(((JokerPiece *)piecePtr.get())->getJokerPiece(), 2);
     } else {
-        piece2 = PieceFactory::createPiece(piecePtr->type ,1);
+        piece2 = PieceFactory::createPiece(piecePtr->type ,2);
     }
 
     Piece::PiecesPower winner = piece1->isStrongerThan(*(piece2.get()));

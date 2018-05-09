@@ -322,7 +322,6 @@ bool GameManager::checkJokerChangeAndSet(const JokerChange &jokerChange, int pla
 bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, int fileLinePlayer[2]) {
     unique_ptr<Move> movePtr = playerAlgoritms[currentTurn]->getMove();
     if(movePtr.get() == nullptr){
-
         return false;
     }
     const Move &move = *(movePtr.get());
@@ -337,6 +336,9 @@ bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler&
     // if there was a fight
     if(fightPtr.get() != nullptr){
         playerAlgoritms[currentTurn]->notifyFightResult(fight);
+    }
+    if(checkWinner(endOfGameHandler, playerNum(changeTurn(currentTurn))).getGameState() != EndOfGameHandler::GameNotOver){
+        return false;
     }
     unique_ptr<JokerChange> jokerChangePtr = playerAlgoritms[currentTurn]->getJokerChange();
     if(jokerChangePtr.get() != nullptr){
@@ -441,7 +443,7 @@ void GameManager::startGame(){
 
         //checkWinner(endOfGameHandler, currentTurn);
         int fileLinePlayer[2] = {0, 0};
-        while ((checkWinner(endOfGameHandler, currentTurn)).getGameState() == EndOfGameHandler::GameNotOver){
+        while ((checkWinner(endOfGameHandler, playerNum(currentTurn))).getGameState() == EndOfGameHandler::GameNotOver){
             printBoard();
             fileLinePlayer[currentTurn]++;
             if(!handleATurn(currentTurn, endOfGameHandler, fileLinePlayer)){
@@ -451,7 +453,7 @@ void GameManager::startGame(){
            // endOfGame = true;
         }
         printBoard();
-        checkWinner(endOfGameHandler, currentTurn);
+        checkWinner(endOfGameHandler, playerNum(currentTurn));
     }
 
 
