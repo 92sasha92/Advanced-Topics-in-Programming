@@ -336,7 +336,7 @@ void AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pT
     curMove.setTo(pTo);
     if (RPS::checkIfMoveIsLegal(selfGameBoard, curMove, curPlayer)) {
         fightInfoTrash = std::move(fightInfo);
-//        fightInfo = makeMove(curMove);
+//        fightInfo = makeMove(curMove, curPlayer);
         curScore = recFunc(curPlayer, depth - 1);
         if (curScore > bestScore) {
             movesTrash = std::move(bestPtrMove);
@@ -377,14 +377,12 @@ unique_ptr<Move> AutoAlgorithm::getMove() {
         }
     }
 
-    pFrom.setPoint(bestPtrMove->getFrom().getY(), bestPtrMove->getFrom().getX()); // TODO: over ride operator= of Move class
+    pFrom.setPoint(bestPtrMove->getFrom().getY(), bestPtrMove->getFrom().getX()); // TODO: override operator= of Move class
     pTo.setPoint(bestPtrMove->getTo().getY(), bestPtrMove->getTo().getX());
     lastMove.init(pFrom, pTo);
     isOpponentAttacked = false;
     return std::move(bestPtrMove);
 }
-
-
 
 unique_ptr<JokerChange> AutoAlgorithm::getJokerChange() {
     // TODO: change the joker that is the most threat to winner piece
