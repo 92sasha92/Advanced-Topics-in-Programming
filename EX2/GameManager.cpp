@@ -283,41 +283,41 @@ int GameManager::playerNum(GameManager::Turns const &currentTurn) {
     }
 }
 
-bool GameManager::checkIfMoveIsLegal(const Move &move, int player) {
-    //bool isJoker = false;
-    RPS rps;
-    unique_ptr<Piece> piecePtr;
-    const Point *fPoint = &(move.getFrom());
-    const Point *toPoint = &(move.getTo());
-    if (fPoint->getY() < 0 || fPoint->getX() < 0 || toPoint->getX() < 0 || toPoint->getY() < 0) {
-        cout << "ERROR: move index is out of bound" << endl;
-        return false;
-    } else if (fPoint->getY() >= rps.getNumberOfRows() || fPoint->getX() >= rps.getNumberOfColumns() || toPoint->getX() >= rps.getNumberOfColumns() || toPoint->getY() >= rps.getNumberOfRows()) {
-        cout << "ERROR: move index is out of bound" << endl;
-        return false;
-    }
-
-    if (gameBoard.board[fPoint->getY()][fPoint->getX()].get() == nullptr) {
-        cout << "ERROR: no piece in the given position" << endl;
-        return false;
-    }
-//    if (gameBoard.board[fPoint->getY()][fPoint->getX()]->type == Piece::Joker) {
-//        isJoker = true;
+//bool GameManager::checkIfMoveIsLegal(const Move &move, int player) {
+//    //bool isJoker = false;
+//    RPS rps;
+//    unique_ptr<Piece> piecePtr;
+//    const Point *fPoint = &(move.getFrom());
+//    const Point *toPoint = &(move.getTo());
+//    if (fPoint->getY() < 0 || fPoint->getX() < 0 || toPoint->getX() < 0 || toPoint->getY() < 0) {
+//        cout << "ERROR: move index is out of bound" << endl;
+//        return false;
+//    } else if (fPoint->getY() >= rps.getNumberOfRows() || fPoint->getX() >= rps.getNumberOfColumns() || toPoint->getX() >= rps.getNumberOfColumns() || toPoint->getY() >= rps.getNumberOfRows()) {
+//        cout << "ERROR: move index is out of bound" << endl;
+//        return false;
 //    }
-    if (!(gameBoard.board[fPoint->getY()][fPoint->getX()]->getCanMove())) {
-        cout << "ERROR " << gameBoard.board[fPoint->getY()][fPoint->getX()]->toString() << " can't move" << endl;
-        return false;
-    }
-    if ((fPoint->getY() + 1 != toPoint->getY() && fPoint->getY() - 1 != toPoint->getY() && fPoint->getX() + 1 != toPoint->getX() && fPoint->getX() - 1 != toPoint->getX()) || (fPoint->getY() != toPoint->getY() && fPoint->getX() != toPoint->getX())) {
-        cout << "ERROR: illegal move, can't move from: (" << fPoint->getX() + 1 << ", " << fPoint->getY() + 1 << ") to: (" << toPoint->getX() + 1 << ", " << toPoint->getY() + 1 << ")" << endl;
-        return false;
-    }
-    if (gameBoard.board[toPoint->getY()][toPoint->getX()].get() != nullptr && gameBoard.board[toPoint->getY()][toPoint->getX()]->getPlayerNumber() == player) {
-        cout << "ERROR: the cell already occupied by other piece of the same player" << endl;
-        return false;
-    }
-    return true;
-}
+//
+//    if (gameBoard.board[fPoint->getY()][fPoint->getX()].get() == nullptr) {
+//        cout << "ERROR: no piece in the given position" << endl;
+//        return false;
+//    }
+////    if (gameBoard.board[fPoint->getY()][fPoint->getX()]->type == Piece::Joker) {
+////        isJoker = true;
+////    }
+//    if (!(gameBoard.board[fPoint->getY()][fPoint->getX()]->getCanMove())) {
+//        cout << "ERROR " << gameBoard.board[fPoint->getY()][fPoint->getX()]->toString() << " can't move" << endl;
+//        return false;
+//    }
+//    if ((fPoint->getY() + 1 != toPoint->getY() && fPoint->getY() - 1 != toPoint->getY() && fPoint->getX() + 1 != toPoint->getX() && fPoint->getX() - 1 != toPoint->getX()) || (fPoint->getY() != toPoint->getY() && fPoint->getX() != toPoint->getX())) {
+//        cout << "ERROR: illegal move, can't move from: (" << fPoint->getX() + 1 << ", " << fPoint->getY() + 1 << ") to: (" << toPoint->getX() + 1 << ", " << toPoint->getY() + 1 << ")" << endl;
+//        return false;
+//    }
+//    if (gameBoard.board[toPoint->getY()][toPoint->getX()].get() != nullptr && gameBoard.board[toPoint->getY()][toPoint->getX()]->getPlayerNumber() == player) {
+//        cout << "ERROR: the cell already occupied by other piece of the same player" << endl;
+//        return false;
+//    }
+//    return true;
+//}
 
 bool GameManager::checkJokerChangeAndSet(const JokerChange &jokerChange, int player) {
     RPS rps;

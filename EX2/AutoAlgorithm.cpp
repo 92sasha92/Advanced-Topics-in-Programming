@@ -289,8 +289,8 @@ void AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pT
     curMove.setTo(pTo);
     if (RPS::checkIfMoveIsLegal(selfGameBoard, curMove, curPlayer)) {
         fightInfoTrash = std::move(fightInfo);
-        fightInfo = makeMove(curMove);
-        curScore = recFunc(curPlayer, depth - 1);
+//        fightInfo = makeMove(curMove);
+//        curScore = recFunc(curPlayer, depth - 1);
         if (curScore > bestScore) {
             movesTrash = std::move(bestPtrMove);
             bestScore = curScore;
