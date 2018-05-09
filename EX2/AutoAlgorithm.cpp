@@ -29,7 +29,6 @@ void AutoAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<Piece
                 MyPoint p(col, row);
                 if (this->selfGameBoard.board[row][col] == nullptr) {
                     cellNotOccupied = false;
-
                     if (i == Piece::Joker) {
                         jokerRep = rand() % Piece::JNotAJoker;
                         jokerType1 = static_cast<Piece::RPSJokerTypes>(jokerRep);
@@ -148,13 +147,13 @@ void AutoAlgorithm::notifyFightResult(const FightInfo& fightInfo) {
 int AutoAlgorithm::scoringFunction(int player) {
     MyPoint p(0,0);
     int score = 0;
-//    int winner = checkWinner();
-//
-//    if (winner == player) {
-//        return WIN_SCORE;
-//    } else if (winner != TIE) { // opponent wins
-//        return LOSE_SCORE;
-//    } // TODO: handle the case of a tie
+    int winner = checkWinner();
+
+    if (winner == player) {
+        return WIN_SCORE;
+    } else if (winner != TIE) { // opponent wins
+        return LOSE_SCORE;
+    } // TODO: handle the case of a tie
 
     for (int i = 0; i < RPS::Nrows; i++) {
         p.setY(i);
