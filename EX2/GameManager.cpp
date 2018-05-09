@@ -482,6 +482,7 @@ void GameManager::startGame(){
     createOutFile(endOfGameHandler, isBadInputVec, errorLine);
     /* TODO:
      *
+     * we do not need to handle line number of an error
      * need to find the reason to the weird prints
      * handle and use all notify functions
      * remove all release() functions
