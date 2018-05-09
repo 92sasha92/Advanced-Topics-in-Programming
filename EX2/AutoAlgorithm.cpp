@@ -328,8 +328,8 @@ int AutoAlgorithm::recFunc(int curPlayer, int depth) {
 
 void AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo,  int curPlayer, int &bestScore, unique_ptr<Move> &bestPtrMove, int depth) {
     int curScore;
-    unique_ptr<Move> movesTrash; // TODO: should not be a vector
-    unique_ptr<MyFightInfo> fightInfoTrash; // TODO: should not be a vector
+    unique_ptr<Move> movesTrash;
+    unique_ptr<MyFightInfo> fightInfoTrash; 
     unique_ptr<MyFightInfo> fightInfo;
 
     curMove.setTo(pTo);
