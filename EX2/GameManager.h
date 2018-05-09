@@ -22,7 +22,6 @@ private:
     unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos);
     unique_ptr<MyFightInfo> setPiece(unique_ptr<PiecePosition> &piecePos, int player);
     unique_ptr<MyFightInfo> makeMove(unique_ptr<Move> &pieceMove, int player);
-//    bool checkIfMoveIsLegal(const Move& move, int player);
     bool checkJokerChangeAndSet(const JokerChange& jokerChange, int player);
     bool checkLegalPositioningVec(const std::vector<unique_ptr<PiecePosition>> &vec, int &errorLineCounter);
     EndOfGameHandler checkWinner(EndOfGameHandler& endOfGameHandler, int currentPlayer);

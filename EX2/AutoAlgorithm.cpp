@@ -196,7 +196,7 @@ EndOfGameHandler AutoAlgorithm::checkWinner(EndOfGameHandler& endOfGameHandler, 
             endOfGameHandler.setGameState(EndOfGameHandler::Tie);
         }
 
-    } else if ((!player1HaveMovingPieces && currentPlayer == 0) || (!player2HaveMovingPieces && currentPlayer)) {
+    } else if ((!player1HaveMovingPieces && currentPlayer == 1) || (!player2HaveMovingPieces && currentPlayer == 2)) {
         if (player1HaveMovingPieces) {
             endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
         } else if (player2HaveMovingPieces) {
@@ -267,7 +267,6 @@ void AutoAlgorithm::undoMove(MyMove &lastMove, unique_ptr<MyFightInfo>& fightInf
 
     if (fightInfo.get() != nullptr) {
         trash.push_back(std::move(selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()]));
-
         unique_ptr<Piece> piecePtr1 = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo->getPiece(curPlayer)), curPlayer);
         selfGameBoard[lastMove.getFrom().getY()][lastMove.getFrom().getX()] = std::move(piecePtr1);
         curPlayer = swapTurn(curPlayer);
@@ -280,8 +279,55 @@ void AutoAlgorithm::undoMove(MyMove &lastMove, unique_ptr<MyFightInfo>& fightInf
 
 }
 
+int AutoAlgorithm::recFunc(int curPlayer, int depth) {
+    EndOfGameHandler endOfGameHandler;
+    checkWinner(endOfGameHandler, curPlayer);
+
+    int bestScore = INT_MIN;
+    unique_ptr<Move> bestPtrMove = nullptr;
+    MyMove curMove;
+    MyPoint pTo(0,0), pFrom(0,0);
+    curPlayer = swapTurn(curPlayer);
+
+    if (endOfGameHandler.getGameState() == static_cast<EndOfGameHandler::GameState>(player)) {
+        return WIN_SCORE;
+    } else if (endOfGameHandler.getGameState() == static_cast<EndOfGameHandler::GameState>(TIE)) {
+        return TIE_SCORE;
+    }  else if (endOfGameHandler.getGameState() != static_cast<EndOfGameHandler::GameState>(GAME_NOT_OVER)) { // opponent wins
+        return LOSE_SCORE;
+    }
+
+    if (depth == 0) {
+        return scoringFunction(curPlayer);
+    }
+
+    for (int i = 0; i < RPS::Nrows; i++) {
+        pFrom.setY(i);
+        pTo.setY(i);
+        for (int j = 0; j < RPS::Mcols; j++) {
+            if ((selfGameBoard[i][j].get() != nullptr) && (selfGameBoard[i][j]->type != Piece::Undefined)) {
+                pFrom.setX(j);
+                curMove.setFrom(pFrom);
+
+                pTo.setPoint(i + 1, j);
+                recFuncHandler(curMove, pFrom , pTo, curPlayer, bestScore, bestPtrMove, depth);
+
+                pTo.setPoint(i - 1, j);
+                recFuncHandler(curMove, pFrom , pTo, curPlayer, bestScore, bestPtrMove, depth);
+
+                pTo.setPoint(i, j + 1);
+                recFuncHandler(curMove, pFrom , pTo, curPlayer, bestScore, bestPtrMove, depth);
+
+                pTo.setPoint(i, j - 1);
+                recFuncHandler(curMove, pFrom , pTo, curPlayer, bestScore, bestPtrMove, depth);
+            }
+        }
+    }
+    return bestScore;
+}
+
 void AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo,  int curPlayer, int &bestScore, unique_ptr<Move> &bestPtrMove, int depth) {
-    int curScore = INT_MIN;
+    int curScore;
     unique_ptr<Move> movesTrash; // TODO: should not be a vector
     unique_ptr<MyFightInfo> fightInfoTrash; // TODO: should not be a vector
     unique_ptr<MyFightInfo> fightInfo;
@@ -289,8 +335,8 @@ void AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pT
     curMove.setTo(pTo);
     if (RPS::checkIfMoveIsLegal(selfGameBoard, curMove, curPlayer)) {
         fightInfoTrash = std::move(fightInfo);
-//        fightInfo = makeMove(curMove);
-//        curScore = recFunc(curPlayer, depth - 1);
+//        fightInfo = makeMove(curMove, curPlayer);
+        curScore = recFunc(curPlayer, depth - 1);
         if (curScore > bestScore) {
             movesTrash = std::move(bestPtrMove);
             bestScore = curScore;
@@ -303,8 +349,7 @@ void AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pT
 unique_ptr<Move> AutoAlgorithm::getMove() {
     int depth = AUTO_ALGORITHM_DEPTH, curPlayer = player;
     int bestScore = INT_MIN;
-    unique_ptr<Move> bestPtrMove = nullptr, curPtrMove = nullptr;
-
+    unique_ptr<Move> bestPtrMove = nullptr;
     MyMove curMove;
     MyPoint pTo(0,0), pFrom(0,0);
 
@@ -331,16 +376,89 @@ unique_ptr<Move> AutoAlgorithm::getMove() {
         }
     }
 
-    pFrom.setPoint(bestPtrMove->getFrom().getY(), bestPtrMove->getFrom().getX()); // TODO: over ride operator= of Move class
+    pFrom.setPoint(bestPtrMove->getFrom().getY(), bestPtrMove->getFrom().getX()); // TODO: override operator= of Move class
     pTo.setPoint(bestPtrMove->getTo().getY(), bestPtrMove->getTo().getX());
     lastMove.init(pFrom, pTo);
     isOpponentAttacked = false;
     return std::move(bestPtrMove);
 }
 
+int AutoAlgorithm::getScoreForJokerRep(int row, int col, Piece::RPSJokerTypes jokerRep) {
+    int score = 0;
+    unique_ptr<Piece> tmpPiece = PieceFactory::createPiece(((JokerPiece *)selfGameBoard[row][col].get())->getJokerPiece(), player);
 
+    if (row + 1 < RPS::Nrows) { // TODO: handle isStrongerThan Joker!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (maybe create new pieces like we did in fight)
+        if ((selfGameBoard[row + 1][col].get() != nullptr) && (selfGameBoard[row + 1][col]->getPlayerNumber() != player) && (selfGameBoard[row + 1][col]->type != Piece::Undefined)) {
+            if (Piece::PiecesPower::Stronger == tmpPiece->isStrongerThan(*(selfGameBoard[row + 1][col].get()))) {
+                score++;
+            } else {
+                score--;
+            }
+        }
+    }
+    if (row - 1 > 0) {
+        if ((selfGameBoard[row - 1][col].get() != nullptr) && (selfGameBoard[row - 1][col]->getPlayerNumber() != player) && (selfGameBoard[row - 1][col]->type != Piece::Undefined)) {
+            if (Piece::PiecesPower::Stronger == tmpPiece->isStrongerThan(*(selfGameBoard[row + 1][col].get()))) {
+                score++;
+            } else {
+                score--;
+            }
+        }
+    }
+    if (col + 1 < RPS::Mcols) {
+        if ((selfGameBoard[row][col + 1].get() != nullptr) && (selfGameBoard[row][col + 1]->getPlayerNumber() != player) && (selfGameBoard[row][col + 1]->type != Piece::Undefined)) {
+            if (Piece::PiecesPower::Stronger == tmpPiece->isStrongerThan(*(selfGameBoard[row + 1][col].get()))) {
+                score++;
+            } else {
+                score--;
+            }
+        }
+    }
+    if (col - 1 > 0) {
+        if ((selfGameBoard[row][col - 1].get() != nullptr) && (selfGameBoard[row][col - 1]->getPlayerNumber() != player) && (selfGameBoard[row][col - 1]->type != Piece::Undefined)) {
+            if (Piece::PiecesPower::Stronger == tmpPiece->isStrongerThan(*(selfGameBoard[row + 1][col].get()))) {
+                score++;
+            } else {
+                score--;
+            }
+        }
+    }
+    return score;
+}
 
 unique_ptr<JokerChange> AutoAlgorithm::getJokerChange() {
-    // TODO: change the joker that is the most threat to winner piece
-    return nullptr;
+    unique_ptr<MyJokerChange> jokerChangePtr;
+    Piece::RPSJokerTypes jokerRep;
+    int curScore, bestScore = INT_MIN;
+    MyPoint p(-1,-1);
+
+    for (int i = 0; i < RPS::Nrows; i++) {
+        p.setY(i);
+        for (int j = 0; j < RPS::Mcols; j++) {
+            if ((selfGameBoard[i][j].get() != nullptr) && (selfGameBoard[i][j]->type == Piece::Joker) && (selfGameBoard[i][j]->getPlayerNumber() == player)) {
+                p.setX(j);
+                jokerRep = Piece::JScissors;
+                curScore = getScoreForJokerRep(i,j, jokerRep);
+                if (bestScore < curScore) {
+                    bestScore = curScore;
+                    jokerChangePtr->init(p, jokerRep);
+                }
+
+                jokerRep = Piece::JRock;
+                curScore = getScoreForJokerRep(i,j, jokerRep);
+                if (bestScore < curScore) {
+                    bestScore = curScore;
+                    jokerChangePtr->init(p, jokerRep);
+                }
+
+                jokerRep = Piece::JPaper;
+                curScore = getScoreForJokerRep(i,j, jokerRep);
+                if (bestScore < curScore) {
+                    bestScore = curScore;
+                    jokerChangePtr->init(p, jokerRep);
+                }
+            }
+        }
+    }
+    return std::move(jokerChangePtr);
 }
