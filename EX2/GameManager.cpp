@@ -182,6 +182,7 @@ GameManager::Turns GameManager::changeTurn(GameManager::Turns turn) {
 
 bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePosition>> &vec, int &errorLineCounter) {
     int tempBoard[RPS::Nrows][RPS::Mcols] = {0};
+    RPS rps;
     rps.initializePiecesArsenal();
     for (const unique_ptr<PiecePosition> &piecePos: vec) {
         errorLineCounter++;

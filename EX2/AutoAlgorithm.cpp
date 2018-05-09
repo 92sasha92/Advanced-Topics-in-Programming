@@ -1,6 +1,6 @@
 #include "AutoAlgorithm.h"
 
-AutoAlgorithm::AutoAlgorithm(): player(0), opponent(0), opponentNumOfFlags(RPS::F), isOpponentAttacked(false), lastMove(), selfGameBoard(){}
+AutoAlgorithm::AutoAlgorithm(): player(0), opponent(0), opponentNumOfFlags(RPS::F), opponentNumOfUnknownPieces(0), isOpponentAttacked(false), lastMove(), selfGameBoard(){}
 
 void AutoAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>>& vectorToFill) {
     srand (time(NULL));
@@ -70,7 +70,8 @@ void AutoAlgorithm::notifyOnInitialBoard(const Board& b, const std::vector<uniqu
         for (int j = 0; j < RPS::Mcols; j++) {
             p.setX(j);
             p.setY(i);
-            if (b.getPlayer(p) == opponent) {
+            if (b.getPlayer(p) == opponent && selfGameBoard.board[i][j].get() == nullptr) {
+                opponentNumOfUnknownPieces++;
                 unique_ptr<Piece> piecePtr = std::make_unique<Piece>(opponent);
                 selfGameBoard.board[i][j] = std::move(piecePtr);
             }
@@ -107,6 +108,7 @@ void AutoAlgorithm::notifyFightResult(const FightInfo& fightInfo) {
             trash.push_back(std::move(selfGameBoard.board[lastMove.getTo().getY()][lastMove.getTo().getX()]));
 
             if (opponentType == Piece::Undefined) {
+                opponentNumOfUnknownPieces--;
                 trash.push_back(std::move(selfGameBoard.board[lastMove.getFrom().getY()][lastMove.getFrom().getX()]));
                 unique_ptr<Piece> piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo.getPiece(opponent)), opponent);
                 selfGameBoard.board[lastMove.getTo().getY()][lastMove.getTo().getX()] = std::move(piecePtr);
@@ -126,6 +128,7 @@ void AutoAlgorithm::notifyFightResult(const FightInfo& fightInfo) {
             trash.push_back(std::move(selfGameBoard.board[lastMove.getFrom().getY()][lastMove.getFrom().getX()]));
 
             if (opponentType == Piece::Undefined) {
+                opponentNumOfUnknownPieces--;
                 trash.push_back(std::move(selfGameBoard.board[lastMove.getTo().getY()][lastMove.getTo().getX()]));
                 unique_ptr<Piece> piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo.getPiece(opponent)), opponent);
                 selfGameBoard.board[lastMove.getTo().getY()][lastMove.getTo().getX()] = std::move(piecePtr);

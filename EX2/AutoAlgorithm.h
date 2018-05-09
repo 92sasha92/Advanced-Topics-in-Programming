@@ -14,6 +14,8 @@ private:
     int player;
     int opponent;
     int opponentNumOfFlags;
+//    int opponentNumOfNonMovingPieces;  // maintain opponent moving pieces
+    int opponentNumOfUnknownPieces;  // maintain number of opponent unknown pieces
     bool isOpponentAttacked;
     MyMove lastMove;
     MyBoard selfGameBoard;
