@@ -40,7 +40,7 @@ class RPS {
 	void initializePiecesArsenal();
 	static EndOfGameHandler checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler, int currentPlayer);
 	static void createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]);
-	static bool checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &board, const Move &move, int player);
+	static bool checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &board, const Move &move, int player, bool printMessages = true);
 
 	vector<vector<unique_ptr<Piece>>> game;
 

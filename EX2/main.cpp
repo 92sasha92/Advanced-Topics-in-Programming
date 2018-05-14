@@ -7,13 +7,15 @@
 #include "AutoAlgorithm.h"
 
 int main() {
-    FileAlgorithm alg1, alg2;
-    AutoAlgorithm alg3;
-    //unique_ptr<PlayerAlgorithm> alg_3 = make_unique<AutoAlgorithm>();
-    unique_ptr<PlayerAlgorithm> alg_2 = make_unique<FileAlgorithm>();
-    unique_ptr<PlayerAlgorithm> alg_1 = make_unique<FileAlgorithm>();
+//    FileAlgorithm alg1, alg2;
+//    AutoAlgorithm alg3, alg4;
+//    unique_ptr<PlayerAlgorithm> alg_1 = make_unique<FileAlgorithm>();
+//    unique_ptr<PlayerAlgorithm> alg_2 = make_unique<FileAlgorithm>();
+    unique_ptr<PlayerAlgorithm> alg_3 = make_unique<AutoAlgorithm>();
+    unique_ptr<PlayerAlgorithm> alg_4 = make_unique<AutoAlgorithm>();
 //    unique_ptr<PlayerAlgorithm> alg_3 = make_unique<AutoAlgorithm>();
-    GameManager manager(std::move(alg_1), std::move(alg_2));
+//    GameManager manager(std::move(alg_1), std::move(alg_2));
+    GameManager manager(std::move(alg_3), std::move(alg_4));
 //    RPS rps;
 //    EndOfGameHandler endOfGameHandler;
 //    vector<unique_ptr<PiecePosition>> vectorToFill;
@@ -40,7 +42,7 @@ int main() {
 //                    rps.game[vectorToFill[i]->getPosition().getY()][vectorToFill[i]->getPosition().getX()] = move(piecePtr);
 //                }
 //                piecePtr.release();
-////         cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~: " << (rps.game[vectorToFill[i]->getPosition().getY()][vectorToFill[i]->getPosition().getX()])->toString() << endl;
+//         cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~: " << (rps.game[vectorToFill[i]->getPosition().getY()][vectorToFill[i]->getPosition().getX()])->toString() << endl;
 //            }
 //            vectorToFill.clear();
 //
@@ -59,7 +61,7 @@ int main() {
 //    }
 //
 //    RPS::createOutFile(rps, endOfGameHandler, isBadInputFile, ErrorLine);
-////    cout << "AND THE WINNER NUMBER IS: " << RPS::checkWinner(rps, endOfGameHandler).getGameState() << endl;
+//    cout << "AND THE WINNER NUMBER IS: " << RPS::checkWinner(rps, endOfGameHandler).getGameState() << endl;
     return 0;
 }
 

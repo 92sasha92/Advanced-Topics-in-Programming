@@ -1,13 +1,13 @@
-Winner: 0
-Reason: A tie - both Moves input files done without a winner
+Winner: 2
+Reason: Bad Moves input file for player 1 - line 2
 
-F f       
-          
-          
-          
- J j      
-B b       
-          
-          
-          
-          
+p b R  j  
+  P  B   p
+P         
+   BPr    
+  r Fs    
+         P
+p pP      
+      J   
+    p f   
+      R   

@@ -39,13 +39,13 @@ unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1Pie
     if (Piece::getEnumTypeRep(player1PiecePos->getPiece()) == Piece::Joker) {
         piece1 = PieceFactory::createPiece(Piece::getEnumTypeRep(player1PiecePos->getJokerRep()), 1);
     } else {
-        piece1 = PieceFactory::createPiece(Piece::getEnumTypeRep(player1PiecePos->getPiece()) ,1);
+        piece1 = PieceFactory::createPiece(Piece::getEnumTypeRep(player1PiecePos->getPiece()), 1);
     }
 
     if (Piece::getEnumTypeRep(player2PiecePos->getPiece()) == Piece::Joker) {
         piece2 = PieceFactory::createPiece(Piece::getEnumTypeRep(player2PiecePos->getJokerRep()), 2);
     } else {
-        piece2 = PieceFactory::createPiece(Piece::getEnumTypeRep(player2PiecePos->getPiece()) ,2);
+        piece2 = PieceFactory::createPiece(Piece::getEnumTypeRep(player2PiecePos->getPiece()), 2);
     }
 
     Piece::PiecesPower winner = piece1->isStrongerThan(*(piece2.get()));
@@ -424,12 +424,14 @@ void GameManager::startGame(){
 
         for (unique_ptr<PiecePosition> &piecePos1: vectorToFill_1) {
             fightInfo = setPiece(piecePos1, 1);
+//            cout << "piecePos1: " << piecePos1->getPiece() << " pos: (" << piecePos1->getPosition().getX() << ", " << piecePos1->getPosition().getY() << ")" << endl;
             if (fightInfo.get() != nullptr) {
                 fightInfoVec.push_back(std::move(fightInfo));
             }
         }
 
         for (unique_ptr<PiecePosition> &piecePos2: vectorToFill_2) {
+//            cout << "piecePos2: " << piecePos2->getPiece() << " pos: (" << piecePos2->getPosition().getX() << ", " << piecePos2->getPosition().getY() << ")" << endl;
             fightInfo = setPiece(piecePos2, 2);
             if (fightInfo.get() != nullptr) {
                 fightInfoVec.push_back(std::move(fightInfo));

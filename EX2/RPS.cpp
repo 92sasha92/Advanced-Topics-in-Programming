@@ -176,17 +176,21 @@ void RPS::createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBad
     fout.close();
 }
 
-bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &board, const Move &move, int player) {
+bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &board, const Move &move, int player, bool printMessages) {
     //bool isJoker = false;
     RPS rps;
     unique_ptr<Piece> piecePtr;
     const Point *fPoint = &(move.getFrom());
     const Point *toPoint = &(move.getTo());
     if (fPoint->getY() < 0 || fPoint->getX() < 0 || toPoint->getX() < 0 || toPoint->getY() < 0) {
-        cout << "ERROR: move index is out of bound" << endl;
+        if (printMessages) {
+            cout << "ERROR: move index is out of bound" << endl;
+        }
         return false;
     } else if (fPoint->getY() >= rps.getNumberOfRows() || fPoint->getX() >= rps.getNumberOfColumns() || toPoint->getX() >= rps.getNumberOfColumns() || toPoint->getY() >= rps.getNumberOfRows()) {
-        cout << "ERROR: move index is out of bound" << endl;
+        if (printMessages) {
+            cout << "ERROR: move index is out of bound" << endl;
+        }
         return false;
     }
 
@@ -198,15 +202,21 @@ bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &b
 //        isJoker = true;
 //    }
     if (!(board[fPoint->getY()][fPoint->getX()]->getCanMove())) {
-        cout << "ERROR " << board[fPoint->getY()][fPoint->getX()]->toString() << " can't move" << endl;
+        if (printMessages) {
+            cout << "ERROR " << board[fPoint->getY()][fPoint->getX()]->toString() << " can't move" << endl;
+        }
         return false;
     }
     if ((fPoint->getY() + 1 != toPoint->getY() && fPoint->getY() - 1 != toPoint->getY() && fPoint->getX() + 1 != toPoint->getX() && fPoint->getX() - 1 != toPoint->getX()) || (fPoint->getY() != toPoint->getY() && fPoint->getX() != toPoint->getX())) {
-        cout << "ERROR: illegal move, can't move from: (" << fPoint->getX() + 1 << ", " << fPoint->getY() + 1 << ") to: (" << toPoint->getX() + 1 << ", " << toPoint->getY() + 1 << ")" << endl;
+        if (printMessages) {
+            cout << "ERROR: illegal move, can't move from: (" << fPoint->getX() + 1 << ", " << fPoint->getY() + 1 << ") to: (" << toPoint->getX() + 1 << ", " << toPoint->getY() + 1 << ")" << endl;
+        }
         return false;
     }
     if (board[toPoint->getY()][toPoint->getX()].get() != nullptr && board[toPoint->getY()][toPoint->getX()]->getPlayerNumber() == player) {
-        cout << "ERROR: the cell already occupied by other piece of the same player" << endl;
+        if (printMessages) {
+            cout << "ERROR: the cell already occupied by other piece of the same player" << endl;
+        }
         return false;
     }
     return true;
