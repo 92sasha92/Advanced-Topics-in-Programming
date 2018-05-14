@@ -326,16 +326,132 @@ int AutoAlgorithm::recFunc(int curPlayer, int depth) {
     return bestScore;
 }
 
+unique_ptr<MyFightInfo> AutoAlgorithm::fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos) {
+    unique_ptr<Piece> piece1 , piece2;
+    Piece::PiecesPower winner;
+
+    if (player1PiecePos->getPosition().getY() != player2PiecePos->getPosition().getY() || player1PiecePos->getPosition().getX() != player2PiecePos->getPosition().getX()) {
+        cout << "ERROR: The pieces are not in the same cell" << endl;
+        return nullptr;
+    }
+
+    MyPoint point(player1PiecePos->getPosition().getX(), player1PiecePos->getPosition().getY());
+
+    if (Piece::getEnumTypeRep(player1PiecePos->getPiece()) == Piece::Joker) {
+        piece1 = PieceFactory::createPiece(Piece::getEnumTypeRep(player1PiecePos->getJokerRep()), 1);
+    } else {
+        piece1 = PieceFactory::createPiece(Piece::getEnumTypeRep(player1PiecePos->getPiece()) ,1);
+    }
+
+    if (Piece::getEnumTypeRep(player2PiecePos->getPiece()) == Piece::Joker) {
+        piece2 = PieceFactory::createPiece(Piece::getEnumTypeRep(player2PiecePos->getJokerRep()), 2);
+    } else {
+        piece2 = PieceFactory::createPiece(Piece::getEnumTypeRep(player2PiecePos->getPiece()) ,2);
+    }
+
+    if ((piece2->type == Piece::Undefined) && (player == 1)) {
+        winner = Piece::Stronger;
+    } else if ((piece1->type == Piece::Undefined) && (player == 2)) {
+        winner = Piece::Weaker;
+    } else if ((piece1->type == Piece::Undefined) || (piece2->type == Piece::Undefined)) {
+        cout << "problem in the IFs recalculate" << endl;
+        winner = Piece::Equal;
+    } else {
+        winner = piece1->isStrongerThan(*(piece2.get()));
+    }
+
+    switch (winner){
+        case Piece::Stronger:{
+            cout << "player1 win in cell (" << point.getX() + 1 << "," << point.getY() + 1 << ")"  << endl;
+            return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 1);
+        }
+        case Piece::Weaker:{
+            cout << "player2 win in cell (" << point.getX() + 1 << "," << point.getY() + 1 << ")"  << endl;
+            return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 2);
+        }
+        case Piece::Equal:{
+            cout << "tie cell (" << point.getX() + 1 << "," << point.getY() + 1 << ")"  << endl;
+            return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 0);
+        }
+        default:
+            cout << "ERROR: wrong PiecesPower type returned" << endl;
+            return nullptr;
+    }
+}
+
+unique_ptr<MyFightInfo> AutoAlgorithm::makeMove(unique_ptr<Move> &pieceMove, int player) {
+    unique_ptr<MyFightInfo> fightInfo = nullptr;
+    unique_ptr<Piece> releasePiece1, releasePiece2, piecePtr;
+    unique_ptr<PiecePosition> defenderPtr, attackingPtr;
+
+    if (pieceMove.get() == nullptr) {
+        cout << "cannot set piece because piece was nullptr" << endl;
+        return nullptr;
+    }
+
+    if (selfGameBoard[pieceMove->getTo().getY()][pieceMove->getTo().getX()].get() != nullptr) {
+        Piece::RPSPiecesTypes defenderPieceType = selfGameBoard[pieceMove->getTo().getY()][pieceMove->getTo().getX()]->type;
+        Piece::RPSPiecesTypes attackingPieceType = selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]->type;
+        Piece::RPSJokerTypes defenderJokerPieceType, attackingJokerPieceType;
+        MyPoint FightingPoint(pieceMove->getTo().getY(), pieceMove->getTo().getX());
+
+        if (attackingPieceType == Piece::Joker) {
+            attackingJokerPieceType = Piece::fromTypeRepToJRep(((JokerPiece *)selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()].get())->getJokerPiece());
+            MyPiecePosition attackingPiecePos(attackingPieceType, FightingPoint, attackingJokerPieceType);
+            attackingPtr = std::make_unique<MyPiecePosition>(attackingPiecePos);
+        } else {
+            MyPiecePosition attackingPiecePos(attackingPieceType, FightingPoint, Piece::JNotAJoker);
+            attackingPtr = std::make_unique<MyPiecePosition>(attackingPiecePos);
+        }
+
+        if (defenderPieceType == Piece::Joker) {
+            defenderJokerPieceType = Piece::fromTypeRepToJRep(((JokerPiece *)selfGameBoard[pieceMove->getTo().getY()][pieceMove->getTo().getX()].get())->getJokerPiece());
+            MyPiecePosition defenderPiecePos(defenderPieceType, FightingPoint, defenderJokerPieceType);
+            defenderPtr = std::make_unique<MyPiecePosition>(defenderPiecePos);
+
+        } else {
+            MyPiecePosition defenderPiecePos(defenderPieceType, FightingPoint, Piece::JNotAJoker);
+            defenderPtr = std::make_unique<MyPiecePosition>(defenderPiecePos);
+
+        }
+
+        if (player == 1) {
+            fightInfo = fight(attackingPtr, defenderPtr);
+        } else if (player == 2) {
+            fightInfo = fight(defenderPtr, attackingPtr);
+        }
+
+        if (fightInfo->getWinner() == 0) {
+            releasePiece1 = std::move(selfGameBoard[pieceMove->getTo().getY()][pieceMove->getTo().getX()]);
+            releasePiece2 = std::move(selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]);
+        } else if (fightInfo->getWinner() == player) {
+            releasePiece1 = std::move(selfGameBoard[pieceMove->getTo().getY()][pieceMove->getTo().getX()]);
+            selfGameBoard[pieceMove->getTo().getY()][pieceMove->getTo().getX()] = std::move(selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]);
+        } else {
+            releasePiece1 = std::move(selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]);
+        }
+        return std::move(fightInfo);
+
+    } else {
+        selfGameBoard[pieceMove->getTo().getY()][pieceMove->getTo().getX()] = std::move(selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]);
+        unique_ptr<Piece> attackingPieceType = move(selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]);
+    }
+    return nullptr;
+}
+
 void AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo,  int curPlayer, int &bestScore, unique_ptr<Move> &bestPtrMove, int depth) {
     int curScore;
     unique_ptr<Move> movesTrash;
-    unique_ptr<MyFightInfo> fightInfoTrash; 
+    unique_ptr<MyFightInfo> fightInfoTrash;
     unique_ptr<MyFightInfo> fightInfo;
 
     curMove.setTo(pTo);
+    MyPoint p1(curMove.getFrom().getY(), curMove.getFrom().getX()), p2(curMove.getTo().getY(), curMove.getTo().getX());
+    unique_ptr<Move> curPtrMove = make_unique<MyMove>(p1, p2);
+
     if (RPS::checkIfMoveIsLegal(selfGameBoard, curMove, curPlayer)) {
         fightInfoTrash = std::move(fightInfo);
-//        fightInfo = makeMove(curMove, curPlayer);
+        fightInfo = makeMove(curPtrMove, curPlayer);
         curScore = recFunc(curPlayer, depth - 1);
         if (curScore > bestScore) {
             movesTrash = std::move(bestPtrMove);

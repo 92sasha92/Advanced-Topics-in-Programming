@@ -44,6 +44,8 @@ private:
     void recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo, int curPlayer, int &bestScore, unique_ptr<Move> &bestPtrMove, int depth);
     int recFunc(int curPlayer, int depth);
     int getScoreForJokerRep(int row, int col, Piece::RPSJokerTypes jokerRep);
+    unique_ptr<MyFightInfo> makeMove(unique_ptr<Move> &pieceMove, int player);
+    unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos);
 
 public:
     AutoAlgorithm();
