@@ -321,6 +321,7 @@ bool GameManager::checkJokerChangeAndSet(const JokerChange &jokerChange, int pla
 
 bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, int fileLinePlayer[2]) {
     unique_ptr<Move> movePtr = playerAlgoritms[currentTurn]->getMove();
+    cout << "player" << currentTurn << " move from (" <<  movePtr->getFrom().getX() << ", " << movePtr->getFrom().getY() << ") to (" <<  movePtr->getTo().getX() << ", " << movePtr->getTo().getY() << ")" << endl;
     if(movePtr.get() == nullptr){
         return false;
     }

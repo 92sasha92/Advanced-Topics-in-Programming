@@ -41,7 +41,7 @@ char Piece::getCharTypeRep(Piece::RPSPiecesTypes type) {
         case Piece::Flag:
             return 'F';
         default:
-        std::cout << "unsupported piece type" << std::endl;
+//        std::cout << "unsupported piece type" << std::endl;
             return '#';
     }
 }
