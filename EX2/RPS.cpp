@@ -147,6 +147,12 @@ bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &b
 //    if (gameBoard.board[fPoint->getY()][fPoint->getX()]->type == Piece::Joker) {
 //        isJoker = true;
 //    }
+    if(board[fPoint->getY()][fPoint->getX()]->getPlayerNumber() != player){
+        if (printMessages) {
+            cout << "ERROR: cannot move opponent piece" << endl;
+        }
+        return false;
+    }
     if (!(board[fPoint->getY()][fPoint->getX()]->getCanMove())) {
         if (printMessages) {
             cout << "ERROR " << board[fPoint->getY()][fPoint->getX()]->toString() << " can't move" << endl;
@@ -166,6 +172,7 @@ bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &b
         }
         return false;
     }
+
     return true;
 }
 
