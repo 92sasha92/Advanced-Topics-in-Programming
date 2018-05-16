@@ -89,8 +89,9 @@ void AutoAlgorithm::notifyOnInitialBoard(const Board& b, const std::vector<uniqu
 
 void AutoAlgorithm::notifyOnOpponentMove(const Move& move) {
     if (this->selfGameBoard[move.getTo().getY()][move.getTo().getX()].get() != nullptr) {
-        MyPoint pFrom(move.getFrom().getY(), move.getFrom().getX()); // TODO: over ride operator= of Move class
-        MyPoint pTo(move.getTo().getY(), move.getTo().getX());
+        MyPoint pFrom(move.getFrom().getX(), move.getFrom().getY()); // TODO: over ride operator= of Move class
+        MyPoint pTo(move.getTo().getX(), move.getTo().getY());
+
         lastMove.init(pFrom, pTo);
         isOpponentAttacked = true;
         return;
