@@ -317,7 +317,7 @@ bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler&
     if(movePtr.get() == nullptr){
         return false;
     }
-    cout << "player" << currentTurn << " move from (" <<  movePtr->getFrom().getX() << ", " << movePtr->getFrom().getY() << ") to (" <<  movePtr->getTo().getX() << ", " << movePtr->getTo().getY() << ")" << endl;
+    cout << "player " << playerNum(currentTurn) << " move from (" <<  movePtr->getFrom().getX() << ", " << movePtr->getFrom().getY() << ") to (" <<  movePtr->getTo().getX() << ", " << movePtr->getTo().getY() << ")" << endl;
     const Move &move = *(movePtr.get());
     if(!RPS::checkIfMoveIsLegal(this->gameBoard.board, move, playerNum(currentTurn))){
         // TODO: ERROR: in making move
