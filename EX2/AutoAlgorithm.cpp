@@ -388,11 +388,18 @@ unique_ptr<MyFightInfo> AutoAlgorithm::makeMove(unique_ptr<Move> &pieceMove, int
 
     } else {
         selfGameBoard[pieceMove->getTo().getY()][pieceMove->getTo().getX()] = std::move(selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]);
-        unique_ptr<Piece> attackingPieceType = move(selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]);
+        unique_ptr<Piece> attackingPieceType = std::move(selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]);
     }
     return nullptr;
 }
 
+
+bool AutoAlgorithm::indexCheck(int row, int col){
+    if(row < 0 || col < 0 || row >= RPS::Nrows || col >= RPS::Mcols){
+        return false;
+    }
+    return true;
+}
 int AutoAlgorithm::recFunc(int curPlayer, int depth, bool isMax) {
     EndOfGameHandler endOfGameHandler;
     checkWinner(endOfGameHandler, curPlayer);
@@ -426,23 +433,27 @@ int AutoAlgorithm::recFunc(int curPlayer, int depth, bool isMax) {
                 curMove.setFrom(pFrom);
 
                 pTo.setPoint(i + 1, j);
-                curScore = recFuncHandler(curMove, pFrom , pTo, curPlayer, depth, isMax);
-                if ((isMax && (curScore >= bestScore)) || (!isMax && curScore <= bestScore)) {
+                curMove.setTo(pTo);
+                curScore = recFuncHandler(curMove, curPlayer, depth, isMax);
+                if (indexCheck(pTo.getX(), pTo.getY()) && ((isMax && (curScore >= bestScore)) || (!isMax && curScore <= bestScore))) {
                     bestScore = curScore;
                 }
                 pTo.setPoint(i - 1, j);
-                curScore = recFuncHandler(curMove, pFrom , pTo, curPlayer, depth, isMax);
-                if ((isMax && (curScore >= bestScore)) || (!isMax && curScore <= bestScore)) {
+                curMove.setTo(pTo);
+                curScore = recFuncHandler(curMove, curPlayer, depth, isMax);
+                if (indexCheck(pTo.getX(), pTo.getY()) && ((isMax && (curScore >= bestScore)) || (!isMax && curScore <= bestScore))) {
                     bestScore = curScore;
                 }
                 pTo.setPoint(i, j + 1);
-                curScore = recFuncHandler(curMove, pFrom , pTo, curPlayer, depth, isMax);
-                if ((isMax && (curScore >= bestScore)) || (!isMax && curScore <= bestScore)) {
+                curMove.setTo(pTo);
+                curScore = recFuncHandler(curMove, curPlayer, depth, isMax);
+                if (indexCheck(pTo.getX(), pTo.getY()) && ((isMax && (curScore >= bestScore)) || (!isMax && curScore <= bestScore))) {
                     bestScore = curScore;
                 }
                 pTo.setPoint(i, j - 1);
-                curScore = recFuncHandler(curMove, pFrom , pTo, curPlayer, depth, isMax);
-                if ((isMax && (curScore >= bestScore)) || (!isMax && curScore <= bestScore)) {
+                curMove.setTo(pTo);
+                curScore = recFuncHandler(curMove, curPlayer, depth, isMax);
+                if (indexCheck(pTo.getX(), pTo.getY()) && ((isMax && (curScore >= bestScore)) || (!isMax && curScore <= bestScore))) {
                     bestScore = curScore;
                 }
             }
@@ -451,7 +462,7 @@ int AutoAlgorithm::recFunc(int curPlayer, int depth, bool isMax) {
     return bestScore;
 }
 
-int AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo,  int curPlayer, int depth, bool isMax) {
+int AutoAlgorithm::recFuncHandler(MyMove &curMove,  int curPlayer, int depth, bool isMax) {
     int curScore = INT_MAX;
     if (isMax) {
         curScore = INT_MIN;
@@ -461,7 +472,6 @@ int AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo
     unique_ptr<MyFightInfo> fightInfo;
     unique_ptr<Piece> fromPiece = nullptr, toPiece = nullptr;
 
-    curMove.setTo(pTo);
     MyPoint p1(curMove.getFrom().getX(), curMove.getFrom().getY()), p2(curMove.getTo().getX(), curMove.getTo().getY());
     unique_ptr<Move> curPtrMove = make_unique<MyMove>(p1, p2);
 
@@ -493,6 +503,19 @@ int AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo
     return curScore;
 }
 
+
+
+void AutoAlgorithm::handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyPoint &bestPFrom, MyPoint &bestPTo, int curPlayer, int &curScore, int &bestScore, MyMove &curMove, int depth, int isMax){
+    pTo.setPoint(col, row);
+    curMove.setTo(pTo);
+    curScore = recFuncHandler(curMove, curPlayer, depth, isMax);
+    MyPoint pFrom(curMove.getFrom().getX(), curMove.getFrom().getY());
+    if (RPS::checkIfMoveIsLegal(selfGameBoard, curMove, curPlayer, false) && curScore >= bestScore) {
+        bestScore = curScore;
+        bestPTo.setPoint(pTo.getX(), pTo.getY());
+        bestPFrom.setPoint(pFrom.getX(), pFrom.getY());
+    }
+}
 unique_ptr<Move> AutoAlgorithm::getMove() {
     bool isMax = true;
     int depth = AUTO_ALGORITHM_DEPTH, curPlayer = player;
@@ -506,35 +529,10 @@ unique_ptr<Move> AutoAlgorithm::getMove() {
             if ((selfGameBoard[i][j].get() != nullptr) && (selfGameBoard[i][j]->type != Piece::Undefined)) {
                 pFrom.setX(j);
                 curMove.setFrom(pFrom);
-
-                pTo.setPoint(j, i + 1);
-                curScore = recFuncHandler(curMove, pFrom , pTo, curPlayer, depth, isMax);
-                if (curScore >= bestScore) {
-                    bestScore = curScore;
-                    bestPTo.setPoint(pTo.getX(), pTo.getY());
-                    bestPFrom.setPoint(pFrom.getX(), pFrom.getY());
-                }
-                pTo.setPoint(j, i - 1);
-                curScore = recFuncHandler(curMove, pFrom , pTo, curPlayer, depth, isMax);
-                if (curScore >= bestScore) {
-                    bestScore = curScore;
-                    bestPTo.setPoint(pTo.getX(), pTo.getY());
-                    bestPFrom.setPoint(pFrom.getX(), pFrom.getY());
-                }
-                pTo.setPoint(j + 1, i);
-                curScore = recFuncHandler(curMove, pFrom , pTo, curPlayer, depth, isMax);
-                if (curScore >= bestScore) {
-                    bestScore = curScore;
-                    bestPTo.setPoint(pTo.getX(), pTo.getY());
-                    bestPFrom.setPoint(pFrom.getX(), pFrom.getY());
-                }
-                pTo.setPoint(j - 1, i);
-                curScore = recFuncHandler(curMove, pFrom , pTo, curPlayer, depth, isMax);
-                if (curScore >= bestScore) {
-                    bestScore = curScore;
-                    bestPTo.setPoint(pTo.getX(), pTo.getY());
-                    bestPFrom.setPoint(pFrom.getX(), pFrom.getY());
-                }
+                handleOneOfTheMoveChoice(i + 1, j, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax);
+                handleOneOfTheMoveChoice(i - 1, j, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax);
+                handleOneOfTheMoveChoice(i, j + 1, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax);
+                handleOneOfTheMoveChoice(i, j - 1, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax);
             }
         }
     }
