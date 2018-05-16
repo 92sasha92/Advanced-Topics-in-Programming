@@ -12,9 +12,10 @@ void GameManager::printBoard() {
     cout << endl;
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
     cout << endl;
-
+    cout << "    0   1   2   3   4   5   6   7   8   9" << endl;
     for (int i = 0; i < RPS::Nrows; i++) {
-        cout << "----------------------------------------" << endl;
+        cout << "--------------------------------------------" << endl;
+        cout << i << " |";
         for (int j = 0; j < RPS::Mcols; j++) {
             if (this->gameBoard.board[i][j].get() != nullptr) {
                 cout << " " << this->gameBoard.board[i][j]->toString() << " |";
