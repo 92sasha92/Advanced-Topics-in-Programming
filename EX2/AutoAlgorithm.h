@@ -34,19 +34,19 @@ private:
     const int WIN_SCORE = INT_MAX;
     const int LOSE_SCORE = INT_MIN;
     const int TIE_SCORE = -1000;
-
+    void handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyPoint &bestPFrom, MyPoint &bestPTo, int curPlayer, int &curScore, int &bestScore, MyMove &curMove, int depth, int isMax);
     int scoringFunction(int player); // calculate the board score
     int getPieceScore(unique_ptr<Piece> &piece);
     int getUnknownPieceTypeScore(); // As a function of the number of flags remaining in relation to the unknown pieces
     EndOfGameHandler checkWinner(EndOfGameHandler& endOfGameHandler, int currentPlayer);
     int swapTurn(int curPlayer);
     void undoMove(MyMove &lastMove, unique_ptr<Piece>& fromPiece, unique_ptr<Piece>& toPiece);
-    int recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo, int curPlayer, int depth, bool isMax);
+    int recFuncHandler(MyMove &curMove, int curPlayer, int depth, bool isMax);
     int recFunc(int curPlayer, int depth, bool isMax);
     int getScoreForJokerRep(int row, int col, Piece::RPSJokerTypes jokerRep);
     unique_ptr<MyFightInfo> makeMove(unique_ptr<Move> &pieceMove, int player);
     unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos);
-
+    bool indexCheck(int row, int col);
 public:
     AutoAlgorithm();
     void getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>>& vectorToFill) override ;
