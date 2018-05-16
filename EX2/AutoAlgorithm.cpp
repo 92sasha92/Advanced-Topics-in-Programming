@@ -513,7 +513,7 @@ void AutoAlgorithm::handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyP
     curMove.setTo(pTo);
     curScore = recFuncHandler(curMove, curPlayer, depth, isMax);
     MyPoint pFrom(curMove.getFrom().getX(), curMove.getFrom().getY());
-    if (RPS::checkIfMoveIsLegal(selfGameBoard, curMove, curPlayer, false) && curScore >= bestScore) {
+    if (RPS::checkIfMoveIsLegal(selfGameBoard, curMove, curPlayer, false) && curScore > bestScore) {
         bestScore = curScore;
         bestPTo.setPoint(pTo.getX(), pTo.getY());
         bestPFrom.setPoint(pFrom.getX(), pFrom.getY());
