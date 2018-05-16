@@ -17,7 +17,7 @@ void GameManager::printBoard() {
         cout << "----------------------------------------" << endl;
         for (int j = 0; j < RPS::Mcols; j++) {
             if (this->gameBoard.board[i][j].get() != nullptr) {
-                cout << this->gameBoard.board[i][j]->toString() << " |";
+                cout << " " << this->gameBoard.board[i][j]->toString() << " |";
             } else {
                 cout << "   |";
             }
