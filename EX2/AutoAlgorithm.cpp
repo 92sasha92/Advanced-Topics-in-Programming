@@ -274,41 +274,50 @@ int AutoAlgorithm::swapTurn(int curPlayer) {
     return 1;
 }
 
-void AutoAlgorithm::undoMove(MyMove &lastMove, unique_ptr<MyFightInfo>& fightInfo, int curPlayer, bool curPlayerIsJoker, bool opponentIsJoker) {
+void AutoAlgorithm::undoMove(MyMove &lastMove, unique_ptr<Piece>& fromPiece, unique_ptr<Piece>& toPiece) {
     vector<unique_ptr<Piece>> trash;
+    trash.push_back(std::move(selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()]));
+    trash.push_back(std::move(selfGameBoard[lastMove.getFrom().getY()][lastMove.getFrom().getX()]));
 
-    if (fightInfo.get() != nullptr) {
-        trash.push_back(std::move(selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()]));
-
-        if (Piece::getEnumTypeRep(fightInfo->getPiece(curPlayer)) == Piece::Undefined) {
-            unique_ptr<Piece> piecePtr1 = std::make_unique<Piece>(curPlayer);
-            selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()] = std::move(piecePtr1);
-        } else if (curPlayerIsJoker) {
-            unique_ptr<Piece> piecePtr1 = PieceFactory::createPiece(Piece::Joker, curPlayer, Piece::getEnumTypeRep(fightInfo->getPiece(curPlayer)));
-            selfGameBoard[lastMove.getFrom().getY()][lastMove.getFrom().getX()] = std::move(piecePtr1);
-        } else {
-            unique_ptr<Piece> piecePtr1 = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo->getPiece(curPlayer)), curPlayer);
-            selfGameBoard[lastMove.getFrom().getY()][lastMove.getFrom().getX()] = std::move(piecePtr1);
-        }
-
-        curPlayer = swapTurn(curPlayer);
-        if (Piece::getEnumTypeRep(fightInfo->getPiece(curPlayer)) == Piece::Undefined) {
-            unique_ptr<Piece> piecePtr2 = std::make_unique<Piece>(curPlayer);
-            selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()] = std::move(piecePtr2);
-
-        } else if (opponentIsJoker) {
-            unique_ptr<Piece> piecePtr2 = PieceFactory::createPiece(Piece::Joker, curPlayer, Piece::getEnumTypeRep(fightInfo->getPiece(curPlayer)));
-            selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()] = std::move(piecePtr2);
-        } else {
-            unique_ptr<Piece> piecePtr2 = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo->getPiece(curPlayer)), curPlayer);
-            selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()] = std::move(piecePtr2);
-        }
-
-    } else {
-        selfGameBoard[lastMove.getFrom().getY()][lastMove.getFrom().getX()] = std::move(selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()]);
-    }
-
+    selfGameBoard[lastMove.getFrom().getY()][lastMove.getFrom().getX()] = std::move(fromPiece);
+    selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()] = std::move(toPiece);
 }
+
+//void AutoAlgorithm::undoMove(MyMove &lastMove, unique_ptr<MyFightInfo>& fightInfo, int curPlayer, bool curPlayerIsJoker, bool opponentIsJoker) {
+//    vector<unique_ptr<Piece>> trash;
+//
+//    if (fightInfo.get() != nullptr) {
+//        trash.push_back(std::move(selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()]));
+//
+//        if (Piece::getEnumTypeRep(fightInfo->getPiece(curPlayer)) == Piece::Undefined) {
+//            unique_ptr<Piece> piecePtr1 = std::make_unique<Piece>(curPlayer);
+//            selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()] = std::move(piecePtr1);
+//        } else if (curPlayerIsJoker) {
+//            unique_ptr<Piece> piecePtr1 = PieceFactory::createPiece(Piece::Joker, curPlayer, Piece::getEnumTypeRep(fightInfo->getPiece(curPlayer)));
+//            selfGameBoard[lastMove.getFrom().getY()][lastMove.getFrom().getX()] = std::move(piecePtr1);
+//        } else {
+//            unique_ptr<Piece> piecePtr1 = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo->getPiece(curPlayer)), curPlayer);
+//            selfGameBoard[lastMove.getFrom().getY()][lastMove.getFrom().getX()] = std::move(piecePtr1);
+//        }
+//
+//        curPlayer = swapTurn(curPlayer);
+//        if (Piece::getEnumTypeRep(fightInfo->getPiece(curPlayer)) == Piece::Undefined) {
+//            unique_ptr<Piece> piecePtr2 = std::make_unique<Piece>(curPlayer);
+//            selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()] = std::move(piecePtr2);
+//
+//        } else if (opponentIsJoker) {
+//            unique_ptr<Piece> piecePtr2 = PieceFactory::createPiece(Piece::Joker, curPlayer, Piece::getEnumTypeRep(fightInfo->getPiece(curPlayer)));
+//            selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()] = std::move(piecePtr2);
+//        } else {
+//            unique_ptr<Piece> piecePtr2 = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo->getPiece(curPlayer)), curPlayer);
+//            selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()] = std::move(piecePtr2);
+//        }
+//
+//    } else {
+//        selfGameBoard[lastMove.getFrom().getY()][lastMove.getFrom().getX()] = std::move(selfGameBoard[lastMove.getTo().getY()][lastMove.getTo().getX()]);
+//    }
+//
+//}
 
 int AutoAlgorithm::recFunc(int curPlayer, int depth) {
     EndOfGameHandler endOfGameHandler;
@@ -475,10 +484,10 @@ unique_ptr<MyFightInfo> AutoAlgorithm::makeMove(unique_ptr<Move> &pieceMove, int
 
 void AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo,  int curPlayer, int &bestScore, unique_ptr<Move> &bestPtrMove, int depth) {
     int curScore;
-    bool curPlayerIsJoker = false, opponentIsJoker = false;
     unique_ptr<Move> movesTrash;
     unique_ptr<MyFightInfo> fightInfoTrash;
     unique_ptr<MyFightInfo> fightInfo;
+    unique_ptr<Piece> fromPiece = nullptr, toPiece = nullptr;
 
     curMove.setTo(pTo);
     MyPoint p1(curMove.getFrom().getX(), curMove.getFrom().getY()), p2(curMove.getTo().getX(), curMove.getTo().getY());
@@ -486,11 +495,25 @@ void AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pT
 
     if (RPS::checkIfMoveIsLegal(selfGameBoard, curMove, curPlayer, false)) {
         fightInfoTrash = std::move(fightInfo);
-        if ((curPlayer == this->player) && (this->selfGameBoard[curPtrMove->getFrom().getY()][curPtrMove->getFrom().getX()]->type == Piece::Joker)) {
-            curPlayerIsJoker = true;
-        } else if ((curPlayer != this->player) && (this->selfGameBoard[curMove.getFrom().getY()][curMove.getFrom().getX()]->type == Piece::Joker)) {
-            opponentIsJoker = true;
+        if (selfGameBoard[curMove.getFrom().getY()][curMove.getFrom().getX()]->type == Piece::Undefined) {
+            fromPiece = std::make_unique<Piece>(swapTurn(curPlayer));
+        } else if (selfGameBoard[curMove.getFrom().getY()][curMove.getFrom().getX()]->type == Piece::Joker) {
+            fromPiece = PieceFactory::createPiece(Piece::Joker, curPlayer, ((JokerPiece *)selfGameBoard[curMove.getFrom().getY()][curMove.getFrom().getX()].get())->getJokerPiece());
+        } else {
+            fromPiece = PieceFactory::createPiece(selfGameBoard[curMove.getFrom().getY()][curMove.getFrom().getX()]->type, curPlayer);
         }
+
+        if (selfGameBoard[curMove.getTo().getY()][curMove.getTo().getX()].get() != nullptr) {
+            if (selfGameBoard[curMove.getTo().getY()][curMove.getTo().getX()]->type == Piece::Undefined) {
+                toPiece = std::make_unique<Piece>(swapTurn(curPlayer));
+            } else if (selfGameBoard[curMove.getTo().getY()][curMove.getTo().getX()]->type == Piece::Joker) {
+                toPiece = PieceFactory::createPiece(Piece::Joker, swapTurn(curPlayer), ((JokerPiece *)selfGameBoard[curMove.getTo().getY()][curMove.getTo().getX()].get())->getJokerPiece());
+            } else {
+                toPiece = PieceFactory::createPiece(selfGameBoard[curMove.getTo().getY()][curMove.getTo().getX()]->type, swapTurn(curPlayer));
+            }
+
+        }
+
         fightInfo = makeMove(curPtrMove, curPlayer);
         curScore = recFunc(curPlayer, depth - 1);
         if (curScore >= bestScore) {
@@ -498,7 +521,7 @@ void AutoAlgorithm::recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pT
             bestScore = curScore;
             bestPtrMove = std::make_unique<MyMove>(pFrom, pTo);
         }
-        undoMove(curMove, fightInfo, curPlayer, curPlayerIsJoker, opponentIsJoker);
+        undoMove(curMove, fromPiece, toPiece);
     }
 }
 
