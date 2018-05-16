@@ -40,7 +40,7 @@ private:
     int getUnknownPieceTypeScore(); // As a function of the number of flags remaining in relation to the unknown pieces
     EndOfGameHandler checkWinner(EndOfGameHandler& endOfGameHandler, int currentPlayer);
     int swapTurn(int curPlayer);
-    void undoMove(MyMove &lastMove, unique_ptr<MyFightInfo>& fightInfo, int curPlayer);
+    void undoMove(MyMove &lastMove, unique_ptr<MyFightInfo>& fightInfo, int curPlayer, bool curPlayerIsJoker, bool opponentIsJoker);
     void recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo, int curPlayer, int &bestScore, unique_ptr<Move> &bestPtrMove, int depth);
     int recFunc(int curPlayer, int depth);
     int getScoreForJokerRep(int row, int col, Piece::RPSJokerTypes jokerRep);
