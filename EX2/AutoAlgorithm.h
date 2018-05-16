@@ -34,7 +34,7 @@ private:
     const int WIN_SCORE = INT_MAX;
     const int LOSE_SCORE = INT_MIN;
     const int TIE_SCORE = -1000;
-    void handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyPoint &bestPFrom, MyPoint &bestPTo, int curPlayer, int &curScore, int &bestScore, MyMove &curMove, int depth, int isMax);
+    void handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyPoint &bestPFrom, MyPoint &bestPTo, int curPlayer, int &curScore, int &bestScore, MyMove &curMove, int depth, bool isMax);
     int scoringFunction(int player); // calculate the board score
     int getPieceScore(unique_ptr<Piece> &piece);
     int getUnknownPieceTypeScore(); // As a function of the number of flags remaining in relation to the unknown pieces
@@ -47,6 +47,8 @@ private:
     unique_ptr<MyFightInfo> makeMove(unique_ptr<Move> &pieceMove, int player);
     unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos);
     bool indexCheck(int row, int col);
+    void printBoard();
+
 public:
     AutoAlgorithm();
     void getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>>& vectorToFill) override ;

@@ -9,22 +9,22 @@ GameManager::GameManager(unique_ptr<PlayerAlgorithm> &&player1Algoritm_, unique_
 }
 
 void GameManager::printBoard() {
-    cout << endl;
-    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-    cout << endl;
-    cout << "    0   1   2   3   4   5   6   7   8   9" << endl;
-    for (int i = 0; i < RPS::Nrows; i++) {
-        cout << "--------------------------------------------" << endl;
-        cout << i << " |";
-        for (int j = 0; j < RPS::Mcols; j++) {
-            if (this->gameBoard.board[i][j].get() != nullptr) {
-                cout << " " << this->gameBoard.board[i][j]->toString() << " |";
-            } else {
-                cout << "   |";
-            }
-        }
-        cout << endl;
-    }
+//    cout << endl;
+//    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+//    cout << endl;
+//    cout << "    0   1   2   3   4   5   6   7   8   9" << endl;
+//    for (int i = 0; i < RPS::Nrows; i++) {
+//        cout << "  ------------------------------------------" << endl;
+//        cout << i << " |";
+//        for (int j = 0; j < RPS::Mcols; j++) {
+//            if (this->gameBoard.board[i][j].get() != nullptr) {
+//                cout << " " << this->gameBoard.board[i][j]->toString() << " |";
+//            } else {
+//                cout << "   |";
+//            }
+//        }
+//        cout << endl;
+//    }
 }
 
 unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos) {
@@ -52,15 +52,15 @@ unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1Pie
     Piece::PiecesPower winner = piece1->isStrongerThan(*(piece2.get()));
     switch (winner){
         case Piece::Stronger:{
-            cout << "player1 win in cell (" << point.getX() + 1 << "," << point.getY() + 1 << ")"  << endl;
+            cout << "player1 win in cell " << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 1);
         }
         case Piece::Weaker:{
-            cout << "player2 win in cell (" << point.getX() + 1 << "," << point.getY() + 1 << ")"  << endl;
+            cout << "player2 win in cell (" << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 2);
         }
         case Piece::Equal:{
-            cout << "tie cell (" << point.getX() + 1 << "," << point.getY() + 1 << ")"  << endl;
+            cout << "tie cell (" << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 0);
         }
         default:
