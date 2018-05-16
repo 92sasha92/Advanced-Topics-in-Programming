@@ -41,8 +41,8 @@ private:
     EndOfGameHandler checkWinner(EndOfGameHandler& endOfGameHandler, int currentPlayer);
     int swapTurn(int curPlayer);
     void undoMove(MyMove &lastMove, unique_ptr<Piece>& fromPiece, unique_ptr<Piece>& toPiece);
-    void recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo, int curPlayer, int &bestScore, unique_ptr<Move> &bestPtrMove, int depth);
-    int recFunc(int curPlayer, int depth);
+    int recFuncHandler(MyMove &curMove, MyPoint &pFrom , MyPoint &pTo, int curPlayer, int depth, bool isMax);
+    int recFunc(int curPlayer, int depth, bool isMax);
     int getScoreForJokerRep(int row, int col, Piece::RPSJokerTypes jokerRep);
     unique_ptr<MyFightInfo> makeMove(unique_ptr<Move> &pieceMove, int player);
     unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos);
