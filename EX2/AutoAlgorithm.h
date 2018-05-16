@@ -47,6 +47,8 @@ private:
     unique_ptr<MyFightInfo> makeMove(unique_ptr<Move> &pieceMove, int player);
     unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos);
     bool indexCheck(int row, int col);
+    void printBoard();
+
 public:
     AutoAlgorithm();
     void getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>>& vectorToFill) override ;

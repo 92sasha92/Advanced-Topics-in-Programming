@@ -19,7 +19,7 @@ void Piece::setCanMove(bool isMovable)
 
 std::string Piece::toString()
 {
-    return "base class";
+    return "#";
 }
 
 Piece::PiecesPower Piece::isStrongerThan(const Piece& rival) {

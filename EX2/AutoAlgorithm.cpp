@@ -264,7 +264,7 @@ int AutoAlgorithm::getPieceScore(unique_ptr<Piece> &piece) {
 }
 
 int AutoAlgorithm::getUnknownPieceTypeScore() { // TODO: create more sophisticated function
-    return (100 * FLAG_SCORE * opponentNumOfFlags)/opponentNumOfUnknownPieces;
+    return (FLAG_SCORE * opponentNumOfFlags)/opponentNumOfUnknownPieces;
 }
 
 int AutoAlgorithm::swapTurn(int curPlayer) {
@@ -545,6 +545,7 @@ unique_ptr<Move> AutoAlgorithm::getMove() {
         this->selfGameBoard[bestPtrMove->getTo().getY()][bestPtrMove->getTo().getX()] = std::move(this->selfGameBoard[bestPtrMove->getFrom().getY()][bestPtrMove->getFrom().getX()]);
     }
 
+    this->printBoard();
     return std::move(bestPtrMove);
 }
 
@@ -633,4 +634,24 @@ unique_ptr<JokerChange> AutoAlgorithm::getJokerChange() {
 
     ((JokerPiece *)this->selfGameBoard[jokerChangePtr->getJokerChangePosition().getY()][jokerChangePtr->getJokerChangePosition().getX()].get())->setJokerPiece(Piece::getEnumTypeRep(jokerChangePtr->getJokerNewRep()));
     return std::move(jokerChangePtr);
+}
+
+void AutoAlgorithm::printBoard() {
+    cout << "player " << player << ":" << endl;
+    cout << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << endl;
+    cout << "    0   1   2   3   4   5   6   7   8   9" << endl;
+    for (int i = 0; i < RPS::Nrows; i++) {
+        cout << "  ------------------------------------------" << endl;
+        cout << i << " |";
+        for (int j = 0; j < RPS::Mcols; j++) {
+            if (this->selfGameBoard[i][j].get() != nullptr) {
+                cout << " " << this->selfGameBoard[i][j]->toString() << " |";
+            } else {
+                cout << "   |";
+            }
+        }
+        cout << endl;
+    }
 }
