@@ -12,23 +12,6 @@ void RPS::initializePiecesArsenal() {
     this->playerPiecesArsenal[Piece::Undefined] = 0;
 }
 
-void RPS::printBoard(RPS& rps) {
-//    cout << endl;
-//    cout << "!@#$%^&*()(*&%^@$@#%@#%#$^%$&%&^%*^&(&^($" << endl;
-//    cout << endl;
-//
-//    for (int i = 0; i < Nrows; i++) {
-//        cout << "----------------------------------------" << endl;
-//        for (int j = 0; j < Mcols; j++) {
-//            if (rps.game[i][j].get() != nullptr) {
-//                cout << rps.game[i][j]->toString() << " |";
-//            } else {
-//                cout << "   |";
-//            }
-//        }
-//        cout << endl;
-//    }
-}
 
 RPS::RPS() : game(0){ // TODO: game should not be initialize this way
     for (int i = 0; i < Nrows; i++){
@@ -84,97 +67,57 @@ void RPS::fight(RPS& rps, int row, int col, unique_ptr<Piece> &piecePtr) {
     }
 }
 
-EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler, int currentPlayer) {
-    bool player1HaveFlag = false, player2HaveFlag = false ,player1HaveMovingPieces = false, player2HaveMovingPieces = false;
-    for (int i = 0; i < rps.Nrows; i++) {
-        for (int j = 0; j < rps.Mcols; j++) {
-            if (rps.game[i][j].get() != nullptr) {
-                if (rps.game[i][j]->getPlayerNumber() == 0) {
-                    if (rps.game[i][j]->type == Piece::Flag) {
-                        player1HaveFlag = true;
-                    } else if (rps.game[i][j]->type == Piece::Rock || rps.game[i][j]->type == Piece::Scissors || rps.game[i][j]->type == Piece::Paper) {
-                        player1HaveMovingPieces = true;
-                    } else if (rps.game[i][j]->type == Piece::Joker && ((JokerPiece *)rps.game[i][j].get())->getJokerPiece() != Piece::Bomb) {
-                        player1HaveMovingPieces = true;
-                    }
-                } else {
-                    if (rps.game[i][j]->type == Piece::Flag) {
-                        player2HaveFlag = true;
-                    } else if (rps.game[i][j]->type == Piece::Rock || rps.game[i][j]->type == Piece::Scissors || rps.game[i][j]->type == Piece::Paper) {
-                        player2HaveMovingPieces = true;
-                    } else if (rps.game[i][j]->type == Piece::Joker && ((JokerPiece *)rps.game[i][j].get())->getJokerPiece() != Piece::Bomb) {
-                        player2HaveMovingPieces = true;
-                    }
-                }
-            }
-        }
-    }
-
-    if ((!player1HaveFlag) || (!player2HaveFlag)) {
-        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::LooserAllFlagsEaten);
-        if (player1HaveFlag) {
-            endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
-        } else if (player2HaveFlag) {
-            endOfGameHandler.setGameState(EndOfGameHandler::Player2Win);
-        } else {
-            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::TieAllFlagsEaten);
-            endOfGameHandler.setGameState(EndOfGameHandler::Tie);
-        }
-
-    } else if ((!player1HaveMovingPieces && currentPlayer == 0) || (!player2HaveMovingPieces && currentPlayer)) {
-        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::AllMovingPiecesEaten);
-        if (player1HaveMovingPieces) {
-            endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
-        } else if (player2HaveMovingPieces) {
-            endOfGameHandler.setGameState(EndOfGameHandler::Player2Win);
-        } else {
-            endOfGameHandler.setGameState(EndOfGameHandler::Tie);
-            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::TieAllMovingPiecesEaten);
-        }
-    }
-    return endOfGameHandler;
-}
-
-//void RPS::createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]) {
-//    ofstream fout(outputFile);
-//    if ((isBadInputFile[0] || isBadInputFile[1])) {
-//        if (!isBadInputFile[0]) {
-//            fout << "Winner: " << 1 << endl;
-//        } else if (!isBadInputFile[1]) {
-//            fout << "Winner: " << 2 << endl;
-//        } else {
-//            fout << "Winner: " << 0 << endl;
-//        }
-//    } else if (endOfGameHandler.getGameState() == EndOfGameHandler::GameNotOver) {
-//        fout << "Winner: " << 0 << endl;
-//    } else {
-//        fout << "Winner: " << endOfGameHandler.getGameState() << endl;
-//    }
-//    fout << "Reason: ";
-//    if (isBadInputFile[0] && isBadInputFile[1]) {
-//        fout << "Bad Positioning input file for both players - player 1: line ";
-//        fout << ErrorLine[0] << ", player 2: line " << ErrorLine[1] << endl;
-//    } else if (isBadInputFile[0]) {
-//        fout << "Bad Positioning input file for player 1 - line " << ErrorLine[0] << endl;
-//    } else if (isBadInputFile[1]) {
-//        fout << "Bad Positioning input file for player 2 - line " << ErrorLine[1] << endl;
-//    } else {
-//        fout << endOfGameHandler.toString() << endl;
-//    }
-//    // empty line
-//    fout << endl;
+//EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler, int currentPlayer) {
+//    bool player1HaveFlag = false, player2HaveFlag = false ,player1HaveMovingPieces = false, player2HaveMovingPieces = false;
 //    for (int i = 0; i < rps.Nrows; i++) {
 //        for (int j = 0; j < rps.Mcols; j++) {
-//            if (rps.game[i][j].get() == nullptr) {
-//               fout << " ";
-//            } else {
-//                fout << rps.game[i][j]->toString();
+//            if (rps.game[i][j].get() != nullptr) {
+//                if (rps.game[i][j]->getPlayerNumber() == 0) {
+//                    if (rps.game[i][j]->type == Piece::Flag) {
+//                        player1HaveFlag = true;
+//                    } else if (rps.game[i][j]->type == Piece::Rock || rps.game[i][j]->type == Piece::Scissors || rps.game[i][j]->type == Piece::Paper) {
+//                        player1HaveMovingPieces = true;
+//                    } else if (rps.game[i][j]->type == Piece::Joker && ((JokerPiece *)rps.game[i][j].get())->getJokerPiece() != Piece::Bomb) {
+//                        player1HaveMovingPieces = true;
+//                    }
+//                } else {
+//                    if (rps.game[i][j]->type == Piece::Flag) {
+//                        player2HaveFlag = true;
+//                    } else if (rps.game[i][j]->type == Piece::Rock || rps.game[i][j]->type == Piece::Scissors || rps.game[i][j]->type == Piece::Paper) {
+//                        player2HaveMovingPieces = true;
+//                    } else if (rps.game[i][j]->type == Piece::Joker && ((JokerPiece *)rps.game[i][j].get())->getJokerPiece() != Piece::Bomb) {
+//                        player2HaveMovingPieces = true;
+//                    }
+//                }
 //            }
 //        }
-//        fout << endl;
 //    }
-//    fout.close();
+//
+//    if ((!player1HaveFlag) || (!player2HaveFlag)) {
+//        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::LooserAllFlagsEaten);
+//        if (player1HaveFlag) {
+//            endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
+//        } else if (player2HaveFlag) {
+//            endOfGameHandler.setGameState(EndOfGameHandler::Player2Win);
+//        } else {
+//            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::TieAllFlagsEaten);
+//            endOfGameHandler.setGameState(EndOfGameHandler::Tie);
+//        }
+//
+//    } else if ((!player1HaveMovingPieces && currentPlayer == 0) || (!player2HaveMovingPieces && currentPlayer)) {
+//        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::AllMovingPiecesEaten);
+//        if (player1HaveMovingPieces) {
+//            endOfGameHandler.setGameState(EndOfGameHandler::Player1Win);
+//        } else if (player2HaveMovingPieces) {
+//            endOfGameHandler.setGameState(EndOfGameHandler::Player2Win);
+//        } else {
+//            endOfGameHandler.setGameState(EndOfGameHandler::Tie);
+//            endOfGameHandler.setEndOfGameReason(EndOfGameHandler::TieAllMovingPiecesEaten);
+//        }
+//    }
+//    return endOfGameHandler;
 //}
+
 
 bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &board, const Move &move, int player, bool printMessages) {
     //bool isJoker = false;
