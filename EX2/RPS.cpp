@@ -166,7 +166,7 @@ bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &b
         return false;
     }
     if (board[toPoint->getY()][toPoint->getX()].get() != nullptr && board[toPoint->getY()][toPoint->getX()]->getPlayerNumber() == player) {
-        cout << board[toPoint->getY()][toPoint->getX()]->getPlayerNumber();
+//        cout << board[toPoint->getY()][toPoint->getX()]->getPlayerNumber();
         if (printMessages) {
             cout << "ERROR: the cell already occupied by other piece of the same player" << endl;
         }

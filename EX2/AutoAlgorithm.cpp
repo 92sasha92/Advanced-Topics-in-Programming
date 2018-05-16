@@ -508,22 +508,38 @@ int AutoAlgorithm::recFuncHandler(MyMove &curMove,  int curPlayer, int depth, bo
 
 
 
-void AutoAlgorithm::handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyPoint &bestPFrom, MyPoint &bestPTo, int curPlayer, int &curScore, int &bestScore, MyMove &curMove, int depth, bool isMax){
+void AutoAlgorithm::handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyPoint &bestPFrom, MyPoint &bestPTo, int curPlayer, int &curScore, int &bestScore, MyMove &curMove, int depth, bool isMax, vector<unique_ptr<Move>> &bestMovesVec){
     pTo.setPoint(col, row);
     curMove.setTo(pTo);
+    vector<unique_ptr<Move>> trashVec;
     curScore = recFuncHandler(curMove, curPlayer, depth, isMax);
     MyPoint pFrom(curMove.getFrom().getX(), curMove.getFrom().getY());
-    if (RPS::checkIfMoveIsLegal(selfGameBoard, curMove, curPlayer, false) && curScore > bestScore) {
-        bestScore = curScore;
-        bestPTo.setPoint(pTo.getX(), pTo.getY());
-        bestPFrom.setPoint(pFrom.getX(), pFrom.getY());
+    if (RPS::checkIfMoveIsLegal(selfGameBoard, curMove, curPlayer, false)) {
+        if (curScore > bestScore) {
+            bestScore = curScore;
+            bestPTo.setPoint(pTo.getX(), pTo.getY());
+            bestPFrom.setPoint(pFrom.getX(), pFrom.getY());
+            unique_ptr<Move> movePtr = make_unique<MyMove>(bestPFrom, bestPTo);
+            for (unique_ptr<Move> &ptr : bestMovesVec) {
+                trashVec.push_back(std::move(ptr));
+            }
+            bestMovesVec.clear();
+            bestMovesVec.push_back(std::move(movePtr));
 //        cout << "found new best" << pFrom << " " << pTo << endl;
+        } else if (curScore == bestScore) {
+            bestPTo.setPoint(pTo.getX(), pTo.getY());
+            bestPFrom.setPoint(pFrom.getX(), pFrom.getY());
+            unique_ptr<Move> movePtr = make_unique<MyMove>(bestPFrom, bestPTo);
+            bestMovesVec.push_back(std::move(movePtr));
+        }
     }
 }
 unique_ptr<Move> AutoAlgorithm::getMove() {
     bool isMax = true;
     int depth = AUTO_ALGORITHM_DEPTH, curPlayer = player;
     int bestScore = INT_MIN, curScore;
+    vector<unique_ptr<Move>> bestMovesVec;
+
     MyMove curMove, bestMove;
     MyPoint pTo(0,0), pFrom(0,0), bestPTo(-1, -1), bestPFrom(-1, -1) ;
 
@@ -533,16 +549,19 @@ unique_ptr<Move> AutoAlgorithm::getMove() {
             if ((selfGameBoard[i][j].get() != nullptr) && (selfGameBoard[i][j]->type != Piece::Undefined)) {
                 pFrom.setX(j);
                 curMove.setFrom(pFrom);
-                handleOneOfTheMoveChoice(i + 1, j, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax);
-                handleOneOfTheMoveChoice(i - 1, j, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax);
-                handleOneOfTheMoveChoice(i, j + 1, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax);
-                handleOneOfTheMoveChoice(i, j - 1, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax);
+                handleOneOfTheMoveChoice(i + 1, j, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax , bestMovesVec);
+                handleOneOfTheMoveChoice(i - 1, j, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax, bestMovesVec);
+                handleOneOfTheMoveChoice(i, j + 1, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax, bestMovesVec);
+                handleOneOfTheMoveChoice(i, j - 1, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax, bestMovesVec);
 
             }
         }
     }
 
-    unique_ptr<Move> bestPtrMove = make_unique<MyMove>(bestPFrom, bestPTo);
+    int randMove = rand() % bestMovesVec.size();
+    unique_ptr<Move> bestPtrMove = std::move(bestMovesVec.at(randMove));
+    bestPTo.setPoint(bestPtrMove->getTo().getX(), bestPtrMove->getTo().getY());
+    bestPFrom.setPoint(bestPtrMove->getFrom().getX(), bestPtrMove->getFrom().getY());
     lastMove.init(bestPFrom, bestPTo);
     isOpponentAttacked = false;
 

@@ -34,7 +34,7 @@ private:
     const int WIN_SCORE = INT_MAX;
     const int LOSE_SCORE = INT_MIN;
     const int TIE_SCORE = -1000;
-    void handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyPoint &bestPFrom, MyPoint &bestPTo, int curPlayer, int &curScore, int &bestScore, MyMove &curMove, int depth, bool isMax);
+    void handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyPoint &bestPFrom, MyPoint &bestPTo, int curPlayer, int &curScore, int &bestScore, MyMove &curMove, int depth, bool isMax, vector<unique_ptr<Move>> &bestMovesVec);
     int scoringFunction(int player); // calculate the board score
     int getPieceScore(unique_ptr<Piece> &piece);
     int getUnknownPieceTypeScore(); // As a function of the number of flags remaining in relation to the unknown pieces
