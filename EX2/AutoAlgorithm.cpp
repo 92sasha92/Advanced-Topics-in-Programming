@@ -638,8 +638,11 @@ unique_ptr<JokerChange> AutoAlgorithm::getJokerChange() {
         jokerChangePtr->setPosition(p);
     }
 
-    ((JokerPiece *)this->selfGameBoard[jokerChangePtr->getJokerChangePosition().getY()][jokerChangePtr->getJokerChangePosition().getX()].get())->setJokerPiece(Piece::getEnumTypeRep(jokerChangePtr->getJokerNewRep()));
-    return std::move(jokerChangePtr);
+    if (this->selfGameBoard[jokerChangePtr->getJokerChangePosition().getY()][jokerChangePtr->getJokerChangePosition().getX()].get() != nullptr) {
+        ((JokerPiece *)this->selfGameBoard[jokerChangePtr->getJokerChangePosition().getY()][jokerChangePtr->getJokerChangePosition().getX()].get())->setJokerPiece(Piece::getEnumTypeRep(jokerChangePtr->getJokerNewRep()));
+        return std::move(jokerChangePtr);
+    }
+    return nullptr;
 }
 
 void AutoAlgorithm::printBoard() {
