@@ -135,46 +135,46 @@ EndOfGameHandler RPS::checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler, 
     return endOfGameHandler;
 }
 
-void RPS::createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]) {
-    ofstream fout(outputFile);
-    if ((isBadInputFile[0] || isBadInputFile[1])) {
-        if (!isBadInputFile[0]) {
-            fout << "Winner: " << 1 << endl;
-        } else if (!isBadInputFile[1]) {
-            fout << "Winner: " << 2 << endl;
-        } else {
-            fout << "Winner: " << 0 << endl;
-        }
-    } else if (endOfGameHandler.getGameState() == EndOfGameHandler::GameNotOver) {
-        fout << "Winner: " << 0 << endl;
-    } else {
-        fout << "Winner: " << endOfGameHandler.getGameState() << endl;
-    }
-    fout << "Reason: ";
-    if (isBadInputFile[0] && isBadInputFile[1]) {
-        fout << "Bad Positioning input file for both players - player 1: line ";
-        fout << ErrorLine[0] << ", player 2: line " << ErrorLine[1] << endl;
-    } else if (isBadInputFile[0]) {
-        fout << "Bad Positioning input file for player 1 - line " << ErrorLine[0] << endl;
-    } else if (isBadInputFile[1]) {
-        fout << "Bad Positioning input file for player 2 - line " << ErrorLine[1] << endl;
-    } else {
-        fout << endOfGameHandler.toString() << endl;
-    }
-    // empty line
-    fout << endl;
-    for (int i = 0; i < rps.Nrows; i++) {
-        for (int j = 0; j < rps.Mcols; j++) {
-            if (rps.game[i][j].get() == nullptr) {
-               fout << " ";
-            } else {
-                fout << rps.game[i][j]->toString();
-            }
-        }
-        fout << endl;
-    }
-    fout.close();
-}
+//void RPS::createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]) {
+//    ofstream fout(outputFile);
+//    if ((isBadInputFile[0] || isBadInputFile[1])) {
+//        if (!isBadInputFile[0]) {
+//            fout << "Winner: " << 1 << endl;
+//        } else if (!isBadInputFile[1]) {
+//            fout << "Winner: " << 2 << endl;
+//        } else {
+//            fout << "Winner: " << 0 << endl;
+//        }
+//    } else if (endOfGameHandler.getGameState() == EndOfGameHandler::GameNotOver) {
+//        fout << "Winner: " << 0 << endl;
+//    } else {
+//        fout << "Winner: " << endOfGameHandler.getGameState() << endl;
+//    }
+//    fout << "Reason: ";
+//    if (isBadInputFile[0] && isBadInputFile[1]) {
+//        fout << "Bad Positioning input file for both players - player 1: line ";
+//        fout << ErrorLine[0] << ", player 2: line " << ErrorLine[1] << endl;
+//    } else if (isBadInputFile[0]) {
+//        fout << "Bad Positioning input file for player 1 - line " << ErrorLine[0] << endl;
+//    } else if (isBadInputFile[1]) {
+//        fout << "Bad Positioning input file for player 2 - line " << ErrorLine[1] << endl;
+//    } else {
+//        fout << endOfGameHandler.toString() << endl;
+//    }
+//    // empty line
+//    fout << endl;
+//    for (int i = 0; i < rps.Nrows; i++) {
+//        for (int j = 0; j < rps.Mcols; j++) {
+//            if (rps.game[i][j].get() == nullptr) {
+//               fout << " ";
+//            } else {
+//                fout << rps.game[i][j]->toString();
+//            }
+//        }
+//        fout << endl;
+//    }
+//    fout.close();
+//}
 
 bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &board, const Move &move, int player, bool printMessages) {
     //bool isJoker = false;

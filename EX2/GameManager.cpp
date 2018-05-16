@@ -160,14 +160,6 @@ unique_ptr<MyFightInfo> GameManager::makeMove(unique_ptr<Move> &pieceMove, int p
         return std::move(fightInfo);
 
     } else {
-//        char type = Piece::getCharTypeRep(gameBoard.board[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]->type);
-//        if (type == Piece::getCharTypeRep(Piece::Joker)) {
-//            char jokerType = ((JokerPiece *)gameBoard.board[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()].get())->getJokerPiece();
-//            piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(type), player, Piece::getEnumTypeRep(jokerType));
-//        } else {
-//            piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(type), player);
-//        }
-//        gameBoard.board[pieceMove->getTo().getY()][pieceMove->getTo().getX()] = std::move(piecePtr);
         gameBoard.board[pieceMove->getTo().getY()][pieceMove->getTo().getX()] = std::move(gameBoard.board[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]);
         unique_ptr<Piece> attackingPieceType = move(gameBoard.board[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]);
     }
@@ -188,7 +180,7 @@ bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePos
     rps.initializePiecesArsenal();
     for (const unique_ptr<PiecePosition> &piecePos: vec) {
         errorLineCounter++;
-        std::cout << errorLineCounter << std::endl;
+       // std::cout << errorLineCounter << std::endl;
         if (piecePos->getPosition().getY() < 0 || piecePos->getPosition().getX() < 0 || piecePos->getPosition().getY() >= RPS::Nrows || piecePos->getPosition().getX() >= RPS::Mcols) {
             cout << "Piece set outside the board" << endl;
             return false;
@@ -361,7 +353,7 @@ bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler&
 
 void GameManager::createOutFile(EndOfGameHandler &endOfGameHandler, bool *isBadInputFile, int *ErrorLine) {
     RPS rps;
-    ofstream fout(outputFile);
+    ofstream fout(GameManager::outputFile);
     if ((isBadInputFile[0] || isBadInputFile[1])) {
         if (!isBadInputFile[0]) {
             fout << "Winner: " << 1 << endl;
@@ -461,7 +453,7 @@ void GameManager::startGame(){
 
 
 
-    createOutFile(endOfGameHandler, isBadInputVec, errorLine);
+    GameManager::createOutFile(endOfGameHandler, isBadInputVec, errorLine);
     /* TODO:
      *
      * we do not need to handle line number of an error
