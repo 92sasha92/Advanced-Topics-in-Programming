@@ -518,7 +518,7 @@ void AutoAlgorithm::handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyP
         bestScore = curScore;
         bestPTo.setPoint(pTo.getX(), pTo.getY());
         bestPFrom.setPoint(pFrom.getX(), pFrom.getY());
-        cout << "found new best" << pFrom << " " << pTo << endl;
+//        cout << "found new best" << pFrom << " " << pTo << endl;
     }
 }
 unique_ptr<Move> AutoAlgorithm::getMove() {
@@ -638,10 +638,12 @@ unique_ptr<JokerChange> AutoAlgorithm::getJokerChange() {
         jokerChangePtr->setPosition(p);
     }
 
+    if ((jokerChangePtr->getJokerChangePosition().getY() != -1) && (jokerChangePtr->getJokerChangePosition().getX() != -1))
     if (this->selfGameBoard[jokerChangePtr->getJokerChangePosition().getY()][jokerChangePtr->getJokerChangePosition().getX()].get() != nullptr) {
         ((JokerPiece *)this->selfGameBoard[jokerChangePtr->getJokerChangePosition().getY()][jokerChangePtr->getJokerChangePosition().getX()].get())->setJokerPiece(Piece::getEnumTypeRep(jokerChangePtr->getJokerNewRep()));
         return std::move(jokerChangePtr);
     }
+
     return nullptr;
 }
 
