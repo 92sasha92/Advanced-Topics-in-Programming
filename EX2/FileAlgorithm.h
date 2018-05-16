@@ -29,7 +29,7 @@ public:
     unique_ptr<Move> getMove() override;
     unique_ptr<JokerChange> getJokerChange() override; // nullptr if no change is requested
     ~FileAlgorithm(){
-        moveFile.close();
+            moveFile.close();
     };
 };
 

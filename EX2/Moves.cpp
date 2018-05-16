@@ -214,57 +214,57 @@ bool Moves::checkJokerChangeAndSet(RPS& rps, int currentTurn, vector<string> &li
 	return true;
 }
 
-void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
-	int currentTurn = 0, fileLinePlayer[2] = { 1, 1 };
-	string cur_line;
-	ifstream fins[2];
-	vector<string> line_words;
-	bool isJokerDied = false;
-	fins[0].open(player1Moves);
-	fins[1].open(player2Moves);
-	if (!fins[0].is_open() || !fins[1].is_open()) {
-		cout << "ERROR: file didn't opened" << endl;
-		movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile);
-		return;
-	}
-	bool isOneFileLeft = false;
-	while (((!fins[0].eof() && !currentTurn) || (!fins[1].eof() && currentTurn)) && ((RPS::checkWinner(rps, endOfGameHandler, currentTurn)).getGameState() == EndOfGameHandler::GameNotOver)) {
-		isJokerDied = false;
-		try {
-			getline(fins[currentTurn], cur_line);
-		} catch (std::ifstream::failure e) {
-			cout << "ERROR: could not read the next line from the move file" << endl;
-			movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);
-			return;
-		}
-		Parser::clearLine(line_words, cur_line);
-		if (line_words.size() != 0) {
-			if (!checkMoveAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler, isJokerDied)) {
-				return;
-			}
-			if (line_words.size() != 4 && line_words.size() != 8) {
-				return;
-			}
-			if (line_words.size() == 8 && !checkJokerChangeAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler, isJokerDied)) {
-				return;
-			}
-            fileLinePlayer[currentTurn]++;
-			cout << endl << "#######################################" << endl;
-			RPS::printBoard(rps);
-			if (!isOneFileLeft) {
-				currentTurn = !currentTurn;
-			}
-			if (fins[!currentTurn].eof()) {
-				isOneFileLeft = true;
-			}
-		} else {
-			if (fins[currentTurn].eof()) {
-				isOneFileLeft = true;
-				currentTurn = !currentTurn;
-			}
-		}
-	}
-	fins[0].close();
-	fins[1].close();
-	RPS::checkWinner(rps, endOfGameHandler, currentTurn);
-}
+//void Moves::parseMoves(RPS& rps, EndOfGameHandler& endOfGameHandler) {
+//	int currentTurn = 0, fileLinePlayer[2] = { 1, 1 };
+//	string cur_line;
+//	ifstream fins[2];
+//	vector<string> line_words;
+//	bool isJokerDied = false;
+//	fins[0].open(player1Moves);
+//	fins[1].open(player2Moves);
+//	if (!fins[0].is_open() || !fins[1].is_open()) {
+//		cout << "ERROR: file didn't opened" << endl;
+//		movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile);
+//		return;
+//	}
+//	bool isOneFileLeft = false;
+//	while (((!fins[0].eof() && !currentTurn) || (!fins[1].eof() && currentTurn)) && ((RPS::checkWinner(rps, endOfGameHandler, currentTurn)).getGameState() == EndOfGameHandler::GameNotOver)) {
+//		isJokerDied = false;
+//		try {
+//			getline(fins[currentTurn], cur_line);
+//		} catch (std::ifstream::failure e) {
+//			cout << "ERROR: could not read the next line from the move file" << endl;
+//			movesHandleError(fins, endOfGameHandler, EndOfGameHandler::BadMoveFile, fileLinePlayer, currentTurn);
+//			return;
+//		}
+//		Parser::clearLine(line_words, cur_line);
+//		if (line_words.size() != 0) {
+//			if (!checkMoveAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler, isJokerDied)) {
+//				return;
+//			}
+//			if (line_words.size() != 4 && line_words.size() != 8) {
+//				return;
+//			}
+//			if (line_words.size() == 8 && !checkJokerChangeAndSet(rps, currentTurn, line_words, fins, fileLinePlayer, endOfGameHandler, isJokerDied)) {
+//				return;
+//			}
+//            fileLinePlayer[currentTurn]++;
+//			cout << endl << "#######################################" << endl;
+//			RPS::printBoard(rps);
+//			if (!isOneFileLeft) {
+//				currentTurn = !currentTurn;
+//			}
+//			if (fins[!currentTurn].eof()) {
+//				isOneFileLeft = true;
+//			}
+//		} else {
+//			if (fins[currentTurn].eof()) {
+//				isOneFileLeft = true;
+//				currentTurn = !currentTurn;
+//			}
+//		}
+//	}
+//	fins[0].close();
+//	fins[1].close();
+//	RPS::checkWinner(rps, endOfGameHandler, currentTurn);
+//}

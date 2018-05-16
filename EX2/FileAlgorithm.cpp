@@ -3,7 +3,7 @@
 string FileAlgorithm::player1Moves = "player1.rps_moves";
 string FileAlgorithm::player2Moves = "player2.rps_moves";
 
-FileAlgorithm::FileAlgorithm(): moveFile(nullptr), player(0), fileLine(0), jokerChange(){
+FileAlgorithm::FileAlgorithm(): moveFile(), player(0), fileLine(0), jokerChange(){
 
 }
 
