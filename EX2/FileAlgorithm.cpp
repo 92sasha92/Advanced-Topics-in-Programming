@@ -35,22 +35,14 @@ void FileAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
 }
 
 unique_ptr<JokerChange> FileAlgorithm::getJokerChange() {
-//    if(this->jokerChange->getIsInitialized()){
-//        return move(this->jokerChange);
-//    } else {
-//        return nullptr;
-//    }
     return move(this->jokerChange);
 }
 
 void FileAlgorithm::ParseJokerChange(vector<string> pieceDescription) {
     int col, row;
     char type;
-    //this->jokerChange.get();
-    //this->jokerChange = nullptr;
     unique_ptr<MyJokerChange> m = make_unique<MyJokerChange>();
     jokerChange = move(m);
-    //this->jokerChange->setInitialized(false);
     if (pieceDescription[4].compare("J:")) {
         cout << "ERROR: Joker line format should start with 'J:'" << endl;
         return;
@@ -76,8 +68,6 @@ void FileAlgorithm::ParseJokerChange(vector<string> pieceDescription) {
 
     MyPoint p(col, row);
     this->jokerChange->init(p, Piece::fromTypeRepToJRep(Piece::getEnumTypeRep(type)));
-//    unique_ptr<JokerChange> joker = make_unique<MyJokerChange>(p, Piece::fromTypeRepToJRep(Piece::getEnumTypeRep(type)));
-//    this->jokerChange = std::move(joker);
 
 }
 
@@ -101,8 +91,6 @@ void FileAlgorithm::parseMove(vector<string> pieceDescription, unique_ptr<MyMove
             return;
         }
     }
-    // arr[1] = fRow, arr[0] = fCol, arr[3] = toRow, arr[2] = toCol
-//    cout << arr[1] << " " << arr[0] << " " << arr[3] << " " << arr[2] << " player:" << this->player + 1 << endl;
     MyPoint p1(arr[0], arr[1]), p2(arr[2], arr[3]);
     move->init(p1, p2);
 }
@@ -113,9 +101,6 @@ unique_ptr<Move> FileAlgorithm::getMove() {
     int fileLine = 0;
     string cur_line;
     vector<string> line_words;
-//    MyPoint p(-1, -1);
-//    MyMove err;
-//    unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
     unique_ptr<MyMove> errMove = std::make_unique<MyMove>();
     if (!moveFile.is_open()) {
         cout << "ERROR: file didn't opened" << endl;
@@ -136,7 +121,7 @@ unique_ptr<Move> FileAlgorithm::getMove() {
             fileLine++;
             if (line_words.size() != 0) {
                 if (!isNumOfArgsCorrect(line_words, fileLine, endOfGameHandler)) {
-                    return errMove;
+                    return std::move(errMove);
                 }
                 parseMove(line_words, move);
                 if (line_words.size() == 8) {

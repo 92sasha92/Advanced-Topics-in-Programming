@@ -23,8 +23,6 @@ add_executable(EX2
         JokerPiece.h
         main.cpp
         Makefile
-        Moves.cpp
-        Moves.h
         PaperPiece.cpp
         PaperPiece.h
         Parser.cpp

@@ -34,12 +34,10 @@ class RPS {
 	int playerPiecesArsenal[7];
 
 	static void fight(RPS& rps, int row, int col, unique_ptr<Piece> &piecePtr);
-	static void printBoard(RPS& rps);
 	int getNumberOfRows() const;
 	int getNumberOfColumns() const;
 	void initializePiecesArsenal();
 	static EndOfGameHandler checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler, int currentPlayer);
-	static void createOutFile(RPS& rps, EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]);
 	static bool checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &board, const Move &move, int player, bool printMessages = true);
 
 	vector<vector<unique_ptr<Piece>>> game;
