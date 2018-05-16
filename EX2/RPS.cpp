@@ -51,15 +51,15 @@ void RPS::fight(RPS& rps, int row, int col, unique_ptr<Piece> &piecePtr) {
     Piece::PiecesPower winner = piece1->isStrongerThan(*(piece2.get()));
     switch (winner){
         case Piece::Stronger:{
-            cout << "player1 win in cell (" << row + 1 << "," << col + 1 << ")"  << endl;
+            cout << "player1 win in cell (" << col << "," << row << ")"  << endl;
         } break;
         case Piece::Weaker:{
-            cout << "player2 win in cell (" << row + 1 << "," << col + 1 << ")"  << endl;
+            cout << "player2 win in cell (" << col << "," << row << ")"  << endl;
             rps.game[row][col].release();
             rps.game[row][col] = move(piecePtr);
         } break;
         case Piece::Equal:{
-            cout << "tie cell (" << row + 1 << "," << col + 1 << ")"  << endl;
+            cout << "tie cell (" << col  << "," << row  << ")"  << endl;
             rps.game[row][col].release();
         } break;
         default:
@@ -138,7 +138,10 @@ bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &b
     }
 
     if (board[fPoint->getY()][fPoint->getX()].get() == nullptr) {
-        cout << "ERROR: no piece in the given position" << endl;
+        if (printMessages) {
+            cout << "ERROR: no piece in the given position" << endl;
+        }
+
         return false;
     }
 //    if (gameBoard.board[fPoint->getY()][fPoint->getX()]->type == Piece::Joker) {
@@ -157,6 +160,7 @@ bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &b
         return false;
     }
     if (board[toPoint->getY()][toPoint->getX()].get() != nullptr && board[toPoint->getY()][toPoint->getX()]->getPlayerNumber() == player) {
+        cout << board[toPoint->getY()][toPoint->getX()]->getPlayerNumber();
         if (printMessages) {
             cout << "ERROR: the cell already occupied by other piece of the same player" << endl;
         }

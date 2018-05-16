@@ -23,7 +23,7 @@ private:
     MyMove lastMove;
     std::vector<std::vector<std::unique_ptr<Piece>>> selfGameBoard;
 
-    const int AUTO_ALGORITHM_DEPTH = 3;
+    const int AUTO_ALGORITHM_DEPTH = 1;
     const int TIE = 0;
     const int EMPTY_CELL = 0;
     const int GAME_NOT_OVER = 3;
