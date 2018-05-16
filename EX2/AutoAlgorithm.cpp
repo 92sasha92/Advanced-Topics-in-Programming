@@ -514,6 +514,7 @@ void AutoAlgorithm::handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyP
         bestScore = curScore;
         bestPTo.setPoint(pTo.getX(), pTo.getY());
         bestPFrom.setPoint(pFrom.getX(), pFrom.getY());
+        cout << "found new best" << pFrom << " " << pTo << endl;
     }
 }
 unique_ptr<Move> AutoAlgorithm::getMove() {
@@ -533,6 +534,7 @@ unique_ptr<Move> AutoAlgorithm::getMove() {
                 handleOneOfTheMoveChoice(i - 1, j, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax);
                 handleOneOfTheMoveChoice(i, j + 1, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax);
                 handleOneOfTheMoveChoice(i, j - 1, pTo, bestPFrom, bestPTo, curPlayer, curScore, bestScore, curMove, depth, isMax);
+
             }
         }
     }
