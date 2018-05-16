@@ -22,5 +22,5 @@ void MyPoint::setPoint(int x, int y) {
 }
 
 std::ostream &operator<<(std::ostream &os, const MyPoint& p){
-    return os << "(" << p.getX() << ", "<< p.getY() << ")";
+    return os << "(" << p.getX() << ", " << p.getY() << ")";
 }

@@ -56,11 +56,11 @@ unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1Pie
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 1);
         }
         case Piece::Weaker:{
-            cout << "player2 win in cell (" << point  << endl;
+            cout << "player2 win in cell " << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 2);
         }
         case Piece::Equal:{
-            cout << "tie cell (" << point  << endl;
+            cout << "tie cell " << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 0);
         }
         default:
@@ -121,7 +121,7 @@ unique_ptr<MyFightInfo> GameManager::makeMove(unique_ptr<Move> &pieceMove, int p
         Piece::RPSPiecesTypes defenderPieceType = gameBoard.board[pieceMove->getTo().getY()][pieceMove->getTo().getX()]->type;
         Piece::RPSPiecesTypes attackingPieceType = gameBoard.board[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]->type;
         Piece::RPSJokerTypes defenderJokerPieceType, attackingJokerPieceType;
-        MyPoint FightingPoint(pieceMove->getTo().getY(), pieceMove->getTo().getX());
+        MyPoint FightingPoint(pieceMove->getTo().getX(), pieceMove->getTo().getY());
 
         if (attackingPieceType == Piece::Joker) {
             attackingJokerPieceType = Piece::fromTypeRepToJRep(((JokerPiece *)gameBoard.board[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()].get())->getJokerPiece());
@@ -317,7 +317,7 @@ bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler&
     if(movePtr.get() == nullptr){
         return false;
     }
-    cout << "player" << currentTurn << " move from (" <<  movePtr->getFrom().getX() << ", " << movePtr->getFrom().getY() << ") to (" <<  movePtr->getTo().getX() << ", " << movePtr->getTo().getY() << ")" << endl;
+    cout << "player" << playerNum(currentTurn) << " move from (" <<  movePtr->getFrom().getX() << ", " << movePtr->getFrom().getY() << ") to (" <<  movePtr->getTo().getX() << ", " << movePtr->getTo().getY() << ")" << endl;
     const Move &move = *(movePtr.get());
     if(!RPS::checkIfMoveIsLegal(this->gameBoard.board, move, playerNum(currentTurn))){
         // TODO: ERROR: in making move
