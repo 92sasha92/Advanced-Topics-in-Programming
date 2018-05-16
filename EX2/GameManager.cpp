@@ -52,15 +52,15 @@ unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1Pie
     Piece::PiecesPower winner = piece1->isStrongerThan(*(piece2.get()));
     switch (winner){
         case Piece::Stronger:{
-            cout << "player1 win in cell (" << point.getX() + 1 << "," << point.getY() + 1 << ")"  << endl;
+            cout << "player1 win in cell " << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 1);
         }
         case Piece::Weaker:{
-            cout << "player2 win in cell (" << point.getX() + 1 << "," << point.getY() + 1 << ")"  << endl;
+            cout << "player2 win in cell (" << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 2);
         }
         case Piece::Equal:{
-            cout << "tie cell (" << point.getX() + 1 << "," << point.getY() + 1 << ")"  << endl;
+            cout << "tie cell (" << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 0);
         }
         default:

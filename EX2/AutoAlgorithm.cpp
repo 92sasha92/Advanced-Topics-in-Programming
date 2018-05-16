@@ -294,12 +294,16 @@ unique_ptr<MyFightInfo> AutoAlgorithm::fight(unique_ptr<PiecePosition> &player1P
 
     MyPoint point(player1PiecePos->getPosition().getX(), player1PiecePos->getPosition().getY());
 
-    if ((Piece::getEnumTypeRep(player2PiecePos->getPiece()) == Piece::Undefined) && (player == 1)) { // player2 piece is undefined so he lose
-        return std::make_unique<MyFightInfo>(point, Piece::getEnumTypeRep(player1PiecePos->getPiece()), Piece::Undefined, 1);
-    } else if ((Piece::getEnumTypeRep(player1PiecePos->getPiece()) == Piece::Undefined) && (player == 2)) { // player1 piece is undefined so he lose
-        return std::make_unique<MyFightInfo>(point, Piece::Undefined, Piece::getEnumTypeRep(player2PiecePos->getPiece()), 2);
-    } else if ((Piece::getEnumTypeRep(player1PiecePos->getPiece()) == Piece::Undefined) || (Piece::getEnumTypeRep(player2PiecePos->getPiece()) == Piece::Undefined)) {
-        cout << "problem in the IFs recalculate" << endl;
+//    if ((Piece::getEnumTypeRep(player2PiecePos->getPiece()) == Piece::Undefined) && (player == 1)) { // player2 piece is undefined so he lose
+//        return std::make_unique<MyFightInfo>(point, Piece::getEnumTypeRep(player1PiecePos->getPiece()), Piece::Undefined, 1);
+//    } else if ((Piece::getEnumTypeRep(player1PiecePos->getPiece()) == Piece::Undefined) && (player == 2)) { // player1 piece is undefined so he lose
+//        return std::make_unique<MyFightInfo>(point, Piece::Undefined, Piece::getEnumTypeRep(player2PiecePos->getPiece()), 2);
+//    } else if ((Piece::getEnumTypeRep(player1PiecePos->getPiece()) == Piece::Undefined) || (Piece::getEnumTypeRep(player2PiecePos->getPiece()) == Piece::Undefined)) {
+//        cout << "problem in the IFs recalculate" << endl;
+//    }
+
+    if ((Piece::getEnumTypeRep(player2PiecePos->getPiece()) == Piece::Undefined) || (Piece::getEnumTypeRep(player1PiecePos->getPiece()) == Piece::Undefined)) {
+        return std::make_unique<MyFightInfo>(point, Piece::getEnumTypeRep(player1PiecePos->getPiece()),Piece::getEnumTypeRep(player2PiecePos->getPiece()), 0);
     }
 
 
@@ -421,7 +425,7 @@ int AutoAlgorithm::recFunc(int curPlayer, int depth, bool isMax) {
     }
 
     if (depth == 0) {
-        return scoringFunction(curPlayer);
+        return scoringFunction(swapTurn(curPlayer));
     }
 
     for (int i = 0; i < RPS::Nrows; i++) {
@@ -435,25 +439,25 @@ int AutoAlgorithm::recFunc(int curPlayer, int depth, bool isMax) {
                 pTo.setPoint(i + 1, j);
                 curMove.setTo(pTo);
                 curScore = recFuncHandler(curMove, curPlayer, depth, isMax);
-                if (indexCheck(pTo.getX(), pTo.getY()) && ((isMax && (curScore >= bestScore)) || (!isMax && curScore <= bestScore))) {
+                if (indexCheck(pTo.getX(), pTo.getY()) && ((isMax && (curScore >= bestScore)) || (!isMax && curScore < bestScore))) {
                     bestScore = curScore;
                 }
                 pTo.setPoint(i - 1, j);
                 curMove.setTo(pTo);
                 curScore = recFuncHandler(curMove, curPlayer, depth, isMax);
-                if (indexCheck(pTo.getX(), pTo.getY()) && ((isMax && (curScore >= bestScore)) || (!isMax && curScore <= bestScore))) {
+                if (indexCheck(pTo.getX(), pTo.getY()) && ((isMax && (curScore >= bestScore)) || (!isMax && curScore < bestScore))) {
                     bestScore = curScore;
                 }
                 pTo.setPoint(i, j + 1);
                 curMove.setTo(pTo);
                 curScore = recFuncHandler(curMove, curPlayer, depth, isMax);
-                if (indexCheck(pTo.getX(), pTo.getY()) && ((isMax && (curScore >= bestScore)) || (!isMax && curScore <= bestScore))) {
+                if (indexCheck(pTo.getX(), pTo.getY()) && ((isMax && (curScore >= bestScore)) || (!isMax && curScore < bestScore))) {
                     bestScore = curScore;
                 }
                 pTo.setPoint(i, j - 1);
                 curMove.setTo(pTo);
                 curScore = recFuncHandler(curMove, curPlayer, depth, isMax);
-                if (indexCheck(pTo.getX(), pTo.getY()) && ((isMax && (curScore >= bestScore)) || (!isMax && curScore <= bestScore))) {
+                if (indexCheck(pTo.getX(), pTo.getY()) && ((isMax && (curScore >= bestScore)) || (!isMax && curScore < bestScore))) {
                     bestScore = curScore;
                 }
             }
@@ -505,7 +509,7 @@ int AutoAlgorithm::recFuncHandler(MyMove &curMove,  int curPlayer, int depth, bo
 
 
 
-void AutoAlgorithm::handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyPoint &bestPFrom, MyPoint &bestPTo, int curPlayer, int &curScore, int &bestScore, MyMove &curMove, int depth, int isMax){
+void AutoAlgorithm::handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyPoint &bestPFrom, MyPoint &bestPTo, int curPlayer, int &curScore, int &bestScore, MyMove &curMove, int depth, bool isMax){
     pTo.setPoint(col, row);
     curMove.setTo(pTo);
     curScore = recFuncHandler(curMove, curPlayer, depth, isMax);
