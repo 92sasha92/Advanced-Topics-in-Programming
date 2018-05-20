@@ -15,7 +15,7 @@ Piece::RPSPiecesTypes PieceFactory::charToPieceType(char c) {
         case 'J':return Piece::RPSPiecesTypes::Joker;
         case 'F':return Piece::RPSPiecesTypes::Flag;
         default: {
-            std::cout << "ERROR: unspported piece character" << std::endl;
+            std::cout << "ERROR: unsupported piece character" << std::endl;
             return Piece::RPSPiecesTypes::Undefined;
         }
     }

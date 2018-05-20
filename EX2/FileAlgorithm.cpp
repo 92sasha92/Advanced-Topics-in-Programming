@@ -88,7 +88,7 @@ bool FileAlgorithm::isNumOfArgsCorrect(vector<string> &line_words,int fileLine, 
     if (line_words.size() != 4 && line_words.size() != 8) {
         cout << "ERROR: num of arguments is incorrect" << line_words.size() << endl;
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
-        endOfGameHandler.setWinner(this->player, fileLine, fileLine); // TODO: should get fileLine of player1 and player2
+        endOfGameHandler.setWinner(this->player - 1, fileLine, fileLine); // TODO: should get fileLine of player1 and player2
         return false;
     }
     return true;
@@ -130,10 +130,10 @@ unique_ptr<Move> FileAlgorithm::getMove() {
             } catch (std::ifstream::failure &e) {
                 cout << "ERROR: could not read the next line from the move file" << endl;
                 endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
-                endOfGameHandler.setWinner(player, fileLine, fileLine); // TODO: should get fileLine of player1 and player2
+                endOfGameHandler.setWinner(player - 1, fileLine, fileLine); // TODO: should get fileLine of player1 and player2
                 return nullptr;
             }
-            Parser::clearLine(line_words, cur_line);
+            Parser::split(line_words, cur_line);
             fileLine++;
             if (line_words.size() != 0) {
                 if (!isNumOfArgsCorrect(line_words, fileLine, endOfGameHandler)) {

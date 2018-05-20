@@ -1,17 +1,7 @@
 #include "Parser.h"
 
-string Parser::player_0_name_ = "player1.rps_board";
-string Parser::player_1_name_ = "player2.rps_board";
-
-void Parser::initializePiecesArsenal(RPS& rps) {
-    rps.playerPiecesArsenal[Piece::Rock] = RPS::R;
-    rps.playerPiecesArsenal[Piece::Paper] = RPS::P;
-    rps.playerPiecesArsenal[Piece::Scissors] = RPS::S;
-    rps.playerPiecesArsenal[Piece::Bomb] = RPS::B;
-    rps.playerPiecesArsenal[Piece::Joker] = RPS::J;
-    rps.playerPiecesArsenal[Piece::Flag] = RPS::F;
-    rps.playerPiecesArsenal[Piece::Undefined] = 0;
-}
+string Parser::player_1_name = "player1.rps_board";
+string Parser::player_2_name = "player2.rps_board";
 
 
 bool Parser::isInteger(string str) {
@@ -51,7 +41,7 @@ bool Parser::parsePiece(RPS& rps, vector<string> pieceDescription, vector<unique
         return false;
     }
 
-    if (0 > row || row >= rps.Nrows || 0 > col || col >= rps.Mcols) {
+    if (0 > row || row >= RPS::NRows || 0 > col || col >= RPS::MCols) {
         cout << "ERROR: piece set outside the board: row: " << row << ", col: " << col << endl;
         return false;
     }
@@ -89,7 +79,7 @@ bool Parser::parsePiece(RPS& rps, vector<string> pieceDescription, vector<unique
 }
 
 
-void Parser::clearLine(vector<string> &line_words, string &cur_line) {
+void Parser::split(vector<string> &line_words, string &cur_line) {
 	string word;
 	istringstream ss(cur_line);
 	line_words.clear();
@@ -108,23 +98,23 @@ void Parser::handleParseError(ifstream& fin, EndOfGameHandler& endOfGameHandler,
 	endOfGameHandler.setWinner(playerIndex, fileLine, fileLine);
 }
 
-void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHandler, vector< unique_ptr<PiecePosition> > &vectorToFill) {
+void Parser::parseBoard(RPS& rps, int player, EndOfGameHandler& endOfGameHandler, vector< unique_ptr<PiecePosition> > &vectorToFill) {
     string cur_line, word;
     int fileLine = 1;
     bool check = true;
     ifstream fin;
     vector<string> line_words;
-    initializePiecesArsenal(rps);
+    rps.initializePiecesArsenal();
     unique_ptr<Piece> piecePtr;
 
-    if (playerIndex == 1) {
-        fin.open(player_0_name_);
-    } else if (playerIndex == 2) {
-        fin.open(player_1_name_);
+    if (player == 1) {
+        fin.open(player_1_name);
+    } else if (player == 2) {
+        fin.open(player_2_name);
     }
 
     if (!fin.is_open()) {
-        cout << "ERROR: file didn't opened for player " << playerIndex + 1 << endl;
+        cout << "ERROR: file didn't opened for player " << player << endl;
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::CantOpenInputFile);
         return;
     }
@@ -132,24 +122,24 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
     while (!fin.eof()) {
         try {
             getline(fin, cur_line);
-        } catch (std::ifstream::failure e){
+        } catch (std::ifstream::failure &e){
             cout << "ERROR: could not read the next line from the file" << endl;
-            handleParseError(fin, endOfGameHandler, playerIndex, fileLine, vectorToFill);
+            handleParseError(fin, endOfGameHandler, player - 1, fileLine, vectorToFill);
             return;
         }
         
-        clearLine(line_words, cur_line);
-        if (line_words.size() < 3 && line_words.size() != 0) {
+        split(line_words, cur_line);
+        if (line_words.size() < 3 && !line_words.empty()) {
             cout << "ERROR: not enogh arguments " << line_words.size() << endl;
-            handleParseError(fin, endOfGameHandler, playerIndex, fileLine, vectorToFill);
+            handleParseError(fin, endOfGameHandler, player - 1, fileLine, vectorToFill);
             return;
         }
-        if (line_words.size() != 0) {
+        if (!line_words.empty()) {
             check = parsePiece(rps, line_words, vectorToFill);
         }
         if (!check) {
             cout << "ERROR: could not set piece" << endl;
-			handleParseError(fin, endOfGameHandler, playerIndex, fileLine, vectorToFill);
+			handleParseError(fin, endOfGameHandler, player - 1, fileLine, vectorToFill);
             return;
         }
         fileLine++;
@@ -157,7 +147,7 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
 
     if (rps.playerPiecesArsenal[Piece::Flag] > 0) {
         cout << "ERROR: Not all Flags placed" << endl;
-				handleParseError(fin, endOfGameHandler, playerIndex, fileLine, vectorToFill);
+				handleParseError(fin, endOfGameHandler, player - 1, fileLine, vectorToFill);
         return;
     }
 

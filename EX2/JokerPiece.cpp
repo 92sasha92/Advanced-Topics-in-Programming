@@ -6,7 +6,7 @@ JokerPiece::JokerPiece(int player, Piece::RPSPiecesTypes jokerPiece_): Piece(pla
         jokerPiece = jokerPiece_;
     } else {
         jokerPiece = Piece::Undefined;
-        std::cout << "ERROR: unsuported joker type" << std::endl;
+        std::cout << "ERROR: unsupported joker type" << std::endl;
     }
 }
 

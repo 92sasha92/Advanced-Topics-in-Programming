@@ -11,27 +11,22 @@ void RPS::initializePiecesArsenal() {
     this->playerPiecesArsenal[Piece::Undefined] = 0;
 }
 
-int RPS::getNumberOfRows() const{
-    return Nrows;
+bool RPS::isPointInBounds(const Point &p){
+    if(p.getX() < 0 || p.getX() >= RPS::MCols){
+        return false;
+    }
+    if(p.getY() < 0 || p.getY() >= RPS::NRows){
+        return false;
+    }
+    return true;
 }
-
-int RPS::getNumberOfColumns() const{
-    return Mcols;
-}
-
 
 bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &board, const Move &move, int player, bool printMessages) {
     //bool isJoker = false;
-    RPS rps;
     unique_ptr<Piece> piecePtr;
     MyPoint fPoint(move.getFrom().getX(), move.getFrom().getY());
     MyPoint toPoint(move.getTo().getX(), move.getTo().getY());
-    if (fPoint.getY() < 0 || fPoint.getX() < 0 || toPoint.getX() < 0 || toPoint.getY() < 0) {
-        if (printMessages) {
-            cout << "ERROR: move index is out of bound" << endl;
-        }
-        return false;
-    } else if (fPoint.getY() >= rps.getNumberOfRows() || fPoint.getX() >= rps.getNumberOfColumns() || toPoint.getX() >= rps.getNumberOfColumns() || toPoint.getY() >= rps.getNumberOfRows()) {
+    if (!isPointInBounds(fPoint) || !isPointInBounds(toPoint)) {
         if (printMessages) {
             cout << "ERROR: move index is out of bound" << endl;
         }
@@ -42,7 +37,6 @@ bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &b
         if (printMessages) {
             cout << "ERROR: no piece in the given position" << endl;
         }
-
         return false;
     }
 //    if (gameBoard.board[fPoint->getY()][fPoint->getX()]->type == Piece::Joker) {
@@ -67,7 +61,6 @@ bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &b
         return false;
     }
     if (board[toPoint.getY()][toPoint.getX()].get() != nullptr && board[toPoint.getY()][toPoint.getX()]->getPlayerNumber() == player) {
-//        cout << board[toPoint->getY()][toPoint->getX()]->getPlayerNumber();
         if (printMessages) {
             cout << "ERROR: the cell already occupied by other piece of the same player" << endl;
         }

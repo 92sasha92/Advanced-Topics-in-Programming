@@ -8,9 +8,9 @@ int MyBoard::getPlayer(const Point &pos) const {
 }
 
 MyBoard::MyBoard(): board(0){
-    for (int i = 0; i < RPS::Nrows; i++){
+    for (int i = 0; i < RPS::NRows; i++){
         vector<unique_ptr<Piece>> line;
-        for (int j = 0; j < RPS::Mcols; j++) {
+        for (int j = 0; j < RPS::MCols; j++) {
             unique_ptr<Piece> ptr;
             line.push_back(move(ptr));
         }

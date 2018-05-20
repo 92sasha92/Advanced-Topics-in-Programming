@@ -1,11 +1,11 @@
 #include "EndOfGameHandler.h"
 
-int EndOfGameHandler::getEndGamelineNumber() {
-    return this->endGamelineNumber;
+int EndOfGameHandler::getEndGameLineNumber() {
+    return this->endGameLineNumber;
 }
 
-void EndOfGameHandler::setEndGamelineNumber(int line_number) {
-    this->endGamelineNumber = line_number;
+void EndOfGameHandler::setEndGameLineNumber(int line_number) {
+    this->endGameLineNumber = line_number;
 }
 
 EndOfGameHandler::EndOfGameReason EndOfGameHandler::getEndOfGameReason() {
@@ -25,38 +25,18 @@ void EndOfGameHandler::setGameState(GameState state) {
 
 void EndOfGameHandler::setWinner(int currentTurn ,int fileLinePlayer1, int fileLinePlayer2) {
     if (!currentTurn) {
-        this->setEndGamelineNumber(fileLinePlayer1);
+        this->setEndGameLineNumber(fileLinePlayer1);
         this->setGameState(EndOfGameHandler::Player2Win);
     } else {
-        this->setEndGamelineNumber(fileLinePlayer2);
+        this->setEndGameLineNumber(fileLinePlayer2);
         this->setGameState(EndOfGameHandler::Player1Win);
     }
-}
-
-void EndOfGameHandler::clear() {
-    this->setEndOfGameReason(GameNotFinished);
-    this->setGameState(GameNotOver);
-    this->setEndGamelineNumber(0);
-}
-
-bool EndOfGameHandler::isInputFileOk(const bool isBadInputFile[2]) {
-    if (isBadInputFile[0] && isBadInputFile[1]) {
-        cout << "two players use incorrect format file and no point are given" << endl;
-        return false;
-    } else if (isBadInputFile[0]) {
-        cout << "player1 use incorrect format file and lose" << endl;
-        return false;
-    } else if (isBadInputFile[1]) {
-        cout << "player2 use incorrect format file and lose" << endl;
-        return false;
-    }
-    return true;
 }
 
 string EndOfGameHandler::toString() {
     if (this->getEndOfGameReason() == EndOfGameHandler::BadMoveFile) {
         stringstream ss;
-        ss << this->getEndGamelineNumber();
+        ss << this->getEndGameLineNumber();
         if (this->getGameState() == 1) {
             return "Bad Moves input file for player 2 - line " + ss.str();
         } else {

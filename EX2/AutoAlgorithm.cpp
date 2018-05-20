@@ -2,9 +2,9 @@
 
 AutoAlgorithm::AutoAlgorithm(): player(0), opponent(0), opponentNumOfFlags(RPS::F), opponentNumOfUnknownPieces(0), isOpponentAttacked(false), lastMove(), selfGameBoard(){
     srand (time(NULL));
-    for (int i = 0; i < RPS::Nrows; i++){
+    for (int i = 0; i < RPS::NRows; i++){
         vector<unique_ptr<Piece>> line;
-        for (int j = 0; j < RPS::Mcols; j++) {
+        for (int j = 0; j < RPS::MCols; j++) {
             unique_ptr<Piece> ptr;
             line.push_back(move(ptr));
         }
@@ -33,8 +33,8 @@ void AutoAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<Piece
         for (int j = 0; j < rps.playerPiecesArsenal[i]; j++ ) {
             cellNotOccupied = true;
             while (cellNotOccupied) {
-                row = rand() % RPS::Nrows;
-                col = rand() % RPS::Mcols;
+                row = rand() % RPS::NRows;
+                col = rand() % RPS::MCols;
                 MyPoint p(col, row);
                 if (this->selfGameBoard[row][col].get() == nullptr) {
                     cellNotOccupied = false;
@@ -74,8 +74,8 @@ void AutoAlgorithm::notifyOnInitialBoard(const Board& b, const std::vector<uniqu
         }
     }
 
-    for (int i = 0; i < RPS::Nrows; i++) {
-        for (int j = 0; j < RPS::Mcols; j++) {
+    for (int i = 0; i < RPS::NRows; i++) {
+        for (int j = 0; j < RPS::MCols; j++) {
             p.setX(j);
             p.setY(i);
             if (b.getPlayer(p) == opponent && this->selfGameBoard[i][j].get() == nullptr) {
@@ -85,9 +85,6 @@ void AutoAlgorithm::notifyOnInitialBoard(const Board& b, const std::vector<uniqu
             }
         }
     }
-//    cout << "888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888" << endl;
-//    this->printBoard();
-//    cout << "888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888" << endl;
 }
 
 void AutoAlgorithm::notifyOnOpponentMove(const Move& move) {
@@ -179,8 +176,8 @@ void AutoAlgorithm::notifyFightResult(const FightInfo& fightInfo) {
 
 EndOfGameHandler AutoAlgorithm::checkWinner(EndOfGameHandler& endOfGameHandler, int currentPlayer) {
     bool player1HaveFlag = false, player2HaveFlag = false ,player1HaveMovingPieces = false, player2HaveMovingPieces = false;
-    for (int i = 0; i < RPS::Nrows; i++) {
-        for (int j = 0; j < RPS::Mcols; j++) {
+    for (int i = 0; i < RPS::NRows; i++) {
+        for (int j = 0; j < RPS::MCols; j++) {
             if (this->selfGameBoard[i][j].get() != nullptr){
                 if (this->selfGameBoard[i][j]->getPlayerNumber() == 1) {
                     if (this->selfGameBoard[i][j]->type == Piece::Undefined) {
@@ -252,9 +249,9 @@ int AutoAlgorithm::scoringFunction(int player) {
         return LOSE_SCORE;
     }
 
-    for (int i = 0; i < RPS::Nrows; i++) {
+    for (int i = 0; i < RPS::NRows; i++) {
         p.setY(i);
-        for (int j = 0; j < RPS::Mcols; j++) {
+        for (int j = 0; j < RPS::MCols; j++) {
             p.setX(j);
             if (this->selfGameBoard[i][j].get() != nullptr) {
                 if (this->selfGameBoard[i][j]->getPlayerNumber() == player){
@@ -413,7 +410,7 @@ unique_ptr<MyFightInfo> AutoAlgorithm::makeMove(unique_ptr<Move> &pieceMove, int
 
 
 bool AutoAlgorithm::indexCheck(int row, int col){
-    if(row < 0 || col < 0 || row >= RPS::Nrows || col >= RPS::Mcols){
+    if(row < 0 || col < 0 || row >= RPS::NRows || col >= RPS::MCols){
         return false;
     }
     return true;
@@ -442,10 +439,10 @@ int AutoAlgorithm::recFunc(int curPlayer, int depth, bool isMax) {
         return scoringFunction(swapTurn(curPlayer));
     }
 
-    for (int i = 0; i < RPS::Nrows; i++) {
+    for (int i = 0; i < RPS::NRows; i++) {
         pFrom.setY(i);
         pTo.setY(i);
-        for (int j = 0; j < RPS::Mcols; j++) {
+        for (int j = 0; j < RPS::MCols; j++) {
             if ((selfGameBoard[i][j].get() != nullptr) && (selfGameBoard[i][j]->type != Piece::Undefined)) {
                 pFrom.setX(j);
                 curMove.setFrom(pFrom);
@@ -558,9 +555,9 @@ unique_ptr<Move> AutoAlgorithm::getMove() {
     MyMove curMove, bestMove;
     MyPoint pTo(0,0), pFrom(0,0), bestPTo(-1, -1), bestPFrom(-1, -1) ;
 
-    for (int i = 0; i < RPS::Nrows; i++) {
+    for (int i = 0; i < RPS::NRows; i++) {
         pFrom.setY(i);
-        for (int j = 0; j < RPS::Mcols; j++) {
+        for (int j = 0; j < RPS::MCols; j++) {
             if ((selfGameBoard[i][j].get() != nullptr) && (selfGameBoard[i][j]->type != Piece::Undefined)) {
                 pFrom.setX(j);
                 curMove.setFrom(pFrom);
@@ -602,7 +599,7 @@ int AutoAlgorithm::getScoreForJokerRep(int row, int col, Piece::RPSJokerTypes jo
     int score = 0;
     unique_ptr<Piece> tmpPiece = PieceFactory::createPiece(Piece::getEnumTypeRep(Piece::fromJRepToChar(jokerRep)), player);
 
-    if (row + 1 < RPS::Nrows) { // TODO: handle isStrongerThan Joker!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (maybe create new pieces like we did in fight)
+    if (row + 1 < RPS::NRows) { // TODO: handle isStrongerThan Joker!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (maybe create new pieces like we did in fight)
         if ((selfGameBoard[row + 1][col].get() != nullptr) && (selfGameBoard[row + 1][col]->getPlayerNumber() != player) && (selfGameBoard[row + 1][col]->type != Piece::Undefined)) {
             if (Piece::PiecesPower::Stronger == tmpPiece->isStrongerThan(*(selfGameBoard[row + 1][col].get()))) {
                 score++;
@@ -620,7 +617,7 @@ int AutoAlgorithm::getScoreForJokerRep(int row, int col, Piece::RPSJokerTypes jo
             }
         }
     }
-    if (col + 1 < RPS::Mcols) {
+    if (col + 1 < RPS::MCols) {
         if ((selfGameBoard[row][col + 1].get() != nullptr) && (selfGameBoard[row][col + 1]->getPlayerNumber() != player) && (selfGameBoard[row][col + 1]->type != Piece::Undefined)) {
             if (Piece::PiecesPower::Stronger == tmpPiece->isStrongerThan(*(selfGameBoard[row][col + 1].get()))) {
                 score++;
@@ -647,9 +644,9 @@ unique_ptr<JokerChange> AutoAlgorithm::getJokerChange() {
     int curScore, bestScore = INT_MIN;
     MyPoint p(-1,-1);
 
-    for (int i = 0; i < RPS::Nrows; i++) {
+    for (int i = 0; i < RPS::NRows; i++) {
         p.setY(i);
-        for (int j = 0; j < RPS::Mcols; j++) {
+        for (int j = 0; j < RPS::MCols; j++) {
             if ((selfGameBoard[i][j].get() != nullptr) && (selfGameBoard[i][j]->type == Piece::Joker) && (selfGameBoard[i][j]->getPlayerNumber() == player)) {
                 p.setX(j);
                 jokerRep = Piece::JScissors;
@@ -705,11 +702,20 @@ void AutoAlgorithm::printBoard() {
     cout << endl;
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
     cout << endl;
-    cout << "    0   1   2   3   4   5   6   7   8   9" << endl;
-    for (int i = 0; i < RPS::Nrows; i++) {
-        cout << "  ------------------------------------------" << endl;
-        cout << i << " |";
-        for (int j = 0; j < RPS::Mcols; j++) {
+    cout << "     ";
+    for(int i = 0; i < RPS::NRows; i++){
+        cout << i + 1 << "   ";
+    }
+    cout << endl;
+    for (int i = 0; i < RPS::NRows; i++) {
+        cout << "   ------------------------------------------" << endl;
+        if ((i + 1) / 10 == 0){
+            cout << i + 1 << "  |";
+        } else {
+            cout << i + 1 << " |";
+        }
+
+        for (int j = 0; j < RPS::MCols; j++) {
             if (this->selfGameBoard[i][j].get() != nullptr) {
                 cout << " " << this->selfGameBoard[i][j]->toString() << " |";
             } else {

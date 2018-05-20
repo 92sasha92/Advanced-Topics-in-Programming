@@ -16,13 +16,10 @@
 using namespace std;
 
 class RPS {
-  private:
-    friend class Parser;
+    public:
 
-  public:
-
-	static const int Mcols = 10;
-	static const int Nrows = 10;
+	static const int MCols = 10;
+	static const int NRows = 10;
 	static const int R = 2;
 	static const int P = 5;
 	static const int S = 1;
@@ -31,9 +28,10 @@ class RPS {
 	static const int F = 1;
 	int playerPiecesArsenal[7];
 
-	int getNumberOfRows() const;
-	int getNumberOfColumns() const;
+	// expected zero based point
+	static bool isPointInBounds(const Point &point);
 	void initializePiecesArsenal();
+	// expected zero based move
 	static bool checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &board, const Move &move, int player, bool printMessages = true);
     RPS(){
     };
