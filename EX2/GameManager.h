@@ -6,6 +6,8 @@
 #include "MyPoint.h"
 #include "MyFightInfo.h"
 #include "MyPiecePosition.h"
+#include "MyMove.h"
+#include "MyJokerChange.h"
 
 class GameManager {
 private:

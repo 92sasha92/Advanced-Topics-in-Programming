@@ -33,25 +33,32 @@ bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription
     char piece = pieceDescription[0][0];
     int col, row;
     if (isInteger(pieceDescription[1])){
+        // zero based
         col = stoi(pieceDescription[1]) - 1;
+        // 1 based
+//        col = stoi(pieceDescription[1]);
     } else {
         cout << "incorrect line format" << endl;
         return false;
     }
     if (isInteger(pieceDescription[2])){
+        // zero based
         row = stoi(pieceDescription[2]) - 1;
+        // 1 based
+//        row = stoi(pieceDescription[2]);
     } else {
         cout << "incorrect line format" << endl;
         return false;
     }
 
     if (0 > row || row >= rps.Nrows || 0 > col || col >= rps.Mcols) {
-        cout << "ERROR: piece set outside the board: row: " << row << ", col: "<< col <<endl;
-        return false;
-    } else if (rps.game[row][col] && rps.game[row][col]->getPlayerNumber() == playerIndex) {
-        cout << "ERROR: two pieces of the same player in one cell: row: " << row << ", col: "<< col <<endl;
+        cout << "ERROR: piece set outside the board: row: " << row << ", col: " << col << endl;
         return false;
     }
+//    } else if (rps.game[row][col] && rps.game[row][col]->getPlayerNumber() == playerIndex) {
+//        cout << "ERROR: two pieces of the same player in one cell: row: " << row << ", col: "<< col <<endl;
+//        return false;
+//    }
     Piece::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piece);
     MyPoint p(col, row);
     if (rps.playerPiecesArsenal[pieceType] == 0) {
@@ -105,13 +112,13 @@ void Parser::handleParseError(ifstream& fin, EndOfGameHandler& endOfGameHandler,
 	endOfGameHandler.setWinner(playerIndex, fileLine, fileLine);
 }
 
-void Parser::printVector(vector<unique_ptr<PiecePosition>> &vector){
-    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
-    for(const auto &vPtr : vector){
-        cout << "Piece from unique: " << vPtr->getPiece() << "    piece position: (" << vPtr->getPosition().getX() << ", " << vPtr->getPosition().getY() << ")" << endl;
-    }
-    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
-}
+//void Parser::printVector(vector<unique_ptr<PiecePosition>> &vector){
+//    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
+//    for(const auto &vPtr : vector){
+//        cout << "Piece from unique: " << vPtr->getPiece() << "    piece position: (" << vPtr->getPosition().getX() << ", " << vPtr->getPosition().getY() << ")" << endl;
+//    }
+//    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
+//}
 
 
 void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHandler, vector< unique_ptr<PiecePosition> > &vectorToFill) {

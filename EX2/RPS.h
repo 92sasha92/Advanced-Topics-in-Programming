@@ -11,13 +11,12 @@
 #include "EndOfGameHandler.h"
 #include "PiecePosition.h"
 #include "Move.h"
-#include "Point.h"
+#include "MyPoint.h"
 
 using namespace std;
 
 class RPS {
   private:
-    static string outputFile;
     friend class Parser;
 
   public:
@@ -30,22 +29,16 @@ class RPS {
 	static const int B = 2;
 	static const int J = 2;
 	static const int F = 1;
-	static const int numOfPlayers = 2;
 	int playerPiecesArsenal[7];
 
-	static void fight(RPS& rps, int row, int col, unique_ptr<Piece> &piecePtr);
 	int getNumberOfRows() const;
 	int getNumberOfColumns() const;
 	void initializePiecesArsenal();
-	static EndOfGameHandler checkWinner(RPS& rps, EndOfGameHandler& endOfGameHandler, int currentPlayer);
 	static bool checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &board, const Move &move, int player, bool printMessages = true);
-
-	vector<vector<unique_ptr<Piece>>> game;
-
-    RPS();
+    RPS(){
+    };
     RPS(const RPS& rps) = delete;
     RPS& operator=(const RPS& rps) = delete;
-    ~RPS();
 };
 
 

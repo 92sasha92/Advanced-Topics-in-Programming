@@ -49,14 +49,20 @@ void FileAlgorithm::ParseJokerChange(vector<string> pieceDescription) {
     }
 
     if (Parser::isInteger(pieceDescription[5])) {
-        col = stoi(pieceDescription[5]) - 1;
+        // zero based
+        //col = stoi(pieceDescription[5]) - 1;
+        // 1 based
+        col = stoi(pieceDescription[5]);
     } else {
         cout << "incorrect Joker line format" << endl;
         return;
     }
 
     if (Parser::isInteger(pieceDescription[6])) {
-        row = stoi(pieceDescription[6]) - 1;
+        // zero based
+       // row = stoi(pieceDescription[6]) - 1;
+        // 1 based
+        row = stoi(pieceDescription[6]);
     } else {
         return;
     }
@@ -85,7 +91,10 @@ void FileAlgorithm::parseMove(vector<string> pieceDescription, unique_ptr<MyMove
     int arr[4];
     for (int i = 0; i < 4; i++) {
         if (Parser::isInteger(pieceDescription[i])) {
-            arr[i] = stoi(pieceDescription[i]) - 1;
+            // zero based
+           // arr[i] = stoi(pieceDescription[i]) - 1;
+            // 1 based correct
+            arr[i] = stoi(pieceDescription[i]);
         } else {
             cout << "incorrect line format" << endl;
             return;
