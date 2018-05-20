@@ -266,11 +266,11 @@ int AutoAlgorithm::getPieceScore(unique_ptr<Piece> &piece) {
         case Piece::Undefined:
             return getUnknownPieceTypeScore();
         default:
-            return SIMPLE_PIECE_SCORE; // TODO: create function that calculate the simple pieces score given the opponent neighbors and their distances from it
+            return SIMPLE_PIECE_SCORE;
     }
 }
 
-int AutoAlgorithm::getUnknownPieceTypeScore() { // TODO: create more sophisticated function
+int AutoAlgorithm::getUnknownPieceTypeScore() {
     return (FLAG_SCORE * opponentNumOfFlags)/opponentNumOfUnknownPieces;
 }
 

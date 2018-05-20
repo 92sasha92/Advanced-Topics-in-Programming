@@ -315,6 +315,8 @@ bool GameManager::checkJokerChangeAndSet(const JokerChange &jokerChange, int pla
 bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, int fileLinePlayer[2]) {
     unique_ptr<Move> movePtr = playerAlgoritms[currentTurn]->getMove();
     if(movePtr.get() == nullptr){
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
+        endOfGameHandler.setWinner(currentTurn, fileLinePlayer[0], fileLinePlayer[1]);
         return false;
     }
     cout << "player " << playerNum(currentTurn) << " move from (" <<  movePtr->getFrom().getX() << ", " << movePtr->getFrom().getY() << ") to (" <<  movePtr->getTo().getX() << ", " << movePtr->getTo().getY() << ")" << endl;
@@ -436,7 +438,6 @@ void GameManager::startGame(){
         this->playerAlgoritms[1]->notifyOnInitialBoard(this->gameBoard, fightInfoVec);
 
        // bool endOfGame = false;
-
         //checkWinner(endOfGameHandler, currentTurn);
         int fileLinePlayer[2] = {0, 0};
         while ((checkWinner(endOfGameHandler, playerNum(currentTurn))).getGameState() == EndOfGameHandler::GameNotOver){
@@ -452,18 +453,5 @@ void GameManager::startGame(){
         checkWinner(endOfGameHandler, playerNum(currentTurn));
     }
 
-
-
     GameManager::createOutFile(endOfGameHandler, isBadInputVec, errorLine);
-    /* TODO:
-     *
-     * we do not need to handle line number of an error
-     * need to find the reason to the weird prints
-     * handle and use all notify functions
-     * remove all release() functions
-     * check leak of memory
-     * create new tests
-     * SMILE!!!
-     *
-     * */
 }
