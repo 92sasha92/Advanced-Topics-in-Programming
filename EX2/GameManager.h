@@ -19,7 +19,7 @@ private:
         SECOND_PLAYER_TURN = 1
     }Turns;
     int playerNum(GameManager::Turns const &currentTurn);
-    bool handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, int fileLinePlayer[2]);
+    bool handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, int fileLinePlayer[2], int &numOfMovesWithoutAFight);
     void startGame();
     unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos);
     unique_ptr<MyFightInfo> setPiece(unique_ptr<PiecePosition> &piecePos, int player);

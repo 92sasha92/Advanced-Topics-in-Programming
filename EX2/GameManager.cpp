@@ -223,6 +223,10 @@ bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePos
 }
 
 EndOfGameHandler GameManager::checkWinner(EndOfGameHandler& endOfGameHandler, int currentPlayer) {
+    if(endOfGameHandler.getEndOfGameReason() == EndOfGameHandler::Tie100MovesNoFight){
+        endOfGameHandler.setGameState(EndOfGameHandler::Tie);
+        return endOfGameHandler;
+    }
     bool player1HaveFlag = false, player2HaveFlag = false ,player1HaveMovingPieces = false, player2HaveMovingPieces = false;
     for (int i = 0; i < RPS::Nrows; i++) {
         for (int j = 0; j < RPS::Mcols; j++) {
@@ -317,7 +321,8 @@ bool GameManager::checkJokerChangeAndSet(const JokerChange &jokerChange, int pla
 }
 
 
-bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, int fileLinePlayer[2]) {
+bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, int fileLinePlayer[2], int &numOfMovesWithoutAFight) {
+    numOfMovesWithoutAFight++;
     unique_ptr<Move> movePtr = playerAlgoritms[currentTurn]->getMove();
     if(movePtr.get() == nullptr){
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
@@ -339,6 +344,7 @@ bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler&
     const FightInfo &fight = *(fightPtr.get());
     // if there was a fight
     if(fightPtr.get() != nullptr){
+        numOfMovesWithoutAFight = 0;
         playerAlgoritms[currentTurn]->notifyFightResult(fight);
     }
     if(checkWinner(endOfGameHandler, playerNum(changeTurn(currentTurn))).getGameState() != EndOfGameHandler::GameNotOver){
@@ -362,6 +368,10 @@ bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler&
         playerAlgoritms[changeTurn(currentTurn)]->notifyFightResult(fight);
     }
     currentTurn = changeTurn(currentTurn);
+    if(numOfMovesWithoutAFight >= 100){
+        endOfGameHandler.setEndOfGameReason(EndOfGameHandler::Tie100MovesNoFight);
+        return false;
+    }
     return true;
 }
 
@@ -410,6 +420,7 @@ void GameManager::createOutFile(EndOfGameHandler &endOfGameHandler, bool *isBadI
 void GameManager::startGame(){
     bool isBadInputVec[2] = {false, false};
     int errorLine[2] = {0, 0};
+    int numOfMovesWithoutAFight = 0;
     EndOfGameHandler endOfGameHandler;
     unique_ptr<MyFightInfo> fightInfo;
     std::vector<unique_ptr<FightInfo>> fightInfoVec;
@@ -450,7 +461,7 @@ void GameManager::startGame(){
         while ((checkWinner(endOfGameHandler, playerNum(currentTurn))).getGameState() == EndOfGameHandler::GameNotOver){
             printBoard();
             fileLinePlayer[currentTurn]++;
-            if(!handleATurn(currentTurn, endOfGameHandler, fileLinePlayer)){
+            if(!handleATurn(currentTurn, endOfGameHandler, fileLinePlayer, numOfMovesWithoutAFight)){
                 //TODO: handle error
                 break;
             }

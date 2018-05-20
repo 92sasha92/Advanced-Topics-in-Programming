@@ -14,7 +14,8 @@ class EndOfGameHandler {
 		TieAllMovingPiecesEaten,
         BadInputFile,
         BadMoveFile,
-        CantOpenInputFile
+        CantOpenInputFile,
+        Tie100MovesNoFight
     } EndOfGameReason;
 
     typedef enum {
