@@ -24,14 +24,21 @@ void FileAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<Piece
 
 void FileAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector<unique_ptr<FightInfo>> &fights) {
     //not relevant for the file algorithm
+    // just to not get an error in the make
+    b.getPlayer(MyPoint(0, 0));
+    fights.size();
 }
 
 void FileAlgorithm::notifyOnOpponentMove(const Move &move) {
     //not relevant for the file algorithm
+    // just to not get an error in the make
+    move.getFrom();
 }
 
 void FileAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
     //not relevant for the file algorithm
+    // just to not get an error in the make
+    fightInfo.getWinner();
 }
 
 unique_ptr<JokerChange> FileAlgorithm::getJokerChange() {

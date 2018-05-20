@@ -25,7 +25,7 @@ bool Parser::isInteger(string str) {
 }
 
 
-bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription, vector<unique_ptr<PiecePosition>> &vectorToFill) {
+bool Parser::parsePiece(RPS& rps, vector<string> pieceDescription, vector<unique_ptr<PiecePosition>> &vectorToFill) {
     if (pieceDescription[0].size() != 1) {
         cout << "incorrect piece type" << endl;
         return false;
@@ -55,10 +55,6 @@ bool Parser::setPiece(RPS& rps, int playerIndex, vector<string> pieceDescription
         cout << "ERROR: piece set outside the board: row: " << row << ", col: " << col << endl;
         return false;
     }
-//    } else if (rps.game[row][col] && rps.game[row][col]->getPlayerNumber() == playerIndex) {
-//        cout << "ERROR: two pieces of the same player in one cell: row: " << row << ", col: "<< col <<endl;
-//        return false;
-//    }
     Piece::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piece);
     MyPoint p(col, row);
     if (rps.playerPiecesArsenal[pieceType] == 0) {
@@ -112,15 +108,6 @@ void Parser::handleParseError(ifstream& fin, EndOfGameHandler& endOfGameHandler,
 	endOfGameHandler.setWinner(playerIndex, fileLine, fileLine);
 }
 
-//void Parser::printVector(vector<unique_ptr<PiecePosition>> &vector){
-//    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
-//    for(const auto &vPtr : vector){
-//        cout << "Piece from unique: " << vPtr->getPiece() << "    piece position: (" << vPtr->getPosition().getX() << ", " << vPtr->getPosition().getY() << ")" << endl;
-//    }
-//    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
-//}
-
-
 void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHandler, vector< unique_ptr<PiecePosition> > &vectorToFill) {
     string cur_line, word;
     int fileLine = 1;
@@ -158,7 +145,7 @@ void Parser::parseBoard(RPS& rps, int playerIndex, EndOfGameHandler& endOfGameHa
             return;
         }
         if (line_words.size() != 0) {
-            check = setPiece(rps, playerIndex, line_words, vectorToFill);
+            check = parsePiece(rps, line_words, vectorToFill);
         }
         if (!check) {
             cout << "ERROR: could not set piece" << endl;
