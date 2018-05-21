@@ -4,7 +4,7 @@ string Parser::player_1_name = "player1.rps_board";
 string Parser::player_2_name = "player2.rps_board";
 
 
-bool Parser::isInteger(string str) {
+bool Parser::isInteger(string str){
     for (char c : str) {
         if (c > '9' || c < '0') {
             cout << "not an integer" << endl;
@@ -79,7 +79,7 @@ bool Parser::parsePiece(RPS& rps, vector<string> pieceDescription, vector<unique
 }
 
 
-void Parser::split(vector<string> &line_words, string &cur_line) {
+void Parser::split(vector<string> &line_words, string &cur_line){
 	string word;
 	istringstream ss(cur_line);
 	line_words.clear();
