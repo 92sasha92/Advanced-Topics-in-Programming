@@ -10,7 +10,7 @@ JokerPiece::JokerPiece(int player, Piece::RPSPiecesTypes jokerPiece_): Piece(pla
     }
 }
 
-std::string JokerPiece::toString() {
+std::string JokerPiece::toString() const {
     if (this->getPlayerNumber() == 2) {
         return "j";
     } else {
@@ -18,7 +18,7 @@ std::string JokerPiece::toString() {
     }
 }
 
-int JokerPiece::getCanMove() {
+int JokerPiece::getCanMove() const{
 	if (this->jokerPiece == Piece::Bomb) {
 		return 0;
 	} else {
@@ -26,7 +26,7 @@ int JokerPiece::getCanMove() {
 	}
 }
 
-Piece::RPSPiecesTypes JokerPiece::getJokerPiece() {
+Piece::RPSPiecesTypes JokerPiece::getJokerPiece() const{
     return this->jokerPiece;
 }
 

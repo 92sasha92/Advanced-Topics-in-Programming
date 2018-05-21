@@ -4,7 +4,7 @@ string Parser::player_1_name = "player1.rps_board";
 string Parser::player_2_name = "player2.rps_board";
 
 
-bool Parser::isInteger(string str){
+bool Parser::isInteger(string str) {
     for (char c : str) {
         if (c > '9' || c < '0') {
             cout << "not an integer" << endl;
@@ -22,7 +22,7 @@ bool Parser::parsePiece(RPS& rps, vector<string> pieceDescription, vector<unique
     }
     char piece = pieceDescription[0][0];
     int col, row;
-    if (isInteger(pieceDescription[1])){
+    if (isInteger(pieceDescription[1])) {
         // zero based
         col = stoi(pieceDescription[1]) - 1;
         // 1 based
@@ -31,7 +31,7 @@ bool Parser::parsePiece(RPS& rps, vector<string> pieceDescription, vector<unique
         cout << "incorrect line format" << endl;
         return false;
     }
-    if (isInteger(pieceDescription[2])){
+    if (isInteger(pieceDescription[2])) {
         // zero based
         row = stoi(pieceDescription[2]) - 1;
         // 1 based
@@ -79,7 +79,7 @@ bool Parser::parsePiece(RPS& rps, vector<string> pieceDescription, vector<unique
 }
 
 
-void Parser::split(vector<string> &line_words, string &cur_line){
+void Parser::split(vector<string> &line_words, string &cur_line) {
 	string word;
 	istringstream ss(cur_line);
 	line_words.clear();
@@ -122,7 +122,7 @@ void Parser::parseBoard(RPS& rps, int player, EndOfGameHandler& endOfGameHandler
     while (!fin.eof()) {
         try {
             getline(fin, cur_line);
-        } catch (std::ifstream::failure &e){
+        } catch (std::ifstream::failure &e) {
             cout << "ERROR: could not read the next line from the file" << endl;
             handleParseError(fin, endOfGameHandler, player - 1, fileLine, vectorToFill);
             return;

@@ -3,22 +3,19 @@
 Piece::Piece(int player) : type(Undefined), playerNumber(player), canMove(true) {
 }
 
-int Piece::getPlayerNumber() {
+int Piece::getPlayerNumber() const {
     return this->playerNumber;
 }
 
-int Piece::getCanMove()
-{
+int Piece::getCanMove() const{
 	return this->canMove;
 }
 
-void Piece::setCanMove(bool isMovable)
-{
+void Piece::setCanMove(bool isMovable) {
 	this->canMove = isMovable;
 }
 
-std::string Piece::toString()
-{
+std::string Piece::toString() const{
     return "#";
 }
 
@@ -27,7 +24,7 @@ Piece::PiecesPower Piece::isStrongerThan(const Piece& rival) {
 }
 
 char Piece::getCharTypeRep(Piece::RPSPiecesTypes type) {
-    switch(type){
+    switch(type) {
         case Piece::Rock:
             return 'R';
         case Piece::Paper:
@@ -48,7 +45,7 @@ char Piece::getCharTypeRep(Piece::RPSPiecesTypes type) {
 
 Piece::RPSPiecesTypes Piece::getEnumTypeRep(char type) {
     char upperType = toupper(type);
-    switch(upperType){
+    switch(upperType) {
         case 'R':
             return Piece::Rock;
         case 'P':
@@ -72,7 +69,7 @@ Piece::~Piece() {
 }
 
 char Piece::fromJRepToChar(Piece::RPSJokerTypes jokerRep) {
-    switch(jokerRep){
+    switch(jokerRep) {
         case Piece::JRock:
             return Piece::getCharTypeRep(Piece::Rock);
         case Piece::JPaper:
@@ -87,7 +84,7 @@ char Piece::fromJRepToChar(Piece::RPSJokerTypes jokerRep) {
 }
 
 Piece::RPSJokerTypes Piece::fromTypeRepToJRep(RPSPiecesTypes typeRep) {
-    switch(typeRep){
+    switch(typeRep) {
         case Piece::Rock:
             return Piece::JRock;
         case Piece::Paper:

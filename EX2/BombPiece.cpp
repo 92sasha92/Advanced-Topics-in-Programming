@@ -10,7 +10,7 @@ BombPiece::BombPiece(int player) :Piece(player) {
     this->strongerThan[Piece::Flag] = Piece::Equal;
 }
 
-std::string BombPiece::toString() {
+std::string BombPiece::toString() const{
     if (this->getPlayerNumber() == 2) {
         return "b";
     } else {

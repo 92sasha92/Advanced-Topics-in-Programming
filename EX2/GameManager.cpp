@@ -9,22 +9,22 @@ GameManager::GameManager(unique_ptr<PlayerAlgorithm> &&player1Algorithm_, unique
 }
 
 void GameManager::printBoard() {
-//    cout << endl;
-//    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-//    cout << endl;
-//    cout << "    0   1   2   3   4   5   6   7   8   9" << endl;
-//    for (int i = 0; i < RPS::Nrows; i++) {
-//        cout << "  ------------------------------------------" << endl;
-//        cout << i << " |";
-//        for (int j = 0; j < RPS::Mcols; j++) {
-//            if (this->gameBoard.board[i][j].get() != nullptr) {
-//                cout << " " << this->gameBoard.board[i][j]->toString() << " |";
-//            } else {
-//                cout << "   |";
-//            }
-//        }
-//        cout << endl;
-//    }
+    cout << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << endl;
+    cout << "    0   1   2   3   4   5   6   7   8   9" << endl;
+    for (int i = 0; i < RPS::NRows; i++) {
+        cout << "  ------------------------------------------" << endl;
+        cout << i << " |";
+        for (int j = 0; j < RPS::MCols; j++) {
+            if (this->gameBoard.board[i][j].get() != nullptr) {
+                cout << " " << this->gameBoard.board[i][j]->toString() << " |";
+            } else {
+                cout << "   |";
+            }
+        }
+        cout << endl;
+    }
 }
 
 unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos) {
@@ -49,17 +49,17 @@ unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1Pie
         piece2 = PieceFactory::createPiece(Piece::getEnumTypeRep(player2PiecePos->getPiece()), 2);
     }
 
-    Piece::PiecesPower winner = piece1->isStrongerThan(*(piece2.get()));
-    switch (winner){
-        case Piece::Stronger:{
+    Piece::PiecesPower winner = piece1->isStrongerThan(*(piece2.get())); // check for the stronger piece
+    switch (winner) {
+        case Piece::Stronger: {
             cout << "player 1 win in cell " << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 1);
         }
-        case Piece::Weaker:{
+        case Piece::Weaker: {
             cout << "player 2 win in cell " << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 2);
         }
-        case Piece::Equal:{
+        case Piece::Equal: {
             cout << "tie cell " << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 0);
         }
@@ -78,7 +78,7 @@ unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<PiecePosition> &piecePo
         return nullptr;
     }
 
-    if (gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()].get() != nullptr) {
+    if (gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()].get() != nullptr) { // check if the cell is empty or preper to fight
         Piece::RPSPiecesTypes type = gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()]->type;
         MyPoint point(piecePos->getPosition().getX(), piecePos->getPosition().getY());
 
@@ -92,7 +92,7 @@ unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<PiecePosition> &piecePo
             fightInfo = fight(ptr, piecePos);
         }
 
-        if (fightInfo->getWinner() == 0 || fightInfo->getWinner() == 2){ // if player1 wins we are not set the piece of player2 on board
+        if (fightInfo->getWinner() == 0 || fightInfo->getWinner() == 2) { // if player1 wins we are not set the piece of player2 on board
             releasePiece = std::move(gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()]); // piece will free when get to the end of the func
             if (fightInfo->getWinner() == 2) {
                 piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(piecePos->getPiece()), 2, Piece::getEnumTypeRep(piecePos->getJokerRep()));
@@ -100,7 +100,7 @@ unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<PiecePosition> &piecePo
             }
         }
         return std::move(fightInfo);
-    } else {
+    } else { // the cell is empty
         piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(piecePos->getPiece()), player, Piece::getEnumTypeRep(piecePos->getJokerRep()));
         gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()] = std::move(piecePtr);
     }
@@ -129,7 +129,7 @@ unique_ptr<MyFightInfo> GameManager::makeMove(unique_ptr<Move> &pieceMove, int p
         Piece::RPSJokerTypes defenderJokerPieceType, attackingJokerPieceType;
         MyPoint FightingPoint(pTo.getX(), pTo.getY());
 
-        if (attackingPieceType == Piece::Joker) {
+        if (attackingPieceType == Piece::Joker) { // create the attack piece to check the fight result
             attackingJokerPieceType = Piece::fromTypeRepToJRep(((JokerPiece *)gameBoard.board[pFrom.getY()][pFrom.getX()].get())->getJokerPiece());
             MyPiecePosition attackingPiecePos(attackingPieceType, FightingPoint, attackingJokerPieceType);
             attackingPtr = std::make_unique<MyPiecePosition>(attackingPiecePos);
@@ -138,7 +138,7 @@ unique_ptr<MyFightInfo> GameManager::makeMove(unique_ptr<Move> &pieceMove, int p
             attackingPtr = std::make_unique<MyPiecePosition>(attackingPiecePos);
         }
 
-        if (defenderPieceType == Piece::Joker) {
+        if (defenderPieceType == Piece::Joker) { // create the defend piece to check the fight result
             defenderJokerPieceType = Piece::fromTypeRepToJRep(((JokerPiece *)gameBoard.board[pTo.getY()][pTo.getX()].get())->getJokerPiece());
             MyPiecePosition defenderPiecePos(defenderPieceType, FightingPoint, defenderJokerPieceType);
             defenderPtr = std::make_unique<MyPiecePosition>(defenderPiecePos);
@@ -155,7 +155,7 @@ unique_ptr<MyFightInfo> GameManager::makeMove(unique_ptr<Move> &pieceMove, int p
             fightInfo = fight(defenderPtr, attackingPtr);
         }
 
-        if (fightInfo->getWinner() == 0) {
+        if (fightInfo->getWinner() == 0) { // handle the fight resule
             releasePiece1 = std::move(gameBoard.board[pTo.getY()][pTo.getX()]);
             releasePiece2 = std::move(gameBoard.board[pFrom.getY()][pFrom.getX()]);
         } else if (fightInfo->getWinner() == player) {
@@ -174,7 +174,7 @@ unique_ptr<MyFightInfo> GameManager::makeMove(unique_ptr<Move> &pieceMove, int p
 }
 
 GameManager::Turns GameManager::changeTurn(GameManager::Turns turn) {
-    if(turn == FIRST_PLAYER_TURN){
+    if (turn == FIRST_PLAYER_TURN) {
         return SECOND_PLAYER_TURN;
     } else {
         return FIRST_PLAYER_TURN;
@@ -192,7 +192,7 @@ bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePos
             cout << "Piece set outside the board" << endl;
             return false;
         }
-        if(Piece::getEnumTypeRep(piecePos->getPiece()) == Piece::Undefined){
+        if (Piece::getEnumTypeRep(piecePos->getPiece()) == Piece::Undefined) {
             std::cout << "Undefined piece type" << piecePos->getPiece() << std::endl;
             return false;
         }
@@ -224,7 +224,7 @@ bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePos
 }
 
 
-void GameManager::checkMovablePieces(bool &player1HaveFlag, bool &player2HaveFlag, bool &player1HaveMovingPieces, bool &player2HaveMovingPieces){
+void GameManager::checkMovablePieces(bool &player1HaveFlag, bool &player2HaveFlag, bool &player1HaveMovingPieces, bool &player2HaveMovingPieces) {
     for (int i = 0; i < RPS::NRows; i++) {
         for (int j = 0; j < RPS::MCols; j++) {
             if (this->gameBoard.board[i][j].get() != nullptr) {
@@ -251,7 +251,7 @@ void GameManager::checkMovablePieces(bool &player1HaveFlag, bool &player2HaveFla
 }
 
 EndOfGameHandler GameManager::checkWinner(EndOfGameHandler& endOfGameHandler, int currentPlayer) {
-    if(endOfGameHandler.getEndOfGameReason() == EndOfGameHandler::Tie100MovesNoFight){
+    if (endOfGameHandler.getEndOfGameReason() == EndOfGameHandler::Tie100MovesNoFight) {
         endOfGameHandler.setGameState(EndOfGameHandler::Tie);
         return endOfGameHandler;
     }
@@ -284,7 +284,7 @@ EndOfGameHandler GameManager::checkWinner(EndOfGameHandler& endOfGameHandler, in
 }
 
 int GameManager::playerNum(GameManager::Turns const &currentTurn) {
-    if(currentTurn == FIRST_PLAYER_TURN){
+    if (currentTurn == FIRST_PLAYER_TURN) {
         return 1;
     } else {
         return 2;
@@ -330,38 +330,39 @@ bool GameManager::checkJokerChangeAndSet(const JokerChange &jokerChange, int pla
 bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, int fileLinePlayer[2], int &numOfMovesWithoutAFight) {
     numOfMovesWithoutAFight++;
     unique_ptr<Move> movePtr = playerAlgorithms[currentTurn]->getMove();
-    if(movePtr.get() == nullptr){
+    if (movePtr.get() == nullptr) {
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
         endOfGameHandler.setWinner(currentTurn, fileLinePlayer[0], fileLinePlayer[1]);
         return false;
     }
+
     cout << "player " << playerNum(currentTurn) << " move from (" <<  movePtr->getFrom().getX() << ", " << movePtr->getFrom().getY() << ") to (" <<  movePtr->getTo().getX() << ", " << movePtr->getTo().getY() << ")" << endl;
     const Move &move = *(movePtr.get());
     MyPoint pFrom(move.getFrom().getX() - 1, move.getFrom().getY() - 1);
     MyPoint pTo(move.getTo().getX() - 1, move.getTo().getY() - 1);
     MyMove zeroBasedMove(pFrom, pTo);
-    if(!RPS::checkIfMoveIsLegal(this->gameBoard.board, zeroBasedMove, playerNum(currentTurn))){
+    if (!RPS::checkIfMoveIsLegal(this->gameBoard.board, zeroBasedMove, playerNum(currentTurn))) { // check if the move is illegal
         // TODO: ERROR: in making move
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
         endOfGameHandler.setWinner(currentTurn, fileLinePlayer[0], fileLinePlayer[1]);
         return false;
     }
-    unique_ptr<FightInfo> fightPtr = makeMove(movePtr, playerNum(currentTurn));
+    unique_ptr<FightInfo> fightPtr = makeMove(movePtr, playerNum(currentTurn)); // make the move and get the fight result
     const FightInfo &fight = *(fightPtr.get());
     // if there was a fight
-    if(fightPtr.get() != nullptr){
+    if (fightPtr.get() != nullptr) {
         numOfMovesWithoutAFight = 0;
         playerAlgorithms[currentTurn]->notifyFightResult(fight);
     }
-    if(checkWinner(endOfGameHandler, playerNum(changeTurn(currentTurn))).getGameState() != EndOfGameHandler::GameNotOver){
+    if (checkWinner(endOfGameHandler, playerNum(changeTurn(currentTurn))).getGameState() != EndOfGameHandler::GameNotOver) {
         return false;
     }
-    unique_ptr<JokerChange> jokerChangePtr = playerAlgorithms[currentTurn]->getJokerChange();
-    if(jokerChangePtr.get() != nullptr){
+    unique_ptr<JokerChange> jokerChangePtr = playerAlgorithms[currentTurn]->getJokerChange(); // handle joker change of representation
+    if (jokerChangePtr.get() != nullptr) {
         const JokerChange &jokerChange = *(jokerChangePtr.get());
         MyPoint jokerPos(jokerChange.getJokerChangePosition().getX() - 1, jokerChange.getJokerChangePosition().getY() - 1);
         MyJokerChange jokerChangeZeroBased(jokerPos, Piece::fromTypeRepToJRep(Piece::getEnumTypeRep(jokerChange.getJokerNewRep())));
-        if(!checkJokerChangeAndSet(jokerChangeZeroBased, playerNum(currentTurn))){
+        if (!checkJokerChangeAndSet(jokerChangeZeroBased, playerNum(currentTurn))) {
             // TODO: ERROR: in changing joker
             endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
             endOfGameHandler.setWinner(currentTurn, fileLinePlayer[0], fileLinePlayer[1]);
@@ -369,11 +370,11 @@ bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler&
         }
     }
     playerAlgorithms[changeTurn(currentTurn)]->notifyOnOpponentMove(move);
-    if(fightPtr.get() != nullptr){
+    if (fightPtr.get() != nullptr) {
         playerAlgorithms[changeTurn(currentTurn)]->notifyFightResult(fight);
     }
-    currentTurn = changeTurn(currentTurn);
-    if(numOfMovesWithoutAFight >= 100){
+    currentTurn = changeTurn(currentTurn); // change turns
+    if (numOfMovesWithoutAFight >= 100) { // check the number of turns without a fight
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::Tie100MovesNoFight);
         return false;
     }
@@ -422,7 +423,7 @@ void GameManager::createOutFile(EndOfGameHandler &endOfGameHandler, bool *isBadI
     fout.close();
 }
 
-void GameManager::startGame(){
+void GameManager::startGame() {
     bool isBadInputVec[2] = {false, false};
     int errorLine[2] = {0, 0};
     int numOfMovesWithoutAFight = 0;
@@ -444,29 +445,27 @@ void GameManager::startGame(){
         cout << "player2 lose because unsupported rps.board format" << endl;
     } else {
 
-        for (unique_ptr<PiecePosition> &piecePos1: vectorToFill_1) {
+        for (unique_ptr<PiecePosition> &piecePos1: vectorToFill_1) { // get players vectors of pieces positions
             fightInfo = setPiece(piecePos1, 1);
-//            cout << "piecePos1: " << piecePos1->getPiece() << " pos: (" << piecePos1->getPosition().getX() << ", " << piecePos1->getPosition().getY() << ")" << endl;
             if (fightInfo.get() != nullptr) {
-                fightInfoVec.push_back(std::move(fightInfo));
+                fightInfoVec.push_back(std::move(fightInfo)); // fight if the current cell is occupied
             }
         }
 
         for (unique_ptr<PiecePosition> &piecePos2: vectorToFill_2) {
-//            cout << "piecePos2: " << piecePos2->getPiece() << " pos: (" << piecePos2->getPosition().getX() << ", " << piecePos2->getPosition().getY() << ")" << endl;
             fightInfo = setPiece(piecePos2, 2);
             if (fightInfo.get() != nullptr) {
                 fightInfoVec.push_back(std::move(fightInfo));
             }
         }
 
-        this->playerAlgorithms[0]->notifyOnInitialBoard(this->gameBoard, fightInfoVec);
+        this->playerAlgorithms[0]->notifyOnInitialBoard(this->gameBoard, fightInfoVec); // notify results to the players
         this->playerAlgorithms[1]->notifyOnInitialBoard(this->gameBoard, fightInfoVec);
         int fileLinePlayer[2] = {0, 0};
-        while ((checkWinner(endOfGameHandler, playerNum(currentTurn))).getGameState() == EndOfGameHandler::GameNotOver){
+        while ((checkWinner(endOfGameHandler, playerNum(currentTurn))).getGameState() == EndOfGameHandler::GameNotOver) { // make moves until the game is over
             printBoard();
             fileLinePlayer[currentTurn]++;
-            if(!handleATurn(currentTurn, endOfGameHandler, fileLinePlayer, numOfMovesWithoutAFight)){
+            if (!handleATurn(currentTurn, endOfGameHandler, fileLinePlayer, numOfMovesWithoutAFight)) {
                 //TODO: handle error
                 break;
             }

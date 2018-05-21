@@ -29,12 +29,11 @@ class RPS {
 	int playerPiecesArsenal[7];
 
 	// expected zero based point
-	static bool isPointInBounds(const Point &point);
-	void initializePiecesArsenal();
+	static bool isPointInBounds(const Point &point); // checks if the piece location is in the board bounds
+	void initializePiecesArsenal(); // initialize the playerPiecesArsenal array acording to the game settings
 	// expected zero based move
 	static bool checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &board, const Move &move, int player, bool printMessages = true);
-    RPS(){
-    };
+    RPS() {};
     RPS(const RPS& rps) = delete;
     RPS& operator=(const RPS& rps) = delete;
 };

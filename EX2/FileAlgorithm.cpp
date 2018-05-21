@@ -3,7 +3,7 @@
 string FileAlgorithm::player1Moves = "player1.rps_moves";
 string FileAlgorithm::player2Moves = "player2.rps_moves";
 
-FileAlgorithm::FileAlgorithm(): moveFile(), player(0), fileLine(0), jokerChange(){
+FileAlgorithm::FileAlgorithm(): moveFile(), player(0), fileLine(0), jokerChange() {
 
 }
 
@@ -124,7 +124,7 @@ unique_ptr<Move> FileAlgorithm::getMove() {
         return nullptr;
     }
 
-        while(line_words.size() == 0 && !moveFile.eof()){
+        while (line_words.size() == 0 && !moveFile.eof()) {
             try {
                 getline(moveFile, cur_line);
             } catch (std::ifstream::failure &e) {

@@ -1,6 +1,6 @@
 #include "EndOfGameHandler.h"
 
-int EndOfGameHandler::getEndGameLineNumber() {
+int EndOfGameHandler::getEndGameLineNumber() const {
     return this->endGameLineNumber;
 }
 
@@ -8,7 +8,7 @@ void EndOfGameHandler::setEndGameLineNumber(int line_number) {
     this->endGameLineNumber = line_number;
 }
 
-EndOfGameHandler::EndOfGameReason EndOfGameHandler::getEndOfGameReason() {
+EndOfGameHandler::EndOfGameReason EndOfGameHandler::getEndOfGameReason() const {
     return this->endOfGameReason;
 }
 
@@ -16,7 +16,7 @@ void EndOfGameHandler::setEndOfGameReason(EndOfGameReason reason) {
     this->endOfGameReason = reason;
 }
 
-EndOfGameHandler::GameState EndOfGameHandler::getGameState() {
+EndOfGameHandler::GameState EndOfGameHandler::getGameState() const {
     return this->gameState;
 }
 void EndOfGameHandler::setGameState(GameState state) {
@@ -33,7 +33,7 @@ void EndOfGameHandler::setWinner(int currentTurn ,int fileLinePlayer1, int fileL
     }
 }
 
-string EndOfGameHandler::toString() {
+string EndOfGameHandler::toString() const {
     if (this->getEndOfGameReason() == EndOfGameHandler::BadMoveFile) {
         stringstream ss;
         ss << this->getEndGameLineNumber();

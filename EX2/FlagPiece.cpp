@@ -10,7 +10,7 @@ FlagPiece::FlagPiece(int player) :Piece(player) {
     this->strongerThan[Piece::Flag] = Piece::Equal;
 }
 
-std::string FlagPiece::toString() {
+std::string FlagPiece::toString() const {
     if (this->getPlayerNumber() == 2) {
         return "f";
     } else {

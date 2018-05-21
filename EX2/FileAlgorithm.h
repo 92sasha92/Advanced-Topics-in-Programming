@@ -16,8 +16,8 @@ private:
     static std::string player2Moves;
     unique_ptr<MyJokerChange> jokerChange;
 
-    bool isNumOfArgsCorrect(vector<string> &line_words,int fileLine, EndOfGameHandler& endOfGameHandler);
-    void parseMove(vector<string> pieceDescription, unique_ptr<MyMove> &move);
+    bool isNumOfArgsCorrect(vector<string> &line_words,int fileLine, EndOfGameHandler& endOfGameHandler); // check if the number of argument is correct
+    void parseMove(vector<string> pieceDescription, unique_ptr<MyMove> &move); // parse the move
     void ParseJokerChange(vector<string> pieceDescription);
 
 public:
@@ -28,7 +28,7 @@ public:
     void notifyFightResult(const FightInfo& fightInfo) override; // called only if there was a fight
     unique_ptr<Move> getMove() override;
     unique_ptr<JokerChange> getJokerChange() override; // nullptr if no change is requested
-    ~FileAlgorithm(){
+    ~FileAlgorithm() {
             moveFile.close();
     };
 };

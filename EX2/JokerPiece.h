@@ -7,10 +7,10 @@ class JokerPiece: public Piece{
     Piece::RPSPiecesTypes jokerPiece;
 
   public:
-    RPSPiecesTypes getJokerPiece();
+    RPSPiecesTypes getJokerPiece() const;
     void setJokerPiece(Piece::RPSPiecesTypes NewJpkerPiece);
     JokerPiece(int player, Piece::RPSPiecesTypes jokerPiece_);
-    std::string toString() override;
-		int getCanMove() override;
+    std::string toString() const override;
+		int getCanMove() const override;
     ~JokerPiece() final;
 };

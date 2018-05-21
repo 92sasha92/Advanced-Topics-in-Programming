@@ -9,7 +9,7 @@ RockPiece::RockPiece(int player) :Piece(player) {
     this->strongerThan[Piece::Flag] = Piece::Stronger;
 }
 
-std::string RockPiece::toString() {
+std::string RockPiece::toString() const {
     if (this->getPlayerNumber() == 2) {
         return "r";
     } else {

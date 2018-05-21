@@ -11,11 +11,11 @@ void RPS::initializePiecesArsenal() {
     this->playerPiecesArsenal[Piece::Undefined] = 0;
 }
 
-bool RPS::isPointInBounds(const Point &p){
-    if(p.getX() < 0 || p.getX() >= RPS::MCols){
+bool RPS::isPointInBounds(const Point &p) {
+    if (p.getX() < 0 || p.getX() >= RPS::MCols) {
         return false;
     }
-    if(p.getY() < 0 || p.getY() >= RPS::NRows){
+    if (p.getY() < 0 || p.getY() >= RPS::NRows) {
         return false;
     }
     return true;
@@ -42,7 +42,7 @@ bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &b
 //    if (gameBoard.board[fPoint->getY()][fPoint->getX()]->type == Piece::Joker) {
 //        isJoker = true;
 //    }
-    if(board[fPoint.getY()][fPoint.getX()]->getPlayerNumber() != player){
+    if (board[fPoint.getY()][fPoint.getX()]->getPlayerNumber() != player) {
         if (printMessages) {
             cout << "ERROR: cannot move opponent piece" << endl;
         }

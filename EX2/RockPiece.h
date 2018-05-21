@@ -4,6 +4,6 @@
 class RockPiece: public Piece{
   public:
     RockPiece(int player);
-    std::string toString() override;
+    std::string toString() const override;
     ~RockPiece() final;
 };

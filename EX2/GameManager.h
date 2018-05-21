@@ -18,18 +18,19 @@ private:
         FIRST_PLAYER_TURN = 0,
         SECOND_PLAYER_TURN = 1
     }Turns;
-    int playerNum(GameManager::Turns const &currentTurn);
+
+    int playerNum(GameManager::Turns const &currentTurn); // return the current player number
     bool handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, int fileLinePlayer[2], int &numOfMovesWithoutAFight);
-    void startGame();
-    unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos);
-    unique_ptr<MyFightInfo> setPiece(unique_ptr<PiecePosition> &piecePos, int player);
-    unique_ptr<MyFightInfo> makeMove(unique_ptr<Move> &pieceMove, int player);
+    void startGame(); // control the game flow
+    unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos); // handle the fight
+    unique_ptr<MyFightInfo> setPiece(unique_ptr<PiecePosition> &piecePos, int player); // set piece on board
+    unique_ptr<MyFightInfo> makeMove(unique_ptr<Move> &pieceMove, int player); // make the move
     bool checkJokerChangeAndSet(const JokerChange& jokerChange, int player);
-    bool checkLegalPositioningVec(const std::vector<unique_ptr<PiecePosition>> &vec, int &errorLineCounter);
+    bool checkLegalPositioningVec(const std::vector<unique_ptr<PiecePosition>> &vec, int &errorLineCounter); // check that the moves vector is legal
     void checkMovablePieces(bool &player1HaveFlag, bool &player2HaveFlag, bool &player1HaveMovingPieces, bool &player2HaveMovingPieces);
-    EndOfGameHandler checkWinner(EndOfGameHandler& endOfGameHandler, int currentPlayer);
+    EndOfGameHandler checkWinner(EndOfGameHandler& endOfGameHandler, int currentPlayer); // check if there is a winner
     void printBoard();
-    void createOutFile(EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]);
+    void createOutFile(EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]); // write the result to the output file
     Turns changeTurn(Turns turn);
 
 public:

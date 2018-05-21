@@ -9,7 +9,7 @@ ScissorsPiece::ScissorsPiece(int player) :Piece(player) {
     this->strongerThan[Piece::Flag] = Piece::Stronger;
 }
 
-std::string ScissorsPiece::toString() {
+std::string ScissorsPiece::toString() const {
     if (this->getPlayerNumber() == 2) {
         return "s";
     } else {

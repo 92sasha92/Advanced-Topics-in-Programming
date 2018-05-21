@@ -9,7 +9,7 @@ PaperPiece::PaperPiece(int player) :Piece(player) {
     this->strongerThan[Piece::Flag] = Piece::Stronger;
 }
 
-std::string PaperPiece::toString() {
+std::string PaperPiece::toString() const {
     if (this->getPlayerNumber() == 2) {
         return "p";
     } else {

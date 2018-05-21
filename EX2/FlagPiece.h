@@ -4,6 +4,6 @@
 class FlagPiece : public Piece {
   public:
     FlagPiece(int player);
-    std::string toString() override;
+    std::string toString() const override;
     ~FlagPiece() final;
 };

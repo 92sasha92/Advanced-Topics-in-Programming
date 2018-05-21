@@ -4,6 +4,6 @@
 class ScissorsPiece : public Piece {
   public:
     ScissorsPiece(int player);
-    std::string toString() override;
+    std::string toString() const override;
     ~ScissorsPiece() final;
 };

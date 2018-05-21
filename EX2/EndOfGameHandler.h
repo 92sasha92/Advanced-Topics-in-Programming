@@ -28,14 +28,14 @@ class EndOfGameHandler {
     EndOfGameHandler() : endOfGameReason(GameNotFinished), gameState(GameNotOver), endGameLineNumber(0) {}
     ~EndOfGameHandler() = default;
 
-    int getEndGameLineNumber();
-    void setEndGameLineNumber(int line_number);
-    EndOfGameReason getEndOfGameReason();
+    int getEndGameLineNumber() const; // return the file line number that cause the error
+    void setEndGameLineNumber(int line_number); // set the file line number that cause the error
+    EndOfGameReason getEndOfGameReason() const;
     void setEndOfGameReason(EndOfGameReason reason);
-    GameState getGameState();
+    GameState getGameState() const; // return the current state of the game
     void setGameState(GameState state);
     void setWinner(int currentTurn ,int fileLinePlayer1, int fileLinePlayer2);
-    string toString();
+    string toString() const;
 
 
   private:
