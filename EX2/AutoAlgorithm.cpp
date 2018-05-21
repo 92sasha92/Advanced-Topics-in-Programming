@@ -119,6 +119,11 @@ void AutoAlgorithm::notifyFightResult(const FightInfo& fightInfo) {
 //    MyPoint fLastPoint(lastMove.getFrom().getX() - 1, lastMove.getFrom().getY() - 1);
 //    MyPoint toLastPoint(lastMove.getTo().getX() - 1, lastMove.getTo().getY() - 1);
     if (fightInfo.getWinner() == TIE) {
+        if (Piece::getEnumTypeRep(fightInfo.getPiece(opponent)) == Piece::Flag) {
+            opponentNumOfFlags--;
+        } else if (Piece::getEnumTypeRep(fightInfo.getPiece(opponent)) == Piece::Undefined) {
+            opponentNumOfUnknownPieces--;
+        }
         trash.push_back(std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]));
         trash.push_back(std::move(selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]));
 
@@ -132,7 +137,8 @@ void AutoAlgorithm::notifyFightResult(const FightInfo& fightInfo) {
             if (opponentType == Piece::Undefined) {
                 opponentNumOfUnknownPieces--;
                 trash.push_back(std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]));
-                unique_ptr<Piece> piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo.getPiece(opponent)), opponent);
+                unique_ptr<Piece> piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo.getPiece(opponent))
+                        , opponent);
                 selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(piecePtr);
 
             } else if ((opponentType != Piece::Joker) && (opponentType != Piece::getEnumTypeRep(fightInfo.getPiece(opponent)))){
@@ -161,7 +167,7 @@ void AutoAlgorithm::notifyFightResult(const FightInfo& fightInfo) {
                 selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(piecePtr);
             }
         } else {
-            if (Piece::getEnumTypeRep(fightInfo.getPiece(opponent) == Piece::Flag)) {
+            if (Piece::getEnumTypeRep(fightInfo.getPiece(opponent)) == Piece::Flag) {
                 opponentNumOfFlags--;
             }
             trash.push_back(std::move(selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]));
@@ -205,7 +211,7 @@ EndOfGameHandler AutoAlgorithm::checkWinner(EndOfGameHandler& endOfGameHandler, 
                             player2HaveFlag = true;
                         } else if (this->selfGameBoard[i][j]->type == Piece::Rock || this->selfGameBoard[i][j]->type == Piece::Scissors || this->selfGameBoard[i][j]->type == Piece::Paper) {
                             player2HaveMovingPieces = true;
-                        } else if (this->selfGameBoard[i][j]->type == Piece::Joker && ((JokerPiece *)this->selfGameBoard[i][j].get())->getJokerPiece() != Piece::Bomb) {
+                        } else if ((this->selfGameBoard[i][j]->type == Piece::Joker) && (((JokerPiece *)this->selfGameBoard[i][j].get())->getJokerPiece() != Piece::Bomb)) {
                             player2HaveMovingPieces = true;
                         }
                     }
@@ -410,12 +416,12 @@ unique_ptr<MyFightInfo> AutoAlgorithm::makeMove(unique_ptr<Move> &pieceMove, int
 
 
 bool AutoAlgorithm::indexCheck(int row, int col){
-    if(row < 0 || col < 0 || row >= RPS::NRows || col >= RPS::MCols){
+    if((row < 0) || (col < 0) || (row >= RPS::NRows) || (col >= RPS::MCols)){
         return false;
     }
     return true;
 }
-int AutoAlgorithm::recFunc(int curPlayer, int depth, bool isMax) {
+int AutoAlgorithm::recFunc(int curPlayer, int depth, bool isMax) { // TODO: give bonus in the scoring function if they eat piece in early move (high depth)
     EndOfGameHandler endOfGameHandler;
     checkWinner(endOfGameHandler, curPlayer);
 
