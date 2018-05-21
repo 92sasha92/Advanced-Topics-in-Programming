@@ -66,7 +66,7 @@ bool Parser::parsePiece(RPS& rps, vector<string> pieceDescription, vector<unique
         MyPiecePosition piecePosition(pieceType, p, Piece::fromTypeRepToJRep(jokerPieceType));
         unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
         vectorToFill.push_back(std::move(ptr));
-    } else {
+    } else { // handle piece that is not a joker
         if (pieceDescription.size() != 3) {
             cout << "ERROR: too much arguments" << endl;
             return false;
@@ -94,7 +94,7 @@ void Parser::handleParseError(ifstream& fin, EndOfGameHandler& endOfGameHandler,
     unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
     vectorToFill.push_back(std::move(ptr));
 	fin.close();
-	endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadInputFile);
+	endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadInputFile); // set the error in the EndOfGameHandler object
 	endOfGameHandler.setWinner(playerIndex, fileLine, fileLine);
 }
 
