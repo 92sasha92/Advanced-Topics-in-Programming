@@ -322,16 +322,12 @@ bool GameManager::checkJokerChangeAndSet(const JokerChange &jokerChange, int pla
     return true;
 }
 
-
-bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, int fileLinePlayer[2], int &numOfMovesWithoutAFight) {
-    numOfMovesWithoutAFight++;
-    unique_ptr<Move> movePtr = playerAlgorithms[currentTurn]->getMove();
+bool GameManager::handleErrorInAMove(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, unique_ptr<Move> &movePtr, int fileLinePlayer[2]){
     if (movePtr.get() == nullptr) {
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
         endOfGameHandler.setWinner(currentTurn, fileLinePlayer[0], fileLinePlayer[1]);
         return false;
     }
-
     cout << "player " << playerNum(currentTurn) << " move from (" <<  movePtr->getFrom().getX() << ", " << movePtr->getFrom().getY() << ") to (" <<  movePtr->getTo().getX() << ", " << movePtr->getTo().getY() << ")" << endl;
     const Move &move = *(movePtr.get());
     MyPoint pFrom(move.getFrom().getX() - 1, move.getFrom().getY() - 1);
@@ -343,6 +339,16 @@ bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler&
         endOfGameHandler.setWinner(currentTurn, fileLinePlayer[0], fileLinePlayer[1]);
         return false;
     }
+    return true;
+}
+
+bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, int fileLinePlayer[2], int &numOfMovesWithoutAFight) {
+    numOfMovesWithoutAFight++;
+    unique_ptr<Move> movePtr = playerAlgorithms[currentTurn]->getMove();
+    if(!handleErrorInAMove(currentTurn, endOfGameHandler, movePtr, fileLinePlayer)){
+        return false;
+    }
+    const Move &move = *(movePtr.get());
     unique_ptr<FightInfo> fightPtr = makeMove(movePtr, playerNum(currentTurn)); // make the move and get the fight result
     const FightInfo &fight = *(fightPtr.get());
     // if there was a fight
@@ -378,7 +384,6 @@ bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler&
 }
 
 void GameManager::createOutFile(EndOfGameHandler &endOfGameHandler, bool *isBadInputFile, int *ErrorLine) {
-    RPS rps;
     ofstream fout(GameManager::outputFile);
     if ((isBadInputFile[0] || isBadInputFile[1])) {
         if (!isBadInputFile[0]) {
@@ -406,8 +411,8 @@ void GameManager::createOutFile(EndOfGameHandler &endOfGameHandler, bool *isBadI
     }
     // empty line
     fout << endl;
-    for (int i = 0; i < rps.NRows; i++) {
-        for (int j = 0; j < rps.MCols; j++) {
+    for (int i = 0; i < RPS::NRows; i++) {
+        for (int j = 0; j < RPS::MCols; j++) {
             if (gameBoard.board[i][j].get() == nullptr) {
                 fout << " ";
             } else {
@@ -419,28 +424,16 @@ void GameManager::createOutFile(EndOfGameHandler &endOfGameHandler, bool *isBadI
     fout.close();
 }
 
-void GameManager::startGame() {
-    bool isBadInputVec[2] = {false, false};
-    int errorLine[2] = {0, 0};
-    int numOfMovesWithoutAFight = 0;
-    EndOfGameHandler endOfGameHandler;
+
+bool GameManager::checkAndSetInitPiecePos(int errorLine[2], bool isBadInputVec[2], std::vector<unique_ptr<FightInfo>> &fightInfoVec){
     unique_ptr<MyFightInfo> fightInfo;
-    std::vector<unique_ptr<FightInfo>> fightInfoVec;
     std::vector<unique_ptr<PiecePosition>> vectorToFill_1;
     std::vector<unique_ptr<PiecePosition>> vectorToFill_2;
     playerAlgorithms[0]->getInitialPositions(1, vectorToFill_1);
     playerAlgorithms[1]->getInitialPositions(2, vectorToFill_2);
-    Turns currentTurn = FIRST_PLAYER_TURN;
     isBadInputVec[0] = !(checkLegalPositioningVec(vectorToFill_1, errorLine[0]));
     isBadInputVec[1] = !(checkLegalPositioningVec(vectorToFill_2, errorLine[1]));
-    if (isBadInputVec[0] && isBadInputVec[1]) {
-        cout << "both players lose because unsupported rps.board format" << endl;
-    } else if (isBadInputVec[0]) {
-        cout << "player1 lose because unsupported rps.board format" << endl;
-    } else if (isBadInputVec[1]) {
-        cout << "player2 lose because unsupported rps.board format" << endl;
-    } else {
-
+    if(!isBadInputVec[0] && !isBadInputVec[1]){
         for (unique_ptr<PiecePosition> &piecePos1: vectorToFill_1) { // get players vectors of pieces positions
             fightInfo = setPiece(piecePos1, 1);
             if (fightInfo.get() != nullptr) {
@@ -454,7 +447,27 @@ void GameManager::startGame() {
                 fightInfoVec.push_back(std::move(fightInfo));
             }
         }
+        return true;
+    } else if (isBadInputVec[0] && isBadInputVec[1]) {
+        cout << "both players lose because unsupported rps.board format" << endl;
+    } else if (isBadInputVec[0]) {
+        cout << "player1 lose because unsupported rps.board format" << endl;
+    } else if (isBadInputVec[1]) {
+        cout << "player2 lose because unsupported rps.board format" << endl;
+    }
+    return false;
+}
 
+
+void GameManager::startGame() {
+    bool isBadInputVec[2] = {false, false};
+    int errorLine[2] = {0, 0};
+    int numOfMovesWithoutAFight = 0;
+    Turns currentTurn = FIRST_PLAYER_TURN;
+    EndOfGameHandler endOfGameHandler;
+    unique_ptr<MyFightInfo> fightInfo;
+    std::vector<unique_ptr<FightInfo>> fightInfoVec;
+    if(checkAndSetInitPiecePos(errorLine, isBadInputVec, fightInfoVec)){
         this->playerAlgorithms[0]->notifyOnInitialBoard(this->gameBoard, fightInfoVec); // notify results to the players
         this->playerAlgorithms[1]->notifyOnInitialBoard(this->gameBoard, fightInfoVec);
         int fileLinePlayer[2] = {0, 0};

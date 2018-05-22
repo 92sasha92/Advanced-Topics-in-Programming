@@ -33,6 +33,8 @@ private:
     void createOutFile(EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]); // write the result to the output file
     Turns changeTurn(Turns turn);
     void checkAndSetBoolFlags(Piece * const currentPiece, bool &playerHaveFlag, bool &playerHaveMovingPieces);
+    bool checkAndSetInitPiecePos(int errorLine[2], bool isBadInputVec[2], std::vector<unique_ptr<FightInfo>> &fightInfoVec);
+    bool handleErrorInAMove(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, unique_ptr<Move> &movePtr, int fileLinePlayer[2]);
 
 public:
     GameManager(unique_ptr<PlayerAlgorithm> &&player1Algorithm_, unique_ptr<PlayerAlgorithm> &&player2Algorithm_);
