@@ -32,6 +32,7 @@ private:
     void printBoard();
     void createOutFile(EndOfGameHandler& endOfGameHandler, bool isBadInputFile[2], int ErrorLine[2]); // write the result to the output file
     Turns changeTurn(Turns turn);
+    void checkAndSetBoolFlags(Piece * const currentPiece, bool &playerHaveFlag, bool &playerHaveMovingPieces);
 
 public:
     GameManager(unique_ptr<PlayerAlgorithm> &&player1Algorithm_, unique_ptr<PlayerAlgorithm> &&player2Algorithm_);
