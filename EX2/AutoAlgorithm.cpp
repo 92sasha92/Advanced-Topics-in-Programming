@@ -19,7 +19,6 @@ void AutoAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<Piece
     } else {
         this->opponent = 1;
     }
-
     int row, col, jokerRep;
     RPS rps;
     bool cellNotOccupied;
@@ -29,7 +28,7 @@ void AutoAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<Piece
     rps.initializePiecesArsenal();
     int numOfPieceTypes = sizeof(rps.playerPiecesArsenal)/sizeof(int);
 
-    for (int i = 0; i < numOfPieceTypes; i++ ) { // set a randomize initial board
+    for (int i = 0; i < numOfPieceTypes; i++ ) { // set a random initial board
         for (int j = 0; j < rps.playerPiecesArsenal[i]; j++ ) {
             cellNotOccupied = true;
             while (cellNotOccupied) {
@@ -88,36 +87,74 @@ void AutoAlgorithm::notifyOnInitialBoard(const Board& b, const std::vector<uniqu
 }
 
 void AutoAlgorithm::notifyOnOpponentMove(const Move& move) {
-    // 1 based
-//    MyPoint fPoint(move.getFrom().getX(), move.getFrom().getY());
-//    MyPoint toPoint(move.getTo().getX(), move.getTo().getY());
-    // zero based - correct
-    MyPoint fPoint(move.getFrom().getX() - 1, move.getFrom().getY() - 1);
+    MyPoint fPoint(move.getFrom().getX() - 1, move.getFrom().getY() - 1);  // converting to zero based point
     MyPoint toPoint(move.getTo().getX() - 1, move.getTo().getY() - 1);
     if (this->selfGameBoard[toPoint.getY()][toPoint.getX()].get() != nullptr) {
-//        MyPoint pFrom(move.getFrom().getX(), move.getFrom().getY()); // TODO: over ride operator= of Move class
-//        MyPoint pTo(move.getTo().getX(), move.getTo().getY());
-// 1 based
-//        lastMove.init(pFrom, pTo);
-        // zero based - correct
         lastMove.init(fPoint, toPoint);
         isOpponentAttacked = true;
         return;
     }
-
     this->selfGameBoard[toPoint.getY()][toPoint.getX()] = std::move(this->selfGameBoard[fPoint.getY()][fPoint.getX()]);
     isOpponentAttacked = false;
 }
 
-void AutoAlgorithm::notifyFightResult(const FightInfo& fightInfo) {
+void AutoAlgorithm::notifyFightResultWhenPlayerDefend(const FightInfo& fightInfo, const MyPoint &fLastPoint, const MyPoint &toLastPoint) {
     vector<unique_ptr<Piece>> trash;
     Piece::RPSPiecesTypes opponentType;
-    // 1 based - correct
-    MyPoint fLastPoint(lastMove.getFrom().getX(), lastMove.getFrom().getY());
-    MyPoint toLastPoint(lastMove.getTo().getX(), lastMove.getTo().getY());
-    // zero based
-//    MyPoint fLastPoint(lastMove.getFrom().getX() - 1, lastMove.getFrom().getY() - 1);
-//    MyPoint toLastPoint(lastMove.getTo().getX() - 1, lastMove.getTo().getY() - 1);
+    if (fightInfo.getWinner() == player) { // player win
+        trash.push_back(std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]));
+    } else { // player lose
+        opponentType = selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]->type;
+        trash.push_back(std::move(selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]));
+
+        if (opponentType == Piece::Undefined) {
+            opponentNumOfUnknownPieces--;
+            trash.push_back(std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]));
+            unique_ptr<Piece> piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo.getPiece(opponent)), opponent);
+            selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(piecePtr);
+
+        } else if ((opponentType != Piece::Joker) && (opponentType != Piece::getEnumTypeRep(fightInfo.getPiece(opponent)))) { // find new joker
+            trash.push_back(std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]));
+            unique_ptr<Piece> piecePtr = PieceFactory::createPiece(Piece::Joker, opponent, opponentType);
+            selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(piecePtr);
+
+        } else {
+            selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]);
+        }
+    }
+}
+
+void AutoAlgorithm::notifyFightResultWhenPlayerAttack(const FightInfo& fightInfo, const MyPoint &fLastPoint, const MyPoint &toLastPoint) {
+    vector<unique_ptr<Piece>> trash;
+    Piece::RPSPiecesTypes opponentType;
+    if (fightInfo.getWinner() == opponent) { // player lose
+        opponentType = selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]->type;
+        trash.push_back(std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]));
+
+        if (opponentType == Piece::Undefined) {
+            opponentNumOfUnknownPieces--;
+            trash.push_back(std::move(selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]));
+            unique_ptr<Piece> piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo.getPiece(opponent)), opponent);
+            selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(piecePtr);
+
+        } else if ((opponentType != Piece::Joker) && (opponentType != Piece::getEnumTypeRep(fightInfo.getPiece(opponent)))) { // find new joker
+            trash.push_back(std::move(selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]));
+            unique_ptr<Piece> piecePtr = PieceFactory::createPiece(Piece::Joker, opponent, opponentType);
+            selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(piecePtr);
+        }
+    } else { // player win
+        if (Piece::getEnumTypeRep(fightInfo.getPiece(opponent)) == Piece::Flag) {
+            opponentNumOfFlags--;
+        }
+        trash.push_back(std::move(selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]));
+        selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]);
+    }
+}
+
+void AutoAlgorithm::notifyFightResult(const FightInfo& fightInfo) {
+    vector<unique_ptr<Piece>> trash;
+    MyPoint fLastPoint(lastMove.getFrom().getX(), lastMove.getFrom().getY()); // 0 based
+    MyPoint toLastPoint(lastMove.getTo().getX(), lastMove.getTo().getY()); // 0 based
     if (fightInfo.getWinner() == TIE) {
         if (Piece::getEnumTypeRep(fightInfo.getPiece(opponent)) == Piece::Flag) {
             opponentNumOfFlags--;
@@ -128,50 +165,25 @@ void AutoAlgorithm::notifyFightResult(const FightInfo& fightInfo) {
         trash.push_back(std::move(selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]));
 
     } else if (isOpponentAttacked) { // player defend
-        if (fightInfo.getWinner() == player) { // player win
-            trash.push_back(std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]));
-        } else { // player lose
-            opponentType = selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]->type;
-            trash.push_back(std::move(selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]));
-
-            if (opponentType == Piece::Undefined) {
-                opponentNumOfUnknownPieces--;
-                trash.push_back(std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]));
-                unique_ptr<Piece> piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo.getPiece(opponent))
-                        , opponent);
-                selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(piecePtr);
-
-            } else if ((opponentType != Piece::Joker) && (opponentType != Piece::getEnumTypeRep(fightInfo.getPiece(opponent)))) { // find new joker
-                trash.push_back(std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]));
-                unique_ptr<Piece> piecePtr = PieceFactory::createPiece(Piece::Joker, opponent, opponentType);
-                selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(piecePtr);
-
-            } else {
-                selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]);
-            }
-        }
+        notifyFightResultWhenPlayerDefend(fightInfo, fLastPoint, toLastPoint);
     } else { // player attack
-        if (fightInfo.getWinner() == opponent) { // player lose
-            opponentType = selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]->type;
-            trash.push_back(std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]));
+        notifyFightResultWhenPlayerAttack(fightInfo, fLastPoint, toLastPoint);
+    }
+}
 
-            if (opponentType == Piece::Undefined) {
-                opponentNumOfUnknownPieces--;
-                trash.push_back(std::move(selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]));
-                unique_ptr<Piece> piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo.getPiece(opponent)), opponent);
-                selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(piecePtr);
-
-            } else if ((opponentType != Piece::Joker) && (opponentType != Piece::getEnumTypeRep(fightInfo.getPiece(opponent)))) { // find new joker
-                trash.push_back(std::move(selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]));
-                unique_ptr<Piece> piecePtr = PieceFactory::createPiece(Piece::Joker, opponent, opponentType);
-                selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(piecePtr);
-            }
-        } else { // player win
-            if (Piece::getEnumTypeRep(fightInfo.getPiece(opponent)) == Piece::Flag) {
-                opponentNumOfFlags--;
-            }
-            trash.push_back(std::move(selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]));
-            selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(selfGameBoard[fLastPoint.getY()][fLastPoint.getX()]);
+void AutoAlgorithm::setPieceData(int row, int col , bool &playerHaveFlag, bool &playerHaveMovingPieces) {
+    if (this->selfGameBoard[row][col]->type == Piece::Undefined) {
+        playerHaveFlag = true;
+        if (opponentNumOfFlags < opponentNumOfUnknownPieces) {
+            playerHaveMovingPieces = true;
+        }
+    } else {
+        if (this->selfGameBoard[row][col]->type == Piece::Flag) {
+            playerHaveFlag = true;
+        } else if (this->selfGameBoard[row][col]->type == Piece::Rock || this->selfGameBoard[row][col]->type == Piece::Scissors || this->selfGameBoard[row][col]->type == Piece::Paper) {
+            playerHaveMovingPieces = true;
+        } else if (this->selfGameBoard[row][col]->type == Piece::Joker && ((JokerPiece *)this->selfGameBoard[row][col].get())->getJokerPiece() != Piece::Bomb) {
+            playerHaveMovingPieces = true;
         }
     }
 }
@@ -182,35 +194,9 @@ EndOfGameHandler AutoAlgorithm::checkWinner(EndOfGameHandler& endOfGameHandler, 
         for (int j = 0; j < RPS::MCols; j++) {
             if (this->selfGameBoard[i][j].get() != nullptr) {
                 if (this->selfGameBoard[i][j]->getPlayerNumber() == 1) {
-                    if (this->selfGameBoard[i][j]->type == Piece::Undefined) {
-                        player1HaveFlag = true;
-                        if (opponentNumOfFlags < opponentNumOfUnknownPieces) {
-                            player1HaveMovingPieces = true;
-                        }
-                    } else {
-                        if (this->selfGameBoard[i][j]->type == Piece::Flag) {
-                            player1HaveFlag = true;
-                        } else if (this->selfGameBoard[i][j]->type == Piece::Rock || this->selfGameBoard[i][j]->type == Piece::Scissors || this->selfGameBoard[i][j]->type == Piece::Paper) {
-                            player1HaveMovingPieces = true;
-                        } else if (this->selfGameBoard[i][j]->type == Piece::Joker && ((JokerPiece *)this->selfGameBoard[i][j].get())->getJokerPiece() != Piece::Bomb) {
-                            player1HaveMovingPieces = true;
-                        }
-                    }
+                    setPieceData(i, j, player1HaveFlag, player1HaveMovingPieces);
                 } else {
-                    if (this->selfGameBoard[i][j]->type == Piece::Undefined) {
-                        player2HaveFlag = true;
-                        if (opponentNumOfFlags < opponentNumOfUnknownPieces) {
-                            player2HaveMovingPieces = true;
-                        }
-                    } else {
-                        if (this->selfGameBoard[i][j]->type == Piece::Flag) {
-                            player2HaveFlag = true;
-                        } else if (this->selfGameBoard[i][j]->type == Piece::Rock || this->selfGameBoard[i][j]->type == Piece::Scissors || this->selfGameBoard[i][j]->type == Piece::Paper) {
-                            player2HaveMovingPieces = true;
-                        } else if ((this->selfGameBoard[i][j]->type == Piece::Joker) && (((JokerPiece *)this->selfGameBoard[i][j].get())->getJokerPiece() != Piece::Bomb)) {
-                            player2HaveMovingPieces = true;
-                        }
-                    }
+                    setPieceData(i, j, player2HaveFlag, player2HaveMovingPieces);
                 }
             }
         }
@@ -350,6 +336,17 @@ unique_ptr<MyFightInfo> AutoAlgorithm::fight(unique_ptr<PiecePosition> &player1P
     }
 }
 
+void AutoAlgorithm::createPtrPiece(unique_ptr<PiecePosition> &piecePtr, Piece::RPSPiecesTypes pieceType, Piece::RPSJokerTypes jokerPieceType, MyPoint &fightingPoint, unique_ptr<Move> &pieceMove) {
+    if (pieceType == Piece::Joker) {
+        jokerPieceType = Piece::fromTypeRepToJRep(((JokerPiece *)selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()].get())->getJokerPiece());
+        MyPiecePosition attackingPiecePos(pieceType, fightingPoint, jokerPieceType);
+        piecePtr = std::make_unique<MyPiecePosition>(attackingPiecePos);
+    } else {
+        MyPiecePosition attackingPiecePos(pieceType, fightingPoint, Piece::JNotAJoker);
+        piecePtr = std::make_unique<MyPiecePosition>(attackingPiecePos);
+    }
+}
+
 unique_ptr<MyFightInfo> AutoAlgorithm::makeMove(unique_ptr<Move> &pieceMove, int player) {
     unique_ptr<MyFightInfo> fightInfo = nullptr;
     unique_ptr<Piece> releasePiece1, releasePiece2, piecePtr;
@@ -364,27 +361,10 @@ unique_ptr<MyFightInfo> AutoAlgorithm::makeMove(unique_ptr<Move> &pieceMove, int
         Piece::RPSPiecesTypes defenderPieceType = selfGameBoard[pieceMove->getTo().getY()][pieceMove->getTo().getX()]->type;
         Piece::RPSPiecesTypes attackingPieceType = selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()]->type;
         Piece::RPSJokerTypes defenderJokerPieceType = Piece::JNotAJoker, attackingJokerPieceType = Piece::JNotAJoker;
-        MyPoint FightingPoint(pieceMove->getTo().getX(), pieceMove->getTo().getY());
+        MyPoint fightingPoint(pieceMove->getTo().getX(), pieceMove->getTo().getY());
 
-        if (attackingPieceType == Piece::Joker) {
-            attackingJokerPieceType = Piece::fromTypeRepToJRep(((JokerPiece *)selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()].get())->getJokerPiece());
-            MyPiecePosition attackingPiecePos(attackingPieceType, FightingPoint, attackingJokerPieceType);
-            attackingPtr = std::make_unique<MyPiecePosition>(attackingPiecePos);
-        } else {
-            MyPiecePosition attackingPiecePos(attackingPieceType, FightingPoint, Piece::JNotAJoker);
-            attackingPtr = std::make_unique<MyPiecePosition>(attackingPiecePos);
-        }
-
-        if (defenderPieceType == Piece::Joker) {
-            defenderJokerPieceType = Piece::fromTypeRepToJRep(((JokerPiece *)selfGameBoard[pieceMove->getTo().getY()][pieceMove->getTo().getX()].get())->getJokerPiece());
-            MyPiecePosition defenderPiecePos(defenderPieceType, FightingPoint, defenderJokerPieceType);
-            defenderPtr = std::make_unique<MyPiecePosition>(defenderPiecePos);
-
-        } else {
-            MyPiecePosition defenderPiecePos(defenderPieceType, FightingPoint, Piece::JNotAJoker);
-            defenderPtr = std::make_unique<MyPiecePosition>(defenderPiecePos);
-
-        }
+        createPtrPiece(attackingPtr, attackingPieceType, attackingJokerPieceType, fightingPoint, pieceMove);
+        createPtrPiece(defenderPtr, defenderPieceType, defenderJokerPieceType, fightingPoint, pieceMove);
 
         if (player == 1) {
             fightInfo = fight(attackingPtr, defenderPtr);
@@ -539,7 +519,6 @@ void AutoAlgorithm::handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyP
             }
             bestMovesVec.clear();
             bestMovesVec.push_back(std::move(movePtr));
-//        cout << "found new best" << pFrom << " " << pTo << endl;
         } else if (curScore == bestScore) {
             bestPTo.setPoint(pTo.getX(), pTo.getY());
             bestPFrom.setPoint(pFrom.getX(), pFrom.getY());

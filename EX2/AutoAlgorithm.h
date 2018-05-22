@@ -47,6 +47,10 @@ private:
     unique_ptr<MyFightInfo> makeMove(unique_ptr<Move> &pieceMove, int player);
     unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos);
     bool indexCheck(int row, int col);
+    void notifyFightResultWhenPlayerDefend(const FightInfo& fightInfo, const MyPoint &fLastPoint, const MyPoint &toLastPoint);
+    void notifyFightResultWhenPlayerAttack(const FightInfo& fightInfo, const MyPoint &fLastPoint, const MyPoint &toLastPoint);
+    void setPieceData(int row, int col , bool &playerHaveFlag, bool &playerHaveMovingPieces);
+    void createPtrPiece(unique_ptr<PiecePosition> &piecePtr, Piece::RPSPiecesTypes pieceType, Piece::RPSJokerTypes jokerPieceType, MyPoint &fightingPoint, unique_ptr<Move> &pieceMove);
     void printBoard();
 
 public:
