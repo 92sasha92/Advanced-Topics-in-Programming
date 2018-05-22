@@ -336,17 +336,6 @@ unique_ptr<MyFightInfo> AutoAlgorithm::fight(unique_ptr<PiecePosition> &player1P
     }
 }
 
-void AutoAlgorithm::createPtrPiece(unique_ptr<PiecePosition> &piecePtr, Piece::RPSPiecesTypes pieceType, Piece::RPSJokerTypes jokerPieceType, MyPoint &fightingPoint, unique_ptr<Move> &pieceMove) {
-    if (pieceType == Piece::Joker) {
-        jokerPieceType = Piece::fromTypeRepToJRep(((JokerPiece *)selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()].get())->getJokerPiece());
-        MyPiecePosition attackingPiecePos(pieceType, fightingPoint, jokerPieceType);
-        piecePtr = std::make_unique<MyPiecePosition>(attackingPiecePos);
-    } else {
-        MyPiecePosition attackingPiecePos(pieceType, fightingPoint, Piece::JNotAJoker);
-        piecePtr = std::make_unique<MyPiecePosition>(attackingPiecePos);
-    }
-}
-
 unique_ptr<MyFightInfo> AutoAlgorithm::makeMove(unique_ptr<Move> &pieceMove, int player) {
     unique_ptr<MyFightInfo> fightInfo = nullptr;
     unique_ptr<Piece> releasePiece1, releasePiece2, piecePtr;
@@ -363,8 +352,25 @@ unique_ptr<MyFightInfo> AutoAlgorithm::makeMove(unique_ptr<Move> &pieceMove, int
         Piece::RPSJokerTypes defenderJokerPieceType = Piece::JNotAJoker, attackingJokerPieceType = Piece::JNotAJoker;
         MyPoint fightingPoint(pieceMove->getTo().getX(), pieceMove->getTo().getY());
 
-        createPtrPiece(attackingPtr, attackingPieceType, attackingJokerPieceType, fightingPoint, pieceMove);
-        createPtrPiece(defenderPtr, defenderPieceType, defenderJokerPieceType, fightingPoint, pieceMove);
+        if (attackingPieceType == Piece::Joker) {
+            attackingJokerPieceType = Piece::fromTypeRepToJRep(((JokerPiece *)selfGameBoard[pieceMove->getFrom().getY()][pieceMove->getFrom().getX()].get())->getJokerPiece());
+            MyPiecePosition attackingPiecePos(attackingPieceType, fightingPoint, attackingJokerPieceType);
+            attackingPtr = std::make_unique<MyPiecePosition>(attackingPiecePos);
+        } else {
+            MyPiecePosition attackingPiecePos(attackingPieceType, fightingPoint, Piece::JNotAJoker);
+            attackingPtr = std::make_unique<MyPiecePosition>(attackingPiecePos);
+        }
+
+        if (defenderPieceType == Piece::Joker) {
+            defenderJokerPieceType = Piece::fromTypeRepToJRep(((JokerPiece *)selfGameBoard[pieceMove->getTo().getY()][pieceMove->getTo().getX()].get())->getJokerPiece());
+            MyPiecePosition defenderPiecePos(defenderPieceType, fightingPoint, defenderJokerPieceType);
+            defenderPtr = std::make_unique<MyPiecePosition>(defenderPiecePos);
+
+        } else {
+            MyPiecePosition defenderPiecePos(defenderPieceType, fightingPoint, Piece::JNotAJoker);
+            defenderPtr = std::make_unique<MyPiecePosition>(defenderPiecePos);
+
+        }
 
         if (player == 1) {
             fightInfo = fight(attackingPtr, defenderPtr);
