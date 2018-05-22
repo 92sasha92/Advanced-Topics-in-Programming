@@ -107,6 +107,7 @@ unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<PiecePosition> &piecePo
     return nullptr;
 }
 
+// pieceMOve is 1 based
 unique_ptr<MyFightInfo> GameManager::makeMove(unique_ptr<Move> &pieceMove, int player) { //for moves case only
     unique_ptr<MyFightInfo> fightInfo = nullptr;
     unique_ptr<Piece> releasePiece1, releasePiece2, piecePtr;
@@ -116,10 +117,7 @@ unique_ptr<MyFightInfo> GameManager::makeMove(unique_ptr<Move> &pieceMove, int p
         cout << "cannot set piece because the piece was nullptr" << endl;
         return nullptr;
     }
-    // 1 based
-//    MyPoint pFrom(pieceMove->getFrom().getX(), pieceMove->getFrom().getY());
-//    MyPoint pTo(pieceMove->getTo().getX(), pieceMove->getTo().getY());
-    // zero based correct
+    // translate the move to zero based points
     MyPoint pFrom(pieceMove->getFrom().getX() - 1, pieceMove->getFrom().getY() - 1);
     MyPoint pTo(pieceMove->getTo().getX() - 1, pieceMove->getTo().getY() - 1);
     // there is a fight
@@ -187,29 +185,29 @@ bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePos
     rps.initializePiecesArsenal();
     for (const unique_ptr<PiecePosition> &piecePos: vec) {
         errorLineCounter++;
-       // std::cout << errorLineCounter << std::endl;
-        if (piecePos->getPosition().getY() < 0 || piecePos->getPosition().getX() < 0 || piecePos->getPosition().getY() >= RPS::NRows || piecePos->getPosition().getX() >= RPS::MCols) {
-            cout << "Piece set outside the board" << endl;
+        MyPoint pos(piecePos->getPosition().getX(), piecePos->getPosition().getY());
+        if (!RPS::isPointInBounds(pos)) {
+            std::cout << "ERROR: Piece set outside the board" << std::endl;
             return false;
         }
         if (Piece::getEnumTypeRep(piecePos->getPiece()) == Piece::Undefined) {
-            std::cout << "Undefined piece type" << piecePos->getPiece() << std::endl;
+            std::cout << "ERROR: Undefined piece type" << piecePos->getPiece() << std::endl;
             return false;
         }
-        if (tempBoard[piecePos->getPosition().getY()][piecePos->getPosition().getX()] == 1) {
-            cout << "(" << piecePos->getPosition().getX() + 1 << ", " << piecePos->getPosition().getY() + 1 <<  ") already occupied by other piece of the same player" << endl;
+        if (tempBoard[pos.getY()][pos.getX()] == 1) {
+            std::cout << "ERROR: " << "(" << pos.getX() + 1 << ", " << pos.getY() + 1 <<  ") already occupied by other piece of the same player" << std::endl;
             return false;
         } else {
             Piece::RPSPiecesTypes pieceType = PieceFactory::charToPieceType(piecePos->getPiece());
             if (rps.playerPiecesArsenal[pieceType] == 0) {
-                cout << "ERROR: too many pieces of the same type, type enum:" << pieceType << endl;
+                std::cout << "ERROR: too many pieces of the same type, type enum:" << pieceType << std::endl;
                 return false;
             }
             rps.playerPiecesArsenal[pieceType]--;
-            tempBoard[piecePos->getPosition().getY()][piecePos->getPosition().getX()] = 1;
+            tempBoard[pos.getY()][pos.getX()] = 1;
             if (piecePos->getPiece() == Piece::Joker) {
                 if (piecePos->getPiece() == Piece::Joker || piecePos->getPiece() == Piece::Undefined || piecePos->getPiece() == Piece::Flag) {
-                    cout << "ERROR: joker piece type is wrong" << endl;
+                    std::cout << "ERROR: joker piece type is wrong" << std::endl;
                     return false;
                 }
             }
@@ -217,33 +215,31 @@ bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePos
     }
 
     if (rps.playerPiecesArsenal[Piece::Flag] > 0) {
-        cout << "ERROR: Not all Flags placed" << endl;
+        std::cout << "ERROR: Not all Flags placed" << std::endl;
         return false;
     }
     return true;
 }
 
+void GameManager::checkAndSetBoolFlags(Piece * const currentPiece, bool &playerHaveFlag, bool &playerHaveMovingPieces){
+    if (currentPiece->type == Piece::Flag) {
+        playerHaveFlag = true;
+    } else if (currentPiece->type == Piece::Rock || currentPiece->type == Piece::Scissors || currentPiece->type == Piece::Paper) {
+        playerHaveMovingPieces = true;
+    } else if (currentPiece->type == Piece::Joker && ((JokerPiece *)currentPiece)->getJokerPiece() != Piece::Bomb) {
+        playerHaveMovingPieces = true;
+    }
+}
 
 void GameManager::checkMovablePieces(bool &player1HaveFlag, bool &player2HaveFlag, bool &player1HaveMovingPieces, bool &player2HaveMovingPieces) {
     for (int i = 0; i < RPS::NRows; i++) {
         for (int j = 0; j < RPS::MCols; j++) {
-            if (this->gameBoard.board[i][j].get() != nullptr) {
-                if (this->gameBoard.board[i][j]->getPlayerNumber() == 1) {
-                    if (this->gameBoard.board[i][j]->type == Piece::Flag) {
-                        player1HaveFlag = true;
-                    } else if (this->gameBoard.board[i][j]->type == Piece::Rock || this->gameBoard.board[i][j]->type == Piece::Scissors || this->gameBoard.board[i][j]->type == Piece::Paper) {
-                        player1HaveMovingPieces = true;
-                    } else if (this->gameBoard.board[i][j]->type == Piece::Joker && ((JokerPiece *)this->gameBoard.board[i][j].get())->getJokerPiece() != Piece::Bomb) {
-                        player1HaveMovingPieces = true;
-                    }
+            Piece * const currentPiece = this->gameBoard.board[i][j].get();
+            if (currentPiece != nullptr) {
+                if (currentPiece->getPlayerNumber() == 1) {
+                    checkAndSetBoolFlags(currentPiece, player1HaveFlag, player1HaveMovingPieces);
                 } else {
-                    if (this->gameBoard.board[i][j]->type == Piece::Flag) {
-                        player2HaveFlag = true;
-                    } else if (this->gameBoard.board[i][j]->type == Piece::Rock || this->gameBoard.board[i][j]->type == Piece::Scissors || this->gameBoard.board[i][j]->type == Piece::Paper) {
-                        player2HaveMovingPieces = true;
-                    } else if (this->gameBoard.board[i][j]->type == Piece::Joker && ((JokerPiece *)this->gameBoard.board[i][j].get())->getJokerPiece() != Piece::Bomb) {
-                        player2HaveMovingPieces = true;
-                    }
+                    checkAndSetBoolFlags(currentPiece, player2HaveFlag, player2HaveMovingPieces);
                 }
             }
         }
