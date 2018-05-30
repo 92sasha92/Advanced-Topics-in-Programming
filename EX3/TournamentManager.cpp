@@ -4,7 +4,7 @@
 TournamentManager TournamentManager::theTournamentManager;
 
 void TournamentManager::playAGame(){
-
+    std::cout << 1 << std::endl;
 }
 
 void TournamentManager::createTournamentSchedule(){
@@ -19,14 +19,14 @@ void TournamentManager::run(){
 //        factoryMethod()->
     }
     this->createTournamentSchedule();
-//    std::vector<std::thread> ths;
-//    for (int i = 1; i <= this->numOfThreads; i++) {
-//        ths.push_back(std::thread(&playAGame));
-//    }
-//
-//    for (auto& th : ths) {
-//        th.join();
-//    }
+    std::vector<std::thread> ths;
+    for (int i = 1; i < this->numOfThreads; i++) {
+        ths.push_back(std::thread(&TournamentManager::playAGame, this));
+    }
+
+    for (auto& th : ths) {
+        th.join();
+    }
 }
 
 void TournamentManager::registerAlgorithm(std::string id, std::function<std::unique_ptr<PlayerAlgorithm>()> &factoryMethod) {

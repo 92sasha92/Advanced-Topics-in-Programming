@@ -2,10 +2,11 @@
 
 #include <iostream>
 #include <map>
-#include "PlayerAlgorithm.h"
-#include "AlgorithmRegistration.h"
 #include <thread>
 #include <vector>
+#include "PlayerAlgorithm.h"
+#include "AlgorithmRegistration.h"
+
 
 class TournamentManager {
 private:
