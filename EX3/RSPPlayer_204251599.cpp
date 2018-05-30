@@ -491,6 +491,13 @@ int RSPPlayer_204251599::recFuncHandler(MyMove &curMove,  int curPlayer, int dep
 
         fightInfo = makeMove(curPtrMove, curPlayer); // make the move if legal
         curScore = recFunc(curPlayer, depth - 1, !isMax); // call the recursive function
+        if ((fightInfo != nullptr ) && (fightInfo->getWinner() == curPlayer)) {
+            if ((curScore != INT_MAX) &&  isMax) {
+                curScore += depth;
+            } else if ((curScore != INT_MIN) && !isMax) {
+                curScore -= depth;
+            }
+        }
         undoMove(curMove, fromPiece, toPiece); // undo the move
     }
     return curScore;
