@@ -15,6 +15,7 @@ void TournamentManager::playAGame(){
         GameManager manager(std::move(alg_1), std::move(alg_2));
        // int result = manager.startGame();
         // TODO: lock and update the score
+
         // TODO: unlock the score struct
         // lock the tournamentSchedule
     }
