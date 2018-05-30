@@ -5,7 +5,6 @@ string GameManager::outputFile = "rps.output";
 GameManager::GameManager(unique_ptr<PlayerAlgorithm> &&player1Algorithm_, unique_ptr<PlayerAlgorithm> &&player2Algorithm_): playerAlgorithms(), gameBoard() {
     playerAlgorithms.push_back(std::move(player1Algorithm_));
     playerAlgorithms.push_back(std::move(player2Algorithm_));
-    startGame();
 }
 
 void GameManager::printBoard() {
@@ -459,7 +458,7 @@ bool GameManager::checkAndSetInitPiecePos(int errorLine[2], bool isBadInputVec[2
 }
 
 
-void GameManager::startGame() {
+int GameManager::startGame() {
     bool isBadInputVec[2] = {false, false};
     int errorLine[2] = {0, 0};
     int numOfMovesWithoutAFight = 0;
@@ -484,4 +483,6 @@ void GameManager::startGame() {
     }
 
     GameManager::createOutFile(endOfGameHandler, isBadInputVec, errorLine);
+    // TODO: return the winner
+    return 0;
 }

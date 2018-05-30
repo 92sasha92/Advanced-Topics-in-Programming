@@ -21,7 +21,7 @@ private:
 
     int playerNum(GameManager::Turns const &currentTurn); // return the current player number
     bool handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler& endOfGameHandler, int fileLinePlayer[2], int &numOfMovesWithoutAFight);
-    void startGame(); // control the game flow
+
     unique_ptr<MyFightInfo> fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos); // handle the fight
     unique_ptr<MyFightInfo> setPiece(unique_ptr<PiecePosition> &piecePos, int player); // set piece on board
     unique_ptr<MyFightInfo> makeMove(unique_ptr<Move> &pieceMove, int player); // make the move
@@ -38,6 +38,7 @@ private:
 
 public:
     GameManager(unique_ptr<PlayerAlgorithm> &&player1Algorithm_, unique_ptr<PlayerAlgorithm> &&player2Algorithm_);
+    int startGame(); // control the game flow
 };
 
 

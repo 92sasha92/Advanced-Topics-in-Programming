@@ -5,10 +5,81 @@ TournamentManager TournamentManager::theTournamentManager;
 
 void TournamentManager::playAGame(){
     std::cout << 1 << std::endl;
+// lock the tournamentSchedule
+    while(!tournamentSchedule.empty()){
+        std::unique_ptr<BattleInfo> battle = std::move(tournamentSchedule.top());
+        tournamentSchedule.pop();
+        // unlock the tournamentSchedule
+        unique_ptr<PlayerAlgorithm> alg_1 = id2factory[battle->getId1()]();
+        unique_ptr<PlayerAlgorithm> alg_2 = id2factory[battle->getId2()]();
+        GameManager manager(std::move(alg_1), std::move(alg_2));
+       // int result = manager.startGame();
+        // TODO: lock and update the score
+        // TODO: unlock the score struct
+        // lock the tournamentSchedule
+    }
+    // unlock the tournamentSchedule
 }
 
-void TournamentManager::createTournamentSchedule(){
+void TournamentManager::setMatch(int p1, int p2) {
+    bool isAlgo1BattleCount = true, isAlgo2BattleCount = true;
 
+    if (idNumOfBattlesSet[p1].second >= 30) {
+        isAlgo1BattleCount = false;
+    }
+
+    if (idNumOfBattlesSet[p2].second >= 30) {
+        isAlgo2BattleCount = false;
+    }
+
+    idNumOfBattlesSet[p1].second++;
+    idNumOfBattlesSet[p2].second++;
+
+    if (isAlgo1BattleCount || isAlgo2BattleCount) {
+        tournamentSchedule.push(std::move(std::make_unique<BattleInfo>(idNumOfBattlesSet[p1].first, idNumOfBattlesSet[p2].first, isAlgo1BattleCount, isAlgo2BattleCount)));
+    }
+}
+
+void TournamentManager::createTournamentSchedule() {
+    int i, start;
+    for (i = 0; i < floor(idNumOfBattlesSet.size() / 31); i++ ) {
+        start = i * 31;
+        for (int j = start ; j < start + 31; j++) {
+            for (int k = j + 1; k < start + 31; k++) {
+                setMatch(j, k);
+            }
+        }
+    }
+    createPartialTournament(i);
+    // TODO: check that every algorithm have reasonable number of matches
+    // TODO: update the makefile
+}
+
+void TournamentManager::createPartialTournament(int shift) {
+    int numOfElements = idNumOfBattlesSet.size() % 31 ;
+
+    if (numOfElements == 0) { // already set all matches
+        return;
+    } else if (numOfElements == 1) {
+        if (shift > 0) { // only one algorithm remain so it will fight one fight against every algorithm in the first group
+            for (int p = 0; p < 30; p++) {
+                setMatch(idNumOfBattlesSet.size() - 1, p);
+            }
+            return;
+        } else {
+            std::cout << "ERROR: TournamentManager got only one algorithm" << std::endl;
+            return;
+        }
+    }
+
+    int numOfRepeats = (int)(ceil(31 / numOfElements)), start = shift * 31;
+    for (int i = start; i < (int)idNumOfBattlesSet.size(); i++) { // run over the last (less than 31) elements
+        for (int j = i + 1; i < (int)idNumOfBattlesSet.size(); j++) {
+            for (int k = 0; k < numOfRepeats; k++) {
+                setMatch(j, k);
+            }
+        }
+    }
 }
 
 void TournamentManager::run(){
@@ -29,9 +100,10 @@ void TournamentManager::run(){
     }
 }
 
-void TournamentManager::registerAlgorithm(std::string id, std::function<std::unique_ptr<PlayerAlgorithm>()> &factoryMethod) {
+void TournamentManager::registerAlgorithm(std::string &id, std::function<std::unique_ptr<PlayerAlgorithm>()> &factoryMethod) {
     // TODO: should warn if id is already registered
     id2factory[id] = factoryMethod;
+    idNumOfBattlesSet.push_back(std::pair<std::string, int>(id, 0));
     std::cout << "hi " << id << std::endl;
 }
 
