@@ -21,12 +21,13 @@ public:
         return theTournamentManager;
     }
     void registerAlgorithm(std::string id, std::function<std::unique_ptr<PlayerAlgorithm>()> &factoryMethod);
-    void run()const;
+    void run();
     int getNumOfThreads() const;
     void setNumOfThreads(int t);
     const std::string& getAlgorithmsPath();
     void setAlgorithmsPath(std::string &path);
     void playAGame();
+    void createTournamentSchedule();
 };
 
 

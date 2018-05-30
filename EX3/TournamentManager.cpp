@@ -7,13 +7,18 @@ void TournamentManager::playAGame(){
 
 }
 
-void TournamentManager::run()const {
+void TournamentManager::createTournamentSchedule(){
+
+}
+
+void TournamentManager::run(){
     for(auto& pair : id2factory) {
         const auto& id = pair.first;
         std::cout << id << ": " << std::endl;
 //        const auto& factoryMethod = pair.second;
 //        factoryMethod()->
     }
+    this->createTournamentSchedule();
 //    std::vector<std::thread> ths;
 //    for (int i = 1; i <= this->numOfThreads; i++) {
 //        ths.push_back(std::thread(&playAGame));
