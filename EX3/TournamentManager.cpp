@@ -3,6 +3,10 @@
 
 TournamentManager TournamentManager::theTournamentManager;
 
+void TournamentManager::playAGame(){
+
+}
+
 void TournamentManager::run()const {
     for(auto& pair : id2factory) {
         const auto& id = pair.first;
@@ -10,6 +14,14 @@ void TournamentManager::run()const {
 //        const auto& factoryMethod = pair.second;
 //        factoryMethod()->
     }
+//    std::vector<std::thread> ths;
+//    for (int i = 1; i <= this->numOfThreads; i++) {
+//        ths.push_back(std::thread(&playAGame));
+//    }
+//
+//    for (auto& th : ths) {
+//        th.join();
+//    }
 }
 
 void TournamentManager::registerAlgorithm(std::string id, std::function<std::unique_ptr<PlayerAlgorithm>()> &factoryMethod) {

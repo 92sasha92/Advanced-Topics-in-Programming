@@ -4,6 +4,8 @@
 #include <map>
 #include "PlayerAlgorithm.h"
 #include "AlgorithmRegistration.h"
+#include <thread>
+#include <vector>
 
 class TournamentManager {
 private:
@@ -24,6 +26,7 @@ public:
     void setNumOfThreads(int t);
     const std::string& getAlgorithmsPath();
     void setAlgorithmsPath(std::string &path);
+    void playAGame();
 };
 
 
