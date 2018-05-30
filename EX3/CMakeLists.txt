@@ -44,4 +44,4 @@ add_executable(EX3
         MyPoint.cpp
         MyPoint.h
         MyMove.cpp
-        MyMove.h MyPiecePosition.cpp MyPiecePosition.h MyJokerChange.cpp MyJokerChange.h GameManager.cpp GameManager.h MyFightInfo.cpp MyFightInfo.h MyBoard.cpp MyBoard.h FileAlgorithm.cpp FileAlgorithm.h AutoAlgorithm.cpp AutoAlgorithm.h)
+        MyMove.h MyPiecePosition.cpp MyPiecePosition.h MyJokerChange.cpp MyJokerChange.h GameManager.cpp GameManager.h MyFightInfo.cpp MyFightInfo.h MyBoard.cpp MyBoard.h FileAlgorithm.cpp FileAlgorithm.h RSPPlayer_204251599.cpp RSPPlayer_204251599.h AlgorithmRegistration.h TournamentManager.cpp TournamentManager.h)

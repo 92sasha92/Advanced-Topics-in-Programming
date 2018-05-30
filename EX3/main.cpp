@@ -3,7 +3,7 @@
 #include "MyMove.h"
 #include "GameManager.h"
 #include "FileAlgorithm.h"
-#include "AutoAlgorithm.h"
+#include "RSPPlayer_204251599.h"
 
 int main(int argc, char* argv[]) {
     std::string gameMode;
@@ -21,14 +21,14 @@ int main(int argc, char* argv[]) {
     }
 
     if (gameMode.compare("auto-vs-auto") == 0) {
-        alg_1 = make_unique<AutoAlgorithm>();
-        alg_2 = make_unique<AutoAlgorithm>();
+        alg_1 = make_unique<RSPPlayer_204251599>();
+        alg_2 = make_unique<RSPPlayer_204251599>();
     } else if (gameMode.compare("auto-vs-file") == 0) {
-        alg_1 = make_unique<AutoAlgorithm>();
+        alg_1 = make_unique<RSPPlayer_204251599>();
         alg_2 = make_unique<FileAlgorithm>();
     } else if (gameMode.compare("file-vs-auto") == 0) {
         alg_1 = make_unique<FileAlgorithm>();
-        alg_2 = make_unique<AutoAlgorithm>();
+        alg_2 = make_unique<RSPPlayer_204251599>();
     } else if (gameMode.compare("file-vs-file") == 0) {
         alg_1 = make_unique<FileAlgorithm>();
         alg_2 = make_unique<FileAlgorithm>();
