@@ -43,4 +43,11 @@ do
 done
 
 echo ""
+echo "start 1000 auto-vs-auto games: "
 
+for ((i=1; i<=1000; i++ ))
+do
+    ./ex2 auto-vs-auto
+done
+
+echo "finish!"
