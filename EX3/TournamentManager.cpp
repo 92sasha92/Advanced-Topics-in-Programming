@@ -26,7 +26,7 @@ void TournamentManager::setMatch(int p1, int p2) {
     }
 }
 
-void TournamentManager::createTournamentSchedule(){
+void TournamentManager::createTournamentSchedule() {
     int i, start;
     for (i = 0; i < floor(idNumOfBattlesSet.size() / 31); i++ ) {
         start = i * 31;
@@ -38,6 +38,7 @@ void TournamentManager::createTournamentSchedule(){
     }
     createPartialTournament(i);
     // TODO: check that every algorithm have reasonable number of matches
+    // TODO: update the makefile
 }
 
 void TournamentManager::createPartialTournament(int shift) {
