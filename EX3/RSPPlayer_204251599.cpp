@@ -1,6 +1,7 @@
-#include "AutoAlgorithm.h"
+#include "RSPPlayer_204251599.h"
 
-AutoAlgorithm::AutoAlgorithm(): player(0), opponent(0), opponentNumOfFlags(RPS::F), opponentNumOfUnknownPieces(0), isOpponentAttacked(false), lastMove(), selfGameBoard() {
+REGISTER_ALGORITHM(204251599)
+RSPPlayer_204251599::RSPPlayer_204251599(): player(0), opponent(0), opponentNumOfFlags(RPS::F), opponentNumOfUnknownPieces(0), isOpponentAttacked(false), lastMove(), selfGameBoard() {
     srand (time(NULL));
     for (int i = 0; i < RPS::NRows; i++) { // initialize the auto player self board
         vector<unique_ptr<Piece>> line;
@@ -12,7 +13,7 @@ AutoAlgorithm::AutoAlgorithm(): player(0), opponent(0), opponentNumOfFlags(RPS::
     }
 }
 
-void AutoAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>>& vectorToFill) {
+void RSPPlayer_204251599::getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>>& vectorToFill) {
     this->player = player;
     if (player == 1) {
         this->opponent = 2;
@@ -57,7 +58,7 @@ void AutoAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<Piece
     }
 }
 
-void AutoAlgorithm::notifyOnInitialBoard(const Board& b, const std::vector<unique_ptr<FightInfo>>& fights) {
+void RSPPlayer_204251599::notifyOnInitialBoard(const Board& b, const std::vector<unique_ptr<FightInfo>>& fights) {
     vector<unique_ptr<Piece>> trash;
     MyPoint p(0,0);
     for (const unique_ptr<FightInfo> &fightInfo: fights) { // initialize the auto player self board accord to the fights occured
@@ -86,7 +87,7 @@ void AutoAlgorithm::notifyOnInitialBoard(const Board& b, const std::vector<uniqu
     }
 }
 
-void AutoAlgorithm::notifyOnOpponentMove(const Move& move) {
+void RSPPlayer_204251599::notifyOnOpponentMove(const Move& move) {
     MyPoint fPoint(move.getFrom().getX() - 1, move.getFrom().getY() - 1);  // converting to zero based point
     MyPoint toPoint(move.getTo().getX() - 1, move.getTo().getY() - 1);
     if (this->selfGameBoard[toPoint.getY()][toPoint.getX()].get() != nullptr) {
@@ -98,7 +99,7 @@ void AutoAlgorithm::notifyOnOpponentMove(const Move& move) {
     isOpponentAttacked = false;
 }
 
-void AutoAlgorithm::notifyFightResultWhenPlayerDefend(const FightInfo& fightInfo, const MyPoint &fLastPoint, const MyPoint &toLastPoint) {
+void RSPPlayer_204251599::notifyFightResultWhenPlayerDefend(const FightInfo& fightInfo, const MyPoint &fLastPoint, const MyPoint &toLastPoint) {
     vector<unique_ptr<Piece>> trash;
     Piece::RPSPiecesTypes opponentType;
     if (fightInfo.getWinner() == player) { // player win
@@ -124,7 +125,7 @@ void AutoAlgorithm::notifyFightResultWhenPlayerDefend(const FightInfo& fightInfo
     }
 }
 
-void AutoAlgorithm::notifyFightResultWhenPlayerAttack(const FightInfo& fightInfo, const MyPoint &fLastPoint, const MyPoint &toLastPoint) {
+void RSPPlayer_204251599::notifyFightResultWhenPlayerAttack(const FightInfo& fightInfo, const MyPoint &fLastPoint, const MyPoint &toLastPoint) {
     vector<unique_ptr<Piece>> trash;
     Piece::RPSPiecesTypes opponentType;
     if (fightInfo.getWinner() == opponent) { // player lose
@@ -151,7 +152,7 @@ void AutoAlgorithm::notifyFightResultWhenPlayerAttack(const FightInfo& fightInfo
     }
 }
 
-void AutoAlgorithm::notifyFightResult(const FightInfo& fightInfo) {
+void RSPPlayer_204251599::notifyFightResult(const FightInfo& fightInfo) {
     vector<unique_ptr<Piece>> trash;
     MyPoint fLastPoint(lastMove.getFrom().getX(), lastMove.getFrom().getY()); // 0 based
     MyPoint toLastPoint(lastMove.getTo().getX(), lastMove.getTo().getY()); // 0 based
@@ -171,7 +172,7 @@ void AutoAlgorithm::notifyFightResult(const FightInfo& fightInfo) {
     }
 }
 
-void AutoAlgorithm::setPieceData(int row, int col , bool &playerHaveFlag, bool &playerHaveMovingPieces) {
+void RSPPlayer_204251599::setPieceData(int row, int col , bool &playerHaveFlag, bool &playerHaveMovingPieces) {
     if (this->selfGameBoard[row][col]->type == Piece::Undefined) {
         playerHaveFlag = true;
         if (opponentNumOfFlags < opponentNumOfUnknownPieces) {
@@ -188,7 +189,7 @@ void AutoAlgorithm::setPieceData(int row, int col , bool &playerHaveFlag, bool &
     }
 }
 
-EndOfGameHandler AutoAlgorithm::checkWinner(EndOfGameHandler& endOfGameHandler, int currentPlayer) {
+EndOfGameHandler RSPPlayer_204251599::checkWinner(EndOfGameHandler& endOfGameHandler, int currentPlayer) {
     bool player1HaveFlag = false, player2HaveFlag = false ,player1HaveMovingPieces = false, player2HaveMovingPieces = false;
     for (int i = 0; i < RPS::NRows; i++) {
         for (int j = 0; j < RPS::MCols; j++) {
@@ -223,7 +224,7 @@ EndOfGameHandler AutoAlgorithm::checkWinner(EndOfGameHandler& endOfGameHandler, 
     return endOfGameHandler;
 }
 
-int AutoAlgorithm::scoringFunction(int player) {
+int RSPPlayer_204251599::scoringFunction(int player) {
     EndOfGameHandler endOfGameHandler;
     checkWinner(endOfGameHandler, player);
     MyPoint p(0,0);
@@ -253,7 +254,7 @@ int AutoAlgorithm::scoringFunction(int player) {
     return score;
 }
 
-int AutoAlgorithm::getPieceScore(unique_ptr<Piece> &piece) const{
+int RSPPlayer_204251599::getPieceScore(unique_ptr<Piece> &piece) const{
     switch (piece->type) {
         case Piece::Flag:
             return FLAG_SCORE;
@@ -268,18 +269,18 @@ int AutoAlgorithm::getPieceScore(unique_ptr<Piece> &piece) const{
     }
 }
 
-int AutoAlgorithm::getUnknownPieceTypeScore() const{
+int RSPPlayer_204251599::getUnknownPieceTypeScore() const{
     return (FLAG_SCORE * opponentNumOfFlags)/opponentNumOfUnknownPieces;
 }
 
-int AutoAlgorithm::swapTurn(int curPlayer) {
+int RSPPlayer_204251599::swapTurn(int curPlayer) {
     if (curPlayer == 1) {
         return 2;
     }
     return 1;
 }
 
-void AutoAlgorithm::undoMove(MyMove &lastMove, unique_ptr<Piece>& fromPiece, unique_ptr<Piece>& toPiece) {
+void RSPPlayer_204251599::undoMove(MyMove &lastMove, unique_ptr<Piece>& fromPiece, unique_ptr<Piece>& toPiece) {
         MyPoint fLastPoint(lastMove.getFrom().getX(), lastMove.getFrom().getY());
     MyPoint toLastPoint(lastMove.getTo().getX(), lastMove.getTo().getY());
     vector<unique_ptr<Piece>> trash;
@@ -290,7 +291,7 @@ void AutoAlgorithm::undoMove(MyMove &lastMove, unique_ptr<Piece>& fromPiece, uni
     selfGameBoard[toLastPoint.getY()][toLastPoint.getX()] = std::move(toPiece);
 }
 
-unique_ptr<MyFightInfo> AutoAlgorithm::fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos) {
+unique_ptr<MyFightInfo> RSPPlayer_204251599::fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos) {
     unique_ptr<Piece> piece1 , piece2;
     Piece::PiecesPower winner;
 
@@ -336,7 +337,7 @@ unique_ptr<MyFightInfo> AutoAlgorithm::fight(unique_ptr<PiecePosition> &player1P
     }
 }
 
-unique_ptr<MyFightInfo> AutoAlgorithm::makeMove(unique_ptr<Move> &pieceMove, int player) {
+unique_ptr<MyFightInfo> RSPPlayer_204251599::makeMove(unique_ptr<Move> &pieceMove, int player) {
     unique_ptr<MyFightInfo> fightInfo = nullptr;
     unique_ptr<Piece> releasePiece1, releasePiece2, piecePtr;
     unique_ptr<PiecePosition> defenderPtr, attackingPtr;
@@ -397,14 +398,14 @@ unique_ptr<MyFightInfo> AutoAlgorithm::makeMove(unique_ptr<Move> &pieceMove, int
 }
 
 
-bool AutoAlgorithm::indexCheck(int row, int col) {
+bool RSPPlayer_204251599::indexCheck(int row, int col) {
     if ((row < 0) || (col < 0) || (row >= RPS::NRows) || (col >= RPS::MCols)) {
         return false;
     }
     return true;
 }
 
-void AutoAlgorithm::setPointAndGetScore(int row, int col, MyPoint &pTo, MyMove &curMove, int curPlayer, int depth, bool isMax, int &bestScore) {
+void RSPPlayer_204251599::setPointAndGetScore(int row, int col, MyPoint &pTo, MyMove &curMove, int curPlayer, int depth, bool isMax, int &bestScore) {
     int curScore;
     pTo.setPoint(row, col);
     curMove.setTo(pTo);
@@ -414,7 +415,7 @@ void AutoAlgorithm::setPointAndGetScore(int row, int col, MyPoint &pTo, MyMove &
     }
 }
 
-int AutoAlgorithm::recFunc(int curPlayer, int depth, bool isMax) { // TODO: give bonus in the scoring function if they eat piece in early move (high depth)
+int RSPPlayer_204251599::recFunc(int curPlayer, int depth, bool isMax) { // TODO: give bonus in the scoring function if they eat piece in early move (high depth)
     EndOfGameHandler endOfGameHandler;
     checkWinner(endOfGameHandler, curPlayer);
     int bestScore = INT_MAX;
@@ -454,7 +455,7 @@ int AutoAlgorithm::recFunc(int curPlayer, int depth, bool isMax) { // TODO: give
     return bestScore;
 }
 
-int AutoAlgorithm::recFuncHandler(MyMove &curMove,  int curPlayer, int depth, bool isMax) {
+int RSPPlayer_204251599::recFuncHandler(MyMove &curMove,  int curPlayer, int depth, bool isMax) {
     int curScore = INT_MAX;
     if (isMax) {
         curScore = INT_MIN;
@@ -497,7 +498,7 @@ int AutoAlgorithm::recFuncHandler(MyMove &curMove,  int curPlayer, int depth, bo
 
 
 
-void AutoAlgorithm::handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyPoint &bestPFrom, MyPoint &bestPTo, int curPlayer, int &curScore, int &bestScore, MyMove &curMove, int depth, bool isMax, vector<unique_ptr<Move>> &bestMovesVec) {
+void RSPPlayer_204251599::handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyPoint &bestPFrom, MyPoint &bestPTo, int curPlayer, int &curScore, int &bestScore, MyMove &curMove, int depth, bool isMax, vector<unique_ptr<Move>> &bestMovesVec) {
     pTo.setPoint(col, row);
     curMove.setTo(pTo);
     vector<unique_ptr<Move>> trashVec;
@@ -523,7 +524,7 @@ void AutoAlgorithm::handleOneOfTheMoveChoice(int row, int col, MyPoint &pTo, MyP
     }
 }
 
-unique_ptr<Move> AutoAlgorithm::getMove() {
+unique_ptr<Move> RSPPlayer_204251599::getMove() {
     bool isMax = true;
     int depth = AUTO_ALGORITHM_DEPTH, curPlayer = player;
     int bestScore = INT_MIN, curScore;
@@ -564,7 +565,7 @@ unique_ptr<Move> AutoAlgorithm::getMove() {
     return std::move(bestPtrMove1Based);
 }
 
-int AutoAlgorithm::getJokerMoveScore(int row, int col, unique_ptr<Piece> &tmpPiece) {
+int RSPPlayer_204251599::getJokerMoveScore(int row, int col, unique_ptr<Piece> &tmpPiece) {
     if ((selfGameBoard[row][col].get() != nullptr) && (selfGameBoard[row][col]->getPlayerNumber() != player) && (selfGameBoard[row][col]->type != Piece::Undefined)) {
         if (Piece::PiecesPower::Stronger == tmpPiece->isStrongerThan(*(selfGameBoard[row][col].get()))) {
             return 1;
@@ -575,7 +576,7 @@ int AutoAlgorithm::getJokerMoveScore(int row, int col, unique_ptr<Piece> &tmpPie
     return 0;
 }
 
-int AutoAlgorithm::getScoreForJokerRep(int row, int col, Piece::RPSJokerTypes jokerRep) {
+int RSPPlayer_204251599::getScoreForJokerRep(int row, int col, Piece::RPSJokerTypes jokerRep) {
     int score = 0;
     unique_ptr<Piece> tmpPiece = PieceFactory::createPiece(Piece::getEnumTypeRep(Piece::fromJRepToChar(jokerRep)), player);
 
@@ -595,7 +596,7 @@ int AutoAlgorithm::getScoreForJokerRep(int row, int col, Piece::RPSJokerTypes jo
     return score;
 }
 
-unique_ptr<JokerChange> AutoAlgorithm::getJokerChange() {
+unique_ptr<JokerChange> RSPPlayer_204251599::getJokerChange() {
     unique_ptr<MyJokerChange> jokerChangePtr = make_unique<MyJokerChange>();
     Piece::RPSJokerTypes jokerRep;
     int curScore, bestScore = INT_MIN;
@@ -643,7 +644,7 @@ unique_ptr<JokerChange> AutoAlgorithm::getJokerChange() {
     return nullptr;
 }
 
-void AutoAlgorithm::printBoard() {
+void RSPPlayer_204251599::printBoard() {
     cout << "player " << player << ":" << endl;
     cout << endl;
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
