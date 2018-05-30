@@ -4,6 +4,7 @@
 #include "GameManager.h"
 #include "FileAlgorithm.h"
 #include "RSPPlayer_204251599.h"
+#include "TournamentManager.h"
 
 int main(int argc, char* argv[]) {
     std::string gameMode;
@@ -37,6 +38,15 @@ int main(int argc, char* argv[]) {
         return 0;
     }
     GameManager manager(std::move(alg_1), std::move(alg_2));
+    TournamentManager::getInstance().run();
+    cout << TournamentManager::getInstance().getNumOfThreads() << endl;
+    TournamentManager::getInstance().setNumOfThreads(20);
+    cout << TournamentManager::getInstance().getNumOfThreads() << endl;
+    cout << TournamentManager::getInstance().getAlgorithmsPath() << endl;
+    std::string s = "hello";
+    TournamentManager::getInstance().setAlgorithmsPath(s);
+    cout << TournamentManager::getInstance().getAlgorithmsPath() << endl;
+
     return 0;
 }
 
