@@ -6,11 +6,11 @@ TournamentManager TournamentManager::theTournamentManager;
 void TournamentManager::playAGame(){
     std::cout << 1 << std::endl;
 //    int result, alg1Score, alg2Score;
-// lock the tournamentSchedule
-    while(!tournamentSchedule.empty()){ 
+// TODO: lock the tournamentSchedule
+    while(!tournamentSchedule.empty()){
         std::unique_ptr<BattleInfo> battle = std::move(tournamentSchedule.top());
         tournamentSchedule.pop();
-//        unlock the tournamentSchedule
+//        TODO: unlock the tournamentSchedule
         unique_ptr<PlayerAlgorithm> alg_1 = id2factory[battle->getId1()]();
         unique_ptr<PlayerAlgorithm> alg_2 = id2factory[battle->getId2()]();
         GameManager manager(std::move(alg_1), std::move(alg_2));
@@ -19,16 +19,16 @@ void TournamentManager::playAGame(){
 //        alg2Score = getAlgScore(result, PLAYER_2);
 //        updateScoringTable(battle->getIsAlgo1BattleCount(), battle->getId1(), alg1Score);
 //        updateScoringTable(battle->getIsAlgo2BattleCount(), battle->getId2(), alg2Score);
-//        lock the tournamentSchedule
+//        TODO: lock the tournamentSchedule
     }
-//    unlock the tournamentSchedule
+//    TODO: unlock the tournamentSchedule
 }
 
 void TournamentManager::updateScoringTable(bool isAlgoScoreCount, std::string &algoName, int algoScore) {
     if (isAlgoScoreCount) {
-        // TODO: lock and update the score
+        // TODO: lock scoringTable
         scoringTable[algoName] += algoScore;
-        // TODO: unlock the score struct
+        // TODO: unlock scoringTable
     }
 }
 
