@@ -13,10 +13,9 @@ void TournamentManager::setMatch(int p1, int p2) {
     if (idNumOfBattlesSet[p1].second >= 30) {
         isAlgo1BattleCount = false;
     }
-
     if (idNumOfBattlesSet[p2].second >= 30) {
         isAlgo2BattleCount = false;
-    }
+    }git 
 
     idNumOfBattlesSet[p1].second++;
     idNumOfBattlesSet[p2].second++;
