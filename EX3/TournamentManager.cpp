@@ -6,7 +6,7 @@ TournamentManager TournamentManager::theTournamentManager;
 void TournamentManager::playAGame(){
     std::cout << 1 << std::endl;
 // lock the tournamentSchedule
-    while(!tournamentSchedule.empty()){
+    while(!tournamentSchedule.empty()){ // TODO: opt1) creat a variable and lock the assignment to it. opt2) cond_variable. but im not sure that the thread wont stuck in the loop in that case
         std::unique_ptr<BattleInfo> battle = std::move(tournamentSchedule.top());
         tournamentSchedule.pop();
 //        unlock the tournamentSchedule
@@ -129,6 +129,7 @@ void TournamentManager::run(){
     for (auto& th : ths) {
         th.join();
     }
+//    printScores();
 }
 
 void TournamentManager::registerAlgorithm(std::string &id, std::function<std::unique_ptr<PlayerAlgorithm>()> &factoryMethod) {
@@ -156,6 +157,24 @@ void TournamentManager::setAlgorithmsPath(std::string &path) {
 
 AlgorithmRegistration::AlgorithmRegistration(std::string id, std::function<std::unique_ptr<PlayerAlgorithm>()> factoryMethod) {
     TournamentManager::getInstance().registerAlgorithm(id, factoryMethod);
+}
+
+void TournamentManager::printScores() {
+    // Declaring the type of Predicate that accepts 2 pairs and return a bool
+    typedef std::function<bool(std::pair<std::string, int>, std::pair<std::string, int>)> Comparator;
+
+    // Defining a lambda function to compare two pairs. It will compare two pairs using second field
+    Comparator compFunctor = [](std::pair<std::string, int> elem1 ,std::pair<std::string, int> elem2) {
+        return elem1.second > elem2.second;
+     };
+
+    // Declaring a set that will store the pairs using above comparision logic
+    std::set<std::pair<std::string, int>, Comparator> setOfIds(scoringTable.begin(), scoringTable.end(), compFunctor);
+
+    // Iterate over a set using range base for loop
+    // It will display the items in sorted order of values
+    for (std::pair<std::string, int> element : setOfIds)
+        std::cout << element.first << " " << element.second << std::endl;
 }
 
 

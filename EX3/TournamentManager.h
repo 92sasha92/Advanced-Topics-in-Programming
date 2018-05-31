@@ -11,6 +11,7 @@
 #include <vector>
 #include <stack>
 #include <cmath>
+#include <set>
 
 class TournamentManager {
 private:
@@ -32,6 +33,7 @@ private:
     int getAlgScore(int result, int curPlayer);
     void setMatch(int p1, int p2);
     void updateScoringTable(bool isAlgoScoreCount, std::string &algoName, int algoScore);
+    void printScores();
     // private ctor
     TournamentManager(): id2factory(), idNumOfBattlesSet(), tournamentSchedule(), scoringTable(), numOfThreads(4), algorithmsPath("") {}
 
