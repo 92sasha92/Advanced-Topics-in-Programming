@@ -82,8 +82,6 @@ void TournamentManager::createTournamentSchedule() {
             cout << "WARNING: "<< idRepeats.second << " matches for " << idRepeats.first << endl;
         }
     }
-
-    // TODO: update the makefile
 }
 
 void TournamentManager::createPartialTournament(int shift) {
