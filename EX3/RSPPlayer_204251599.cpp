@@ -224,13 +224,13 @@ EndOfGameHandler RSPPlayer_204251599::checkWinner(EndOfGameHandler& endOfGameHan
     return endOfGameHandler;
 }
 
-int RSPPlayer_204251599::scoringFunction(int player) {
+int RSPPlayer_204251599::scoringFunction(int curPlayer) {
     EndOfGameHandler endOfGameHandler;
-    checkWinner(endOfGameHandler, player);
+    checkWinner(endOfGameHandler, curPlayer);
     MyPoint p(0,0);
     int score = 0;
 
-    if (endOfGameHandler.getGameState() == static_cast<EndOfGameHandler::GameState>(player)) {
+    if (endOfGameHandler.getGameState() == static_cast<EndOfGameHandler::GameState>(curPlayer)) {
         return WIN_SCORE;
     } else if (endOfGameHandler.getGameState() == static_cast<EndOfGameHandler::GameState>(TIE)) {
         return TIE_SCORE;
@@ -243,7 +243,7 @@ int RSPPlayer_204251599::scoringFunction(int player) {
         for (int j = 0; j < RPS::MCols; j++) {
             p.setX(j);
             if (this->selfGameBoard[i][j].get() != nullptr) {
-                if (this->selfGameBoard[i][j]->getPlayerNumber() == player) {
+                if (this->selfGameBoard[i][j]->getPlayerNumber() == curPlayer) {
                     score += getPieceScore(this->selfGameBoard[i][j]);
                 } else if (this->selfGameBoard[i][j]->getPlayerNumber() != EMPTY_CELL) {
                     score -= getPieceScore(this->selfGameBoard[i][j]);

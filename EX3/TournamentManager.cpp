@@ -9,22 +9,44 @@ void TournamentManager::playAGame(){
     while(!tournamentSchedule.empty()){
         std::unique_ptr<BattleInfo> battle = std::move(tournamentSchedule.top());
         tournamentSchedule.pop();
-        // unlock the tournamentSchedule
+//        unlock the tournamentSchedule
         unique_ptr<PlayerAlgorithm> alg_1 = id2factory[battle->getId1()]();
         unique_ptr<PlayerAlgorithm> alg_2 = id2factory[battle->getId2()]();
         GameManager manager(std::move(alg_1), std::move(alg_2));
-       // int result = manager.startGame();
-        // TODO: lock and update the score
-
-        // TODO: unlock the score struct
-        // lock the tournamentSchedule
+//        int result = manager.startGame();
+//        int alg1Score = getAlgScore(result, PLAYER_1);
+//        int alg2Score = getAlgScore(result, PLAYER_2);
+//        updateScoringTable(battle->getIsAlgo1BattleCount(), battle->getId1(), alg1Score);
+//        updateScoringTable(battle->getIsAlgo2BattleCount(), battle->getId2(), alg2Score);
+//        lock the tournamentSchedule
     }
-    // unlock the tournamentSchedule
+//    unlock the tournamentSchedule
+}
+
+void TournamentManager::updateScoringTable(bool isAlgoScoreCount, std::string &algoName, int algoScore) {
+    if (isAlgoScoreCount) {
+        // TODO: lock and update the score
+        scoringTable[algoName] += algoScore;
+        // TODO: unlock the score struct
+    }
+}
+
+int TournamentManager::getAlgScore(int result, int curPlayer) {
+    if (result == TIE) {
+        return 1;
+    } else if (result == curPlayer) {
+        return 3;
+    }
+    return 0;
 }
 
 void TournamentManager::setMatch(int p1, int p2) {
-    bool isAlgo1BattleCount = true, isAlgo2BattleCount = true;
+    if (p1 == p2) {
+        cout << "ERROR: algorithm can't play against itself!" << endl;
+        return;
+    }
 
+    bool isAlgo1BattleCount = true, isAlgo2BattleCount = true;
     if (idNumOfBattlesSet[p1].second >= NUM_OF_GAMES_FOR_ALGO) {
         isAlgo1BattleCount = false;
     }

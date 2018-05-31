@@ -16,6 +16,9 @@ class TournamentManager {
 private:
     const int GROUP_SIZE = 31;
     const int NUM_OF_GAMES_FOR_ALGO = 30;
+    const int TIE = 0;
+    const int PLAYER_1 = 1;
+    const int PLAYER_2 = 2;
 
     int numOfThreads;
     static TournamentManager theTournamentManager;
@@ -26,7 +29,9 @@ private:
     std::string algorithmsPath;
 
     void createPartialTournament(int shift);
+    int getAlgScore(int result, int curPlayer);
     void setMatch(int p1, int p2);
+    void updateScoringTable(bool isAlgoScoreCount, std::string &algoName, int algoScore);
     // private ctor
     TournamentManager(): id2factory(), idNumOfBattlesSet(), tournamentSchedule(), scoringTable(), numOfThreads(4), algorithmsPath("") {}
 

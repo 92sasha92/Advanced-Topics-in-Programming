@@ -483,6 +483,6 @@ int GameManager::startGame() {
     }
 
     GameManager::createOutFile(endOfGameHandler, isBadInputVec, errorLine);
-    // TODO: return the winner
-    return 0;
+
+    return static_cast<int>(endOfGameHandler.getGameState());
 }
