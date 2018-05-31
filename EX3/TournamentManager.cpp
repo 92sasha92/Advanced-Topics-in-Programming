@@ -171,8 +171,7 @@ void TournamentManager::printScores() {
     // Declaring a set that will store the pairs using above comparision logic
     std::set<std::pair<std::string, int>, Comparator> setOfIds(scoringTable.begin(), scoringTable.end(), compFunctor);
 
-    // Iterate over a set using range base for loop
-    // It will display the items in sorted order of values
+    // Iterate over a set using range base for loop, it will display the items in sorted order of values
     for (std::pair<std::string, int> element : setOfIds)
         std::cout << element.first << " " << element.second << std::endl;
 }
