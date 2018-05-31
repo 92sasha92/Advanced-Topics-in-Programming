@@ -14,7 +14,7 @@ void TournamentManager::scoreNode::addToScore(int newScore) {
 void TournamentManager::playAGame(){
 //    int result, alg1Score, alg2Score;
 // TODO: lock the tournamentSchedule
-    unique_lock<mutex> lock(sheduleLock);
+    unique_lock<mutex> lock(scheduleLock);
     std::cout << 1 << std::endl;
     while(!tournamentSchedule.empty()){
         std::unique_ptr<BattleInfo> battle = std::move(tournamentSchedule.top());

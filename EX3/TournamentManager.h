@@ -36,7 +36,7 @@ private:
     std::map<std::string, std::function<std::unique_ptr<PlayerAlgorithm>()>> id2factory;
     std::vector<std::pair<std::string, int>> idNumOfBattlesSet;
     std::stack<unique_ptr<BattleInfo>> tournamentSchedule;
-    mutex sheduleLock;
+    mutex scheduleLock;
     std::map<std::string, scoreNode> scoringTable;
     std::string algorithmsPath;
 
@@ -47,7 +47,7 @@ private:
     void printScores();
 
     // private ctor
-    TournamentManager(): numOfThreads(4), id2factory(), idNumOfBattlesSet(), tournamentSchedule(), sheduleLock(), scoringTable(), algorithmsPath("") {}
+    TournamentManager(): numOfThreads(4), id2factory(), idNumOfBattlesSet(), tournamentSchedule(), scheduleLock(), scoringTable(), algorithmsPath("") {}
 
 public:
     static TournamentManager& getInstance() {
