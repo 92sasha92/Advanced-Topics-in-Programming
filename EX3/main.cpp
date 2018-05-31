@@ -38,6 +38,7 @@ int main(int argc, char* argv[]) {
         return 0;
     }
     GameManager manager(std::move(alg_1), std::move(alg_2));
+    manager.startGame();
     TournamentManager::getInstance().run();
     cout << TournamentManager::getInstance().getNumOfThreads() << endl;
     TournamentManager::getInstance().setNumOfThreads(20);
