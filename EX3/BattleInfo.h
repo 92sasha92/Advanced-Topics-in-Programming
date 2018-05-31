@@ -13,7 +13,7 @@ class BattleInfo {
     std::string getId1();
     std::string getId2();
     bool getIsAlgo1BattleCount();
-    bool getIsAlgosBattleCount();
+    bool getIsAlgo2BattleCount();
 };
 
 

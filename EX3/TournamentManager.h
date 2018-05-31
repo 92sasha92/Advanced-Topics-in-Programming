@@ -12,30 +12,42 @@
 #include <stack>
 #include <cmath>
 #include <set>
+#include <mutex>
 
 class TournamentManager {
+public:
+    class scoreNode{
+        int score;
+    public:
+        mutex scoreLock;
+        scoreNode(): score(0), scoreLock(){}
+        int getScore() const;
+        void addToScore(int newScore);
+    };
 private:
+
     const int GROUP_SIZE = 31;
     const int NUM_OF_GAMES_FOR_ALGO = 30;
     const int TIE = 0;
     const int PLAYER_1 = 1;
     const int PLAYER_2 = 2;
-
-    int numOfThreads;
     static TournamentManager theTournamentManager;
+    int numOfThreads;
     std::map<std::string, std::function<std::unique_ptr<PlayerAlgorithm>()>> id2factory;
     std::vector<std::pair<std::string, int>> idNumOfBattlesSet;
     std::stack<unique_ptr<BattleInfo>> tournamentSchedule;
-    std::map<std::string, int> scoringTable;
+    mutex sheduleLock;
+    std::map<std::string, scoreNode> scoringTable;
     std::string algorithmsPath;
 
     void createPartialTournament(int shift);
     int getAlgScore(int result, int curPlayer);
     void setMatch(int p1, int p2);
-    void updateScoringTable(bool isAlgoScoreCount, std::string &algoName, int algoScore);
+    void updateScoringTable(bool isAlgoScoreCount, const std::string &algoName, int algoScore);
     void printScores();
+
     // private ctor
-    TournamentManager(): id2factory(), idNumOfBattlesSet(), tournamentSchedule(), scoringTable(), numOfThreads(4), algorithmsPath("") {}
+    TournamentManager(): numOfThreads(4), id2factory(), idNumOfBattlesSet(), tournamentSchedule(), sheduleLock(), scoringTable(), algorithmsPath("") {}
 
 public:
     static TournamentManager& getInstance() {

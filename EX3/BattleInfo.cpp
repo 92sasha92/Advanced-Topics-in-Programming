@@ -13,6 +13,6 @@ bool BattleInfo::getIsAlgo1BattleCount() {
     return this->isAlgo1BattleCount;
 }
 
-bool BattleInfo::getIsAlgosBattleCount() {
+bool BattleInfo::getIsAlgo2BattleCount() {
     return this->isAlgo2BattleCount;
 }
