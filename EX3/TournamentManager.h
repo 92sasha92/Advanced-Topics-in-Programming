@@ -14,14 +14,17 @@
 
 class TournamentManager {
 private:
+    const int GROUP_SIZE = 31;
+    const int NUM_OF_GAMES_FOR_ALGO = 30;
 
+    int numOfThreads;
     static TournamentManager theTournamentManager;
     std::map<std::string, std::function<std::unique_ptr<PlayerAlgorithm>()>> id2factory;
     std::vector<std::pair<std::string, int>> idNumOfBattlesSet;
     std::stack<unique_ptr<BattleInfo>> tournamentSchedule;
     std::map<std::string, int> scoringTable;
-    int numOfThreads;
     std::string algorithmsPath;
+
     void createPartialTournament(int shift);
     void setMatch(int p1, int p2);
     // private ctor

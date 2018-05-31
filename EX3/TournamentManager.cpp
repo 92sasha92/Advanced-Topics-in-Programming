@@ -25,12 +25,12 @@ void TournamentManager::playAGame(){
 void TournamentManager::setMatch(int p1, int p2) {
     bool isAlgo1BattleCount = true, isAlgo2BattleCount = true;
 
-    if (idNumOfBattlesSet[p1].second >= 30) {
+    if (idNumOfBattlesSet[p1].second >= NUM_OF_GAMES_FOR_ALGO) {
         isAlgo1BattleCount = false;
     }
-    if (idNumOfBattlesSet[p2].second >= 30) {
+    if (idNumOfBattlesSet[p2].second >= NUM_OF_GAMES_FOR_ALGO) {
         isAlgo2BattleCount = false;
-    }git 
+    }
 
     idNumOfBattlesSet[p1].second++;
     idNumOfBattlesSet[p2].second++;
@@ -42,27 +42,35 @@ void TournamentManager::setMatch(int p1, int p2) {
 
 void TournamentManager::createTournamentSchedule() {
     int i, start;
-    for (i = 0; i < floor(idNumOfBattlesSet.size() / 31); i++ ) {
-        start = i * 31;
-        for (int j = start ; j < start + 31; j++) {
-            for (int k = j + 1; k < start + 31; k++) {
+    for (i = 0; i < floor(idNumOfBattlesSet.size() / GROUP_SIZE); i++ ) {
+        start = i * GROUP_SIZE;
+        for (int j = start ; j < start + GROUP_SIZE; j++) {
+            for (int k = j + 1; k < start + GROUP_SIZE; k++) {
                 setMatch(j, k);
             }
         }
     }
     createPartialTournament(i);
-    // TODO: check that every algorithm have reasonable number of matches
+
+    for (auto &idRepeats : idNumOfBattlesSet) {
+        if (idRepeats.second < NUM_OF_GAMES_FOR_ALGO) {
+            cout << "ERROR: only " << idRepeats.second << " matches for " << idRepeats.first << endl;
+        } else if (idRepeats.second > NUM_OF_GAMES_FOR_ALGO) {
+            cout << "WARNING: "<< idRepeats.second << " matches for " << idRepeats.first << endl;
+        }
+    }
+
     // TODO: update the makefile
 }
 
 void TournamentManager::createPartialTournament(int shift) {
-    int numOfElements = idNumOfBattlesSet.size() % 31 ;
+    int numOfElements = idNumOfBattlesSet.size() % GROUP_SIZE ;
 
     if (numOfElements == 0) { // already set all matches
         return;
     } else if (numOfElements == 1) {
         if (shift > 0) { // only one algorithm remain so it will fight one fight against every algorithm in the first group
-            for (int p = 0; p < 30; p++) {
+            for (int p = 0; p < NUM_OF_GAMES_FOR_ALGO; p++) {
                 setMatch(idNumOfBattlesSet.size() - 1, p);
             }
             return;
@@ -72,11 +80,12 @@ void TournamentManager::createPartialTournament(int shift) {
         }
     }
 
-    int numOfRepeats = (int)(ceil(31 / numOfElements)), start = shift * 31;
+    int numOfRepeats = (int)(ceil(GROUP_SIZE / numOfElements)), start = shift * GROUP_SIZE;
+    // TODO: maybe it will be better to run from the end to the start
     for (int i = start; i < (int)idNumOfBattlesSet.size(); i++) { // run over the last (less than 31) elements
         for (int j = i + 1; i < (int)idNumOfBattlesSet.size(); j++) {
             for (int k = 0; k < numOfRepeats; k++) {
-                setMatch(j, k);
+                setMatch(i, j);
             }
         }
     }

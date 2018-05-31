@@ -7,7 +7,7 @@ UNAME := $(shell uname -s)
 
 COMP_FLAG=-std=c++14 -Wall -Wextra -Werror -pedantic-errors -Wfatal-errors -Wno-shift-count-overflow -Weffc++ -Wno-non-virtual-dtor -Wno-strict-aliasing -Wno-unused-private-field
 
-OBJS = BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o EndOfGameHandler.o MyMove.o MyPoint.o MyPiecePosition.o  MyJokerChange.o GameManager.o RSPPlayer_204251599.o FileAlgorithm.o MyBoard.o MyFightInfo.o TournamentManager.o
+OBJS = BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o EndOfGameHandler.o MyMove.o MyPoint.o MyPiecePosition.o  MyJokerChange.o GameManager.o RSPPlayer_204251599.o FileAlgorithm.o MyBoard.o MyFightInfo.o TournamentManager.o BattleInfo.o
 EXEC = ex3
 
 all:	$(EXEC)
@@ -56,6 +56,8 @@ MyBoard.o: MyBoard.h MyBoard.cpp
 MyFightInfo.o: MyFightInfo.h MyFightInfo.cpp
 	$(CC) $(COMP_FLAG) -c $*.cpp
 TournamentManager.o: PlayerAlgorithm.h TournamentManager.h TournamentManager.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp
+BattleInfo.o: BattleInfo.h BattleInfo.cpp
 	$(CC) $(COMP_FLAG) -c $*.cpp
 clean:
 	rm -f *.o $(EXEC) $(UNIT_TESTS)
