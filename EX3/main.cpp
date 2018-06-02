@@ -13,6 +13,7 @@ int main(int argc, char* argv[]) {
         cout << "ERROR: game mode was not specified" << endl;
         cout << "As default we will play auto-vs-auto" << endl; // TODO: maybe return 0, and not set a default game.
         gameMode = "auto-vs-auto";
+        //gameMode = "file-vs-file";
     } else {
         if (argc != 2) {
             cout << "ERROR: too much arguments received" << endl;

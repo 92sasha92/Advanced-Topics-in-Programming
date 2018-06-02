@@ -28,12 +28,13 @@ void GameManager::printBoard() {
 
 unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos) {
     unique_ptr<Piece> piece1 , piece2;
-
-    if (player1PiecePos->getPosition().getY() != player2PiecePos->getPosition().getY() || player1PiecePos->getPosition().getX() != player2PiecePos->getPosition().getX()) {
+    MyPoint pos1(player1PiecePos->getPosition().getX() - 1, player1PiecePos->getPosition().getY() - 1);
+    MyPoint pos2(player2PiecePos->getPosition().getX() - 1, player2PiecePos->getPosition().getY() - 1);
+    if (pos1.getY() != pos2.getY() || pos1.getX() != pos2.getX()) {
         cout << "ERROR: The pieces are not in the same cell" << endl;
         return nullptr;
     }
-
+    // fight info 1 based
     MyPoint point(player1PiecePos->getPosition().getX(), player1PiecePos->getPosition().getY());
 
     if (Piece::getEnumTypeRep(player1PiecePos->getPiece()) == Piece::Joker) {
@@ -76,13 +77,13 @@ unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<PiecePosition> &piecePo
         cout << "cannot set piece because piece was nullptr" << endl;
         return nullptr;
     }
+    MyPoint pos(piecePos->getPosition().getX() - 1, piecePos->getPosition().getY() - 1);
+    if (gameBoard.board[pos.getY()][pos.getX()].get() != nullptr) { // check if the cell is empty or preper to fight
+        Piece::RPSPiecesTypes type = gameBoard.board[pos.getY()][pos.getX()]->type;
+        MyPoint point(pos.getX() + 1, pos.getY() + 1);
 
-    if (gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()].get() != nullptr) { // check if the cell is empty or preper to fight
-        Piece::RPSPiecesTypes type = gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()]->type;
-        MyPoint point(piecePos->getPosition().getX(), piecePos->getPosition().getY());
-
-        if (gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()]->type == Piece::Joker) {
-            MyPiecePosition player1PiecePos(type, point,Piece::fromTypeRepToJRep(((JokerPiece *)gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()].get())->getJokerPiece()));
+        if (gameBoard.board[pos.getY()][pos.getX()]->type == Piece::Joker) {
+            MyPiecePosition player1PiecePos(type, point,Piece::fromTypeRepToJRep(((JokerPiece *)gameBoard.board[pos.getY()][pos.getX()].get())->getJokerPiece()));
             unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(player1PiecePos);
             fightInfo = fight(ptr, piecePos);
         } else {
@@ -92,16 +93,16 @@ unique_ptr<MyFightInfo> GameManager::setPiece(unique_ptr<PiecePosition> &piecePo
         }
 
         if (fightInfo->getWinner() == 0 || fightInfo->getWinner() == 2) { // if player1 wins we are not set the piece of player2 on board
-            releasePiece = std::move(gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()]); // piece will free when get to the end of the func
+            releasePiece = std::move(gameBoard.board[pos.getY()][pos.getX()]); // piece will free when get to the end of the func
             if (fightInfo->getWinner() == 2) {
                 piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(piecePos->getPiece()), 2, Piece::getEnumTypeRep(piecePos->getJokerRep()));
-                gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()] = std::move(piecePtr);
+                gameBoard.board[pos.getY()][pos.getX()] = std::move(piecePtr);
             }
         }
         return std::move(fightInfo);
     } else { // the cell is empty
         piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(piecePos->getPiece()), player, Piece::getEnumTypeRep(piecePos->getJokerRep()));
-        gameBoard.board[piecePos->getPosition().getY()][piecePos->getPosition().getX()] = std::move(piecePtr);
+        gameBoard.board[pos.getY()][pos.getX()] = std::move(piecePtr);
     }
     return nullptr;
 }
@@ -124,7 +125,7 @@ unique_ptr<MyFightInfo> GameManager::makeMove(unique_ptr<Move> &pieceMove, int p
         Piece::RPSPiecesTypes defenderPieceType = gameBoard.board[pTo.getY()][pTo.getX()]->type;
         Piece::RPSPiecesTypes attackingPieceType = gameBoard.board[pFrom.getY()][pFrom.getX()]->type;
         Piece::RPSJokerTypes defenderJokerPieceType, attackingJokerPieceType;
-        MyPoint FightingPoint(pTo.getX(), pTo.getY());
+        MyPoint FightingPoint(pTo.getX() + 1, pTo.getY() + 1);
 
         if (attackingPieceType == Piece::Joker) { // create the attack piece to check the fight result
             attackingJokerPieceType = Piece::fromTypeRepToJRep(((JokerPiece *)gameBoard.board[pFrom.getY()][pFrom.getX()].get())->getJokerPiece());
@@ -184,7 +185,8 @@ bool GameManager::checkLegalPositioningVec(const std::vector<unique_ptr<PiecePos
     rps.initializePiecesArsenal();
     for (const unique_ptr<PiecePosition> &piecePos: vec) {
         errorLineCounter++;
-        MyPoint pos(piecePos->getPosition().getX(), piecePos->getPosition().getY());
+        // transfer to zero based
+        MyPoint pos(piecePos->getPosition().getX() - 1, piecePos->getPosition().getY() - 1);
         if (!RPS::isPointInBounds(pos)) {
             std::cout << "ERROR: Piece set outside the board" << std::endl;
             return false;

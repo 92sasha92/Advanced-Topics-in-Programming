@@ -35,7 +35,8 @@ void RSPPlayer_204251599::getInitialPositions(int player, std::vector<unique_ptr
             while (cellNotOccupied) {
                 row = rand() % RPS::NRows;
                 col = rand() % RPS::MCols;
-                MyPoint p(col, row);
+                // transfer to 1 based
+                MyPoint p(col + 1, row + 1);
                 if (this->selfGameBoard[row][col].get() == nullptr) {
                     cellNotOccupied = false;
                     if (i == Piece::Joker) {
@@ -61,15 +62,17 @@ void RSPPlayer_204251599::getInitialPositions(int player, std::vector<unique_ptr
 void RSPPlayer_204251599::notifyOnInitialBoard(const Board& b, const std::vector<unique_ptr<FightInfo>>& fights) {
     vector<unique_ptr<Piece>> trash;
     MyPoint p(0,0);
+
     for (const unique_ptr<FightInfo> &fightInfo: fights) { // initialize the auto player self board accord to the fights occured
+        MyPoint fightPos(fightInfo->getPosition().getX() - 1, fightInfo->getPosition().getY() - 1);
         if (fightInfo->getPiece(opponent) == Piece::Flag) {
             opponentNumOfFlags--;
         }
         if (fightInfo->getWinner() != player) {
-            trash.push_back(std::move(this->selfGameBoard[fightInfo->getPosition().getY()][fightInfo->getPosition().getX()]));
+            trash.push_back(std::move(this->selfGameBoard[fightPos.getY()][fightPos.getX()]));
             if (fightInfo->getWinner() == opponent) { // not a tie
                 unique_ptr<Piece> piecePtr = PieceFactory::createPiece(Piece::getEnumTypeRep(fightInfo->getPiece(opponent)), opponent);
-                this->selfGameBoard[fightInfo->getPosition().getY()][fightInfo->getPosition().getX()] = std::move(piecePtr);
+                this->selfGameBoard[fightPos.getY()][fightPos.getX()] = std::move(piecePtr);
             }
         }
     }
@@ -156,6 +159,8 @@ void RSPPlayer_204251599::notifyFightResult(const FightInfo& fightInfo) {
     vector<unique_ptr<Piece>> trash;
     MyPoint fLastPoint(lastMove.getFrom().getX(), lastMove.getFrom().getY()); // 0 based
     MyPoint toLastPoint(lastMove.getTo().getX(), lastMove.getTo().getY()); // 0 based
+    MyPoint fightPos(fightInfo.getPosition().getX() - 1, fightInfo.getPosition().getY() - 1);
+    MyFightInfo fightInfoZero(fightPos, Piece::getEnumTypeRep(fightInfo.getPiece(1)), Piece::getEnumTypeRep(fightInfo.getPiece(2)), fightInfo.getWinner());
     if (fightInfo.getWinner() == TIE) {
         if (Piece::getEnumTypeRep(fightInfo.getPiece(opponent)) == Piece::Flag) {
             opponentNumOfFlags--;
@@ -166,9 +171,9 @@ void RSPPlayer_204251599::notifyFightResult(const FightInfo& fightInfo) {
         trash.push_back(std::move(selfGameBoard[toLastPoint.getY()][toLastPoint.getX()]));
 
     } else if (isOpponentAttacked) { // player defend
-        notifyFightResultWhenPlayerDefend(fightInfo, fLastPoint, toLastPoint);
+        notifyFightResultWhenPlayerDefend(fightInfoZero, fLastPoint, toLastPoint);
     } else { // player attack
-        notifyFightResultWhenPlayerAttack(fightInfo, fLastPoint, toLastPoint);
+        notifyFightResultWhenPlayerAttack(fightInfoZero, fLastPoint, toLastPoint);
     }
 }
 

@@ -24,24 +24,24 @@ bool Parser::parsePiece(RPS& rps, vector<string> pieceDescription, vector<unique
     int col, row;
     if (isInteger(pieceDescription[1])) {
         // zero based
-        col = stoi(pieceDescription[1]) - 1;
+//        col = stoi(pieceDescription[1]) - 1;
         // 1 based
-//        col = stoi(pieceDescription[1]);
+        col = stoi(pieceDescription[1]);
     } else {
         cout << "incorrect line format" << endl;
         return false;
     }
     if (isInteger(pieceDescription[2])) {
         // zero based
-        row = stoi(pieceDescription[2]) - 1;
+     //   row = stoi(pieceDescription[2]) - 1;
         // 1 based
-//        row = stoi(pieceDescription[2]);
+        row = stoi(pieceDescription[2]);
     } else {
         cout << "incorrect line format" << endl;
         return false;
     }
 
-    if (0 > row || row >= RPS::NRows || 0 > col || col >= RPS::MCols) {
+    if (1 > row || row > RPS::NRows || 1 > col || col > RPS::MCols) {
         cout << "ERROR: piece set outside the board: row: " << row << ", col: " << col << endl;
         return false;
     }
