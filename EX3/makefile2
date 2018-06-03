@@ -57,9 +57,9 @@ MyBoard.o: MyBoard.h MyBoard.cpp
 MyFightInfo.o: MyFightInfo.h MyFightInfo.cpp
 	$(CC) $(COMP_FLAG) -c $*.cpp
 RSPPlayer_204251599.o: PlayerAlgorithm.h RSPPlayer_204251599.h RSPPlayer_204251599.cpp
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp -fPIC
 libRSPPlayer_204251599.so: RSPPlayer_204251599.o
-	$(CC) -shared -Wl $(COMP_FLAG) -fPIC, -soname, libRSPPlayer_204251599.so -o libRSPPlayer_204251599.so RSPPlayer_204251599.o
+	$(CC) -shared -Wl,-soname,libRSPPlayer_204251599.so -o libRSPPlayer_204251599.so RSPPlayer_204251599.o
 BattleInfo.o: BattleInfo.h BattleInfo.cpp
 	$(CC) $(COMP_FLAG) -c $*.cpp
 clean:
