@@ -2,64 +2,65 @@ CC=g++-5.3.0
 AR=ar
 RM=rm
 IDIR =include
-LIBS = -ldl
 
 UNAME := $(shell uname -s)
 
 COMP_FLAG=-std=c++14 -Wall -Wextra -Werror -pedantic-errors -Wfatal-errors -Wno-shift-count-overflow -Weffc++ -Wno-non-virtual-dtor -Wno-strict-aliasing -Wno-unused-private-field
-LDFLAGS = -pthread
-OBJS = TournamentManager.o BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o EndOfGameHandler.o MyMove.o MyPoint.o MyPiecePosition.o  MyJokerChange.o GameManager.o RSPPlayer_204251599.so FileAlgorithm.o MyBoard.o MyFightInfo.o BattleInfo.o
+LDFLAGS = -pthread -ldl
+OBJS = TournamentManager.o BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o EndOfGameHandler.o MyMove.o MyPoint.o MyPiecePosition.o  MyJokerChange.o GameManager.o RSPPlayer_204251599.o libRSPPlayer_204251599.so FileAlgorithm.o MyBoard.o MyFightInfo.o BattleInfo.o
 EXEC = ex3
 
 all:	$(EXEC)
 $(EXEC): $(OBJS)
 	$(CC) $(OBJS) -o $@ $(LDFLAGS)
+TournamentManager.o: TournamentManager.h TournamentManager.cpp PlayerAlgorithm.h
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 BombPiece.o: BombPiece.h BombPiece.cpp Piece.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 RockPiece.o: RockPiece.h RockPiece.cpp Piece.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 ScissorsPiece.o: ScissorsPiece.h ScissorsPiece.cpp Piece.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 FlagPiece.o: FlagPiece.h FlagPiece.cpp Piece.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 JokerPiece.o: JokerPiece.h JokerPiece.cpp Piece.h PieceFactory.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 PaperPiece.o: PaperPiece.h PaperPiece.cpp Piece.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 RPS.o: RPS.h RPS.cpp Piece.h PieceFactory.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
-main.o: main.cpp RPS.h MyMove.h GameManager.h RSPPlayer_204251599.h
-	$(CC) -rdynamic $(COMP_FLAG) -c $*.cpp $(LIBS)
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
+main.o: main.cpp RPS.h MyMove.h GameManager.h RSPPlayer_204251599.h TournamentManager.h
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 Piece.o: Piece.h Piece.cpp
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 Parser.o: Parser.h Parser.cpp RPS.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 EndOfGameHandler.o: EndOfGameHandler.h EndOfGameHandler.cpp
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 PieceFactory.o: PieceFactory.h PieceFactory.cpp Piece.h BombPiece.h RockPiece.h ScissorsPiece.h FlagPiece.h JokerPiece.h PaperPiece.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 MyMove.o: MyMove.h MyMove.cpp MyPoint.h MyPoint.h Move.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 MyPoint.o: MyPoint.h MyPoint.cpp Point.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 MyPiecePosition.o: MyPiecePosition.h MyPiecePosition.cpp Piece.h MyPoint.h PiecePosition.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 MyJokerChange.o: MyJokerChange.h MyJokerChange.cpp JokerChange.h MyPoint.h Piece.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 GameManager.o: GameManager.h GameManager.cpp MyPoint.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
-RSPPlayer_204251599.so: PlayerAlgorithm.h RSPPlayer_204251599.h RSPPlayer_204251599.cpp
-	$(CC) -shared -Wl,-soname, RSPPlayer_204251599.so $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 FileAlgorithm.o: FileAlgorithm.h FileAlgorithm.cpp
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 MyBoard.o: MyBoard.h MyBoard.cpp
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 MyFightInfo.o: MyFightInfo.h MyFightInfo.cpp
-	$(CC) $(COMP_FLAG) -c $*.cpp
-TournamentManager.o: PlayerAlgorithm.h TournamentManager.h TournamentManager.cpp
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
+RSPPlayer_204251599.o: PlayerAlgorithm.h RSPPlayer_204251599.h RSPPlayer_204251599.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
+libRSPPlayer_204251599.so: PlayerAlgorithm.h RSPPlayer_204251599.h RSPPlayer_204251599.cpp
+	$(CC) -shared -Wl $(COMP_FLAG), -soname, libRSPPlayer_204251599.so -o libRSPPlayer_204251599.so $*.cpp
 BattleInfo.o: BattleInfo.h BattleInfo.cpp
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp mcmodel=large
 clean:
-	rm -f *.o $(EXEC) $(UNIT_TESTS)
+	rm -f *.o *.so $(EXEC)
 
