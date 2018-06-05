@@ -13,6 +13,9 @@
 #include <cmath>
 #include <set>
 #include <mutex>
+#include <list>
+#include <cstring>
+#include <dlfcn.h>
 
 class TournamentManager {
 public:
@@ -39,15 +42,18 @@ private:
     mutex scheduleLock;
     std::map<std::string, scoreNode> scoringTable;
     std::string algorithmsPath;
+    std::list<void *> dl_list;
 
     void createPartialTournament(int shift);
     int getAlgScore(int result, int curPlayer);
     void setMatch(int p1, int p2);
     void updateScoringTable(bool isAlgoScoreCount, const std::string &algoName, int algoScore);
     void printScores();
-
+    void loadAlgos();
+    void loadAlgosFullPath();
+    void freeDls();
     // private ctor
-    TournamentManager(): numOfThreads(4), id2factory(), idNumOfBattlesSet(), tournamentSchedule(), scheduleLock(), scoringTable(), algorithmsPath("") {}
+    TournamentManager(): numOfThreads(4), id2factory(), idNumOfBattlesSet(), tournamentSchedule(), scheduleLock(), scoringTable(), algorithmsPath(""), dl_list() {}
 
 public:
     static TournamentManager& getInstance() {

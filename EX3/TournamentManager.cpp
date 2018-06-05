@@ -126,6 +126,11 @@ void TournamentManager::createPartialTournament(int shift) {
 }
 
 void TournamentManager::run(){
+    if(!this->algorithmsPath.compare("")){
+        this->loadAlgos();
+    } else {
+        this->loadAlgosFullPath();
+    }
     for(auto& pair : id2factory) {
         const auto& id = pair.first;
         std::cout << id << ": " << std::endl;
@@ -142,6 +147,49 @@ void TournamentManager::run(){
         th.join();
     }
 //    printScores();
+    freeDls();
+}
+
+void TournamentManager::loadAlgosFullPath() {
+
+}
+
+void TournamentManager::freeDls() {
+    std::list<void *>::iterator itr;
+    // close all the dynamic libs we opened
+    for(itr=dl_list.begin(); itr!=dl_list.end(); itr++){
+        dlclose(*itr);
+    }
+}
+
+void TournamentManager::loadAlgos() {
+    // size of buffer for reading in directory entries
+    static unsigned int BUF_SIZE = 1024;
+    FILE *dl;   // handle to read directory
+    const char *command_str = "ls *.so";  // command string to get dynamic lib names
+    char in_buf[1024]; // input buffer for lib names
+    // get the names of all the dynamic libs (.so  files) in the current dir
+    dl = popen(command_str, "r");
+    if(!dl){
+        perror("popen");
+        exit(-1);
+    }
+    void *dlib;
+    char name[1024];
+    while(fgets(in_buf, BUF_SIZE, dl)){
+        // trim off the whitespace
+        char *ws = strpbrk(in_buf, " \t\n");
+        if(ws) *ws = '\0';
+        // append ./ to the front of the lib name
+        sprintf(name, "./%s", in_buf);
+        dlib = dlopen(name, RTLD_NOW);
+        if(dlib == NULL){
+            cerr << dlerror() << endl;
+            // TODO: error
+        }
+        // add the handle to our list
+        dl_list.insert(dl_list.end(), dlib);
+    }
 }
 
 void TournamentManager::registerAlgorithm(std::string &id, std::function<std::unique_ptr<PlayerAlgorithm>()> &factoryMethod) {
