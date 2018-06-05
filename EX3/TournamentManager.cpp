@@ -3,23 +3,12 @@
 
 TournamentManager TournamentManager::theTournamentManager;
 
-int TournamentManager::scoreNode::getScore() const{
-    return this->score;
-}
-
-void TournamentManager::scoreNode::addToScore(int newScore) {
-    this->score += newScore;
-}
-
 void TournamentManager::playAGame(){
-//    int result, alg1Score, alg2Score;
-// TODO: lock the tournamentSchedule
     unique_lock<mutex> lock(scheduleLock);
     std::cout << 1 << std::endl;
     while(!tournamentSchedule.empty()){
         std::unique_ptr<BattleInfo> battle = std::move(tournamentSchedule.top());
         tournamentSchedule.pop();
-//        TODO: unlock the tournamentSchedule
         lock.unlock();
         unique_ptr<PlayerAlgorithm> alg_1 = id2factory[battle->getId1()]();
         unique_ptr<PlayerAlgorithm> alg_2 = id2factory[battle->getId2()]();
@@ -27,22 +16,15 @@ void TournamentManager::playAGame(){
         int result = manager.startGame();
         int alg1Score = getAlgScore(result, PLAYER_1);
         int alg2Score = getAlgScore(result, PLAYER_2);
-        updateScoringTable(battle->getIsAlgo1BattleCount(), battle->getId1(), alg1Score);
-        updateScoringTable(battle->getIsAlgo2BattleCount(), battle->getId2(), alg2Score);
-//        TODO: lock the tournamentSchedule
+        if (battle->getIsAlgo1BattleCount()) {
+            scoringTable[battle->getId1()] += alg1Score;
+        }
+        if (battle->getIsAlgo2BattleCount()) {
+            scoringTable[battle->getId2()] += alg2Score;
+        }
         lock.lock();
     }
-//    TODO: unlock the tournamentSchedule
     lock.unlock();
-}
-
-void TournamentManager::updateScoringTable(bool isAlgoScoreCount, const std::string &algoName, int algoScore) {
-    if (isAlgoScoreCount) {
-        // TODO: lock scoringTable
-        unique_lock<mutex> lock(scoringTable[algoName].scoreLock);
-        scoringTable[algoName].addToScore(algoScore);
-        // TODO: unlock scoringTable
-    }
 }
 
 int TournamentManager::getAlgScore(int result, int curPlayer) {
@@ -146,7 +128,7 @@ void TournamentManager::run(){
     for (auto& th : ths) {
         th.join();
     }
-//    printScores();
+    printScores();
 }
 
 void TournamentManager::loadAlgosFullPath() {
@@ -194,6 +176,7 @@ void TournamentManager::loadAlgos() {
 void TournamentManager::registerAlgorithm(std::string &id, std::function<std::unique_ptr<PlayerAlgorithm>()> &factoryMethod) {
     // TODO: should warn if id is already registered
     id2factory[id] = factoryMethod;
+    scoringTable[id] = 0;
     idNumOfBattlesSet.push_back(std::pair<std::string, int>(id, 0));
     std::cout << "hi " << id << std::endl;
 }
@@ -218,23 +201,30 @@ AlgorithmRegistration::AlgorithmRegistration(std::string id, std::function<std::
     TournamentManager::getInstance().registerAlgorithm(id, factoryMethod);
 }
 
-//void TournamentManager::printScores() {
-//    // Declaring the type of Predicate that accepts 2 pairs and return a bool
-//   // typedef std::function<bool(std::pair<std::string, scoreNode>, std::pair<std::string, scoreNode>)> Comparator;
+void TournamentManager::printScores() {
+//    std::vector<std::pair<std::string, int>> vec;
+//    std::copy(scoringTable.begin(), scoringTable.end(), std::back_inserter<std::vector<std::pair<std::string, int>>>(vec));
+//    std::sort(vec.begin(), vec.end(),[](std::pair<std::string, int> elem1, std::pair<std::string, int> elem2) {
+//        return elem1.second > elem2.second;
+//     });
 //
-//    // Defining a lambda function to compare two pairs. It will compare two pairs using second field
-//    auto compFunctor = [](std::pair<std::string, scoreNode> elem1, std::pair<std::string, scoreNode> elem2) {
-//        return elem1.second.getScore() > elem2.second.getScore();
-//     };
-//
-//    // Declaring a set that will store the pairs using above comparision logic
-//    //std::set<std::pair<std::string, scoreNode>, decltype(compFunctor)> setOfIds(scoringTable.begin(), scoringTable.end(), compFunctor);
-//    std::set<std::pair<std::string, scoreNode>, decltype(compFunctor)> setOfIds(compFunctor);
-//
-//    // Iterate over a set using range base for loop, it will display the items in sorted order of values
-////    for (const auto &element : setOfIds){
-////        std::cout << element.first << " " << element.second.getScore() << std::endl;
-////    }
-//}
+//    for (auto const &element: vec ) {
+//        std::cout << element.first << " " << element.second << std::endl;
+//    }
+
+
+    // Defining a lambda function to compare two pairs. It will compare two pairs using second field
+    auto compFunctor = [](std::pair<std::string, int> elem1, std::pair<std::string, int> elem2) {
+        return elem1.second > elem2.second;
+     };
+
+    // Declaring a set that will store the pairs using above comparision logic
+    std::set<std::pair<std::string, int>, decltype(compFunctor)> setOfIds(scoringTable.begin(), scoringTable.end(), compFunctor);
+
+    // Iterate over a set using range base for loop, it will display the items in sorted order of values
+    for (const auto &element : setOfIds){
+        std::cout << element.first << " " << element.second << std::endl;
+    }
+}
 
 
