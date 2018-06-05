@@ -15,18 +15,11 @@
 #include <mutex>
 #include <list>
 #include <cstring>
+#include <atomic>
+#include <algorithm>
 #include <dlfcn.h>
 
 class TournamentManager {
-public:
-    class scoreNode{
-        int score;
-    public:
-        mutex scoreLock;
-        scoreNode(): score(0), scoreLock(){}
-        int getScore() const;
-        void addToScore(int newScore);
-    };
 private:
 
     const int GROUP_SIZE = 31;
@@ -40,14 +33,13 @@ private:
     std::vector<std::pair<std::string, int>> idNumOfBattlesSet;
     std::stack<unique_ptr<BattleInfo>> tournamentSchedule;
     mutex scheduleLock;
-    std::map<std::string, scoreNode> scoringTable;
+    std::map<std::string, std::atomic<int>> scoringTable;
     std::string algorithmsPath;
     std::list<void *> dl_list;
 
     void createPartialTournament(int shift);
     int getAlgScore(int result, int curPlayer);
     void setMatch(int p1, int p2);
-    void updateScoringTable(bool isAlgoScoreCount, const std::string &algoName, int algoScore);
     void printScores();
     void loadAlgos();
     void loadAlgosFullPath();
