@@ -52,11 +52,8 @@ void TournamentManager::setMatch(int p1, int p2) {
 
     idNumOfBattlesSet[p1].second++;
     idNumOfBattlesSet[p2].second++;
-    std::cout << idNumOfBattlesSet[p1].second << ", " << idNumOfBattlesSet[p2].second << std::endl;
     if (isAlgo1BattleCount || isAlgo2BattleCount) {
-		std::cout << "before pushing to tournamentSchedule" << std::endl;
         tournamentSchedule.push(std::move(std::make_unique<BattleInfo>(idNumOfBattlesSet[p1].first, idNumOfBattlesSet[p2].first, isAlgo1BattleCount, isAlgo2BattleCount)));
-		std::cout << "after pushing to tournamentSchedule" << std::endl;
     }
 }
 
@@ -102,7 +99,7 @@ void TournamentManager::createPartialTournament(int shift) {
 	std::cout << "numOfRepeats: " << numOfRepeats << std::endl;
     // TODO: maybe it will be better to run from the end to the start
     for (int i = start; i < (int)idNumOfBattlesSet.size(); i++) { // run over the last (less than 31) elements
-        for (int j = i + 1; i < (int)idNumOfBattlesSet.size(); j++) {
+        for (int j = i + 1; j < (int)idNumOfBattlesSet.size(); j++) {
             for (int k = 0; k < numOfRepeats; k++) {
                 setMatch(i, j);
             }
