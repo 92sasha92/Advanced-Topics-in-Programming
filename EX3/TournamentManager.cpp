@@ -52,9 +52,11 @@ void TournamentManager::setMatch(int p1, int p2) {
 
     idNumOfBattlesSet[p1].second++;
     idNumOfBattlesSet[p2].second++;
-
+    std::cout << idNumOfBattlesSet[p1].second << ", " << idNumOfBattlesSet[p2].second << std::endl;
     if (isAlgo1BattleCount || isAlgo2BattleCount) {
+		std::cout << "before pushing to tournamentSchedule" << std::endl;
         tournamentSchedule.push(std::move(std::make_unique<BattleInfo>(idNumOfBattlesSet[p1].first, idNumOfBattlesSet[p2].first, isAlgo1BattleCount, isAlgo2BattleCount)));
+		std::cout << "after pushing to tournamentSchedule" << std::endl;
     }
 }
 
@@ -81,7 +83,7 @@ void TournamentManager::createTournamentSchedule() {
 
 void TournamentManager::createPartialTournament(int shift) {
     int numOfElements = idNumOfBattlesSet.size() % GROUP_SIZE ;
-
+	std::cout << "createPartial" << numOfElements << std::endl;
     if (numOfElements == 0) { // already set all matches
         return;
     } else if (numOfElements == 1) {
@@ -96,7 +98,8 @@ void TournamentManager::createPartialTournament(int shift) {
         }
     }
 
-    int numOfRepeats = (int)(ceil(GROUP_SIZE / numOfElements)), start = shift * GROUP_SIZE;
+    int numOfRepeats = (int)(ceil(GROUP_SIZE / (numOfElements -1))), start = shift * GROUP_SIZE;
+	std::cout << "numOfRepeats: " << numOfRepeats << std::endl;
     // TODO: maybe it will be better to run from the end to the start
     for (int i = start; i < (int)idNumOfBattlesSet.size(); i++) { // run over the last (less than 31) elements
         for (int j = i + 1; i < (int)idNumOfBattlesSet.size(); j++) {
@@ -120,6 +123,7 @@ void TournamentManager::run(){
 //        factoryMethod()->
     }
     this->createTournamentSchedule();
+	std::cout << "created schedule" << std::endl;
     std::vector<std::thread> ths;
     for (int i = 1; i < this->numOfThreads; i++) {
         ths.push_back(std::thread(&TournamentManager::playAGame, this));

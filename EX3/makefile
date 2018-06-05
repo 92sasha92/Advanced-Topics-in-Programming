@@ -18,6 +18,9 @@ rps_tournament: $(OBJS)
 	
 rps_lib: RSPPlayer_204251599.cpp AlgorithmRegistration.h
 	$(CC) $(COMP_FLAG) RSPPlayer_204251599.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o libRSPPlayer_204251599.so
+	
+rps_lib2: RSPPlayer_323239566.cpp AlgorithmRegistration.h
+	$(CC) $(COMP_FLAG) RSPPlayer_323239566.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o libRSPPlayer_323239566.so
 
 all:	$(EXEC)
 $(EXEC): $(OBJS)
