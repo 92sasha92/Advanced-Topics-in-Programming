@@ -2,13 +2,22 @@ CC=g++-5.3.0
 AR=ar
 RM=rm
 IDIR =include
+LIBS = -ldl
 
 UNAME := $(shell uname -s)
 
-COMP_FLAG=-std=c++14 -Wall -Wextra -Werror -pedantic-errors -Wfatal-errors -Wno-shift-count-overflow -Weffc++ -Wno-non-virtual-dtor -Wno-strict-aliasing -Wno-unused-private-field
+COMP_FLAG=-std=c++14 -Wall -Wextra -Werror -pedantic-errors -Wfatal-errors -Wno-shift-count-overflow -Weffc++ -Wno-non-virtual-dtor -Wno-strict-aliasing -Wno-unused-private-field -fPIC
 LDFLAGS = -pthread -ldl
-OBJS = TournamentManager.o BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o EndOfGameHandler.o MyMove.o MyPoint.o MyPiecePosition.o  MyJokerChange.o GameManager.o RSPPlayer_204251599.o FileAlgorithm.o MyBoard.o MyFightInfo.o BattleInfo.o
+OBJS = TournamentManager.o BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o EndOfGameHandler.o MyMove.o MyPoint.o MyPiecePosition.o  MyJokerChange.o GameManager.o FileAlgorithm.o MyBoard.o MyFightInfo.o BattleInfo.o
+OBJSO = RSPPlayer_204251599.o libRSPPlayer_204251599.so
 EXEC = ex3
+EXEC2 = s
+
+rps_tournament: $(OBJS)
+	$(CC) $(OBJS) -o $(EXEC) -ldl -pthread -lpthread -rdynamic 
+	
+rps_lib: RSPPlayer_204251599.cpp AlgorithmRegistration.h
+	$(CC) $(COMP_FLAG) RSPPlayer_204251599.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o libRSPPlayer_204251599.so
 
 all:	$(EXEC)
 $(EXEC): $(OBJS)
@@ -30,7 +39,7 @@ PaperPiece.o: PaperPiece.h PaperPiece.cpp Piece.h
 RPS.o: RPS.h RPS.cpp Piece.h PieceFactory.h
 	$(CC) $(COMP_FLAG) -c $*.cpp
 main.o: main.cpp RPS.h MyMove.h GameManager.h RSPPlayer_204251599.h TournamentManager.h
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -rdynamic -c $*.cpp $(LIBS)
 Piece.o: Piece.h Piece.cpp
 	$(CC) $(COMP_FLAG) -c $*.cpp
 Parser.o: Parser.h Parser.cpp RPS.h
@@ -56,9 +65,10 @@ MyBoard.o: MyBoard.h MyBoard.cpp
 MyFightInfo.o: MyFightInfo.h MyFightInfo.cpp
 	$(CC) $(COMP_FLAG) -c $*.cpp
 RSPPlayer_204251599.o: PlayerAlgorithm.h RSPPlayer_204251599.h RSPPlayer_204251599.cpp
-	$(CC) $(COMP_FLAG) -c $*.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp -fPIC
 BattleInfo.o: BattleInfo.h BattleInfo.cpp
 	$(CC) $(COMP_FLAG) -c $*.cpp
+	
 clean:
-	rm -f *.o $(EXEC) $(UNIT_TESTS)
+	rm -f *.o *.so $(EXEC)
 

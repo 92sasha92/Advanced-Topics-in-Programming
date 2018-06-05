@@ -62,6 +62,7 @@ public:
     void notifyFightResult(const FightInfo& fightInfo) override; // called only if there was a fight
     unique_ptr<Move> getMove() override;
     unique_ptr<JokerChange> getJokerChange() override; // nullptr if no change is requested
+    ~RSPPlayer_204251599(){};
 };
 
 

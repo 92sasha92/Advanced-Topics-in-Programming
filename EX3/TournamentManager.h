@@ -67,6 +67,9 @@ public:
     void setAlgorithmsPath(std::string &path);
     void playAGame();
     void createTournamentSchedule();
+    ~TournamentManager(){
+        this->freeDls();
+    }
 };
 
 

@@ -147,7 +147,6 @@ void TournamentManager::run(){
         th.join();
     }
 //    printScores();
-    freeDls();
 }
 
 void TournamentManager::loadAlgosFullPath() {
@@ -182,7 +181,7 @@ void TournamentManager::loadAlgos() {
         if(ws) *ws = '\0';
         // append ./ to the front of the lib name
         sprintf(name, "./%s", in_buf);
-        dlib = dlopen(name, RTLD_NOW);
+        dlib = dlopen(name, RTLD_LAZY);
         if(dlib == NULL){
             cerr << dlerror() << endl;
             // TODO: error
