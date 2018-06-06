@@ -28,6 +28,7 @@ void TournamentManager::playAGame(){
 }
 
 int TournamentManager::getAlgScore(int result, int curPlayer) {
+    cout << "result " << result;
     if (result == TIE) {
         return 1;
     } else if (result == curPlayer) {
