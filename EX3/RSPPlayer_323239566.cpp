@@ -78,8 +78,8 @@ void RSPPlayer_323239566::notifyOnInitialBoard(const Board& b, const std::vector
 
     for (int i = 0; i < RPS::NRows; i++) { // initialize the auto player self board with unknown pieces
         for (int j = 0; j < RPS::MCols; j++) {
-            p.setX(j);
-            p.setY(i);
+            p.setX(j + 1);
+            p.setY(i + 1);
             if (b.getPlayer(p) == opponent && this->selfGameBoard[i][j].get() == nullptr) {
                 opponentNumOfUnknownPieces++;
                 unique_ptr<Piece> piecePtr = std::make_unique<Piece>(opponent);

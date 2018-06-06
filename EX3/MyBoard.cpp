@@ -1,8 +1,8 @@
 #include "MyBoard.h"
 
 int MyBoard::getPlayer(const Point &pos) const {
-    if (board[pos.getY()][pos.getX()] != nullptr) {
-        return board[pos.getY()][pos.getX()]->getPlayerNumber();
+    if (board[pos.getY() - 1][pos.getX() - 1] != nullptr) {
+        return board[pos.getY() - 1][pos.getX() - 1]->getPlayerNumber();
     }
     return 0;
 }
