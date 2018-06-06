@@ -211,22 +211,7 @@ void TournamentManager::setTournamentParameters(std::string &path, int numOfThre
     setNumOfThreads(numOfThreads);
 }
 
-AlgorithmRegistration::AlgorithmRegistration(std::string id, std::function<std::unique_ptr<PlayerAlgorithm>()> factoryMethod) {
-    TournamentManager::getInstance().registerAlgorithm(id, factoryMethod);
-}
-
 void TournamentManager::printScores() {
-//    std::vector<std::pair<std::string, int>> vec;
-//    std::copy(scoringTable.begin(), scoringTable.end(), std::back_inserter<std::vector<std::pair<std::string, int>>>(vec));
-//    std::sort(vec.begin(), vec.end(),[](std::pair<std::string, int> elem1, std::pair<std::string, int> elem2) {
-//        return elem1.second > elem2.second;
-//     });
-//
-//    for (auto const &element: vec ) {
-//        std::cout << element.first << " " << element.second << std::endl;
-//    }
-
-
     // Defining a lambda function to compare two pairs. It will compare two pairs using second field
     auto compFunctor = [](std::pair<std::string, int> elem1, std::pair<std::string, int> elem2) {
 		return elem1.second != elem2.second ?  elem1.second > elem2.second : elem1.first < elem2.first;

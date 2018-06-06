@@ -8,9 +8,8 @@ UNAME := $(shell uname -s)
 
 COMP_FLAG=-std=c++14 -Wall -Wextra -Werror -pedantic-errors -Wfatal-errors -Wno-shift-count-overflow -Weffc++ -Wno-non-virtual-dtor -Wno-strict-aliasing -Wno-unused-private-field -fPIC
 LDFLAGS = -pthread -ldl
-OBJS = TournamentManager.o BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o EndOfGameHandler.o MyMove.o MyPoint.o MyPiecePosition.o  MyJokerChange.o GameManager.o FileAlgorithm.o MyBoard.o MyFightInfo.o BattleInfo.o
+OBJS = TournamentManager.o AlgorithmRegistration.o BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o EndOfGameHandler.o MyMove.o MyPoint.o MyPiecePosition.o  MyJokerChange.o GameManager.o FileAlgorithm.o MyBoard.o MyFightInfo.o BattleInfo.o
 EXEC = ex3
-EXEC2 = s
 
 rps_tournament: $(OBJS)
 	$(CC) $(OBJS) -o $(EXEC) -ldl -pthread -lpthread -rdynamic 
@@ -79,7 +78,9 @@ RSPPlayer_204251599.o: PlayerAlgorithm.h RSPPlayer_204251599.h RSPPlayer_2042515
 	$(CC) $(COMP_FLAG) -c $*.cpp -fPIC
 BattleInfo.o: BattleInfo.h BattleInfo.cpp
 	$(CC) $(COMP_FLAG) -c $*.cpp
-	
+AlgorithmRegistration.o: AlgorithmRegistration.h AlgorithmRegistration.cpp
+	$(CC) $(COMP_FLAG) -c $*.cpp
+
 clean:
 	rm -f *.o $(EXEC)
 clean_so: 
