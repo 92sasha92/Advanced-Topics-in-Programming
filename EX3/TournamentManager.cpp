@@ -205,6 +205,11 @@ void TournamentManager::setAlgorithmsPath(std::string &path) {
     this->algorithmsPath = path;
 }
 
+void TournamentManager::setTournamentParameters(std::string &path, int numOfThreads) {
+    setAlgorithmsPath(path);
+    setNumOfThreads(numOfThreads);
+}
+
 AlgorithmRegistration::AlgorithmRegistration(std::string id, std::function<std::unique_ptr<PlayerAlgorithm>()> factoryMethod) {
     TournamentManager::getInstance().registerAlgorithm(id, factoryMethod);
 }
