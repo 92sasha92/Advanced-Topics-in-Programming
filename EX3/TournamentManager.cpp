@@ -132,6 +132,7 @@ void TournamentManager::run(){
     for (int i = 1; i < this->numOfThreads; i++) {
         ths.push_back(std::thread(&TournamentManager::playAGame, this));
     }
+	playAGame();
 
     for (auto& th : ths) {
         th.join();
@@ -161,7 +162,7 @@ void TournamentManager::loadAlgos() {
     dl = popen(command_str, "r");
     if(!dl){
         perror("popen");
-        exit(-1);
+        //TODO: ERROR: exit(-1);
     }
     void *dlib;
     char name[1024];
@@ -228,7 +229,7 @@ void TournamentManager::printScores() {
 
     // Defining a lambda function to compare two pairs. It will compare two pairs using second field
     auto compFunctor = [](std::pair<std::string, int> elem1, std::pair<std::string, int> elem2) {
-		return elem1.second != elem2.second ?  elem1.second < elem2.second : elem1.first < elem2.first;
+		return elem1.second != elem2.second ?  elem1.second > elem2.second : elem1.first < elem2.first;
      };
 
     // Declaring a set that will store the pairs using above comparision logic

@@ -9,7 +9,7 @@
 
 
 int main(int argc, char* argv[]) {
-    int numOfThreads = 1;
+    int numOfThreads = 4;
     std::string path = "";
     Parser::parseCommandLine(argc, argv, numOfThreads, path);
     TournamentManager::getInstance().setTournamentParameters(path, numOfThreads);
