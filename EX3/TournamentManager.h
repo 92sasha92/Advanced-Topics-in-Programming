@@ -57,6 +57,7 @@ public:
     void setNumOfThreads(int t);
     const std::string& getAlgorithmsPath();
     void setAlgorithmsPath(std::string &path);
+    void setTournamentParameters(std::string &path, int numOfThreads);
     void playAGame();
     void createTournamentSchedule();
     ~TournamentManager(){

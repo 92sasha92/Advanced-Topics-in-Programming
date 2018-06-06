@@ -14,6 +14,36 @@ bool Parser::isInteger(string str) {
     return true;
 }
 
+bool Parser::parseCommandLineHelper(string s1, string s2, int &numOfThreads, string &path){
+    if(!s1.compare("threads") && Parser::isInteger(s2)){
+        numOfThreads = stoi(s2);
+    } else if(!s1.compare("path")){
+        path = s2;
+    } else {
+        return false;
+    }
+    return true;
+}
+
+void Parser::parseCommandLine(int argc, char* argv[], int &numOfThreads, string &path){
+    if(argc > 2){
+        string str1 = argv[1];
+        string str2 = argv[2];
+        if(!parseCommandLineHelper(str1, str2, numOfThreads, path)){
+            //TODO: error
+        }
+        if(argc > 4){
+            string str3 = argv[3];
+            string str4 = argv[4];
+            if(!str1.compare(str3)){
+                //TODO: error same parameter twice
+            }
+            if(!parseCommandLineHelper(str3, str4, numOfThreads, path)){
+                //TODO: error
+            }
+        }
+    }
+}
 
 bool Parser::parsePiece(RPS& rps, vector<string> pieceDescription, vector<unique_ptr<PiecePosition>> &vectorToFill) {
     if (pieceDescription[0].size() != 1) {
