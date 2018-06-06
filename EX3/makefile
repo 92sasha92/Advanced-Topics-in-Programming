@@ -16,19 +16,19 @@ rps_tournament: $(OBJS)
 	$(CC) $(OBJS) -o $(EXEC) -ldl -pthread -lpthread -rdynamic 
 	
 rps_lib: RSPPlayer_204251599.cpp AlgorithmRegistration.h
-	$(CC) $(COMP_FLAG) RSPPlayer_204251599.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o libRSPPlayer_204251599.so
+	$(CC) $(COMP_FLAG) RSPPlayer_204251599.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o RSPPlayer_204251599.so
 	
 rps_lib2: RSPPlayer_323239566.cpp AlgorithmRegistration.h
-	$(CC) $(COMP_FLAG) RSPPlayer_323239566.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o libRSPPlayer_323239566.so
+	$(CC) $(COMP_FLAG) RSPPlayer_323239566.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o RSPPlayer_323239566.so
 	
 rps_lib3: RSPPlayer_123.cpp AlgorithmRegistration.h
-	$(CC) $(COMP_FLAG) RSPPlayer_123.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o libRSPPlayer_123.so
+	$(CC) $(COMP_FLAG) RSPPlayer_123.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o RSPPlayer_123.so
 	
 rps_lib4: RSPPlayer_111.cpp AlgorithmRegistration.h
-	$(CC) $(COMP_FLAG) RSPPlayer_111.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o libRSPPlayer_111.so
+	$(CC) $(COMP_FLAG) RSPPlayer_111.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o RSPPlayer_111.so
 
 rps_lib5: RSPPlayer_222.cpp AlgorithmRegistration.h
-	$(CC) $(COMP_FLAG) RSPPlayer_222.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o libRSPPlayer_222.so
+	$(CC) $(COMP_FLAG) RSPPlayer_222.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o RSPPlayer_222.so
 
 all:	$(EXEC)
 $(EXEC): $(OBJS)
