@@ -4,7 +4,6 @@
 #include <map>
 
 #include "PlayerAlgorithm.h"
-#include "AlgorithmRegistration.h"
 #include "BattleInfo.h"
 #include "GameManager.h"
 #include <thread>
