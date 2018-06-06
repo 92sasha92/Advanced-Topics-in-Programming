@@ -74,6 +74,8 @@ void TournamentManager::createTournamentSchedule() {
             cout << "ERROR: only " << idRepeats.second << " matches for " << idRepeats.first << endl;
         } else if (idRepeats.second > NUM_OF_GAMES_FOR_ALGO) {
             cout << "WARNING: "<< idRepeats.second << " matches for " << idRepeats.first << endl;
+        } else {
+            cout << "player  " << idRepeats.first << " have  " << idRepeats.first << "matches." <<endl;
         }
     }
 }
