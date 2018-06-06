@@ -35,7 +35,6 @@ void RSPPlayer_111::getInitialPositions(int player, std::vector<unique_ptr<Piece
             while (cellNotOccupied) {
                 row = rand() % RPS::NRows;
                 col = rand() % RPS::MCols;
-                // transfer to 1 based
                 MyPoint p(col + 1, row + 1);
                 if (this->selfGameBoard[row][col].get() == nullptr) {
                     cellNotOccupied = false;
@@ -91,7 +90,7 @@ void RSPPlayer_111::notifyOnInitialBoard(const Board& b, const std::vector<uniqu
 }
 
 void RSPPlayer_111::notifyOnOpponentMove(const Move& move) {
-    MyPoint fPoint(move.getFrom().getX() - 1, move.getFrom().getY() - 1);  // converting to zero based point
+    MyPoint fPoint(move.getFrom().getX() - 1, move.getFrom().getY() - 1);
     MyPoint toPoint(move.getTo().getX() - 1, move.getTo().getY() - 1);
     if (this->selfGameBoard[toPoint.getY()][toPoint.getX()].get() != nullptr) {
         lastMove.init(fPoint, toPoint);
@@ -157,8 +156,8 @@ void RSPPlayer_111::notifyFightResultWhenPlayerAttack(const FightInfo& fightInfo
 
 void RSPPlayer_111::notifyFightResult(const FightInfo& fightInfo) {
     vector<unique_ptr<Piece>> trash;
-    MyPoint fLastPoint(lastMove.getFrom().getX(), lastMove.getFrom().getY()); // 0 based
-    MyPoint toLastPoint(lastMove.getTo().getX(), lastMove.getTo().getY()); // 0 based
+    MyPoint fLastPoint(lastMove.getFrom().getX(), lastMove.getFrom().getY());
+    MyPoint toLastPoint(lastMove.getTo().getX(), lastMove.getTo().getY());
     MyPoint fightPos(fightInfo.getPosition().getX() - 1, fightInfo.getPosition().getY() - 1);
     MyFightInfo fightInfoZero(fightPos, Piece::getEnumTypeRep(fightInfo.getPiece(1)), Piece::getEnumTypeRep(fightInfo.getPiece(2)), fightInfo.getWinner());
     if (fightInfo.getWinner() == TIE) {
@@ -420,7 +419,7 @@ void RSPPlayer_111::setPointAndGetScore(int row, int col, MyPoint &pTo, MyMove &
     }
 }
 
-int RSPPlayer_111::recFunc(int curPlayer, int depth, bool isMax) { // TODO: give bonus in the scoring function if they eat piece in early move (high depth)
+int RSPPlayer_111::recFunc(int curPlayer, int depth, bool isMax) {
     EndOfGameHandler endOfGameHandler;
     checkWinner(endOfGameHandler, curPlayer);
     int bestScore = INT_MAX;
@@ -570,7 +569,6 @@ unique_ptr<Move> RSPPlayer_111::getMove() {
     }
 
 //    this->printBoard();
-//    translate to 1 based (game manager expects 1 based)
     MyPoint pFrom1(bestPFrom.getX() + 1, bestPFrom.getY() + 1);
     MyPoint pTo1(bestPTo.getX() + 1, bestPTo.getY() + 1);
     unique_ptr<Move> bestPtrMove1Based = make_unique<MyMove>(pFrom1, pTo1);
@@ -592,7 +590,7 @@ int RSPPlayer_111::getScoreForJokerRep(int row, int col, Piece::RPSJokerTypes jo
     int score = 0;
     unique_ptr<Piece> tmpPiece = PieceFactory::createPiece(Piece::getEnumTypeRep(Piece::fromJRepToChar(jokerRep)), player);
 
-    if (row + 1 < RPS::NRows) { // TODO: handle isStrongerThan Joker!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (maybe create new pieces like we did in fight)
+    if (row + 1 < RPS::NRows) { // TODO: handle isStrongerThan Joker!!! (maybe create new pieces like we did in fight)
         score += getJokerMoveScore(row + 1, col, tmpPiece);
     }
     if (row - 1 > 0) {
@@ -642,7 +640,7 @@ unique_ptr<JokerChange> RSPPlayer_111::getJokerChange() {
         }
     }
     if ((jokerChangePtr->getJokerChangePosition().getY() == this->lastMove.getFrom().getY()) && (jokerChangePtr->getJokerChangePosition().getX() == this->lastMove.getFrom().getX())) {
-        MyPoint p(this->lastMove.getTo().getX(), this->lastMove.getTo().getY()); //1 based
+        MyPoint p(this->lastMove.getTo().getX(), this->lastMove.getTo().getY());
         jokerChangePtr->setPosition(p);
     }
     if ((jokerChangePtr->getJokerChangePosition().getY() != -1) && (jokerChangePtr->getJokerChangePosition().getX() != -1)) {
@@ -650,7 +648,7 @@ unique_ptr<JokerChange> RSPPlayer_111::getJokerChange() {
             ((JokerPiece *)this->selfGameBoard[jokerChangePtr->getJokerChangePosition().getY()][jokerChangePtr->getJokerChangePosition().getX()].get())->setJokerPiece(Piece::getEnumTypeRep(jokerChangePtr->getJokerNewRep()));
             MyPoint jokerPos(jokerChangePtr->getJokerChangePosition().getX() + 1, jokerChangePtr->getJokerChangePosition().getY() + 1);
             unique_ptr<MyJokerChange> jokerChangeOneBase = make_unique<MyJokerChange>(jokerPos, Piece::fromTypeRepToJRep(Piece::getEnumTypeRep(jokerChangePtr->getJokerNewRep())));
-            return std::move(jokerChangeOneBase); // 1 based - manager expects this
+            return std::move(jokerChangeOneBase);
         }
     }
     return nullptr;

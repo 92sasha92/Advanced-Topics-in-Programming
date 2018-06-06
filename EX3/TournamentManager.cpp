@@ -14,16 +14,13 @@ void TournamentManager::playAGame(){
         unique_ptr<PlayerAlgorithm> alg_2 = id2factory[battle->getId2()]();
         GameManager manager(std::move(alg_1), std::move(alg_2));
         int result = manager.startGame();
-		//manager.startGame();
         int alg1Score = getAlgScore(result, PLAYER_1);
         int alg2Score = getAlgScore(result, PLAYER_2);
         if (battle->getIsAlgo1BattleCount()) {
             scoringTable[battle->getId1()] += alg1Score;
-			//scoringTable[battle->getId1()] += 1;
         }
         if (battle->getIsAlgo2BattleCount()) {
             scoringTable[battle->getId2()] += alg2Score;
-			//scoringTable[battle->getId2()] += 1;
         }
         lock.lock();
     }
@@ -104,7 +101,6 @@ void TournamentManager::createPartialTournament(int shift) {
     int numOfRepeats = (int)(ceil(static_cast<double>(GROUP_SIZE) / (numOfElements - 1))), start = shift * GROUP_SIZE;
 	std::cout << "numOfRepeats: " << numOfRepeats << endl;
 	std::cout << "numOfRepeats: " << numOfRepeats << std::endl;
-    // TODO: maybe it will be better to run from the end to the start
     for (int i = start; i < (int)idNumOfBattlesSet.size(); i++) { // run over the last (less than 31) elements
         for (int j = i + 1; j < (int)idNumOfBattlesSet.size(); j++) {
             for (int k = 0; k < numOfRepeats; k++) {
@@ -123,8 +119,6 @@ void TournamentManager::run(){
     for(auto& pair : id2factory) {
         const auto& id = pair.first;
         std::cout << id << ": " << std::endl;
-//        const auto& factoryMethod = pair.second;
-//        factoryMethod()->
     }
     this->createTournamentSchedule();
 	std::cout << "created schedule" << std::endl;
@@ -146,44 +140,42 @@ void TournamentManager::loadAlgosFullPath() {
 
 void TournamentManager::freeDls() {
     std::list<void *>::iterator itr;
-    // close all the dynamic libs we opened
-    for(itr=dl_list.begin(); itr!=dl_list.end(); itr++){
+    for(itr=dl_list.begin(); itr!=dl_list.end(); itr++){ // close all the dynamic libs we opened
         dlclose(*itr);
     }
 }
 
 void TournamentManager::loadAlgos() {
-    // size of buffer for reading in directory entries
-    static unsigned int BUF_SIZE = 1024;
+    static unsigned int BUF_SIZE = 1024; // size of buffer for reading in directory entries
     FILE *dl;   // handle to read directory
     const char *command_str = "ls *.so";  // command string to get dynamic lib names
     char in_buf[1024]; // input buffer for lib names
-    // get the names of all the dynamic libs (.so  files) in the current dir
-    dl = popen(command_str, "r");
+    dl = popen(command_str, "r"); // get the names of all the dynamic libs (.so  files) in the current dir
     if(!dl){
         perror("popen");
-        //TODO: ERROR: exit(-1);
+        cout << "ERROR: cannot get dynamic lib" << endl;
+        return;
     }
     void *dlib;
     char name[1024];
     while(fgets(in_buf, BUF_SIZE, dl)){
-        // trim off the whitespace
-        char *ws = strpbrk(in_buf, " \t\n");
+        char *ws = strpbrk(in_buf, " \t\n");  // trim off the whitespace
         if(ws) *ws = '\0';
-        // append ./ to the front of the lib name
-        sprintf(name, "./%s", in_buf);
+        sprintf(name, "./%s", in_buf); // append ./ to the front of the lib name
         dlib = dlopen(name, RTLD_LAZY);
         if(dlib == NULL){
-            cerr << dlerror() << endl;
-            // TODO: error
+            cout << "ERROR: cannot open dynamic lib" << endl;
+            return;
         }
-        // add the handle to our list
-        dl_list.insert(dl_list.end(), dlib);
+        dl_list.insert(dl_list.end(), dlib); // add the handle to our list
     }
 }
 
 void TournamentManager::registerAlgorithm(std::string &id, std::function<std::unique_ptr<PlayerAlgorithm>()> &factoryMethod) {
-    // TODO: should warn if id is already registered
+    if (id2factory.find(id) != id2factory.end()) {
+        cout << "ERROR: id already exist" << endl;
+        return;
+    }
     id2factory[id] = factoryMethod;
     scoringTable[id] = 0;
     idNumOfBattlesSet.push_back(std::pair<std::string, int>(id, 0));

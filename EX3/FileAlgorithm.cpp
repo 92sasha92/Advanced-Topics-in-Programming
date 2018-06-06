@@ -24,20 +24,17 @@ void FileAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<Piece
 
 void FileAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector<unique_ptr<FightInfo>> &fights) {
     //not relevant for the file algorithm
-    // just to not get an error in the make
     b.getPlayer(MyPoint(0, 0));
     fights.size();
 }
 
 void FileAlgorithm::notifyOnOpponentMove(const Move &move) {
     //not relevant for the file algorithm
-    // just to not get an error in the make
     move.getFrom();
 }
 
 void FileAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
     //not relevant for the file algorithm
-    // just to not get an error in the make
     fightInfo.getWinner();
 }
 
@@ -56,9 +53,6 @@ void FileAlgorithm::ParseJokerChange(vector<string> pieceDescription) {
     }
 
     if (Parser::isInteger(pieceDescription[5])) {
-        // zero based
-        //col = stoi(pieceDescription[5]) - 1;
-        // 1 based
         col = stoi(pieceDescription[5]);
     } else {
         cout << "incorrect Joker line format" << endl;
@@ -66,9 +60,6 @@ void FileAlgorithm::ParseJokerChange(vector<string> pieceDescription) {
     }
 
     if (Parser::isInteger(pieceDescription[6])) {
-        // zero based
-       // row = stoi(pieceDescription[6]) - 1;
-        // 1 based
         row = stoi(pieceDescription[6]);
     } else {
         return;
@@ -98,9 +89,6 @@ void FileAlgorithm::parseMove(vector<string> pieceDescription, unique_ptr<MyMove
     int arr[4];
     for (int i = 0; i < 4; i++) {
         if (Parser::isInteger(pieceDescription[i])) {
-            // zero based
-           // arr[i] = stoi(pieceDescription[i]) - 1;
-            // 1 based correct
             arr[i] = stoi(pieceDescription[i]);
         } else {
             cout << "incorrect line format" << endl;
