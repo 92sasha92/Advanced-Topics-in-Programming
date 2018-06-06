@@ -5,7 +5,7 @@ TournamentManager TournamentManager::theTournamentManager;
 
 void TournamentManager::playAGame(){
     unique_lock<mutex> lock(scheduleLock);
-    std::cout << 1 << std::endl;
+    std::cout << "welcome to playAGame()" << std::endl;
     while(!tournamentSchedule.empty()){
         std::unique_ptr<BattleInfo> battle = std::move(tournamentSchedule.top());
         tournamentSchedule.pop();
@@ -14,13 +14,16 @@ void TournamentManager::playAGame(){
         unique_ptr<PlayerAlgorithm> alg_2 = id2factory[battle->getId2()]();
         GameManager manager(std::move(alg_1), std::move(alg_2));
         int result = manager.startGame();
+		//manager.startGame();
         int alg1Score = getAlgScore(result, PLAYER_1);
         int alg2Score = getAlgScore(result, PLAYER_2);
         if (battle->getIsAlgo1BattleCount()) {
             scoringTable[battle->getId1()] += alg1Score;
+			//scoringTable[battle->getId1()] += 1;
         }
         if (battle->getIsAlgo2BattleCount()) {
             scoringTable[battle->getId2()] += alg2Score;
+			//scoringTable[battle->getId2()] += 1;
         }
         lock.lock();
     }
@@ -45,21 +48,22 @@ void TournamentManager::setMatch(int p1, int p2) {
     bool isAlgo1BattleCount = true, isAlgo2BattleCount = true;
     if (idNumOfBattlesSet[p1].second >= NUM_OF_GAMES_FOR_ALGO) {
         isAlgo1BattleCount = false;
-    }
+    } 
     if (idNumOfBattlesSet[p2].second >= NUM_OF_GAMES_FOR_ALGO) {
         isAlgo2BattleCount = false;
-    }
+    } 
 
-    idNumOfBattlesSet[p1].second++;
-    idNumOfBattlesSet[p2].second++;
     if (isAlgo1BattleCount || isAlgo2BattleCount) {
+		idNumOfBattlesSet[p1].second++;
+		idNumOfBattlesSet[p2].second++;
+		cout << endl << "match between  " << idNumOfBattlesSet[p1].first << " to  " << idNumOfBattlesSet[p2].first <<endl;
         tournamentSchedule.push(std::move(std::make_unique<BattleInfo>(idNumOfBattlesSet[p1].first, idNumOfBattlesSet[p2].first, isAlgo1BattleCount, isAlgo2BattleCount)));
     }
 }
 
 void TournamentManager::createTournamentSchedule() {
     int i, start;
-    for (i = 0; i < floor(idNumOfBattlesSet.size() / GROUP_SIZE); i++ ) {
+    for (i = 0; i < floor(idNumOfBattlesSet.size() / static_cast<double>(GROUP_SIZE)); i++ ) {
         start = i * GROUP_SIZE;
         for (int j = start ; j < start + GROUP_SIZE; j++) {
             for (int k = j + 1; k < start + GROUP_SIZE; k++) {
@@ -75,7 +79,7 @@ void TournamentManager::createTournamentSchedule() {
         } else if (idRepeats.second > NUM_OF_GAMES_FOR_ALGO) {
             cout << "WARNING: "<< idRepeats.second << " matches for " << idRepeats.first << endl;
         } else {
-            cout << "player  " << idRepeats.first << " have  " << idRepeats.first << "matches." <<endl;
+            cout << "player  " << idRepeats.first << " have  " << idRepeats.second << " matches." <<endl;
         }
     }
 }
@@ -97,7 +101,8 @@ void TournamentManager::createPartialTournament(int shift) {
         }
     }
 
-    int numOfRepeats = (int)(ceil(GROUP_SIZE / (numOfElements -1))), start = shift * GROUP_SIZE;
+    int numOfRepeats = (int)(ceil(static_cast<double>(GROUP_SIZE) / (numOfElements - 1))), start = shift * GROUP_SIZE;
+	std::cout << "numOfRepeats: " << numOfRepeats << endl;
 	std::cout << "numOfRepeats: " << numOfRepeats << std::endl;
     // TODO: maybe it will be better to run from the end to the start
     for (int i = start; i < (int)idNumOfBattlesSet.size(); i++) { // run over the last (less than 31) elements
@@ -218,7 +223,7 @@ void TournamentManager::printScores() {
 
     // Defining a lambda function to compare two pairs. It will compare two pairs using second field
     auto compFunctor = [](std::pair<std::string, int> elem1, std::pair<std::string, int> elem2) {
-        return elem1.second > elem2.second;
+		return elem1.second != elem2.second ?  elem1.second < elem2.second : elem1.first < elem2.first;
      };
 
     // Declaring a set that will store the pairs using above comparision logic

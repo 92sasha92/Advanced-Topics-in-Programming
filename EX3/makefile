@@ -9,7 +9,6 @@ UNAME := $(shell uname -s)
 COMP_FLAG=-std=c++14 -Wall -Wextra -Werror -pedantic-errors -Wfatal-errors -Wno-shift-count-overflow -Weffc++ -Wno-non-virtual-dtor -Wno-strict-aliasing -Wno-unused-private-field -fPIC
 LDFLAGS = -pthread -ldl
 OBJS = TournamentManager.o BombPiece.o RockPiece.o ScissorsPiece.o FlagPiece.o JokerPiece.o PaperPiece.o RPS.o main.o Piece.o PieceFactory.o Parser.o EndOfGameHandler.o MyMove.o MyPoint.o MyPiecePosition.o  MyJokerChange.o GameManager.o FileAlgorithm.o MyBoard.o MyFightInfo.o BattleInfo.o
-OBJSO = RSPPlayer_204251599.o libRSPPlayer_204251599.so
 EXEC = ex3
 EXEC2 = s
 
@@ -27,6 +26,9 @@ rps_lib3: RSPPlayer_123.cpp AlgorithmRegistration.h
 	
 rps_lib4: RSPPlayer_111.cpp AlgorithmRegistration.h
 	$(CC) $(COMP_FLAG) RSPPlayer_111.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o libRSPPlayer_111.so
+
+rps_lib5: RSPPlayer_222.cpp AlgorithmRegistration.h
+	$(CC) $(COMP_FLAG) RSPPlayer_222.cpp MyBoard.cpp MyPoint.cpp MyFightInfo.cpp MyJokerChange.cpp MyMove.cpp MyPiecePosition.cpp RPS.cpp -shared -fPIC -rdynamic -o libRSPPlayer_222.so
 
 all:	$(EXEC)
 $(EXEC): $(OBJS)
@@ -47,7 +49,7 @@ PaperPiece.o: PaperPiece.h PaperPiece.cpp Piece.h
 	$(CC) $(COMP_FLAG) -c $*.cpp
 RPS.o: RPS.h RPS.cpp Piece.h PieceFactory.h
 	$(CC) $(COMP_FLAG) -c $*.cpp
-main.o: main.cpp RPS.h MyMove.h GameManager.h RSPPlayer_204251599.h TournamentManager.h
+main.o: main.cpp RPS.h MyMove.h GameManager.h TournamentManager.h
 	$(CC) $(COMP_FLAG) -rdynamic -c $*.cpp $(LIBS)
 Piece.o: Piece.h Piece.cpp
 	$(CC) $(COMP_FLAG) -c $*.cpp
@@ -79,5 +81,6 @@ BattleInfo.o: BattleInfo.h BattleInfo.cpp
 	$(CC) $(COMP_FLAG) -c $*.cpp
 	
 clean:
-	rm -f *.o *.so $(EXEC)
-
+	rm -f *.o $(EXEC)
+clean_so: 
+	rm -f *.so

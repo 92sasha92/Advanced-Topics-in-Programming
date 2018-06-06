@@ -8,7 +8,7 @@ GameManager::GameManager(unique_ptr<PlayerAlgorithm> &&player1Algorithm_, unique
 }
 
 void GameManager::printBoard() {
-    cout << endl;
+    /*cout << endl;
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
     cout << endl;
     cout << "    1   2   3   4   5   6   7   8   9   10" << endl;
@@ -23,7 +23,7 @@ void GameManager::printBoard() {
             }
         }
         cout << endl;
-    }
+    }*/
 }
 
 unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos) {
@@ -52,15 +52,15 @@ unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1Pie
     Piece::PiecesPower winner = piece1->isStrongerThan(*(piece2.get())); // check for the stronger piece
     switch (winner) {
         case Piece::Stronger: {
-            cout << "player 1 win in cell " << point  << endl;
+            //cout << "player 1 win in cell " << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 1);
         }
         case Piece::Weaker: {
-            cout << "player 2 win in cell " << point  << endl;
+            //cout << "player 2 win in cell " << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 2);
         }
         case Piece::Equal: {
-            cout << "tie cell " << point  << endl;
+            //cout << "tie cell " << point  << endl;
             return std::make_unique<MyFightInfo>(point, piece1->type, piece2->type, 0);
         }
         default:
@@ -329,7 +329,7 @@ bool GameManager::handleErrorInAMove(GameManager::Turns &currentTurn, EndOfGameH
         endOfGameHandler.setWinner(currentTurn, fileLinePlayer[0], fileLinePlayer[1]);
         return false;
     }
-    cout << "player " << playerNum(currentTurn) << " move from (" <<  movePtr->getFrom().getX() << ", " << movePtr->getFrom().getY() << ") to (" <<  movePtr->getTo().getX() << ", " << movePtr->getTo().getY() << ")" << endl;
+    //cout << "player " << playerNum(currentTurn) << " move from (" <<  movePtr->getFrom().getX() << ", " << movePtr->getFrom().getY() << ") to (" <<  movePtr->getTo().getX() << ", " << movePtr->getTo().getY() << ")" << endl;
     const Move &move = *(movePtr.get());
     MyPoint pFrom(move.getFrom().getX() - 1, move.getFrom().getY() - 1);
     MyPoint pTo(move.getTo().getX() - 1, move.getTo().getY() - 1);
