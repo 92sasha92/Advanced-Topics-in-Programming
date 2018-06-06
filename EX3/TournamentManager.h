@@ -60,7 +60,7 @@ public:
     void playAGame();
     void createTournamentSchedule();
     ~TournamentManager(){
-        this->freeDls();
+//        this->freeDls();
     }
 };
 
