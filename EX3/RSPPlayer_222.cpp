@@ -420,7 +420,7 @@ void RSPPlayer_222::setPointAndGetScore(int row, int col, MyPoint &pTo, MyMove &
     }
 }
 
-int RSPPlayer_222::recFunc(int curPlayer, int depth, bool isMax) { // TODO: give bonus in the scoring function if they eat piece in early move (high depth)
+int RSPPlayer_222::recFunc(int curPlayer, int depth, bool isMax) {
     EndOfGameHandler endOfGameHandler;
     checkWinner(endOfGameHandler, curPlayer);
     int bestScore = INT_MAX;
@@ -592,7 +592,7 @@ int RSPPlayer_222::getScoreForJokerRep(int row, int col, Piece::RPSJokerTypes jo
     int score = 0;
     unique_ptr<Piece> tmpPiece = PieceFactory::createPiece(Piece::getEnumTypeRep(Piece::fromJRepToChar(jokerRep)), player);
 
-    if (row + 1 < RPS::NRows) { // TODO: handle isStrongerThan Joker!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (maybe create new pieces like we did in fight)
+    if (row + 1 < RPS::NRows) { // TODO: handle isStrongerThan Joker!!! (maybe create new pieces like we did in fight)
         score += getJokerMoveScore(row + 1, col, tmpPiece);
     }
     if (row - 1 > 0) {

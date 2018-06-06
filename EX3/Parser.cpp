@@ -30,6 +30,7 @@ void Parser::parseCommandLine(int argc, char* argv[], int &numOfThreads, string 
         string str1 = argv[1];
         string str2 = argv[2];
         if(!parseCommandLineHelper(str1, str2, numOfThreads, path)){
+            cout << "ERROR: error occured when parsing command line." << endl;
             //TODO: error
         }
         if(argc > 4){
@@ -37,9 +38,11 @@ void Parser::parseCommandLine(int argc, char* argv[], int &numOfThreads, string 
             string str4 = argv[4];
             if(!str1.compare(str3)){
                 //TODO: error same parameter twice
+                cout << "ERROR: same parameter twice." << endl;
             }
             if(!parseCommandLineHelper(str3, str4, numOfThreads, path)){
                 //TODO: error
+                cout << "ERROR: error occured when parsing command line." << endl;
             }
         }
     }
@@ -53,18 +56,12 @@ bool Parser::parsePiece(RPS& rps, vector<string> pieceDescription, vector<unique
     char piece = pieceDescription[0][0];
     int col, row;
     if (isInteger(pieceDescription[1])) {
-        // zero based
-//        col = stoi(pieceDescription[1]) - 1;
-        // 1 based
         col = stoi(pieceDescription[1]);
     } else {
         cout << "incorrect line format" << endl;
         return false;
     }
     if (isInteger(pieceDescription[2])) {
-        // zero based
-     //   row = stoi(pieceDescription[2]) - 1;
-        // 1 based
         row = stoi(pieceDescription[2]);
     } else {
         cout << "incorrect line format" << endl;

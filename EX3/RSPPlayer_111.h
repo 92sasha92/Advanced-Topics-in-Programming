@@ -17,7 +17,6 @@ private:
     int player;
     int opponent;
     int opponentNumOfFlags;
-//    int opponentNumOfNonMovingPieces;  // TODO: maintain opponent not moving pieces instead of unknown pieces
     int opponentNumOfUnknownPieces;
     bool isOpponentAttacked;
     MyMove lastMove;

@@ -22,7 +22,6 @@ bool RPS::isPointInBounds(const Point &p) {
 }
 
 bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &board, const Move &move, int player, bool printMessages) {
-    //bool isJoker = false;
     unique_ptr<Piece> piecePtr;
     MyPoint fPoint(move.getFrom().getX(), move.getFrom().getY());
     MyPoint toPoint(move.getTo().getX(), move.getTo().getY());
@@ -39,9 +38,6 @@ bool RPS::checkIfMoveIsLegal(std::vector<std::vector<std::unique_ptr<Piece>>> &b
         }
         return false;
     }
-//    if (gameBoard.board[fPoint->getY()][fPoint->getX()]->type == Piece::Joker) {
-//        isJoker = true;
-//    }
     if (board[fPoint.getY()][fPoint.getX()]->getPlayerNumber() != player) {
         if (printMessages) {
             cout << "ERROR: cannot move opponent piece" << endl;
