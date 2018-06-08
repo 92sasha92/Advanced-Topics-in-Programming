@@ -327,6 +327,7 @@ bool GameManager::handleErrorInAMove(GameManager::Turns &currentTurn, EndOfGameH
     if (movePtr.get() == nullptr) {
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
         endOfGameHandler.setWinner(currentTurn, fileLinePlayer[0], fileLinePlayer[1]);
+        cout << "ERROR: there was no move" << endl;
         return false;
     }
     //cout << "player " << playerNum(currentTurn) << " move from (" <<  movePtr->getFrom().getX() << ", " << movePtr->getFrom().getY() << ") to (" <<  movePtr->getTo().getX() << ", " << movePtr->getTo().getY() << ")" << endl;
@@ -338,6 +339,7 @@ bool GameManager::handleErrorInAMove(GameManager::Turns &currentTurn, EndOfGameH
         // TODO: ERROR: in making move
         endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
         endOfGameHandler.setWinner(currentTurn, fileLinePlayer[0], fileLinePlayer[1]);
+        cout << "ERROR: move is illegal" << endl;
         return false;
     }
     return true;
@@ -367,6 +369,7 @@ bool GameManager::handleATurn(GameManager::Turns &currentTurn, EndOfGameHandler&
         MyJokerChange jokerChangeZeroBased(jokerPos, Piece::fromTypeRepToJRep(Piece::getEnumTypeRep(jokerChange.getJokerNewRep())));
         if (!checkJokerChangeAndSet(jokerChangeZeroBased, playerNum(currentTurn))) {
             // TODO: ERROR: in changing joker
+            cout << "ERROR: in changing joker" << endl;
             endOfGameHandler.setEndOfGameReason(EndOfGameHandler::BadMoveFile);
             endOfGameHandler.setWinner(currentTurn, fileLinePlayer[0], fileLinePlayer[1]);
             return false;
