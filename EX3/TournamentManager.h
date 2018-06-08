@@ -60,7 +60,8 @@ public:
     void playAGame();
     void createTournamentSchedule();
     ~TournamentManager(){
-//        this->freeDls();
+        this->id2factory.clear();
+        this->freeDls();
     }
 };
 
