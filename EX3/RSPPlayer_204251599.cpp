@@ -64,7 +64,7 @@ void RSPPlayer_204251599::notifyOnInitialBoard(const Board& b, const std::vector
 
     for (const unique_ptr<FightInfo> &fightInfo: fights) { // initialize the auto player self board accord to the fights occured
         MyPoint fightPos(fightInfo->getPosition().getX() - 1, fightInfo->getPosition().getY() - 1);
-        if (fightInfo->getPiece(opponent) == Piece::Flag) {
+        if (Piece::getEnumTypeRep(fightInfo->getPiece(opponent)) == Piece::Flag) {
             opponentNumOfFlags--;
         }
         if (fightInfo->getWinner() != player) {

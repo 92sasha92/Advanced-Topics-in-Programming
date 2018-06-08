@@ -1,6 +1,5 @@
 #pragma once
 #include "PlayerAlgorithm.h"
-#include "MyBoard.h"
 #include <stdlib.h>
 #include <time.h>
 #include <climits>
