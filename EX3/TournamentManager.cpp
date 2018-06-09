@@ -99,7 +99,6 @@ void TournamentManager::createPartialTournament(int shift) {
     }
 
     int numOfRepeats = (int)(ceil(static_cast<double>(GROUP_SIZE) / (numOfElements - 1))), start = shift * GROUP_SIZE;
-	std::cout << "numOfRepeats: " << numOfRepeats << endl;
 	std::cout << "numOfRepeats: " << numOfRepeats << std::endl;
     for (int i = start; i < (int)idNumOfBattlesSet.size(); i++) { // run over the last (less than 31) elements
         for (int j = i + 1; j < (int)idNumOfBattlesSet.size(); j++) {
@@ -121,9 +120,10 @@ void TournamentManager::run(){
         std::cout << id << ": " << std::endl;
     }
     this->createTournamentSchedule();
+    auto numOfGames = (int)tournamentSchedule.size();
 	std::cout << "created schedule" << std::endl;
     std::vector<std::thread> ths;
-    for (int i = 1; i < this->numOfThreads; i++) {
+    for (int i = 1; i < min(this->numOfThreads, numOfGames - 1); i++) {
         ths.push_back(std::thread(&TournamentManager::playAGame, this));
     }
 	playAGame();
@@ -141,17 +141,17 @@ void TournamentManager::loadAlgosFullPath() {
     struct dirent * dp;
     void *dlib;
     char libName[1024];
-    while ((dp = readdir(dirp)) != NULL) {
+    while ((dp = readdir(dirp)) != nullptr) {
         std::string name = dp->d_name;
         std::cout << name << std::endl;
         if(name.size() > 3 && !name.substr(name.size() - 3, 3).compare(".so")){
             sprintf(libName, "./%s/%s", this->algorithmsPath.c_str(), name.c_str()); // append ./ to the front of the lib name
             dlib = dlopen(libName, RTLD_LAZY);
-            if(dlib == NULL){
-                cout << "ERROR: cannot open dynamic lib" << endl;
-                return;
+            if(dlib == nullptr){
+                cout << "ERROR: cannot open dynamic lib " << name << endl;
+            } else {
+                dl_list.insert(dl_list.end(), dlib); // add the handle to our list
             }
-            dl_list.insert(dl_list.end(), dlib); // add the handle to our list
         }
 
     }
@@ -183,11 +183,11 @@ void TournamentManager::loadAlgos() {
         if(ws) *ws = '\0';
         sprintf(name, "./%s", in_buf); // append ./ to the front of the lib name
         dlib = dlopen(name, RTLD_LAZY);
-        if(dlib == NULL){
-            cout << "ERROR: cannot open dynamic lib" << endl;
-            return;
+        if(dlib == nullptr){
+            cout << "ERROR: cannot open dynamic lib " << name << endl;
+        } else {
+            dl_list.insert(dl_list.end(), dlib); // add the handle to our list
         }
-        dl_list.insert(dl_list.end(), dlib); // add the handle to our list
     }
 }
 
