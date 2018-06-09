@@ -1,4 +1,5 @@
 
+#include <dirent.h>
 #include "TournamentManager.h"
 
 TournamentManager TournamentManager::theTournamentManager;
@@ -145,7 +146,7 @@ void TournamentManager::loadAlgosFullPath() {
         std::string name = dp->d_name;
         std::cout << name << std::endl;
         if(name.size() > 3 && !name.substr(name.size() - 3, 3).compare(".so")){
-            sprintf(libName, "./%s/%s", this->algorithmsPath.c_str(), name.c_str()); // append ./ to the front of the lib name
+            sprintf(libName, "%s/%s", this->algorithmsPath.c_str(), name.c_str()); // append ./ to the front of the lib name
             dlib = dlopen(libName, RTLD_LAZY);
             if(dlib == nullptr){
                 cout << "ERROR: cannot open dynamic lib " << name << endl;
