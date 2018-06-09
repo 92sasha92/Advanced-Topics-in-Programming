@@ -17,6 +17,8 @@
 #include <atomic>
 #include <algorithm>
 #include <dlfcn.h>
+#include <sys/types.h>
+#include <dirent.h>
 
 class TournamentManager {
 private:

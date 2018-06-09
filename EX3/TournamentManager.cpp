@@ -134,8 +134,28 @@ void TournamentManager::run(){
     printScores();
 }
 
-void TournamentManager::loadAlgosFullPath() {
 
+
+void TournamentManager::loadAlgosFullPath() {
+    DIR* dirp = opendir(this->algorithmsPath.c_str());
+    struct dirent * dp;
+    void *dlib;
+    char libName[1024];
+    while ((dp = readdir(dirp)) != NULL) {
+        std::string name = dp->d_name;
+        std::cout << name << std::endl;
+        if(name.size() > 3 && !name.substr(name.size() - 3, 3).compare(".so")){
+            sprintf(libName, "./%s/%s", this->algorithmsPath.c_str(), name.c_str()); // append ./ to the front of the lib name
+            dlib = dlopen(libName, RTLD_LAZY);
+            if(dlib == NULL){
+                cout << "ERROR: cannot open dynamic lib" << endl;
+                return;
+            }
+            dl_list.insert(dl_list.end(), dlib); // add the handle to our list
+        }
+
+    }
+    closedir(dirp);
 }
 
 void TournamentManager::freeDls() {
