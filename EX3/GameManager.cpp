@@ -8,7 +8,7 @@ GameManager::GameManager(unique_ptr<PlayerAlgorithm> &&player1Algorithm_, unique
 }
 
 void GameManager::printBoard() {
-    /*cout << endl;
+    cout << endl;
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
     cout << endl;
     cout << "    1   2   3   4   5   6   7   8   9   10" << endl;
@@ -23,7 +23,7 @@ void GameManager::printBoard() {
             }
         }
         cout << endl;
-    }*/
+    }
 }
 
 unique_ptr<MyFightInfo> GameManager::fight(unique_ptr<PiecePosition> &player1PiecePos, unique_ptr<PiecePosition> &player2PiecePos) {
@@ -476,18 +476,17 @@ int GameManager::startGame() {
         this->playerAlgorithms[1]->notifyOnInitialBoard(this->gameBoard, fightInfoVec);
         int fileLinePlayer[2] = {0, 0};
         while ((checkWinner(endOfGameHandler, playerNum(currentTurn))).getGameState() == EndOfGameHandler::GameNotOver) { // make moves until the game is over
-            printBoard();
+//            printBoard();
             fileLinePlayer[currentTurn]++;
             if (!handleATurn(currentTurn, endOfGameHandler, fileLinePlayer, numOfMovesWithoutAFight)) {
                 //TODO: handle error
                 break;
             }
         }
-        printBoard();
+//        printBoard();
         checkWinner(endOfGameHandler, playerNum(currentTurn));
     }
 
     GameManager::createOutFile(endOfGameHandler, isBadInputVec, errorLine);
-
     return static_cast<int>(endOfGameHandler.getGameState());
 }

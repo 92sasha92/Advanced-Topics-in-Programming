@@ -2,6 +2,7 @@
 #include "PlayerAlgorithm.h"
 #include <stdlib.h>
 #include <time.h>
+#include <random>
 #include <climits>
 #include "RPS.h"
 #include "MyPoint.h"

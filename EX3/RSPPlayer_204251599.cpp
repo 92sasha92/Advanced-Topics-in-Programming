@@ -14,8 +14,13 @@ RSPPlayer_204251599::RSPPlayer_204251599(): player(0), opponent(0), opponentNumO
 }
 
 void RSPPlayer_204251599::getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>>& vectorToFill) {
-    cout << " hii getInitialPositions!!!!!" << endl;
-    this->player = player;
+//    cout << " hii getInitialPositions!!!!!" << endl;
+    random_device generator;
+    uniform_int_distribution <int> rowDistribution(0, RPS::NRows - 7);
+    uniform_int_distribution <int> colDistribution(0, RPS::MCols - 7);
+    uniform_int_distribution <int> flagRowDistribution(0, 2);
+    uniform_int_distribution <int> flagColDistribution(0, 2);
+        this->player = player;
     if (player == 1) {
         this->opponent = 2;
     } else {
@@ -30,15 +35,30 @@ void RSPPlayer_204251599::getInitialPositions(int player, std::vector<unique_ptr
     rps.initializePiecesArsenal();
     int numOfPieceTypes = sizeof(rps.playerPiecesArsenal)/sizeof(int);
 
+    jokerType1 = Piece::JNotAJoker;
+    jokerType2 = Piece::Undefined;
+    row = flagRowDistribution(generator);
+    col = flagColDistribution(generator);
+    MyPoint p(col + 1, row + 1);
+    MyPiecePosition piecePosition(static_cast<Piece::RPSPiecesTypes>(Piece::Flag), p, jokerType1);
+    unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
+    vectorToFill.push_back(std::move(ptr));
+
+    unique_ptr<Piece> piecePtr = PieceFactory::createPiece(static_cast<Piece::RPSPiecesTypes>(Piece::Flag), player, jokerType2);
+    this->selfGameBoard[row][col] = std::move(piecePtr);
+    rps.playerPiecesArsenal[Piece::Flag]--;
+
     for (int i = 0; i < numOfPieceTypes; i++ ) { // set a random initial board
         for (int j = 0; j < rps.playerPiecesArsenal[i]; j++ ) {
             cellNotOccupied = true;
             while (cellNotOccupied) {
-                row = rand() % RPS::NRows;
-                col = rand() % RPS::MCols;
+                row = rowDistribution(generator);
+                col = colDistribution(generator);
+//                cout << "rand row: " << row << "    rand col: " << col << endl;
+
                 MyPoint p(col + 1, row + 1);
                 if (this->selfGameBoard[row][col].get() == nullptr) {
-                    cout << "get row: " << p.getY() << "    col:" << p.getX() << endl;
+//                    cout << "get row: " << p.getY() << "    col:" << p.getX() << endl;
                     cellNotOccupied = false;
                     if (i == Piece::Joker) {
                         jokerRep = rand() % Piece::JNotAJoker;
@@ -58,17 +78,18 @@ void RSPPlayer_204251599::getInitialPositions(int player, std::vector<unique_ptr
             }
         }
     }
-    cout << " bye getInitialPositions!!!!!" << endl;
+//    printBoard();
+//    cout << " bye getInitialPositions!!!!!" << endl;
 }
 
 void RSPPlayer_204251599::notifyOnInitialBoard(const Board& b, const std::vector<unique_ptr<FightInfo>>& fights) {
-    cout << "hii notifyOnInitialBoard!!!!!" << endl;
+//    cout << "hii notifyOnInitialBoard!!!!!" << endl;
     vector<unique_ptr<Piece>> trash;
     MyPoint p(0,0);
 
     for (const unique_ptr<FightInfo> &fightInfo: fights) { // initialize the auto player self board accord to the fights occured
         MyPoint fightPos(fightInfo->getPosition().getX() - 1, fightInfo->getPosition().getY() - 1);
-        cout << "notify row: " << fightPos.getY() << "    col:" << fightPos.getX() << endl;
+//        cout << "notify row: " << fightPos.getY() << "    col:" << fightPos.getX() << endl;
         if (Piece::getEnumTypeRep(fightInfo->getPiece(opponent)) == Piece::Flag) {
             opponentNumOfFlags--;
         }
@@ -92,7 +113,7 @@ void RSPPlayer_204251599::notifyOnInitialBoard(const Board& b, const std::vector
             }
         }
     }
-    cout << "bye notifyOnInitialBoard!!!!!" << endl;
+//    cout << "bye notifyOnInitialBoard!!!!!" << endl;
 }
 
 void RSPPlayer_204251599::notifyOnOpponentMove(const Move& move) {

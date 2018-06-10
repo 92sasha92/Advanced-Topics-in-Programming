@@ -6,7 +6,7 @@ TournamentManager TournamentManager::theTournamentManager;
 
 void TournamentManager::playAGame(){
     unique_lock<mutex> lock(scheduleLock);
-    std::cout << "welcome to playAGame()" << std::endl;
+//    std::cout << "welcome to playAGame()" << std::endl;
     while(!tournamentSchedule.empty()){
         std::unique_ptr<BattleInfo> battle = std::move(tournamentSchedule.top());
         tournamentSchedule.pop();
@@ -54,7 +54,7 @@ void TournamentManager::setMatch(int p1, int p2) {
     if (isAlgo1BattleCount || isAlgo2BattleCount) {
 		idNumOfBattlesSet[p1].second++;
 		idNumOfBattlesSet[p2].second++;
-		cout << endl << "match between  " << idNumOfBattlesSet[p1].first << " to  " << idNumOfBattlesSet[p2].first <<endl;
+//		cout << endl << "match between  " << idNumOfBattlesSet[p1].first << " to  " << idNumOfBattlesSet[p2].first <<endl;
         tournamentSchedule.push(std::move(std::make_unique<BattleInfo>(idNumOfBattlesSet[p1].first, idNumOfBattlesSet[p2].first, isAlgo1BattleCount, isAlgo2BattleCount)));
     }
 }
@@ -77,14 +77,14 @@ void TournamentManager::createTournamentSchedule() {
         } else if (idRepeats.second > NUM_OF_GAMES_FOR_ALGO) {
             cout << "WARNING: "<< idRepeats.second << " matches for " << idRepeats.first << endl;
         } else {
-            cout << "player  " << idRepeats.first << " have  " << idRepeats.second << " matches." <<endl;
+//            cout << "player  " << idRepeats.first << " have  " << idRepeats.second << " matches." <<endl;
         }
     }
 }
 
 void TournamentManager::createPartialTournament(int shift) {
     int numOfElements = idNumOfBattlesSet.size() % GROUP_SIZE ;
-	std::cout << "createPartial" << numOfElements << std::endl;
+//	std::cout << "createPartial" << numOfElements << std::endl;
     if (numOfElements == 0) { // already set all matches
         return;
     } else if (numOfElements == 1) {
@@ -100,7 +100,7 @@ void TournamentManager::createPartialTournament(int shift) {
     }
 
     int numOfRepeats = (int)(ceil(static_cast<double>(GROUP_SIZE) / (numOfElements - 1))), start = shift * GROUP_SIZE;
-	std::cout << "numOfRepeats: " << numOfRepeats << std::endl;
+//	std::cout << "numOfRepeats: " << numOfRepeats << std::endl;
     for (int i = start; i < (int)idNumOfBattlesSet.size(); i++) { // run over the last (less than 31) elements
         for (int j = i + 1; j < (int)idNumOfBattlesSet.size(); j++) {
             for (int k = 0; k < numOfRepeats; k++) {
@@ -116,13 +116,13 @@ void TournamentManager::run(){
     } else {
         this->loadAlgosFullPath();
     }
-    for(auto& pair : id2factory) {
-        const auto& id = pair.first;
-        std::cout << id << ": " << std::endl;
-    }
+//    for(auto& pair : id2factory) {
+//        const auto& id = pair.first;
+//        std::cout << id << ": " << std::endl;
+//    }
     this->createTournamentSchedule();
     auto numOfGames = (int)tournamentSchedule.size();
-	std::cout << "created schedule" << std::endl;
+//	std::cout << "created schedule" << std::endl;
     std::vector<std::thread> ths;
     for (int i = 1; i < min(this->numOfThreads, numOfGames - 1); i++) {
         ths.push_back(std::thread(&TournamentManager::playAGame, this));
@@ -200,7 +200,7 @@ void TournamentManager::registerAlgorithm(std::string &id, std::function<std::un
     id2factory[id] = factoryMethod;
     scoringTable[id] = 0;
     idNumOfBattlesSet.push_back(std::pair<std::string, int>(id, 0));
-    std::cout << "hi " << id << std::endl;
+//    std::cout << "hi " << id << std::endl;
 }
 
 int TournamentManager::getNumOfThreads() const {
