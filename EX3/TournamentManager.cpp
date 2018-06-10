@@ -139,6 +139,10 @@ void TournamentManager::run(){
 
 void TournamentManager::loadAlgosFullPath() {
     DIR* dirp = opendir(this->algorithmsPath.c_str());
+    if(dirp == nullptr){
+        std::cout << "Error: path not valid, could not open directory" << std::endl;
+        return;
+    }
     struct dirent * dp;
     void *dlib;
     char libName[1024];
