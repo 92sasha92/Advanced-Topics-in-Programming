@@ -51,6 +51,7 @@ private:
     void setPieceData(int row, int col , bool &playerHaveFlag, bool &playerHaveMovingPieces);
     void setPointAndGetScore(int row, int col, MyPoint &pTo, MyMove &curMove, int curPlayer, int depth, bool isMax, int &bestScore);
     int getJokerMoveScore(int row, int col, unique_ptr<Piece> &tmpPiece);
+    void setFlag(int player, std::vector<unique_ptr<PiecePosition>>& vectorToFill, RPS &rps);
     void printBoard();
 
 public:

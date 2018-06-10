@@ -13,13 +13,30 @@ RSPPlayer_204251599::RSPPlayer_204251599(): player(0), opponent(0), opponentNumO
     }
 }
 
+void RSPPlayer_204251599::setFlag(int player, std::vector<unique_ptr<PiecePosition>>& vectorToFill, RPS &rps) {
+    random_device generator;
+    uniform_int_distribution <int> flagRowDistribution(0, 2);
+    uniform_int_distribution <int> flagColDistribution(0, 2);
+    Piece::RPSJokerTypes jokerType1 = Piece::JNotAJoker;
+    Piece::RPSPiecesTypes jokerType2 = Piece::Undefined;
+    int row = flagRowDistribution(generator);
+    int col = flagColDistribution(generator);
+    MyPoint p(col + 1, row + 1);
+    MyPiecePosition piecePosition(static_cast<Piece::RPSPiecesTypes>(Piece::Flag), p, jokerType1);
+    unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
+    vectorToFill.push_back(std::move(ptr));
+
+    unique_ptr<Piece> piecePtr = PieceFactory::createPiece(static_cast<Piece::RPSPiecesTypes>(Piece::Flag), player, jokerType2);
+    this->selfGameBoard[row][col] = std::move(piecePtr);
+    rps.playerPiecesArsenal[Piece::Flag]--;
+}
+
 void RSPPlayer_204251599::getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>>& vectorToFill) {
 //    cout << " hii getInitialPositions!!!!!" << endl;
     random_device generator;
     uniform_int_distribution <int> rowDistribution(0, RPS::NRows - 7);
     uniform_int_distribution <int> colDistribution(0, RPS::MCols - 7);
-    uniform_int_distribution <int> flagRowDistribution(0, 2);
-    uniform_int_distribution <int> flagColDistribution(0, 2);
+
         this->player = player;
     if (player == 1) {
         this->opponent = 2;
@@ -34,19 +51,7 @@ void RSPPlayer_204251599::getInitialPositions(int player, std::vector<unique_ptr
     unique_ptr<PiecePosition> piecePos;
     rps.initializePiecesArsenal();
     int numOfPieceTypes = sizeof(rps.playerPiecesArsenal)/sizeof(int);
-
-    jokerType1 = Piece::JNotAJoker;
-    jokerType2 = Piece::Undefined;
-    row = flagRowDistribution(generator);
-    col = flagColDistribution(generator);
-    MyPoint p(col + 1, row + 1);
-    MyPiecePosition piecePosition(static_cast<Piece::RPSPiecesTypes>(Piece::Flag), p, jokerType1);
-    unique_ptr<PiecePosition> ptr = std::make_unique<MyPiecePosition>(piecePosition);
-    vectorToFill.push_back(std::move(ptr));
-
-    unique_ptr<Piece> piecePtr = PieceFactory::createPiece(static_cast<Piece::RPSPiecesTypes>(Piece::Flag), player, jokerType2);
-    this->selfGameBoard[row][col] = std::move(piecePtr);
-    rps.playerPiecesArsenal[Piece::Flag]--;
+    setFlag(player, vectorToFill, rps);
 
     for (int i = 0; i < numOfPieceTypes; i++ ) { // set a random initial board
         for (int j = 0; j < rps.playerPiecesArsenal[i]; j++ ) {
@@ -61,7 +66,7 @@ void RSPPlayer_204251599::getInitialPositions(int player, std::vector<unique_ptr
 //                    cout << "get row: " << p.getY() << "    col:" << p.getX() << endl;
                     cellNotOccupied = false;
                     if (i == Piece::Joker) {
-                        jokerRep = rand() % Piece::JNotAJoker;
+                        jokerRep = rand() % Piece::JBomb;
                         jokerType1 = static_cast<Piece::RPSJokerTypes>(jokerRep);
                         jokerType2 = static_cast<Piece::RPSPiecesTypes>(jokerRep);
                     } else {
@@ -301,6 +306,9 @@ int RSPPlayer_204251599::getPieceScore(unique_ptr<Piece> &piece) const{
 }
 
 int RSPPlayer_204251599::getUnknownPieceTypeScore() const{
+    if(opponentNumOfUnknownPieces == 0) {
+        return INT_MAX;
+    }
     return (FLAG_SCORE * opponentNumOfFlags)/opponentNumOfUnknownPieces;
 }
 
@@ -569,7 +577,6 @@ unique_ptr<Move> RSPPlayer_204251599::getMove() {
     vector<unique_ptr<Move>> bestMovesVec;
     MyMove curMove, bestMove;
     MyPoint pTo(0,0), pFrom(0,0), bestPTo(-1, -1), bestPFrom(-1, -1) ;
-
     for (int i = 0; i < RPS::NRows; i++) {
         pFrom.setY(i);
         for (int j = 0; j < RPS::MCols; j++) {
@@ -584,6 +591,13 @@ unique_ptr<Move> RSPPlayer_204251599::getMove() {
         }
     }
 
+    if (bestMovesVec.size() == 0) {
+        MyPoint pFrom1(-1, -1);
+        MyPoint pTo1(-1, -1);
+        unique_ptr<Move> bestPtrMove1Based = make_unique<MyMove>(pFrom1, pTo1);
+//        this->printBoard();
+        return std::move(bestPtrMove1Based);
+    }
     int randMove = rand() % bestMovesVec.size();
     unique_ptr<Move> bestPtrMove = std::move(bestMovesVec.at(randMove));
     bestPTo.setPoint(bestPtrMove->getTo().getX(), bestPtrMove->getTo().getY());
@@ -594,7 +608,6 @@ unique_ptr<Move> RSPPlayer_204251599::getMove() {
     if (this->selfGameBoard[bestPtrMove->getTo().getY()][bestPtrMove->getTo().getX()].get() == nullptr) {
         this->selfGameBoard[bestPtrMove->getTo().getY()][bestPtrMove->getTo().getX()] = std::move(this->selfGameBoard[bestPtrMove->getFrom().getY()][bestPtrMove->getFrom().getX()]);
     }
-
 //    this->printBoard();
     MyPoint pFrom1(bestPFrom.getX() + 1, bestPFrom.getY() + 1);
     MyPoint pTo1(bestPTo.getX() + 1, bestPTo.getY() + 1);
@@ -693,7 +706,7 @@ void RSPPlayer_204251599::printBoard() {
     cout << endl;
     for (int i = 0; i < RPS::NRows; i++) {
         cout << "   ------------------------------------------" << endl;
-        if ((i + 1) / 10 == 0) {
+        if (((i + 1) / 10) == 0) {
             cout << i + 1 << "  |";
         } else {
             cout << i + 1 << " |";
