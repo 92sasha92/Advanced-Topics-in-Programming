@@ -5,8 +5,6 @@
 template<typename GAME_PIECE>
 using PieceInfo = std::unique_ptr<const std::pair<int, GAME_PIECE>>;
 
-template<typename GAME_PIECE>
-using PieceData = std::pair<int, GAME_PIECE>;
 using std::cout;
 using std::endl;
 using std::vector;
@@ -23,28 +21,39 @@ class GameBoard {
         int row;
         int col;
         int player;
+        GAME_PIECE *piece;
         std::tuple<int, int, GAME_PIECE, int> tuple;
       public:
-        iterator(typename vector<PieceInfo<GAME_PIECE>>::iterator _rowItr, GameBoard *board, int _row = 0, int _col = 0, int player_ = -1): rowItr(_rowItr), itrBoard(board), row(_row), col(_col) , tuple(), player(player_){}
+        iterator(typename vector<PieceInfo<GAME_PIECE>>::iterator _rowItr, GameBoard *board, int _row = 0, int _col = 0, int player_ = -1, GAME_PIECE *piece_ = nullptr): rowItr(_rowItr), itrBoard(board), row(_row), col(_col), player(player_), piece(piece_), tuple() {}
 
         bool operator!=(iterator other) {
-            return row != other.row || col != other.col;// || (rowItr[col]->second != other.rowItr[other.col]->second);
+            return row != other.row || col != other.col;;
         }
 
         iterator& operator++() {
-            ++rowItr;
-            col++;
-            if(!(rowItr != (itrBoard->board[row]).end())) {
-                row++;
+            if (row == -1) {
+                row = 0;
                 col = 0;
-                if(row < ROWS) {
-                    rowItr = itrBoard->board[row].begin();
-                } else {
-                    rowItr = {};
+                rowItr = itrBoard->board[row].begin();
+            } else {
+                ++rowItr;
+                col++;
+                if(!(rowItr != (itrBoard->board[row]).end())) {
+                    row++;
+                    col = 0;
+                    if(row < ROWS) {
+                        rowItr = itrBoard->board[row].begin();
+                    } else {
+                        rowItr = {};
+                    }
                 }
             }
-            if(player != -1){
-                if(rowItr != (itrBoard->board[row]).end() && (*rowItr)->second != player){
+            if (rowItr != (itrBoard->board[row]).end()) {
+                if ((player != -1) && (piece == nullptr) && ((*rowItr)->first != player)) {
+                    return ++(*this);
+                } else if ((player == -1) && (piece != nullptr) && ((*rowItr)->second != *piece)) {
+                    return ++(*this);
+                } else if ((player != -1) && (piece != nullptr) && (((*rowItr)->first != player) || ((*rowItr)->second != *piece))) {
                     return ++(*this);
                 }
             }
@@ -98,32 +107,64 @@ class GameBoard {
         return std::move(prevPiece);
     }
 
-//  a.
-    class PiecesOfPlayer{
-        GameBoard *playerBoard;
-        int playerNum;
-    public:
-        PiecesOfPlayer(int playerNum_, GameBoard *board_): playerNum(playerNum_), playerBoard(board_){
+//  b.
+        class PiecesOfPlayer{
+            int playerNum;
+            GameBoard *playerBoard;
+        public:
+            PiecesOfPlayer(int playerNum_, GameBoard *board_): playerNum(playerNum_), playerBoard(board_){}
 
+            iterator begin(){
+                return ++(iterator(this->playerBoard->board[0].begin(), this->playerBoard, -1, 0, playerNum));
+            }
+
+            iterator end(){
+                return iterator(this->playerBoard->board[ROWS - 1].end(), this->playerBoard, ROWS, 0);
+
+            }
+        };
+        PiecesOfPlayer allPiecesOfPlayer(int playerNum){
+            return PiecesOfPlayer(playerNum, this);
         }
 
+//  c.
+    class OccureneceOfPiece{
+        GAME_PIECE piece;
+        GameBoard *playerBoard;
+      public:
+        OccureneceOfPiece(GAME_PIECE piece_, GameBoard *board_): piece(piece_), playerBoard(board_){}
+
         iterator begin(){
-            return iterator()
+            return ++(iterator(this->playerBoard->board[0].begin(), this->playerBoard, -1, 0, -1, &piece));
         }
 
         iterator end(){
-
+            return iterator(this->playerBoard->board[ROWS - 1].end(), this->playerBoard, ROWS, 0);
         }
     };
-//    GameBoard should allow iterating over its content in several options:
-    PiecesOfPlayer allPiecesOfPlayer(int playerNum){
-        return PiecesOfPlayer(playerNum, this);
+    OccureneceOfPiece allOccureneceOfPiece(GAME_PIECE piece){
+        return OccureneceOfPiece(piece, this);
     }
 
-//  b.
-//  c.
 //  d.
+    class OccureneceOfPieceForPlayer{
+        GAME_PIECE piece;
+        int playerNum;
+        GameBoard *playerBoard;
+      public:
+        OccureneceOfPieceForPlayer(GAME_PIECE piece_, int playerNum_, GameBoard *board_): piece(piece_), playerNum(playerNum_), playerBoard(board_){}
 
+        iterator begin(){
+            return ++(iterator(this->playerBoard->board[0].begin(), this->playerBoard, -1, 0, playerNum, &piece));
+        }
+
+        iterator end(){
+            return iterator(this->playerBoard->board[ROWS - 1].end(), this->playerBoard, ROWS, 0);
+        }
+    };
+    OccureneceOfPieceForPlayer allOccureneceOfPieceForPlayer(GAME_PIECE piece, int playerNum_){
+        return OccureneceOfPieceForPlayer(piece, playerNum_, this);
+    }
 };
 
 
