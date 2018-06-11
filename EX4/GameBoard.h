@@ -62,7 +62,7 @@ class GameBoard {
 
         const std::tuple<int, int, GAME_PIECE, int>& operator*() {
             if(*rowItr == nullptr){
-                cout << "got nullptr in a cell" << endl;
+                cout << "ERROR: got nullptr in a cell" << endl;
             }
             tuple = std::make_tuple(row, col, (*rowItr)->second, (*rowItr)->first);
             return tuple;
