@@ -22,9 +22,10 @@ class GameBoard {
         GameBoard *itrBoard;
         int row;
         int col;
+        int player;
         std::tuple<int, int, GAME_PIECE, int> tuple;
       public:
-        iterator(typename vector<PieceInfo<GAME_PIECE>>::iterator _rowItr, GameBoard *board, int _row = 0, int _col = 0): rowItr(_rowItr), itrBoard(board), row(_row), col(_col) , tuple(){}
+        iterator(typename vector<PieceInfo<GAME_PIECE>>::iterator _rowItr, GameBoard *board, int _row = 0, int _col = 0, int player_ = -1): rowItr(_rowItr), itrBoard(board), row(_row), col(_col) , tuple(), player(player_){}
 
         bool operator!=(iterator other) {
             return row != other.row || col != other.col;// || (rowItr[col]->second != other.rowItr[other.col]->second);
@@ -40,6 +41,11 @@ class GameBoard {
                     rowItr = itrBoard->board[row].begin();
                 } else {
                     rowItr = {};
+                }
+            }
+            if(player != -1){
+                if(rowItr != (itrBoard->board[row]).end() && (*rowItr)->second != player){
+                    return ++(*this);
                 }
             }
             return *this;
@@ -92,8 +98,28 @@ class GameBoard {
         return std::move(prevPiece);
     }
 
-//    GameBoard should allow iterating over its content in several options:
 //  a.
+    class PiecesOfPlayer{
+        GameBoard *playerBoard;
+        int playerNum;
+    public:
+        PiecesOfPlayer(int playerNum_, GameBoard *board_): playerNum(playerNum_), playerBoard(board_){
+
+        }
+
+        iterator begin(){
+            return iterator()
+        }
+
+        iterator end(){
+
+        }
+    };
+//    GameBoard should allow iterating over its content in several options:
+    PiecesOfPlayer allPiecesOfPlayer(int playerNum){
+        return PiecesOfPlayer(playerNum, this);
+    }
+
 //  b.
 //  c.
 //  d.
