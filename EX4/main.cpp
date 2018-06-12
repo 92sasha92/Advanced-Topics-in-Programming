@@ -13,7 +13,7 @@ static bool test1(){
 	GameBoard<12, 7, char, 4> board;
 	int i = 0;
 	for (int row = 0; row < 7; row++){
-		for(int col = 0; col < 6; col++){
+		for(int col = 0; col < 7; col++){
 			board.setPiece(row, col, 'p', i);
 			i = (i+1)%4;
 		}
