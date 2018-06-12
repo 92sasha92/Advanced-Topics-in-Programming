@@ -49,6 +49,10 @@ class GameBoard {
                 }
             }
             if (rowItr != (itrBoard->board[row]).end()) {
+                // check if there is no piece in the current position
+                if((*rowItr) == nullptr && row < ROWS){
+                    return ++(*this);
+                }
                 if ((player != -1) && (piece == nullptr) && ((*rowItr)->first != player)) {
                     return ++(*this);
                 } else if ((player == -1) && (piece != nullptr) && ((*rowItr)->second != *piece)) {
@@ -71,6 +75,9 @@ class GameBoard {
 
     iterator begin() {
     // TODO: handle board of size zero
+        if(*(this->board[0].begin()) == nullptr){
+            return ++iterator(this->board[0].begin(), this);
+        }
         return {this->board[0].begin(), this};
     }
 
