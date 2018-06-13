@@ -25,7 +25,10 @@ class GameBoard {
         std::tuple<int, int, GAME_PIECE, int> tuple;
       public:
         iterator(typename vector<PieceInfo<GAME_PIECE>>::iterator _rowItr, GameBoard *board, int _row = 0, int _col = 0, int player_ = -1, GAME_PIECE *piece_ = nullptr): rowItr(_rowItr), itrBoard(board), row(_row), col(_col), player(player_), piece(piece_), tuple() {}
-
+        iterator(){
+            row = -2;
+            col = -2;
+        }
         bool operator!=(iterator other) {
             return row != other.row || col != other.col;;
         }
@@ -74,7 +77,9 @@ class GameBoard {
     };
 
     iterator begin() {
-    // TODO: handle board of size zero
+        if(ROWS == 0 || COLS == 0){
+            return this->end();
+        }
         if(*(this->board[0].begin()) == nullptr){
             return ++iterator(this->board[0].begin(), this);
         }
@@ -82,6 +87,9 @@ class GameBoard {
     }
 
     iterator end() {
+        if(ROWS == 0 || COLS == 0){
+            return {};
+        }
         return {this->board[ROWS - 1].end(), this, ROWS, 0};
     }
 
@@ -122,12 +130,17 @@ class GameBoard {
             PiecesOfPlayer(int playerNum_, GameBoard *board_): playerNum(playerNum_), playerBoard(board_){}
 
             iterator begin(){
+                if(ROWS == 0 || COLS == 0){
+                    return this->end();
+                }
                 return ++(iterator(this->playerBoard->board[0].begin(), this->playerBoard, -1, 0, playerNum));
             }
 
             iterator end(){
+                if(ROWS == 0 || COLS == 0){
+                    return {};
+                }
                 return iterator(this->playerBoard->board[ROWS - 1].end(), this->playerBoard, ROWS, 0);
-
             }
         };
         PiecesOfPlayer allPiecesOfPlayer(int playerNum){
@@ -142,10 +155,16 @@ class GameBoard {
         OccureneceOfPiece(GAME_PIECE piece_, GameBoard *board_): piece(piece_), playerBoard(board_){}
 
         iterator begin(){
+            if(ROWS == 0 || COLS == 0){
+                return this->end();
+            }
             return ++(iterator(this->playerBoard->board[0].begin(), this->playerBoard, -1, 0, -1, &piece));
         }
 
         iterator end(){
+            if(ROWS == 0 || COLS == 0){
+                return {};
+            }
             return iterator(this->playerBoard->board[ROWS - 1].end(), this->playerBoard, ROWS, 0);
         }
     };
@@ -162,10 +181,16 @@ class GameBoard {
         OccureneceOfPieceForPlayer(GAME_PIECE piece_, int playerNum_, GameBoard *board_): piece(piece_), playerNum(playerNum_), playerBoard(board_){}
 
         iterator begin(){
+            if(ROWS == 0 || COLS == 0){
+                return this->end();
+            }
             return ++(iterator(this->playerBoard->board[0].begin(), this->playerBoard, -1, 0, playerNum, &piece));
         }
 
         iterator end(){
+            if(ROWS == 0 || COLS == 0){
+                return {};
+            }
             return iterator(this->playerBoard->board[ROWS - 1].end(), this->playerBoard, ROWS, 0);
         }
     };
