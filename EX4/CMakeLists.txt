@@ -6,6 +6,5 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -Werror -Wfata
 include_directories(.)
 
 add_executable(EX4
-        ex4.h
         main.cpp
-        unit_test_util.h GameBoard.h)
+        unit_test_util.h GameBoard.h ex4_header.h)

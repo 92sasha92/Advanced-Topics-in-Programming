@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ex4.h"
+#include "ex4_header.h"
 
 template<typename GAME_PIECE>
 using PieceInfo = std::unique_ptr<const std::pair<int, GAME_PIECE>>;
